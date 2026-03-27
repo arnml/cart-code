@@ -24,58 +24,35 @@ Each method is evaluated on 50 random HotpotQA questions (validation set, distra
 
 ## Setup
 
-### 1. Activate venv
+### 1. Verify Dependencies
 
-```bash
-# Windows PowerShell
-.\.venv\Scripts\Activate.ps1
+This project uses `uv` as the package manager. All dependencies are already installed via `uv sync`.
 
-# Windows cmd
-.venv\Scripts\activate.bat
-
-# macOS/Linux
-source .venv/bin/activate
-```
-
-### 2. Verify OpenAI API key is set
-
-Your `OPENAI_API_KEY` should already be in your Windows environment variables.
-
-To verify it's set:
+Check that your `OPENAI_API_KEY` is set:
 ```powershell
-$env:OPENAI_API_KEY
+$env:OPENAI_API_KEY  # Should show: sk-proj-vN...
 ```
 
-If not set, set it once (Windows PowerShell):
+### 2. Run Validation (Optional)
+
 ```powershell
-$env:OPENAI_API_KEY = "sk-your-actual-key-here"
+uv run python validate_setup.py
 ```
 
-Get your key from: https://platform.openai.com/account/api-keys
+This checks that all packages and API key are accessible.
 
-### 3. Check dependencies
-
-All required packages should already be in `pyproject.toml`:
-- `openai` — API calls
-- `datasets` — HotpotQA loading
-- `tiktoken` — Token counting
-- `numpy`, `scikit-learn` — Embeddings and similarity
-
-If missing, install with:
-```powershell
-uv pip install scikit-learn
-```
-
-Or if not using `uv`:
-```powershell
-pip install scikit-learn
-```
 
 ## Run
 
+From the root directory:
+```powershell
+uv run python experiments/baseline_analysis/run_baselines.py
+```
+
+Or navigate to the directory:
 ```powershell
 cd experiments/baseline_analysis
-py run_baselines.py
+uv run python run_baselines.py
 ```
 
 **Expected runtime:** ~5-10 minutes (50 questions × 3 methods, with rate limiting)

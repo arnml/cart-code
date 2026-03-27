@@ -13,8 +13,8 @@ You should see: `sk-proj-vN...` (your API key)
 ## Step 2: Run Validation (Optional but Recommended)
 
 ```powershell
-cd experiments/baseline_analysis
-py validate_setup.py
+cd c:\code\smtl-code
+uv run python experiments/baseline_analysis/validate_setup.py
 ```
 
 This checks that:
@@ -27,12 +27,18 @@ If all checks pass ✅, continue to step 3.
 ## Step 3: Run the Baselines
 
 ```powershell
-py run_baselines.py
+cd experiments/baseline_analysis
+uv run python run_baselines.py
 ```
 
-> **Note:** The script automatically reads your `OPENAI_API_KEY` from Windows environment variables. No manual setting needed.
+Or from the root directory:
+```powershell
+uv run python experiments/baseline_analysis/run_baselines.py
+```
 
-**Expected runtime:** 5-10 minutes (with rate limiting)
+> **Note:** Use `uv run python` — this project uses `uv` for dependency management. The script automatically reads your `OPENAI_API_KEY` from environment variables.
+
+**Expected runtime:** ~5-10 minutes (with API rate limiting)
 
 ---
 
@@ -115,4 +121,4 @@ baseline_analysis/
 
 ---
 
-**Ready?** Run: `py run_baselines.py` 🚀
+**Ready?** Run: `uv run python run_baselines.py` 🚀
