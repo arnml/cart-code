@@ -1,0 +1,20 @@
+[project]
+name = "smtl-code"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "datasets>=4.8.4",
+    "llama-index>=0.14.19",
+    "openai>=2.30.0",
+    "tiktoken>=0.12.0",
+    "scikit-learn>=1.3.0",
+    "numpy>=1.24.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "ruff>=0.15.7",
+]
