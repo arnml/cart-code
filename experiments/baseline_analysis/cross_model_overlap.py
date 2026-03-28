@@ -13,27 +13,23 @@ Usage:
 Output: analysis/cross_model_overlap.md
 """
 
-import csv
 from collections import defaultdict
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+
+from eval_utils import load_csv_safe
 
 
-def load_targets(csv_path, think_method='always_think', k5_method='always_retrieve_k5'):
+def load_targets(csv_path, think_method="always_think", k5_method="always_retrieve_k5"):
     """Load CART targets from a results CSV file."""
     if not Path(csv_path).exists():
         return {}
 
-    try:
-        with open(csv_path, encoding="utf-8") as f:
-            rows = list(csv.DictReader(f))
-    except UnicodeDecodeError:
-        with open(csv_path, encoding="latin-1") as f:
-            rows = list(csv.DictReader(f))
+    rows = load_csv_safe(Path(csv_path))
 
     by_q = defaultdict(dict)
     for r in rows:
-        by_q[r['question_id']][r['method']] = r
+        by_q[r["question_id"]][r["method"]] = r
 
     targets = {}
     for qid, methods in by_q.items():
@@ -41,19 +37,19 @@ def load_targets(csv_path, think_method='always_think', k5_method='always_retrie
         k5_row = methods.get(k5_method, {})
 
         try:
-            t_f1 = float(t_row.get('f1_score', 0))
-            k5_f1 = float(k5_row.get('f1_score', 0))
+            t_f1 = float(t_row.get("f1_score", 0))
+            k5_f1 = float(k5_row.get("f1_score", 0))
 
             if t_f1 < 0.3 and k5_f1 > 0.6:
-                q = t_row.get('question', '')
-                gt = t_row.get('ground_truth', '')
+                q = t_row.get("question", "")
+                gt = t_row.get("ground_truth", "")
                 targets[qid] = {
-                    'q': q,
-                    'gt': gt,
-                    't_f1': t_f1,
-                    'k5_f1': k5_f1,
-                    't_tokens': int(t_row.get('total_tokens', 0)),
-                    'k5_tokens': int(k5_row.get('total_tokens', 0)),
+                    "q": q,
+                    "gt": gt,
+                    "t_f1": t_f1,
+                    "k5_f1": k5_f1,
+                    "t_tokens": int(t_row.get("total_tokens", 0)),
+                    "k5_tokens": int(k5_row.get("total_tokens", 0)),
                 }
         except (ValueError, TypeError):
             continue
@@ -90,7 +86,7 @@ def main():
     # Build markdown report
     md = f"""# Cross-Model Analysis: CART Targets Overlap
 
-**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+**Generated:** {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 
 This analysis identifies which CART targets are consistent across models,
 helping prioritize the most important questions for CART to solve.
@@ -136,8 +132,11 @@ These questions should be CART's top priority — all models struggle with them.
             for model_name in model_names:
                 if qid in targets[model_name]:
                     t = targets[model_name][qid]
-                    gap = (t['k5_f1'] - t['t_f1']) * 100
-                    md += f"- **{model_name}**: think F1={t['t_f1']:.3f}, k5 F1={t['k5_f1']:.3f} (gap={gap:.0f}%)\n"
+                    gap = (t["k5_f1"] - t["t_f1"]) * 100
+                    md += (
+                        f"- **{model_name}**: think F1={t['t_f1']:.3f},"
+                        f" k5 F1={t['k5_f1']:.3f} (gap={gap:.0f}%)\n"
+                    )
 
             md += "\n"
     else:
@@ -166,7 +165,7 @@ Questions that multiple models struggle with but not all.
             for model_name in model_names:
                 if qid in targets[model_name]:
                     t = targets[model_name][qid]
-                    gap = (t['k5_f1'] - t['t_f1']) * 100
+                    gap = (t["k5_f1"] - t["t_f1"]) * 100
                     md += f"- **{model_name}**: gap={gap:.0f}%\n"
                 else:
                     md += f"- **{model_name}**: (not a CART target)\n"
@@ -192,7 +191,7 @@ They may represent model quirks rather than fundamental difficulty.
         if specific:
             for qid in sorted(specific)[:5]:
                 t = targets[model_name][qid]
-                gap = (t['k5_f1'] - t['t_f1']) * 100
+                gap = (t["k5_f1"] - t["t_f1"]) * 100
                 md += f"- Q{qid}: `{t['gt']}` — {t['q'][:50]} (gap={gap:.0f}%)\n"
 
             if len(specific) > 5:
@@ -233,9 +232,9 @@ They may represent model quirks rather than fundamental difficulty.
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(md)
 
-    print("="*80)
+    print("=" * 80)
     print(f"✓ Overwrote: {output_path}")
-    print("="*80)
+    print("=" * 80)
     print(md)
 
 

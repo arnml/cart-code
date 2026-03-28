@@ -8,9 +8,10 @@ Identifies:
 Saves results to: analysis/cart_targets.md
 """
 
-import csv
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+
+from eval_utils import load_csv_safe
 
 
 def analyze_model(model_dir: str, model_name: str) -> str:
@@ -22,42 +23,38 @@ def analyze_model(model_dir: str, model_name: str) -> str:
 
     output = f"\n## {model_name}\n\n"
 
-    # Try different encodings
-    try:
-        with open(csv_path, encoding="utf-8") as f:
-            rows = list(csv.DictReader(f))
-    except UnicodeDecodeError:
-        with open(csv_path, encoding="latin-1") as f:
-            rows = list(csv.DictReader(f))
+    rows = load_csv_safe(csv_path)
 
     # Group by question
-    by_q = {}
+    by_q: dict[str, dict[str, dict]] = {}
     for r in rows:
-        qid = r['question_id']
+        qid = r["question_id"]
         if qid not in by_q:
             by_q[qid] = {}
-        by_q[qid][r['method']] = r
+        by_q[qid][r["method"]] = r
 
     # Find questions where think fails but k5 succeeds
     think_fails_k5_wins = []
     for qid, methods in by_q.items():
-        t = methods.get('always_think', {})
-        k5 = methods.get('always_retrieve_k5', {})
+        t = methods.get("always_think", {})
+        k5 = methods.get("always_retrieve_k5", {})
 
         try:
-            t_f1 = float(t.get('f1_score', 0))
-            k5_f1 = float(k5.get('f1_score', 0))
+            t_f1 = float(t.get("f1_score", 0))
+            k5_f1 = float(k5.get("f1_score", 0))
 
             if t_f1 < 0.3 and k5_f1 > 0.6:
-                think_fails_k5_wins.append({
-                    'qid': qid,
-                    'question': t.get('question', '')[:70],
-                    'ground_truth': t.get('ground_truth'),
-                    'think_f1': t_f1,
-                    'think_tokens': int(t.get('total_tokens', 0)),
-                    'k5_f1': k5_f1,
-                    'k5_tokens': int(k5.get('total_tokens', 0)),
-                })
+                think_fails_k5_wins.append(
+                    {
+                        "qid": qid,
+                        "question": t.get("question", "")[:70],
+                        "ground_truth": t.get("ground_truth"),
+                        "think_f1": t_f1,
+                        "think_tokens": int(t.get("total_tokens", 0)),
+                        "k5_f1": k5_f1,
+                        "k5_tokens": int(k5.get("total_tokens", 0)),
+                    }
+                )
         except (ValueError, TypeError):
             continue
 
@@ -66,8 +63,10 @@ def analyze_model(model_dir: str, model_name: str) -> str:
     output += "Questions where think F1 < 0.3 but k5 F1 > 0.6 (retrieval is crucial)\n\n"
 
     if think_fails_k5_wins:
-        for r in sorted(think_fails_k5_wins, key=lambda x: x['k5_f1'] - x['think_f1'], reverse=True)[:10]:
-            gap = (r['k5_f1'] - r['think_f1']) * 100
+        for r in sorted(
+            think_fails_k5_wins, key=lambda x: x["k5_f1"] - x["think_f1"], reverse=True
+        )[:10]:
+            gap = (r["k5_f1"] - r["think_f1"]) * 100
             output += f"**Q{r['qid']}:** {r['question']}\n\n"
             output += f"- Ground truth: `{r['ground_truth']}`\n"
             output += f"- Think F1: **{r['think_f1']:.3f}** ({r['think_tokens']} tokens)\n"
@@ -77,11 +76,11 @@ def analyze_model(model_dir: str, model_name: str) -> str:
         output += "> No such questions found - think is competitive!\n\n"
 
     # Section 2: Sample think-only outputs
-    output += f"### Sample Think-Only Outputs\n\n"
+    output += "### Sample Think-Only Outputs\n\n"
 
-    think_rows = [r for r in rows if r['method'] == 'always_think']
+    think_rows = [r for r in rows if r["method"] == "always_think"]
     for i, r in enumerate(think_rows[:5], 1):
-        answer_preview = r['answer'][:100] if r['answer'] else "(empty)"
+        answer_preview = r["answer"][:100] if r["answer"] else "(empty)"
         output += f"**Sample {i}:**\n\n"
         output += f"- **Q:** {r['question'][:60]}\n"
         output += f"- **Ground truth:** `{r['ground_truth']}`\n"
@@ -89,15 +88,15 @@ def analyze_model(model_dir: str, model_name: str) -> str:
         output += f"- **F1:** {r['f1_score']} | **Tokens:** {r['total_tokens']}\n\n"
 
     # Section 3: Summary statistics table
-    output += f"### Summary Statistics\n\n"
-    output += f"| Method | Avg F1 | Avg Tokens | Avg Cost |\n"
-    output += f"|--------|--------|-----------|----------|\n"
+    output += "### Summary Statistics\n\n"
+    output += "| Method | Avg F1 | Avg Tokens | Avg Cost |\n"
+    output += "|--------|--------|-----------|----------|\n"
 
-    for method in sorted(set(r['method'] for r in rows)):
-        method_rows = [r for r in rows if r['method'] == method]
-        avg_f1 = sum(float(r['f1_score']) for r in method_rows) / len(method_rows)
-        avg_tokens = sum(int(r['total_tokens']) for r in method_rows) / len(method_rows)
-        avg_cost = sum(float(r['cost_usd']) for r in method_rows) / len(method_rows)
+    for method in sorted(set(r["method"] for r in rows)):
+        method_rows = [r for r in rows if r["method"] == method]
+        avg_f1 = sum(float(r["f1_score"]) for r in method_rows) / len(method_rows)
+        avg_tokens = sum(int(r["total_tokens"]) for r in method_rows) / len(method_rows)
+        avg_cost = sum(float(r["cost_usd"]) for r in method_rows) / len(method_rows)
 
         output += f"| {method} | {avg_f1:.4f} | {avg_tokens:.0f} | ${avg_cost:.5f} |\n"
 
@@ -115,7 +114,7 @@ def main():
     # Build markdown output
     md = f"""# CART Targets: Baseline Diagnostics
 
-**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+**Generated:** {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 
 This analysis identifies questions where CART needs to excel:
 - **CART Targets**: Questions where think fails but retrieval succeeds
@@ -126,9 +125,9 @@ This analysis identifies questions where CART needs to excel:
 
 """
 
-    print("\n" + "="*80)
+    print("\n" + "=" * 80)
     print("BASELINE DIAGNOSTICS: Which questions need CART to solve?")
-    print("="*80)
+    print("=" * 80)
 
     # Use correct directory names
     models = [
@@ -193,9 +192,9 @@ CART should be competitive with always_think
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(md)
 
-    print("="*80)
+    print("=" * 80)
     print(f"✓ Overwrote: {output_path}")
-    print("="*80 + "\n")
+    print("=" * 80 + "\n")
 
 
 if __name__ == "__main__":

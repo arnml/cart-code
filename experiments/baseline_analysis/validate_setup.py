@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Validate that all dependencies and API access are set up correctly."""
 
+import os
 import sys
-from pathlib import Path
 
 
 def check_imports():
@@ -21,7 +21,7 @@ def check_imports():
         try:
             __import__(package)
             print(f"  ✓ {package:<15} ({description})")
-        except ImportError as e:
+        except ImportError:
             print(f"  ✗ {package:<15} MISSING")
             all_ok = False
 
@@ -31,8 +31,6 @@ def check_imports():
 def check_api_key():
     """Check that OpenAI API key is set."""
     print("\n🔑 Checking API key...")
-    import os
-
     api_key = os.getenv("OPENAI_API_KEY")
     if api_key:
         # Show first 10 and last 4 chars for privacy
@@ -40,18 +38,18 @@ def check_api_key():
         print(f"  ✓ OPENAI_API_KEY found in environment: {masked}")
 
         if not api_key.startswith("sk-"):
-            print(f"  ⚠️  WARNING: Key doesn't start with 'sk-'. Is it correct?")
+            print("  ⚠️  WARNING: Key doesn't start with 'sk-'. Is it correct?")
             return False
         return True
     else:
-        print(f"  ✗ OPENAI_API_KEY not found in environment variables")
-        print(f"\n     To set it (Windows PowerShell):")
-        print(f"     $env:OPENAI_API_KEY = 'sk-your-key-here'")
-        print(f"\n     To set it (Windows CMD):")
-        print(f"     set OPENAI_API_KEY=sk-your-key-here")
-        print(f"\n     To set it (macOS/Linux):")
-        print(f"     export OPENAI_API_KEY='sk-your-key-here'")
-        print(f"\n     Get your key from: https://platform.openai.com/account/api-keys")
+        print("  ✗ OPENAI_API_KEY not found in environment variables")
+        print("\n     To set it (Windows PowerShell):")
+        print("     $env:OPENAI_API_KEY = 'sk-your-key-here'")
+        print("\n     To set it (Windows CMD):")
+        print("     set OPENAI_API_KEY=sk-your-key-here")
+        print("\n     To set it (macOS/Linux):")
+        print("     export OPENAI_API_KEY='sk-your-key-here'")
+        print("\n     Get your key from: https://platform.openai.com/account/api-keys")
         return False
 
 
@@ -60,6 +58,7 @@ def check_dataset():
     print("\n📊 Checking dataset access...")
     try:
         from datasets import load_dataset
+
         print("  ⏳ Loading HotpotQA (first time may take a minute)...")
         ds = load_dataset("hotpot_qa", "distractor", split="validation")
         print(f"  ✓ HotpotQA loaded ({len(ds)} examples)")

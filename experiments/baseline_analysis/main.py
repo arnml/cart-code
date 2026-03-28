@@ -6,15 +6,14 @@ Run this from the project root:
   python main.py
 """
 
-import sys
 import os
+import sys
 from pathlib import Path
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 
 from run_baselines import run_all_baselines
-
 
 if __name__ == "__main__":
     print("""
@@ -38,6 +37,7 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\n❌ Error: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)
     else:

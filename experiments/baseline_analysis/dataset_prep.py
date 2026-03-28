@@ -1,6 +1,7 @@
 """Load and prepare HotpotQA dataset."""
 
 import random
+
 from datasets import load_dataset
 
 
@@ -34,11 +35,11 @@ def extract_paragraphs(sample: dict) -> list[str]:
     """
     paragraphs = []
 
-    titles = sample['context']['title']
-    sentences_lists = sample['context']['sentences']
+    titles = sample["context"]["title"]
+    sentences_lists = sample["context"]["sentences"]
 
-    for title, sentences in zip(titles, sentences_lists):
-        text = ' '.join(sentences)
+    for title, sentences in zip(titles, sentences_lists, strict=False):
+        text = " ".join(sentences)
         paragraphs.append(f"[{title}] {text}")
 
     return paragraphs
