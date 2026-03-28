@@ -50,12 +50,24 @@ def exact_match(prediction: str, ground_truth: str) -> int:
     return int(normalize_answer(prediction) == normalize_answer(ground_truth))
 
 
-def cost_usd(input_tokens: int, output_tokens: int) -> float:
+def cost_usd(input_tokens: int, output_tokens: int, model: str = "gpt-4o-mini") -> float:
     """
-    Estimate cost in USD for GPT-4o-mini.
-    Pricing: $0.15 per 1M input, $0.60 per 1M output
+    Estimate cost in USD for different models.
+
+    Models:
+    - gpt-4o-mini: $0.15 per 1M input, $0.60 per 1M output
+    - gpt-5.4-mini: $0.75 per 1M input, $4.50 per 1M output
+    - claude-haiku-4-5: $1.00 per 1M input, $5.00 per 1M output
     """
-    return (input_tokens * 0.00015 + output_tokens * 0.0006) / 1000
+    if model == "gpt-5.4-mini-2026-03-17" or model == "gpt-5.4-mini":
+        # GPT-5.4-mini pricing
+        return (input_tokens * 0.00075 + output_tokens * 0.0045) / 1000
+    elif "haiku" in model.lower() or "claude" in model.lower():
+        # Claude Haiku 4.5 pricing: $1.00/$5.00 per 1M
+        return (input_tokens * 0.001 + output_tokens * 0.005) / 1000
+    else:
+        # Default to GPT-4o-mini pricing
+        return (input_tokens * 0.00015 + output_tokens * 0.0006) / 1000
 
 
 def efficiency(f1: float, total_tokens: int) -> float:

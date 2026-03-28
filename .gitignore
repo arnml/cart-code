@@ -45,7 +45,3 @@ Thumbs.db
 .env
 .env.*
 *.env
-
-# Generated experiment outputs
-experiments/baseline_analysis/results/
-experiments/hotpotqa_distractor_examples.json

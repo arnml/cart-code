@@ -1,8 +1,8 @@
 """
-Day 2: Run baseline analysis and generate results.
+Day 2: Run baseline analysis with Claude (Anthropic) and generate results.
 
 This script:
-1. Loads 50 random HotpotQA questions
+1. Loads 50 random HotpotQA questions (same as OpenAI run)
 2. Runs 3 methods: Always-Think, Always-Retrieve k=3, Always-Retrieve k=5
 3. Measures F1, exact match, tokens, and cost
 4. Saves results to CSV and summary markdown (with model name in filename)
@@ -17,39 +17,39 @@ from pathlib import Path
 
 from eval_utils import f1_score, exact_match, cost_usd, efficiency
 from dataset_prep import get_sample, extract_paragraphs
-from baseline_always_think import always_think
-from baseline_always_retrieve import always_retrieve
+from baseline_always_think_anthropic import always_think
+from baseline_always_retrieve_anthropic import always_retrieve
 
 
 def check_api_key():
-    """Check that OPENAI_API_KEY is set before running."""
-    api_key = os.getenv("OPENAI_API_KEY")
+    """Check that ANTHROPIC_API_KEY is set before running."""
+    api_key = os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
-        print("\n❌ ERROR: OPENAI_API_KEY not found in environment variables")
+        print("\n❌ ERROR: ANTHROPIC_API_KEY not found in environment variables")
         print("\nSet it with (Windows PowerShell):")
-        print("  $env:OPENAI_API_KEY = 'sk-your-key-here'")
+        print("  $env:ANTHROPIC_API_KEY = 'sk-ant-your-key-here'")
         print("\nOr (Windows CMD):")
-        print("  set OPENAI_API_KEY=sk-your-key-here")
-        print("\nGet your key from: https://platform.openai.com/account/api-keys\n")
+        print("  set ANTHROPIC_API_KEY=sk-ant-your-key-here")
+        print("\nGet your key from: https://console.anthropic.com/account/keys\n")
         sys.exit(1)
     return api_key
 
 
-def run_all_baselines(n_samples: int = 50, output_dir: str = "results", model: str = "gpt-4o-mini"):
+def run_all_baselines(n_samples: int = 50, output_dir: str = "results", model: str = "claude-haiku-4-5"):
     """
-    Run all baselines on HotpotQA samples.
+    Run all baselines on HotpotQA samples using Claude.
 
     Args:
         n_samples: Number of questions to evaluate
         output_dir: Base directory to save results
-        model: Model to use (e.g., "gpt-4o-mini", "gpt-5-mini")
+        model: Claude model to use (e.g., "claude-3-5-haiku-20241022")
     """
     # Verify API key before starting
     api_key = check_api_key()
     print(f"✓ API key found ({api_key[:15]}...)\n")
 
     # Create model-specific output directory
-    model_dir = f"{output_dir}_{model.replace('-', '_')}"
+    model_dir = f"{output_dir}_{model.replace('-', '_').replace('.', '_')}"
     output_path = Path(model_dir)
 
     # Load dataset
@@ -126,7 +126,7 @@ def run_all_baselines(n_samples: int = 50, output_dir: str = "results", model: s
                 print(f"\n{'':<54} ❌ ERROR: {str(e)[:40]}", end="")
 
         print()  # Newline after all methods for this question
-        time.sleep(1)  # Rate limit
+        time.sleep(0.5)  # Rate limit (Anthropic has generous limits)
 
     # Save results
     print("\n" + "=" * 98)
@@ -221,6 +221,6 @@ def print_summary(results: list[dict], output_dir: Path, model: str):
 
 
 if __name__ == "__main__":
-    # Accept model as command-line argument
-    model = sys.argv[1] if len(sys.argv) > 1 else "gpt-4o-mini"
+    # Accept model as command-line argument, default to Haiku 4.5
+    model = sys.argv[1] if len(sys.argv) > 1 else "claude-haiku-4-5"
     run_all_baselines(n_samples=50, output_dir="results", model=model)

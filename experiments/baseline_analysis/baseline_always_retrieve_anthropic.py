@@ -1,16 +1,18 @@
-"""Baseline 1: Always-Retrieve (fixed top-k documents)."""
+"""Baseline 1: Always-Retrieve (fixed top-k documents) — Anthropic Claude version."""
 
 import numpy as np
 from openai import OpenAI
+from anthropic import Anthropic
 
-client = OpenAI()
+openai_client = OpenAI()
+anthropic_client = Anthropic()
 
 
 def get_embedding(text: str, model: str = "text-embedding-3-small") -> list:
-    """Get embedding for text using OpenAI API."""
+    """Get embedding for text using OpenAI API (same for both providers)."""
     # Truncate to 8000 chars to avoid token limits
     text = text[:8000]
-    response = client.embeddings.create(
+    response = openai_client.embeddings.create(
         model=model,
         input=text
     )
@@ -50,7 +52,7 @@ def retrieve_top_k(question: str, paragraphs: list[str], k: int = 5) -> tuple:
     return top_paragraphs, top_sims
 
 
-def always_retrieve(question: str, paragraphs: list[str], k: int = 5, model: str = "gpt-4o-mini") -> dict:
+def always_retrieve(question: str, paragraphs: list[str], k: int = 5, model: str = "claude-haiku-4-5") -> dict:
     """
     RAG baseline: retrieve top-k documents, then answer.
 
@@ -58,7 +60,7 @@ def always_retrieve(question: str, paragraphs: list[str], k: int = 5, model: str
         question: The question
         paragraphs: All available paragraphs
         k: Number of documents to retrieve (default 5)
-        model: Model to use (e.g., "gpt-4o-mini", "gpt-5-mini")
+        model: Claude model to use
 
     Returns:
         Dict with method, answer, token counts, etc.
@@ -66,14 +68,14 @@ def always_retrieve(question: str, paragraphs: list[str], k: int = 5, model: str
     docs, scores = retrieve_top_k(question, paragraphs, k=k)
     context = '\n\n'.join(docs)
 
-    messages = [
-        {
-            "role": "system",
-            "content": "You are a helpful assistant. Answer the question based on the provided context."
-        },
-        {
-            "role": "user",
-            "content": f"""Context:
+    message = anthropic_client.messages.create(
+        model=model,
+        max_tokens=300,
+        system="You are a helpful assistant. Answer the question based on the provided context.",
+        messages=[
+            {
+                "role": "user",
+                "content": f"""Context:
 {context}
 
 Question: {question}
@@ -83,32 +85,20 @@ Think step by step, then provide a concise answer.
 Format your response as:
 Reasoning: [your reasoning steps]
 Answer: [the final answer]"""
-        }
-    ]
+            }
+        ]
+    )
 
-    # Use max_completion_tokens for newer models, max_tokens for older ones
-    kwargs = {
-        "model": model,
-        "messages": messages,
-        "temperature": 0,
-    }
-    if model.startswith("gpt-5"):
-        kwargs["max_completion_tokens"] = 300
-    else:
-        kwargs["max_tokens"] = 300
-
-    response = client.chat.completions.create(**kwargs)
-
-    content = response.choices[0].message.content
-    # Extract answer after "Answer:" label, same as always_think
+    content = message.content[0].text
+    # Extract answer after "Answer:" label
     answer = content.split("Answer:")[-1].strip() if "Answer:" in content else content.strip()
 
     return {
         "method": f"always_retrieve_k{k}",
         "answer": answer,
-        "input_tokens": response.usage.prompt_tokens,
-        "output_tokens": response.usage.completion_tokens,
-        "total_tokens": response.usage.total_tokens,
+        "input_tokens": message.usage.input_tokens,
+        "output_tokens": message.usage.output_tokens,
+        "total_tokens": message.usage.input_tokens + message.usage.output_tokens,
         "llm_calls": 1,
         "docs_retrieved": k,
         "avg_similarity": round(sum(scores) / len(scores), 4)
