@@ -16,7 +16,8 @@ from .eval_utils import load_csv_safe
 
 def analyze_model(model_dir: str, model_name: str) -> str:
     """Analyze results for a specific model. Returns markdown text."""
-    csv_path = Path(model_dir) / "results.csv"
+    base_dir = Path(__file__).parent
+    csv_path = base_dir / model_dir / "results.csv"
 
     if not csv_path.exists():
         return f"\n### {model_name}\n\n⚠️ No results found at `{csv_path}`\n\n"
@@ -106,9 +107,10 @@ def analyze_model(model_dir: str, model_name: str) -> str:
 
 def main():
     """Run diagnostics for all available models and save to markdown."""
+    base_dir = Path(__file__).parent
 
-    # Create analysis directory
-    analysis_dir = Path("analysis")
+    # Create analysis directory relative to script
+    analysis_dir = base_dir / "analysis"
     analysis_dir.mkdir(exist_ok=True)
 
     # Build markdown output
@@ -129,11 +131,11 @@ This analysis identifies questions where CART needs to excel:
     print("BASELINE DIAGNOSTICS: Which questions need CART to solve?")
     print("=" * 80)
 
-    # Use correct directory names
+    # Use correct directory names inside the results/ folder
     models = [
-        ("results_gpt_4o_mini", "GPT-4o-mini"),
-        ("results_gpt_5.4_mini_2026_03_17", "GPT-5.4-mini"),
-        ("results_claude_haiku_4_5", "Claude Haiku 4.5"),
+        ("results/results_gpt_4o_mini", "GPT-4o-mini"),
+        ("results/results_gpt_5.4_mini_2026_03_17", "GPT-5.4-mini"),
+        ("results/results_claude_haiku_4_5", "Claude Haiku 4.5"),
     ]
 
     for model_dir, model_name in models:

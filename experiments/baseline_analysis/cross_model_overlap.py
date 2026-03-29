@@ -59,16 +59,17 @@ def load_targets(csv_path, think_method="always_think", k5_method="always_retrie
 
 def main():
     """Analyze cross-model overlap of CART targets."""
+    base_dir = Path(__file__).parent
 
     # Create analysis directory
-    analysis_dir = Path("analysis")
+    analysis_dir = base_dir / "analysis"
     analysis_dir.mkdir(exist_ok=True)
 
-    # Load targets from all models
+    # Load targets from all models inside the results/ folder
     models = {
-        "GPT-4o-mini": Path("results_gpt_4o_mini") / "results.csv",
-        "GPT-5.4-mini": Path("results_gpt_5_4_mini_2026_03_17") / "results.csv",
-        "Claude Haiku 4.5": Path("results_claude_haiku_4_5") / "results.csv",
+        "GPT-4o-mini": base_dir / "results/results_gpt_4o_mini/results.csv",
+        "GPT-5.4-mini": base_dir / "results/results_gpt_5_4_mini_2026_03_17/results.csv",
+        "Claude Haiku 4.5": base_dir / "results/results_claude_haiku_4_5/results.csv",
     }
 
     targets = {}

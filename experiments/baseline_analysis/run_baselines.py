@@ -37,11 +37,10 @@ def run_all_baselines(
     """Run all baselines on HotpotQA samples."""
     check_api_key()
     
-    # Ensure results are saved relative to the script directory (experiments/baseline_analysis/)
+    # Ensure results are saved inside experiments/baseline_analysis/results/
     base_dir = Path(__file__).parent
-    # Replace only dashes with underscores, keep periods for versions (e.g. 5.4)
     model_safe = model.replace("-", "_")
-    output_path = base_dir / f"{output_dir}_{model_safe}"
+    output_path = base_dir / output_dir / f"{output_dir}_{model_safe}"
 
     print(f"📥 Loading {n_samples} HotpotQA samples...")
     samples = get_sample(n=n_samples, seed=42)
