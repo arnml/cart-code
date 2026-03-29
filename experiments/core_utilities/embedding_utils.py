@@ -13,7 +13,7 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Cache root — created lazily at first use
-_CACHE_ROOT = Path(__file__).parent / "cache"
+_CACHE_ROOT = Path(__file__).parent / "embeddings_cache"
 
 
 def _get_encoding(model: str):
@@ -242,7 +242,7 @@ def retrieve_top_k(
     paragraphs: list[str],
     k: int,
     provider: str,
-    model: str,
+    embedding_model: str,
     token_budget: int = 8000,
 ) -> tuple[list[str], list[float]]:
     """Retrieve top-k paragraphs by cosine similarity to question.
@@ -254,7 +254,7 @@ def retrieve_top_k(
         paragraphs: List of candidate paragraphs
         k: Number of top results to return
         provider: "openai" or "anthropic"
-        model: Model name
+        embedding_model: Embedding model name (e.g., "voyage-3", "text-embedding-3-small")
         token_budget: Max tokens per text
 
     Returns:
@@ -273,7 +273,7 @@ def retrieve_top_k(
 
     # Fetch embeddings for question + all paragraphs (cached)
     all_texts = [question, *paragraphs]
-    embeddings = get_embeddings(all_texts, provider, model, token_budget)
+    embeddings = get_embeddings(all_texts, provider, embedding_model, token_budget)
 
     # Handle edge case: all-whitespace texts
     if not embeddings[0] or not embeddings[1:]:

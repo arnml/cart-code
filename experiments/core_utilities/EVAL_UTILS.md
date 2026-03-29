@@ -310,9 +310,7 @@ print(f"Cost-Eff: {final_results['cost_efficiency_mean']:.0f} F1/$")
 
 ---
 
-## For Your Research Paper
-
-### Methods Section Template
+## Methods Section Template
 ```
 Evaluation Metrics. We follow HotpotQA official v1 evaluation [ref],
 computing exact match (EM) and token-level F1, precision, and recall
@@ -328,13 +326,11 @@ Embedding costs for document retrieval are cached and amortized across
 all questions.
 ```
 
-### Results Table
-```markdown
+## Results Table Example
 | Method | EM (%) | F1 (%) | Cost ($) | Token-Eff | Cost-Eff (F1/$) |
 |--------|--------|--------|----------|-----------|-----------------|
 | CART | 72.0 | 85.0 | 0.0025 | 0.120 | 340 |
 | Baseline | 68.0 | 80.0 | 0.0050 | 0.110 | 160 |
-```
 
 **Metrics Explanation:**
 - **Token-Eff**: F1 / log(1 + tokens) — quality per compute unit (lower is better is false, higher is better)
@@ -342,29 +338,7 @@ all questions.
 
 ---
 
-## Comparison: Old vs New
-
-| Aspect | Old | New |
-|--------|-----|-----|
-| F1 return value | Single float | (f1, prec, rec) tuple ← **All metrics** |
-| Yes/no handling | ❌ None | ✅ Strict exact match |
-| Metrics together | ❌ Manual loops | ✅ `aggregate_metrics()` |
-| Embedding cost | ❌ Ignored | ✅ Included |
-| Token Efficiency | ❌ None | ✅ F1/log(tokens) — per compute |
-| Cost Efficiency | ❌ None | ✅ F1/$ — per dollar |
-| Type safety | Dict | ✅ EvalMetrics dataclass |
-| Documentation | Minimal | ✅ Complete |
-
----
-
 ## FAQ
-
-**Q: Do I need to recompute all results?**
-A: Only slightly. F1/EM computation is same, but yes/no answers become stricter (no partial credit). LLM costs are unchanged; embedding costs are now handled separately (cache once, amortize).
-
-**Q: Can I use old and new code together?**
-A: Yes. They coexist. Import from whichever you prefer.
-
 **Q: What about supporting facts evaluation?**
 A: Official HotpotQA also evaluates supporting facts. This code focuses on answer metrics (CART doesn't use supporting facts).
 
@@ -397,7 +371,5 @@ total_cost = llm_cost + (embedding_cost_per_q / num_questions)
 ---
 
 ## Reference
-
-- **File**: `experiments/core_utilities/eval_utils.py`
 - **Official HotpotQA**: https://github.com/hotpotqa/hotpot/blob/master/hotpot_evaluate_v1.py
 - **Citation**: HotpotQA (Yang et al., 2018)
