@@ -11,7 +11,9 @@ from pathlib import Path
 _MODEL_PRICING: dict[str, tuple[float, float]] = {
     "gpt-5.4-mini": (0.00075, 0.0045),
     "gpt-4o-mini": (0.00015, 0.0006),
-    "claude": (0.001, 0.005),  # Haiku / Claude family
+    "claude-haiku": (0.001, 0.005),
+    "claude-sonnet": (0.003, 0.015),
+    "claude": (0.001, 0.005),  # Default / Haiku fallback
 }
 
 
@@ -59,17 +61,15 @@ def exact_match(prediction: str, ground_truth: str | list) -> int:
 
 def cost_usd(input_tokens: int, output_tokens: int, model: str = "gpt-4o-mini") -> float:
     """
-    Estimate cost in USD.
-
-    Pricing (per 1M tokens):
-    - gpt-4o-mini:  $0.15 input / $0.60 output
-    - gpt-5.4-mini: $0.75 input / $4.50 output
-    - claude/haiku: $1.00 input / $5.00 output
+    Estimate cost in USD based on 2026 pricing tiers.
     """
-    if model in ("gpt-5.4-mini-2026-03-17", "gpt-5.4-mini"):
+    model_lower = model.lower()
+    if "gpt-5.4-mini" in model_lower:
         in_rate, out_rate = _MODEL_PRICING["gpt-5.4-mini"]
-    elif "haiku" in model.lower() or "claude" in model.lower():
-        in_rate, out_rate = _MODEL_PRICING["claude"]
+    elif "sonnet" in model_lower:
+        in_rate, out_rate = _MODEL_PRICING["claude-sonnet"]
+    elif "haiku" in model_lower or "claude" in model_lower:
+        in_rate, out_rate = _MODEL_PRICING["claude-haiku"]
     else:
         in_rate, out_rate = _MODEL_PRICING["gpt-4o-mini"]
     return (input_tokens * in_rate + output_tokens * out_rate) / 1000

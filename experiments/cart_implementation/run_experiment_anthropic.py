@@ -1,4 +1,4 @@
-"""Component ablation experiment for Anthropic Claude (Haiku): cart_base / cart_noise / cart_full, 20 samples."""
+"""Component ablation experiment for Anthropic Claude models: cart_base / cart_noise / cart_full, 20 samples."""
 
 import argparse
 import csv
@@ -23,21 +23,12 @@ from .policy import UCBCostPolicy
 
 RESULTS_DIR = Path(__file__).parent / "results"
 
-MODELS: dict[str, str] = {
-    "claude_haiku": "claude-haiku-4-5",
-}
-
-METHODS = [
-    (cart_base, {}),
-    (cart_noise, {}),
-    (cart_full, {"lambda_cost": 1.0}),
-]
-
-
 def _run_sample(
     i: int,
     n: int,
     sample: dict,
+    model_key: str,
+    model_str: str,
     model_policies: dict[str, UCBCostPolicy],
 ) -> list[dict]:
     q, gt = sample["question"], sample["answer"]
@@ -45,50 +36,53 @@ def _run_sample(
     print(f"\n[{i + 1}/{n}] {q[:60]}...")
 
     rows = []
-    for model_key, model_str in MODELS.items():
-        for fn, extra_kw in METHODS:
-            routed_to = None
-            try:
-                call_kw = dict(extra_kw)
-                if fn is cart_full:
-                    call_kw["policy"] = model_policies[model_key]
-                r = fn(question=q, paragraphs=paras, model=model_str, **call_kw)
-                routed_to = r.get("routed_to")
-                f1 = f1_score(r["answer"], gt)
-                
-                # Update policy with actual performance reward if it was a think action
-                if fn is cart_full and routed_to in ("think", "think_fallback"):
-                    model_policies[model_key].update("think", f1)
-                
-                rows.append(
-                    {
-                        "model": model_key,
-                        "qid": sample.get("id", i),
-                        "question": q,
-                        "ground_truth": gt,
-                        **r,
-                        "f1": round(f1, 4),
-                        "exact_match": exact_match(r["answer"], gt),
-                        "cost_usd": round(cost_usd(r["input_tokens"], r["output_tokens"], model=model_str), 6),
-                        "efficiency": round(efficiency(f1, r["total_tokens"]), 5),
-                    }
-                )
-                print(
-                    f"  [{model_key}] {r['method']:<12} F1={f1:.3f} "
-                    f"tok={r['total_tokens']} route={routed_to or 'n/a'}"
-                )
-            except Exception as e:
-                print(f"  ERROR [{model_key}] {fn.__name__}: {e}")
-            time.sleep(0.5)
+    for fn, extra_kw in [
+        (cart_base, {}),
+        (cart_noise, {}),
+        (cart_full, {"lambda_cost": 1.0}),
+    ]:
+        routed_to = None
+        try:
+            call_kw = dict(extra_kw)
+            if fn is cart_full:
+                call_kw["policy"] = model_policies[model_key]
+            r = fn(question=q, paragraphs=paras, model=model_str, **call_kw)
+            routed_to = r.get("routed_to")
+            f1 = f1_score(r["answer"], gt)
+            
+            # Update policy with actual performance reward if it was a think action
+            if fn is cart_full and routed_to in ("think", "think_fallback"):
+                model_policies[model_key].update("think", f1)
+            
+            rows.append(
+                {
+                    "model": model_key,
+                    "qid": sample.get("id", i),
+                    "question": q,
+                    "ground_truth": gt,
+                    **r,
+                    "f1": round(f1, 4),
+                    "exact_match": exact_match(r["answer"], gt),
+                    "cost_usd": round(cost_usd(r["input_tokens"], r["output_tokens"], model=model_str), 6),
+                    "efficiency": round(efficiency(f1, r["total_tokens"]), 5),
+                }
+            )
+            print(
+                f"  [{model_key}] {r['method']:<12} F1={f1:.3f} "
+                f"tok={r['total_tokens']} route={routed_to or 'n/a'}"
+            )
+        except Exception as e:
+            print(f"  ERROR [{model_key}] {fn.__name__}: {e}")
+        time.sleep(0.5)
     return rows
 
 
-def _build_summary(results: list[dict]) -> str:
+def _build_summary(results: list[dict], model_key: str) -> str:
     grouped: dict[tuple, list] = defaultdict(list)
     for r in results:
         grouped[(r["model"], r["method"])].append(r)
 
-    lines = ["# CART Component Ablation for Anthropic — Results (Table 5)\n"]
+    lines = [f"# CART Component Ablation for {model_key} — Results (Table 5)\n"]
     lines.append(f"{'Model':<14}{'Method':<14}{'F1':>6}{'Tokens':>8}{'Eff':>8}")
     lines.append("=" * 52)
     for (m, mth), rows in sorted(grouped.items()):
@@ -98,10 +92,8 @@ def _build_summary(results: list[dict]) -> str:
         lines.append(f"{m:<14}{mth:<14}{f1_avg:>6.3f}{tok_avg:>8.0f}{eff_avg:>8.4f}")
 
     lines.append("\n## CART-Full Routing (key proof of concept)\n")
-    for model_key in MODELS:
-        rows = [r for r in results if r["method"] == "cart_full" and r["model"] == model_key]
-        if not rows:
-            continue
+    rows = [r for r in results if r["method"] == "cart_full" and r["model"] == model_key]
+    if rows:
         think_count = sum(1 for r in rows if r.get("routed_to", "") in ("think", "think_fallback"))
         retrieve_count = len(rows) - think_count
         lines.append(
@@ -123,30 +115,30 @@ def _csv_fieldnames(rows: list[dict]) -> list[str]:
     return fieldnames
 
 
-def run(n: int = 20) -> None:
+def run(n: int = 20, model_str: str = "claude-haiku-4-5") -> None:
+    model_key = model_str.replace("-", "_").replace(".", "_")
     RESULTS_DIR.mkdir(exist_ok=True)
 
+    print(f"🤖 Running experiment for model: {model_str}")
     samples = get_sample(n=n, seed=42)
-    model_policies = {model_key: UCBCostPolicy(lambda_cost=1.0) for model_key in MODELS}
-    results = [
-        row
-        for i, s in enumerate(samples)
-        for row in _run_sample(i, n, s, model_policies)
-    ]
+    model_policies = {model_key: UCBCostPolicy(lambda_cost=1.0)}
+    results = []
+    for i, s in enumerate(samples):
+        results.extend(_run_sample(i, n, s, model_key, model_str, model_policies))
 
     if not results:
         raise RuntimeError("No CART results were produced; CSV export aborted.")
 
-    csv_path = RESULTS_DIR / "results_cart_ablation_anthropic.csv"
+    csv_path = RESULTS_DIR / f"results_cart_ablation_anthropic_{model_key}.csv"
     with open(csv_path, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=_csv_fieldnames(results))
         writer.writeheader()
         writer.writerows(results)
 
-    summary = _build_summary(results)
+    summary = _build_summary(results, model_key)
     print("\n" + summary)
 
-    md_path = RESULTS_DIR / "results_cart_ablation_anthropic.md"
+    md_path = RESULTS_DIR / f"results_cart_ablation_anthropic_{model_key}.md"
     md_path.write_text(summary)
 
     print(f"\nSaved: {csv_path}")
@@ -154,4 +146,8 @@ def run(n: int = 20) -> None:
 
 
 if __name__ == "__main__":
-    run(n=20)
+    parser = argparse.ArgumentParser(description="Run the CART ablation for Anthropic models.")
+    parser.add_argument("--n", type=int, default=20, help="Number of samples.")
+    parser.add_argument("--model", type=str, default="claude-haiku-4-5", help="Anthropic model ID.")
+    args = parser.parse_args()
+    run(n=args.n, model_str=args.model)
