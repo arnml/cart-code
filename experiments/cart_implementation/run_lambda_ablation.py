@@ -17,6 +17,7 @@ from baseline_analysis.dataset_prep import extract_paragraphs, get_sample
 from baseline_analysis.eval_utils import cost_usd, efficiency, exact_match, f1_score
 
 from .cart import cart_full
+from .policy import UCBCostPolicy
 
 RESULTS_DIR = Path(__file__).parent / "results"
 
@@ -29,13 +30,20 @@ SEED = 42
 
 def _run_lambda(lam: float, samples: list[dict]) -> list[dict]:
     rows = []
+    policy = UCBCostPolicy(lambda_cost=lam)
     for i, s in enumerate(samples):
         q, gt = s["question"], s["answer"]
         paras = extract_paragraphs(s)
         print(f"  [λ={lam}] [{i + 1}/{len(samples)}] {q[:55]}...")
         routed_to = None
         try:
-            r = cart_full(question=q, paragraphs=paras, model=MODEL_STR, lambda_cost=lam)
+            r = cart_full(
+                question=q,
+                paragraphs=paras,
+                model=MODEL_STR,
+                lambda_cost=lam,
+                policy=policy,
+            )
             routed_to = r.get("routed_to")
             f1 = f1_score(r["answer"], gt)
             rows.append(
