@@ -1,12 +1,13 @@
 """
 Day 2: Run baseline analysis with Claude (Anthropic) and generate results.
 
-1. Loads 50 random HotpotQA questions (same seed as OpenAI run)
+1. Loads HotpotQA questions
 2. Runs 3 methods: Always-Think, Always-Retrieve k=3, Always-Retrieve k=5
 3. Measures F1, exact match, tokens, and cost
 4. Saves results to CSV and summary markdown (model name in directory)
 """
 
+import argparse
 import csv
 import os
 import sys
@@ -14,11 +15,11 @@ import time
 from pathlib import Path
 from typing import Any
 
-from baseline_always_retrieve_anthropic import always_retrieve
-from baseline_always_think_anthropic import always_think
-from dataset_prep import extract_paragraphs, get_sample
-from eval_utils import cost_usd, efficiency, exact_match, f1_score
-from run_utils import print_summary
+from .baseline_always_retrieve_anthropic import always_retrieve
+from .baseline_always_think_anthropic import always_think
+from .dataset_prep import extract_paragraphs, get_sample
+from .eval_utils import cost_usd, efficiency, exact_match, f1_score
+from .run_utils import print_summary
 
 
 def check_api_key() -> str:
@@ -26,11 +27,6 @@ def check_api_key() -> str:
     api_key = os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
         print("\n❌ ERROR: ANTHROPIC_API_KEY not found in environment variables")
-        print("\nSet it with (Windows PowerShell):")
-        print("  $env:ANTHROPIC_API_KEY = 'sk-ant-your-key-here'")
-        print("\nOr (Windows CMD):")
-        print("  set ANTHROPIC_API_KEY=sk-ant-your-key-here")
-        print("\nGet your key from: https://console.anthropic.com/account/keys\n")
         sys.exit(1)
     return api_key
 
@@ -39,8 +35,7 @@ def run_all_baselines(
     n_samples: int = 50, output_dir: str = "results", model: str = "claude-haiku-4-5"
 ) -> None:
     """Run all baselines on HotpotQA samples using Claude."""
-    api_key = check_api_key()
-    print(f"✓ API key found ({api_key[:15]}...)\n")
+    check_api_key()
 
     output_path = Path(f"{output_dir}_{model.replace('-', '_').replace('.', '_')}")
 
@@ -115,7 +110,7 @@ def run_all_baselines(
                 print(f"\n{'':<54} ❌ ERROR: {str(e)[:40]}", end="")
 
         print()
-        time.sleep(0.5)  # Anthropic has generous rate limits
+        time.sleep(0.5)
 
     print("\n" + "=" * 98)
     if results:
@@ -130,5 +125,8 @@ def run_all_baselines(
 
 
 if __name__ == "__main__":
-    model = sys.argv[1] if len(sys.argv) > 1 else "claude-haiku-4-5"
-    run_all_baselines(n_samples=50, output_dir="results", model=model)
+    parser = argparse.ArgumentParser(description="Run baseline analysis for Anthropic.")
+    parser.add_argument("--n", type=int, default=50, help="Number of samples.")
+    parser.add_argument("model", type=str, nargs="?", default="claude-haiku-4-5", help="Model ID.")
+    args = parser.parse_args()
+    run_all_baselines(n_samples=args.n, output_dir="results", model=args.model)

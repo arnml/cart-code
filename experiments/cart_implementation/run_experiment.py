@@ -2,12 +2,21 @@
 
 import argparse
 import csv
+import sys
 import time
 from collections import defaultdict
 from pathlib import Path
 
-from baseline_analysis.dataset_prep import extract_paragraphs, get_sample
-from baseline_analysis.eval_utils import cost_usd, efficiency, exact_match, f1_score
+# Add experiments directory to path to allow importing from baseline_analysis
+sys.path.append(str(Path(__file__).parent.parent))
+
+try:
+    from baseline_analysis.dataset_prep import extract_paragraphs, get_sample
+    from baseline_analysis.eval_utils import cost_usd, efficiency, exact_match, f1_score
+except ImportError:
+    # Fallback for different execution environments
+    from experiments.baseline_analysis.dataset_prep import extract_paragraphs, get_sample
+    from experiments.baseline_analysis.eval_utils import cost_usd, efficiency, exact_match, f1_score
 
 from .cart import cart_base, cart_full, cart_noise
 from .policy import UCBCostPolicy
@@ -82,14 +91,25 @@ def _build_summary(results: list[dict]) -> str:
     for r in results:
         grouped[(r["model"], r["method"])].append(r)
 
-    lines = ["# CART Component Ablation — Results (Table 5)\n"]
-    lines.append(f"{'Model':<14}{'Method':<14}{'F1':>6}{'Tokens':>8}{'Eff':>8}")
-    lines.append("=" * 52)
+    # Determine baseline for token reduction per model (cart_base is our 'standard')
+    baselines = {}
+    for (model, method), rows in grouped.items():
+        if method == "cart_base":
+            baselines[model] = sum(r["total_tokens"] for r in rows) / len(rows)
+
+    lines = ["# CART Component Ablation — Results (Global Metrics)\n"]
+    lines.append(f"{'Model':<14}{'Method':<14}{'F1':>6}{'Tokens':>8}{'Reduct%':>10}{'Eff_Glb':>10}")
+    lines.append("=" * 66)
     for (m, mth), rows in sorted(grouped.items()):
         f1_avg = sum(r["f1"] for r in rows) / len(rows)
         tok_avg = sum(r["total_tokens"] for r in rows) / len(rows)
-        eff_avg = sum(r["efficiency"] for r in rows) / len(rows)
-        lines.append(f"{m:<14}{mth:<14}{f1_avg:>6.3f}{tok_avg:>8.0f}{eff_avg:>8.4f}")
+        
+        # New Global Metrics
+        ref_tokens = baselines.get(m, tok_avg)
+        reduction_pct = (1 - (tok_avg / ref_tokens)) * 100 if ref_tokens > 0 else 0.0
+        eff_global = efficiency(f1_avg, int(tok_avg))
+        
+        lines.append(f"{m:<14}{mth:<14}{f1_avg:>6.3f}{tok_avg:>8.0f}{reduction_pct:>9.1f}%{eff_global:>10.4f}")
 
     lines.append("\n## CART-Full Routing (key proof of concept)\n")
     for model_key in MODELS:
@@ -131,7 +151,7 @@ def run(n: int = 50) -> None:
     if not results:
         raise RuntimeError("No CART results were produced; CSV export aborted.")
 
-    csv_path = RESULTS_DIR / "results_cart_ablation.csv"
+    csv_path = RESULTS_DIR / f"results_cart_ablation_n{n}.csv"
     with open(csv_path, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=_csv_fieldnames(results))
         writer.writeheader()
@@ -140,7 +160,7 @@ def run(n: int = 50) -> None:
     summary = _build_summary(results)
     print("\n" + summary)
 
-    md_path = RESULTS_DIR / "results_cart_ablation.md"
+    md_path = RESULTS_DIR / f"results_cart_ablation_n{n}.md"
     md_path.write_text(summary)
 
     print(f"\nSaved: {csv_path}")

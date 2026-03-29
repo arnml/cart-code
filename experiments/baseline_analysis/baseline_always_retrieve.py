@@ -1,7 +1,7 @@
 """Baseline: Always-Retrieve (fixed top-k documents)."""
 
-from embedding_utils import retrieve_top_k
-from eval_utils import extract_answer
+from .embedding_utils import retrieve_top_k
+from .eval_utils import extract_answer
 from openai import OpenAI
 
 client = OpenAI()

@@ -2,7 +2,7 @@
 
 from anthropic import Anthropic
 from anthropic.types import TextBlock
-from eval_utils import extract_answer
+from .eval_utils import extract_answer
 
 client = Anthropic()
 

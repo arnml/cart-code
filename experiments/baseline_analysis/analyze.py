@@ -11,7 +11,7 @@ Saves results to: analysis/cart_targets.md
 from datetime import datetime
 from pathlib import Path
 
-from eval_utils import load_csv_safe
+from .eval_utils import load_csv_safe
 
 
 def analyze_model(model_dir: str, model_name: str) -> str:

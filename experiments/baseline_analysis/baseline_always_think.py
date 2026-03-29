@@ -1,6 +1,6 @@
 """Baseline: Always-Think (chain-of-thought, no retrieval)."""
 
-from eval_utils import extract_answer
+from .eval_utils import extract_answer
 from openai import OpenAI
 
 client = OpenAI()

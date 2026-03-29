@@ -13,7 +13,7 @@ from pathlib import Path
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 
-from run_baselines import run_all_baselines
+from .run_baselines import run_all_baselines
 
 if __name__ == "__main__":
     print("""

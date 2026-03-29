@@ -17,7 +17,7 @@ from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 
-from eval_utils import load_csv_safe
+from .eval_utils import load_csv_safe
 
 
 def load_targets(csv_path, think_method="always_think", k5_method="always_retrieve_k5"):

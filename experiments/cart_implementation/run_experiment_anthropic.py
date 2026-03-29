@@ -82,16 +82,28 @@ def _build_summary(results: list[dict], model_key: str) -> str:
     for r in results:
         grouped[(r["model"], r["method"])].append(r)
 
-    lines = [f"# CART Component Ablation for {model_key} — Results (Table 5)\n"]
-    lines.append(f"{'Model':<14}{'Method':<14}{'F1':>6}{'Tokens':>8}{'Eff':>8}")
-    lines.append("=" * 52)
+    # Determine baseline for token reduction (cart_base is our 'standard')
+    baseline_tokens = 0.0
+    for (m, mth), rows in grouped.items():
+        if m == model_key and mth == "cart_base":
+            baseline_tokens = sum(r["total_tokens"] for r in rows) / len(rows)
+
+    lines = [f"# CART Component Ablation for {model_key} — Results (Global Metrics)\n"]
+    lines.append(f"{'Model':<14}{'Method':<14}{'F1':>6}{'Tokens':>8}{'Reduct%':>10}{'Eff_Glb':>10}")
+    lines.append("=" * 66)
     for (m, mth), rows in sorted(grouped.items()):
         f1_avg = sum(r["f1"] for r in rows) / len(rows)
         tok_avg = sum(r["total_tokens"] for r in rows) / len(rows)
-        eff_avg = sum(r["efficiency"] for r in rows) / len(rows)
-        lines.append(f"{m:<14}{mth:<14}{f1_avg:>6.3f}{tok_avg:>8.0f}{eff_avg:>8.4f}")
+
+        # New Global Metrics
+        ref_tokens = baseline_tokens if baseline_tokens > 0 else tok_avg
+        reduction_pct = (1 - (tok_avg / ref_tokens)) * 100 if ref_tokens > 0 else 0.0
+        eff_global = efficiency(f1_avg, int(tok_avg))
+
+        lines.append(f"{m:<14}{mth:<14}{f1_avg:>6.3f}{tok_avg:>8.0f}{reduction_pct:>9.1f}%{eff_global:>10.4f}")
 
     lines.append("\n## CART-Full Routing (key proof of concept)\n")
+
     rows = [r for r in results if r["method"] == "cart_full" and r["model"] == model_key]
     if rows:
         think_count = sum(1 for r in rows if r.get("routed_to", "") in ("think", "think_fallback"))
