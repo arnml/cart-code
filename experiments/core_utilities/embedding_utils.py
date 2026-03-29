@@ -295,10 +295,20 @@ def retrieve_top_k(
 if __name__ == "__main__":
     """Test embeddings for both providers with different token budgets."""
 
+    # Use a longer text so truncation at budget 100 actually happens
     test_text = (
         "The quick brown fox jumps over the lazy dog. "
         "This is a sample text used to test the embedding utilities. "
-        "We are testing token-aware truncation and caching functionality."
+        "We are testing token-aware truncation and caching functionality. "
+        "The embedding system supports multiple providers including OpenAI and Anthropic. "
+        "When using Anthropic, embeddings are powered by Voyage AI, which provides "
+        "high-quality embedding models optimized for various use cases. "
+        "Token-aware truncation ensures that we respect model limits while preserving "
+        "as much information as possible from the original text. "
+        "Caching prevents redundant API calls, improving both speed and cost efficiency. "
+        "The cache is organized by provider, model, and token budget for flexibility. "
+        "Different token budgets create separate cache entries, allowing you to experiment "
+        "with different truncation strategies without invalidating cached results."
     )
 
     print("=" * 70)
@@ -336,9 +346,11 @@ if __name__ == "__main__":
     # Test Anthropic (Voyage AI) with two different token budgets
     print("\n[Anthropic] voyage-3")
     print("-" * 70)
+    print("Note: Anthropic embeddings use Voyage AI")
+    print("Set VOYAGE_API_KEY from https://dash.voyageai.com to enable\n")
 
     try:
-        print("\n1. Token budget: 8000 (default)")
+        print("1. Token budget: 8000 (default)")
         embs_voyage_8000 = get_embeddings(
             [test_text],
             provider="anthropic",
@@ -361,8 +373,11 @@ if __name__ == "__main__":
         diff = sum(abs(a - b) for a, b in zip(embs_voyage_8000[0], embs_voyage_100[0]))
         print(f"   L1 difference: {diff:.4f} (should be > 0 if text was truncated)")
     except Exception as e:
-        print(f"   Error: {e}")
-        print("   (Voyage API key may not be set)")
+        if "No API key" in str(e) or "VOYAGE_API_KEY" in str(e):
+            print("   VOYAGE_API_KEY not set")
+            print("   Set: export VOYAGE_API_KEY=<your-key>")
+        else:
+            print(f"   Error: {e}")
 
     # Test cache efficiency
     print("\n" + "=" * 70)
