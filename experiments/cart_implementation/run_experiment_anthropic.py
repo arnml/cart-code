@@ -2,12 +2,21 @@
 
 import argparse
 import csv
+import sys
 import time
 from collections import defaultdict
 from pathlib import Path
 
-from baseline_analysis.dataset_prep import extract_paragraphs, get_sample
-from baseline_analysis.eval_utils import cost_usd, efficiency, exact_match, f1_score
+# Add experiments directory to path to allow importing from baseline_analysis
+sys.path.append(str(Path(__file__).parent.parent))
+
+try:
+    from baseline_analysis.dataset_prep import extract_paragraphs, get_sample
+    from baseline_analysis.eval_utils import cost_usd, efficiency, exact_match, f1_score
+except ImportError:
+    # Fallback for different execution environments
+    from experiments.baseline_analysis.dataset_prep import extract_paragraphs, get_sample
+    from experiments.baseline_analysis.eval_utils import cost_usd, efficiency, exact_match, f1_score
 
 from .cart_anthropic import cart_base, cart_full, cart_noise
 from .policy import UCBCostPolicy
