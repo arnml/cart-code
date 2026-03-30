@@ -89,12 +89,12 @@ LLM_TO_EMBEDDING = {
     },
     "claude-haiku-4-5": {
         "provider": "anthropic",
-        "embedding_model": "voyage-3",
+        "embedding_model": "voyage-4",
         "max_tokens": 32000,  # Voyage AI voyage-3 max per text
     },
     "claude-sonnet-4-6": {
         "provider": "anthropic",
-        "embedding_model": "voyage-3",
+        "embedding_model": "voyage-4",
         "max_tokens": 32000,  # Voyage AI voyage-3 max per text
     },
 }

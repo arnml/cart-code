@@ -8,3 +8,8 @@ py -m pip install uv
 
 # Install packages (runtime + tools)
 uv pip install openai tiktoken llama-index datasets ruff pytest
+
+# Run baselines
+```bash
+uv run python -m experiments.run_baseline <MODEL_NAME> <SAMPLE_SIZE>
+```

@@ -28,11 +28,35 @@ Single source of truth. A collaborator reads top-to-bottom with no prior context
 **CART: Cost-Penalized Adaptive Routing for Test-Time Retrieval**
 
 ## Problem
-Current RAG agents apply a fixed retrieval budget (top-k documents) to every
-query. This is standard practice — documented in Self-RAG (ICLR 2024), RankRAG
-(NeurIPS 2024), and REPLUG (NAACL 2024) — and it has two failure modes:
-(1) wastes tokens when the model already knows the answer, and (2) introduces
-distractor noise that degrades quality when retrieval is poor.
+Current RAG agents apply a fixed retrieval budget (top-k documents) to every query. The problem is that this is often wasteful and sometimes unnecessary.
+
+Why?
+
+- Some questions really need external evidence.
+- Some can already be answered by the model’s own parametric knowledge.
+- Retrieving too much adds tokens, latency, and noise.
+- The best retrieval behavior can change across queries and across models.
+
+So the real problem is:
+
+> How should an LLM decide, at inference time, whether to retrieve at all, and if so, how much to retrieve, while accounting for token cost?
+
+## What does the paper want to do?
+The paper wants to turn retrieval from a fixed pipeline choice into an adaptive test-time decision.
+
+More specifically, it wants to propose a method that:
+
+- is training-free
+- works at inference time
+- decides whether to retrieve
+- decides how much context to retrieve
+- balances answer quality against token cost
+
+That method is CART.
+
+So the paper’s central move is:
+
+> Treat retrieval as a cost-aware routing problem, not as a fixed top-𝑘 k preprocessing step.
 
 ## Central Empirical Discovery
 ```
