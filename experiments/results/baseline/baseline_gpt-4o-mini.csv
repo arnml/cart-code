@@ -9,6 +9,16 @@ question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,out
 5adef1b35542993a75d263af,always_think,Marilyn Monroe,Salma Hayek Pinault,0.0,0.0,0.0,0.0,85,3,1.455e-05
 5a73b55855429978a71e9086,always_think,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,93,4,1.6349999999999998e-05
 5ae80919554299540e5a56f6,always_think,W. M. MacKenzie,The Changing Scottish Landscape,0.0,0.0,0.0,0.0,90,6,1.71e-05
+5ae361605542994393b9e69b,always_think,Naval Reserve Training Center,"""Home of the Submarine Force""",0.0,0.0,0.0,0.0,84,5,1.56e-05
+5ac3a76e554299741d48a2be,always_think,U2,U2,1.0,1.0,1.0,1.0,88,2,1.44e-05
+5a7557d75542992d0ec05f68,always_think,Julia Louis-Dreyfus,Laurie Metcalf,0.0,0.0,0.0,0.0,81,5,1.515e-05
+5a8d12ca5542994ba4e3dbe2,always_think,London,"Nairobi, Kenya",0.0,0.0,0.0,0.0,91,1,1.4249999999999999e-05
+5ab7f6d35542993667794070,always_think,Wire,Cyclic Defrost,0.0,0.0,0.0,0.0,93,1,1.4549999999999998e-05
+5ac3d9135542995c82c4ac4c,always_think,Concord,729 at the 2010 census,0.0,0.0,0.0,0.0,86,2,1.41e-05
+5ae129115542990adbacf722,always_think,The Bothy Ballad,Francis McPeake,0.0,0.0,0.0,0.0,85,5,1.575e-05
+5a86769c5542994775f60776,always_think,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,92,5,1.68e-05
+5ab31864554299233954ff06,always_think,Saxophone,strings,0.0,0.0,0.0,0.0,80,3,1.38e-05
+5a7b1023554299042af8f6c2,always_think,The Many Adventures of Winnie the Pooh,Ride a Wild Pony,0.0,0.0,0.0,0.0,90,7,1.77e-05
 5ae143ed55429920d5234360,retrieval_k3,1755,1755,1.0,1.0,1.0,1.0,392,2,6e-05
 5abc19705542993a06baf86e,retrieval_k3,Dutch,Dutch,1.0,1.0,1.0,1.0,534,1,8.07e-05
 5ac3e0f7554299194317388b,retrieval_k3,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,515,3,7.905e-05
@@ -19,6 +29,16 @@ question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,out
 5adef1b35542993a75d263af,retrieval_k3,Penélope Cruz,Salma Hayek Pinault,0.0,0.0,0.0,0.0,252,4,4.0199999999999995e-05
 5a73b55855429978a71e9086,retrieval_k3,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,428,4,6.66e-05
 5ae80919554299540e5a56f6,retrieval_k3,"""The Changing Scottish Landscape""",The Changing Scottish Landscape,1.0,1.0,1.0,1.0,356,5,5.6399999999999995e-05
+5ae361605542994393b9e69b,retrieval_k3,submarine school,"""Home of the Submarine Force""",0.0,0.3333333333333333,0.5,0.25,408,3,6.3e-05
+5ac3a76e554299741d48a2be,retrieval_k3,U2,U2,1.0,1.0,1.0,1.0,473,2,7.215e-05
+5a7557d75542992d0ec05f68,retrieval_k3,Laurie Metcalf,Laurie Metcalf,1.0,1.0,1.0,1.0,584,5,9.059999999999999e-05
+5a8d12ca5542994ba4e3dbe2,retrieval_k3,Nairobi,"Nairobi, Kenya",0.0,0.6666666666666666,1.0,0.5,448,2,6.840000000000001e-05
+5ab7f6d35542993667794070,retrieval_k3,Cyclic Defrost,Cyclic Defrost,1.0,1.0,1.0,1.0,372,4,5.819999999999999e-05
+5ac3d9135542995c82c4ac4c,retrieval_k3,729,729 at the 2010 census,0.0,0.4,1.0,0.25,404,1,6.12e-05
+5ae129115542990adbacf722,retrieval_k3,Francis McPeake,Francis McPeake,1.0,1.0,1.0,1.0,509,5,7.935e-05
+5a86769c5542994775f60776,retrieval_k3,The Magic Christian,Slaughterhouse-Five,0.0,0.0,0.0,0.0,565,3,8.655e-05
+5ab31864554299233954ff06,retrieval_k3,Sarod,strings,0.0,0.0,0.0,0.0,466,2,7.11e-05
+5a7b1023554299042af8f6c2,retrieval_k3,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,439,4,6.824999999999999e-05
 5ae143ed55429920d5234360,retrieval_k5,1755,1755,1.0,1.0,1.0,1.0,583,2,8.865e-05
 5abc19705542993a06baf86e,retrieval_k5,Jewish,Dutch,0.0,0.0,0.0,0.0,771,2,0.00011685
 5ac3e0f7554299194317388b,retrieval_k5,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,716,3,0.0001092
@@ -29,6 +49,16 @@ question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,out
 5adef1b35542993a75d263af,retrieval_k5,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,451,4,7.005e-05
 5a73b55855429978a71e9086,retrieval_k5,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,864,4,0.000132
 5ae80919554299540e5a56f6,retrieval_k5,"""The Changing Scottish Landscape""",The Changing Scottish Landscape,1.0,1.0,1.0,1.0,656,5,0.0001014
+5ae361605542994393b9e69b,retrieval_k5,US Naval Submarine Base New London,"""Home of the Submarine Force""",0.0,0.2,0.16666666666666666,0.25,674,7,0.00010529999999999998
+5ac3a76e554299741d48a2be,retrieval_k5,U2,U2,1.0,1.0,1.0,1.0,696,2,0.00010559999999999999
+5a7557d75542992d0ec05f68,retrieval_k5,Laurie Metcalf,Laurie Metcalf,1.0,1.0,1.0,1.0,881,5,0.00013515
+5a8d12ca5542994ba4e3dbe2,retrieval_k5,Nairobi,"Nairobi, Kenya",0.0,0.6666666666666666,1.0,0.5,789,2,0.00011954999999999999
+5ab7f6d35542993667794070,retrieval_k5,Cyclic Defrost,Cyclic Defrost,1.0,1.0,1.0,1.0,568,4,8.76e-05
+5ac3d9135542995c82c4ac4c,retrieval_k5,729,729 at the 2010 census,0.0,0.4,1.0,0.25,659,1,9.944999999999999e-05
+5ae129115542990adbacf722,retrieval_k5,Francis McPeake,Francis McPeake,1.0,1.0,1.0,1.0,779,5,0.00011985
+5a86769c5542994775f60776,retrieval_k5,The Magic Christian,Slaughterhouse-Five,0.0,0.0,0.0,0.0,772,3,0.0001176
+5ab31864554299233954ff06,retrieval_k5,Sarod,strings,0.0,0.0,0.0,0.0,836,2,0.0001266
+5a7b1023554299042af8f6c2,retrieval_k5,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,752,4,0.0001152
 5ae143ed55429920d5234360,retrieval_k10,1755,1755,1.0,1.0,1.0,1.0,953,2,0.00014414999999999998
 5abc19705542993a06baf86e,retrieval_k10,Dutch,Dutch,1.0,1.0,1.0,1.0,1390,1,0.0002091
 5ac3e0f7554299194317388b,retrieval_k10,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,1341,3,0.00020295
@@ -39,3 +69,13 @@ question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,out
 5adef1b35542993a75d263af,retrieval_k10,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,1096,4,0.00016680000000000002
 5a73b55855429978a71e9086,retrieval_k10,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,1715,4,0.00025965
 5ae80919554299540e5a56f6,retrieval_k10,"""The Changing Scottish Landscape""",The Changing Scottish Landscape,1.0,1.0,1.0,1.0,1126,5,0.0001719
+5ae361605542994393b9e69b,retrieval_k10,Naval Submarine Base New London,"""Home of the Submarine Force""",0.0,0.22222222222222224,0.2,0.25,1631,7,0.00024884999999999995
+5ac3a76e554299741d48a2be,retrieval_k10,U2,U2,1.0,1.0,1.0,1.0,1359,2,0.00020505
+5a7557d75542992d0ec05f68,retrieval_k10,Laurie Metcalf,Laurie Metcalf,1.0,1.0,1.0,1.0,1668,5,0.00025320000000000003
+5a8d12ca5542994ba4e3dbe2,retrieval_k10,Dar es Salaam,"Nairobi, Kenya",0.0,0.0,0.0,0.0,1289,3,0.00019514999999999997
+5ab7f6d35542993667794070,retrieval_k10,Cyclic Defrost,Cyclic Defrost,1.0,1.0,1.0,1.0,1604,4,0.000243
+5ac3d9135542995c82c4ac4c,retrieval_k10,729,729 at the 2010 census,0.0,0.4,1.0,0.25,1947,1,0.00029265000000000004
+5ae129115542990adbacf722,retrieval_k10,Francis McPeake,Francis McPeake,1.0,1.0,1.0,1.0,1777,5,0.00026955
+5a86769c5542994775f60776,retrieval_k10,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,1532,5,0.00023279999999999997
+5ab31864554299233954ff06,retrieval_k10,Sarod,strings,0.0,0.0,0.0,0.0,1642,2,0.00024749999999999994
+5a7b1023554299042af8f6c2,retrieval_k10,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,1631,4,0.00024704999999999996
