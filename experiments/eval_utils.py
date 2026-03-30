@@ -5,12 +5,10 @@ Includes F1, EM, precision, recall, and efficiency metrics.
 Reference: https://github.com/hotpotqa/hotpot/blob/master/hotpot_evaluate_v1.py
 """
 
-import math
 import re
 import string
 from collections import Counter
 from dataclasses import dataclass
-from typing import Optional
 
 
 @dataclass
@@ -20,8 +18,6 @@ class EvalMetrics:
     f1: float  # F1 score
     precision: float  # Token-level precision
     recall: float  # Token-level recall
-    token_efficiency: Optional[float] = None  # F1 / log(1 + input_tokens + output_tokens) — quality per compute
-    cost_efficiency: Optional[float] = None  # F1 / cost_usd — quality per dollar
 
 
 def normalize_answer(s: str) -> str:
@@ -104,9 +100,6 @@ def exact_match_score(prediction: str, ground_truth: str) -> bool:
 def evaluate_sample(
     prediction: str,
     ground_truth: str,
-    input_tokens: int = 0,
-    output_tokens: int = 0,
-    cost_usd: float = 0.0,
 ) -> EvalMetrics:
     """
     Evaluate a single prediction-ground_truth pair.
@@ -114,12 +107,9 @@ def evaluate_sample(
     Args:
         prediction: Generated answer
         ground_truth: Reference answer
-        input_tokens: Total input tokens used (for efficiency metric)
-        output_tokens: Total output tokens used (for efficiency metric)
-        cost_usd: Total cost in USD (for cost efficiency metric)
 
     Returns:
-        EvalMetrics dataclass with EM, F1, precision, recall, efficiency scores
+        EvalMetrics dataclass with EM, F1, precision, recall
     """
     # Exact Match
     em = float(exact_match_score(prediction, ground_truth))
@@ -127,126 +117,12 @@ def evaluate_sample(
     # F1, Precision, Recall
     f1, prec, recall = f1_score(prediction, ground_truth)
 
-    # Token Efficiency: F1 / log(1 + total_tokens) — quality per compute unit
-    total_tokens = input_tokens + output_tokens
-    token_efficiency = None
-    if total_tokens >= 0:
-        token_efficiency = f1 / math.log(1 + total_tokens) if total_tokens > 0 else f1
-
-    # Cost Efficiency: F1 / cost_usd — quality per dollar spent
-    cost_efficiency = None
-    if cost_usd > 0:
-        cost_efficiency = f1 / cost_usd
-
     return EvalMetrics(
         em=em,
         f1=f1,
         precision=prec,
         recall=recall,
-        token_efficiency=token_efficiency,
-        cost_efficiency=cost_efficiency,
     )
-
-
-def aggregate_metrics(
-    predictions: list[str],
-    ground_truths: list[str],
-    input_tokens: Optional[list[int]] = None,
-    output_tokens: Optional[list[int]] = None,
-    costs_usd: Optional[list[float]] = None,
-) -> dict:
-    """
-    Aggregate metrics across multiple predictions.
-
-    Args:
-        predictions: List of generated answers
-        ground_truths: List of reference answers
-        input_tokens: List of input token counts per sample (optional)
-        output_tokens: List of output token counts per sample (optional)
-        costs_usd: List of costs in USD per sample (optional)
-
-    Returns:
-        Dictionary with aggregated metrics:
-            - em_mean, f1_mean, precision_mean, recall_mean
-            - token_efficiency_mean (if tokens provided) — quality per compute
-            - cost_efficiency_mean (if costs provided) — quality per dollar
-            - Also includes _sum variants for each metric
-    """
-    assert len(predictions) == len(ground_truths), "Mismatched lengths"
-
-    if input_tokens is None:
-        input_tokens = [0] * len(predictions)
-    if output_tokens is None:
-        output_tokens = [0] * len(predictions)
-    if costs_usd is None:
-        costs_usd = [0.0] * len(predictions)
-
-    metrics_list = [
-        evaluate_sample(
-            pred, gt, inp, out, cost
-        )
-        for pred, gt, inp, out, cost in zip(
-            predictions, ground_truths, input_tokens, output_tokens, costs_usd
-        )
-    ]
-
-    # Aggregate
-    n = len(metrics_list)
-    agg = {
-        'count': n,
-        'em_sum': sum(m.em for m in metrics_list),
-        'f1_sum': sum(m.f1 for m in metrics_list),
-        'precision_sum': sum(m.precision for m in metrics_list),
-        'recall_sum': sum(m.recall for m in metrics_list),
-        'em_mean': sum(m.em for m in metrics_list) / n,
-        'f1_mean': sum(m.f1 for m in metrics_list) / n,
-        'precision_mean': sum(m.precision for m in metrics_list) / n,
-        'recall_mean': sum(m.recall for m in metrics_list) / n,
-    }
-
-    # Token Efficiency metrics (if available)
-    if any(m.token_efficiency is not None for m in metrics_list):
-        token_effs = [m.token_efficiency for m in metrics_list if m.token_efficiency is not None]
-        if token_effs:
-            agg['token_efficiency_mean'] = sum(token_effs) / len(token_effs)
-            agg['token_efficiency_sum'] = sum(token_effs)
-
-    # Cost efficiency (if available)
-    if any(m.cost_efficiency is not None for m in metrics_list):
-        cost_effs = [m.cost_efficiency for m in metrics_list if m.cost_efficiency is not None]
-        if cost_effs:
-            agg['cost_efficiency_mean'] = sum(cost_effs) / len(cost_effs)
-            agg['cost_efficiency_sum'] = sum(cost_effs)
-
-    return agg
-
-
-def format_metrics(metrics: dict) -> str:
-    """
-    Format aggregated metrics for printing.
-
-    Args:
-        metrics: Dictionary from aggregate_metrics()
-
-    Returns:
-        Formatted string for display
-    """
-    lines = [f"Metrics (n={metrics.get('count', '?')}):"]
-
-    if 'em_mean' in metrics:
-        lines.append(f"  EM:        {metrics['em_mean']:.4f}")
-    if 'f1_mean' in metrics:
-        lines.append(f"  F1:        {metrics['f1_mean']:.4f}")
-    if 'precision_mean' in metrics:
-        lines.append(f"  Precision: {metrics['precision_mean']:.4f}")
-    if 'recall_mean' in metrics:
-        lines.append(f"  Recall:    {metrics['recall_mean']:.4f}")
-    if 'token_efficiency_mean' in metrics:
-        lines.append(f"  Token-Eff (F1/log(tok)): {metrics['token_efficiency_mean']:.4f}")
-    if 'cost_efficiency_mean' in metrics:
-        lines.append(f"  Cost-Eff (F1/$):         {metrics['cost_efficiency_mean']:.2f}")
-
-    return '\n'.join(lines)
 
 
 # ============================================================================
@@ -298,16 +174,13 @@ def cost_usd(
 # ============================================================================
 
 if __name__ == "__main__":
-    # Example 1: Single sample evaluation
+    # Example: Single sample evaluation
     pred = "Paris is the capital of France"
     gt = "Paris"
 
     metrics = evaluate_sample(
         prediction=pred,
         ground_truth=gt,
-        input_tokens=500,
-        output_tokens=50,
-        cost_usd=cost_usd(500, 50, model="claude-haiku"),
     )
 
     print("Single Sample Evaluation:")
@@ -315,34 +188,3 @@ if __name__ == "__main__":
     print(f"  F1: {metrics.f1:.4f}")
     print(f"  Precision: {metrics.precision:.4f}")
     print(f"  Recall: {metrics.recall:.4f}")
-    print(f"  Token-Eff (F1/log(tok)): {metrics.token_efficiency:.4f}")
-    print(f"  Cost-Eff (F1/$): {metrics.cost_efficiency:.2f}")
-    print()
-
-    # Example 2: Batch evaluation
-    predictions = [
-        "Paris is the capital of France",
-        "London is the capital of England",
-        "Berlin is the capital of Germany",
-    ]
-    ground_truths = [
-        "Paris",
-        "London",
-        "Berlin is the capital",
-    ]
-    input_tokens_list = [500, 500, 500]
-    output_tokens_list = [50, 50, 75]
-    costs_list = [
-        cost_usd(inp, out, model="claude-haiku")
-        for inp, out in zip(input_tokens_list, output_tokens_list)
-    ]
-
-    agg = aggregate_metrics(
-        predictions,
-        ground_truths,
-        input_tokens=input_tokens_list,
-        output_tokens=output_tokens_list,
-        costs_usd=costs_list,
-    )
-
-    print(format_metrics(agg))
