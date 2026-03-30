@@ -5,7 +5,7 @@ Requires: ANTHROPIC_API_KEY environment variable
 """
 
 from anthropic import Anthropic
-from experiments.core_utilities.baselines_config import LLM_CONFIG
+from experiments.baselines_config import LLM_CONFIG
 
 
 def call_anthropic(prompt: str, model: str) -> dict:

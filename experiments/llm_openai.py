@@ -5,7 +5,7 @@ Requires: OPENAI_API_KEY environment variable
 """
 
 from openai import OpenAI
-from experiments.core_utilities.baselines_config import LLM_CONFIG
+from experiments.baselines_config import LLM_CONFIG
 
 
 def call_openai(prompt: str, model: str) -> dict:

@@ -112,7 +112,7 @@ PRODUCTION_N_ROWS = [100, 200, 300, 400]
 # ============================================================================
 # Output Directory
 # ============================================================================
-# Results are written to experiments/baseline/results/
+# Results are written to experiments/results/baseline/
 # Each model gets two files:
 #   - baseline_{model}.csv  (per-record metrics)
 #   - baseline_{model}.md   (summary report with global metrics)

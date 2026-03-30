@@ -5,7 +5,7 @@ Includes:
 - retrieval_k3/k5/k10: Dense retrieval by embedding similarity
 """
 
-from experiments.core_utilities.embedding_utils import retrieve_top_k
+from experiments.embedding_utils import retrieve_top_k
 
 
 def _flatten_context(context: dict) -> list[str]:
@@ -128,7 +128,7 @@ def _retrieval_kn(sample: dict, model: str, k: int) -> tuple[str, int, int, floa
     question = sample["question"]
     context = sample["context"]
 
-    from experiments.core_utilities.baselines_config import LLM_TO_EMBEDDING
+    from experiments.baselines_config import LLM_TO_EMBEDDING
 
     # Flatten context to list of paragraph strings
     # Note: We use titles + paragraph text for retrieval, not supporting_facts
@@ -216,7 +216,7 @@ def call_llm(prompt: str, model: str) -> tuple[str, int, int, float]:
         KeyError: If model not recognized
         Exception: If API call fails (auth, rate limit, etc.)
     """
-    from experiments.core_utilities.baselines_config import LLM_CONFIG
+    from experiments.baselines_config import LLM_CONFIG
 
     if model not in LLM_CONFIG:
         raise KeyError(f"Unknown model: {model}")
@@ -225,10 +225,10 @@ def call_llm(prompt: str, model: str) -> tuple[str, int, int, float]:
     provider = config["provider"]
 
     if provider == "openai":
-        from experiments.core_utilities.llm_openai import call_openai
+        from experiments.llm_openai import call_openai
         result = call_openai(prompt, model)
     elif provider == "anthropic":
-        from experiments.core_utilities.llm_anthropic import call_anthropic
+        from experiments.llm_anthropic import call_anthropic
         result = call_anthropic(prompt, model)
     else:
         raise ValueError(f"Unknown provider: {provider}")

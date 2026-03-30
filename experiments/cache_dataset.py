@@ -1,15 +1,16 @@
 """Dataset caching utilities to avoid re-loading and re-processing large datasets.
 
 Provides persistent, disk-based caching for HotpotQA and other datasets.
-Supports partial loads and range-based slicing.
+Supports partial loads and deterministic random sampling.
 """
 
 import json
+import random
 from pathlib import Path
 from typing import Optional
 
 # Cache root for datasets
-_CACHE_ROOT = Path(__file__).parent / "dataset_cache"
+_CACHE_ROOT = Path(__file__).parent / "cache" / "dataset_cache"
 
 
 def _cache_path(dataset_name: str, subset: str, split: str) -> Path:
@@ -36,13 +37,14 @@ def load_dataset_cached(
     """Load dataset with caching support.
 
     First checks if the full dataset is cached on disk. If not, loads from Hugging Face
-    and caches it. Then returns the first n_rows (or all if n_rows is None).
+    and caches it. Then returns a deterministic random sample of n_rows (or all if n_rows is None).
 
     Args:
         dataset_name: Dataset name (e.g., "hotpot_qa")
         subset: Dataset subset (e.g., "distractor")
         split: Dataset split (e.g., "validation")
         n_rows: Optional limit on number of rows to return. If None, returns all.
+                Uses deterministic random sampling (seed=42) for reproducibility.
         force_reload: If True, ignore cache and reload from Hugging Face
 
     Returns:
@@ -51,6 +53,7 @@ def load_dataset_cached(
     Example:
         >>> ds = load_dataset_cached("hotpot_qa", "distractor", "validation", n_rows=100)
         >>> len(ds)  # <= 100 (or full dataset size if < 100)
+        >>> # Same 100 records returned on every call with n_rows=100
     """
     from datasets import load_dataset
 
@@ -83,9 +86,12 @@ def load_dataset_cached(
             json.dump(cache_data, f, indent=2)
         print(f"Cached to {cache_file}")
 
-    # Return sliced result
+    # Return deterministic random sample
     if n_rows is not None and n_rows > 0:
-        return rows[: min(n_rows, len(rows))]
+        n_rows = min(n_rows, len(rows))
+        random.seed(42)  # Fixed seed for reproducibility
+        sample_indices = random.sample(range(len(rows)), n_rows)
+        return [rows[i] for i in sample_indices]
     return rows
 
 

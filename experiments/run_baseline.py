@@ -4,28 +4,28 @@ Main baseline evaluation script for CART paper.
 Evaluates LLM performance on HotpotQA using different retrieval strategies.
 
 Usage from root:
-    python -m experiments.baseline.run_baseline gpt-4o-mini 2
-    python -m experiments.baseline.run_baseline claude-sonnet-4-6 100
+    python -m experiments.run_baseline gpt-4o-mini 2
+    python -m experiments.run_baseline claude-sonnet-4-6 100
 """
 
 import csv
 import sys
 from pathlib import Path
 
-from experiments.core_utilities.cache_dataset import load_dataset_cached
-from experiments.core_utilities.eval_utils import (
+from experiments.cache_dataset import load_dataset_cached
+from experiments.eval_utils import (
     evaluate_sample,
     aggregate_metrics,
 )
-from experiments.core_utilities.baselines_config import (
+from experiments.baselines_config import (
     MODELS,
     METHODS,
     DATASET_CONFIG,
 )
-from experiments.core_utilities.baselines import get_method
+from experiments.baselines import get_method
 
-RESULTS_DIR = Path(__file__).parent / "results"
-RESULTS_DIR.mkdir(exist_ok=True)
+RESULTS_DIR = Path(__file__).parent / "results" / "baseline"
+RESULTS_DIR.mkdir(exist_ok=True, parents=True)
 
 
 def load_or_create_csv(model: str) -> tuple[dict, Path]:
@@ -142,7 +142,7 @@ def _process_method(
     print(f"\nMethod: {method_name}")
     new_results = []
     method_results = []
-    
+
     for i, sample in enumerate(ds):
         qid = sample["id"]
         key = (qid, method_name)
@@ -264,7 +264,7 @@ def run_baseline(model: str, n_rows: int, methods: list[str] = None):
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print("Usage: python -m experiments.baseline.run_baseline <model> <n_rows>")
+        print("Usage: python -m experiments.run_baseline <model> <n_rows>")
         print(f"\nAvailable models: {', '.join(MODELS)}")
         print(f"Available methods: {', '.join(METHODS)}")
         sys.exit(1)
