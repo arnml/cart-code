@@ -48,7 +48,18 @@ def always_think(sample: dict, model: str) -> tuple[str, int, int, float]:
         Tuple of (answer, input_tokens, output_tokens, cost_usd)
     """
     question = sample["question"]
-    prompt = f"Answer the question: {question}"
+    prompt = f"""Answer the HotpotQA question.
+
+Rules:
+- Output only the final answer.
+- If the answer is yes or no, output exactly: yes or no.
+- Otherwise output a short span or entity name only.
+- Do not include any explanation.
+- Do not repeat the question.
+
+Question: {question}
+
+Answer:"""
 
     # Call LLM and get answer + tokens + cost
     answer, input_tokens, output_tokens, cost_usd = call_llm(prompt, model)
@@ -140,7 +151,15 @@ def _retrieval_kn(sample: dict, model: str, k: int) -> tuple[str, int, int, floa
     context_str = "\n\n".join(
         [f"[{i+1}] {p}" for i, p in enumerate(top_paragraphs)]
     )
-    prompt = f"""Using the context below, answer the question:
+    prompt = f"""Answer the HotpotQA question using only the provided context.
+
+Rules:
+- Output only the final answer.
+- If the answer is yes or no, output exactly: yes or no.
+- Otherwise output a short span or entity name only.
+- Do not include any explanation.
+- Do not repeat the question.
+- If multiple positions/titles are mentioned, output only the one that directly answers the question.
 
 Context:
 {context_str}
