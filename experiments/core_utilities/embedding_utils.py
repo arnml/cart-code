@@ -66,24 +66,22 @@ def _text_hash(text: str) -> str:
     return hashlib.sha256(text.encode()).hexdigest()
 
 
-def _cache_path(provider: str, model: str, token_budget: int) -> Path:
-    """Return path to the cache JSON file for this config."""
-    return _CACHE_ROOT / provider / model / str(token_budget) / "embeddings.json"
+def _cache_path(provider: str, token_budget: int) -> Path:
+    """Return path to the cache JSON file for this provider and token budget."""
+    return _CACHE_ROOT / provider / str(token_budget) / "embeddings.json"
 
 
-def _load_cache(provider: str, model: str, token_budget: int) -> dict:
+def _load_cache(provider: str, token_budget: int) -> dict:
     """Load existing cache or create empty cache structure.
 
     Args:
         provider: "openai" or "anthropic"
-        model: Model name
         token_budget: Token budget for this cache
 
     Cache format:
     {
         "metadata": {
             "provider": "openai",
-            "model": "text-embedding-3-small",
             "token_budget": 8000,
             "updated_at": "2026-03-29T12:00:00"
         },
@@ -96,7 +94,7 @@ def _load_cache(provider: str, model: str, token_budget: int) -> dict:
         }
     }
     """
-    path = _cache_path(provider, model, token_budget)
+    path = _cache_path(provider, token_budget)
 
     if path.exists():
         with open(path) as f:
@@ -105,7 +103,6 @@ def _load_cache(provider: str, model: str, token_budget: int) -> dict:
     return {
         "metadata": {
             "provider": provider,
-            "model": model,
             "token_budget": token_budget,
             "updated_at": datetime.now(timezone.utc).isoformat(),
         },
@@ -113,16 +110,15 @@ def _load_cache(provider: str, model: str, token_budget: int) -> dict:
     }
 
 
-def _save_cache(cache: dict, provider: str, model: str, token_budget: int) -> None:
+def _save_cache(cache: dict, provider: str, token_budget: int) -> None:
     """Write cache to disk, creating directories as needed.
 
     Args:
         cache: Cache dict to save
         provider: "openai" or "anthropic"
-        model: Model name
         token_budget: Token budget for this cache
     """
-    path = _cache_path(provider, model, token_budget)
+    path = _cache_path(provider, token_budget)
     path.parent.mkdir(parents=True, exist_ok=True)
 
     cache["metadata"]["updated_at"] = datetime.now(timezone.utc).isoformat()
@@ -204,7 +200,7 @@ def get_embeddings(
     ]
 
     # Load cache
-    cache = _load_cache(provider, model, token_budget)
+    cache = _load_cache(provider, token_budget)
 
     # Track which texts need fetching
     results = [None] * len(texts)
@@ -232,7 +228,7 @@ def get_embeddings(
                 "text_preview": orig[:80],
             }
 
-        _save_cache(cache, provider, model, token_budget)
+        _save_cache(cache, provider, token_budget)
 
     return results
 
@@ -289,7 +285,10 @@ def retrieve_top_k(
     k_actual = min(k, len(paragraphs))
     top_idx = np.argsort(sims)[::-1][:k_actual]
 
-    return [paragraphs[i] for i in top_idx], sims[top_idx].tolist()
+    top_paragraphs = [paragraphs[i] for i in top_idx]
+    top_scores = sims[top_idx].tolist()
+
+    return top_paragraphs, top_scores
 
 
 if __name__ == "__main__":
@@ -401,19 +400,16 @@ if __name__ == "__main__":
         for provider_dir in sorted(cache_dir.iterdir()):
             if provider_dir.is_dir():
                 print(f"  {provider_dir.name}/")
-                for model_dir in sorted(provider_dir.iterdir()):
-                    if model_dir.is_dir():
-                        print(f"    {model_dir.name}/")
-                        for budget_dir in sorted(model_dir.iterdir()):
-                            if budget_dir.is_dir():
-                                cache_file = budget_dir / "embeddings.json"
-                                if cache_file.exists():
-                                    with open(cache_file) as f:
-                                        cache_data = json.load(f)
-                                        num_entries = len(cache_data.get("entries", {}))
-                                    print(
-                                        f"      {budget_dir.name}/ ({num_entries} entries)"
-                                    )
+                for budget_dir in sorted(provider_dir.iterdir()):
+                    if budget_dir.is_dir():
+                        cache_file = budget_dir / "embeddings.json"
+                        if cache_file.exists():
+                            with open(cache_file) as f:
+                                cache_data = json.load(f)
+                                num_entries = len(cache_data.get("entries", {}))
+                            print(
+                                f"    {budget_dir.name}/ ({num_entries} entries)"
+                            )
 
     print("\n" + "=" * 70)
     print("TEST COMPLETE")

@@ -8,20 +8,24 @@ Includes:
 from experiments.core_utilities.embedding_utils import retrieve_top_k
 
 
-def _flatten_context(context: list) -> list[str]:
+def _flatten_context(context: dict) -> list[str]:
     """Convert HotpotQA context format to list of strings.
 
     Combines title and sentences into natural-reading paragraphs.
     Handles empty sentences, messy spacing, and edge cases robustly.
 
     Args:
-        context: List of [title, sentences] pairs from HotpotQA
+        context: Dict with "title" and "sentences" keys from HotpotQA
+                 Both are lists of equal length (one paragraph per index)
 
     Returns:
         List of paragraph strings (title. sentences joined)
     """
+    titles = context.get("title", [])
+    sentences_list = context.get("sentences", [])
+
     paragraphs = []
-    for title, sentences in context:
+    for title, sentences in zip(titles, sentences_list):
         title = str(title).strip()
         # Filter and clean sentences
         sent_text = " ".join(s.strip() for s in sentences if s and s.strip())
@@ -31,27 +35,27 @@ def _flatten_context(context: list) -> list[str]:
     return paragraphs
 
 
-def always_think(sample: dict, model: str) -> str:
+def always_think(sample: dict, model: str) -> tuple[str, int, int, float]:
     """No retrieval — just ask the LLM the question.
 
     This is a baseline of pure reasoning without access to supporting documents.
 
     Args:
         sample: HotpotQA sample with "question" key
-        model: Model name (passed for API routing, not used here)
+        model: Model name (passed for API routing)
 
     Returns:
-        LLM-generated answer
+        Tuple of (answer, input_tokens, output_tokens, cost_usd)
     """
     question = sample["question"]
     prompt = f"Answer the question: {question}"
 
-    # Placeholder: implement by calling LLM client with prompt
-    answer = call_llm(prompt, model)
-    return answer
+    # Call LLM and get answer + tokens + cost
+    answer, input_tokens, output_tokens, cost_usd = call_llm(prompt, model)
+    return answer, input_tokens, output_tokens, cost_usd
 
 
-def retrieval_k3(sample: dict, model: str) -> str:
+def retrieval_k3(sample: dict, model: str) -> tuple[str, int, int, float]:
     """Retrieve top-3 paragraphs by embedding similarity, then ask LLM.
 
     Args:
@@ -59,12 +63,12 @@ def retrieval_k3(sample: dict, model: str) -> str:
         model: Model name
 
     Returns:
-        LLM-generated answer based on retrieved context
+        Tuple of (answer, input_tokens, output_tokens, cost_usd)
     """
     return _retrieval_kn(sample, model, k=3)
 
 
-def retrieval_k5(sample: dict, model: str) -> str:
+def retrieval_k5(sample: dict, model: str) -> tuple[str, int, int, float]:
     """Retrieve top-5 paragraphs by embedding similarity, then ask LLM.
 
     Args:
@@ -72,12 +76,12 @@ def retrieval_k5(sample: dict, model: str) -> str:
         model: Model name
 
     Returns:
-        LLM-generated answer based on retrieved context
+        Tuple of (answer, input_tokens, output_tokens, cost_usd)
     """
     return _retrieval_kn(sample, model, k=5)
 
 
-def retrieval_k10(sample: dict, model: str) -> str:
+def retrieval_k10(sample: dict, model: str) -> tuple[str, int, int, float]:
     """Retrieve top-10 paragraphs by embedding similarity, then ask LLM.
 
     Args:
@@ -85,12 +89,12 @@ def retrieval_k10(sample: dict, model: str) -> str:
         model: Model name
 
     Returns:
-        LLM-generated answer based on retrieved context
+        Tuple of (answer, input_tokens, output_tokens, cost_usd)
     """
     return _retrieval_kn(sample, model, k=10)
 
 
-def _retrieval_kn(sample: dict, model: str, k: int) -> str:
+def _retrieval_kn(sample: dict, model: str, k: int) -> tuple[str, int, int, float]:
     """Generic retrieval-based method.
 
     Retrieves top-k paragraphs by embedding similarity to the question,
@@ -105,7 +109,7 @@ def _retrieval_kn(sample: dict, model: str, k: int) -> str:
         k: Number of paragraphs to retrieve
 
     Returns:
-        LLM-generated answer based on retrieved context
+        Tuple of (answer, input_tokens, output_tokens, cost_usd)
 
     Raises:
         KeyError: If LLM model not in EMBEDDING_CONFIG
@@ -145,9 +149,9 @@ Question: {question}
 
 Answer:"""
 
-    # Call LLM with context-augmented prompt
-    answer = call_llm(prompt, model)
-    return answer
+    # Call LLM with context-augmented prompt and get tokens + cost
+    answer, input_tokens, output_tokens, cost_usd = call_llm(prompt, model)
+    return answer, input_tokens, output_tokens, cost_usd
 
 
 def get_method(method_name: str):
@@ -177,25 +181,42 @@ def get_method(method_name: str):
     return methods[method_name]
 
 
-def call_llm(prompt: str, model: str) -> str:
-    """Call LLM and return generated answer.
+def call_llm(prompt: str, model: str) -> tuple[str, int, int, float]:
+    """Call LLM and return answer + token counts + cost.
 
-    Placeholder: Implement with actual API calls (OpenAI, Anthropic, etc.)
-    Must track:
-        - input_tokens: Total tokens in prompt
-        - output_tokens: Total tokens in response
-        - cost_usd: Total cost for this call
+    Routes to OpenAI or Anthropic based on model configuration.
 
     Args:
         prompt: Full prompt to send to LLM
         model: Model name (e.g., "gpt-4o-mini", "claude-sonnet-4-6")
 
     Returns:
-        Generated answer string
+        Tuple of (answer, input_tokens, output_tokens, cost_usd)
 
     Raises:
-        NotImplementedError: Until you implement with actual API client
+        KeyError: If model not recognized
+        Exception: If API call fails (auth, rate limit, etc.)
     """
-    raise NotImplementedError(
-        "call_llm() must be implemented with actual API calls (OpenAI SDK, Anthropic SDK, etc.)"
+    from experiments.core_utilities.baselines_config import LLM_CONFIG
+
+    if model not in LLM_CONFIG:
+        raise KeyError(f"Unknown model: {model}")
+
+    config = LLM_CONFIG[model]
+    provider = config["provider"]
+
+    if provider == "openai":
+        from experiments.core_utilities.llm_openai import call_openai
+        result = call_openai(prompt, model)
+    elif provider == "anthropic":
+        from experiments.core_utilities.llm_anthropic import call_anthropic
+        result = call_anthropic(prompt, model)
+    else:
+        raise ValueError(f"Unknown provider: {provider}")
+
+    return (
+        result["answer"],
+        result["input_tokens"],
+        result["output_tokens"],
+        result["cost_usd"],
     )

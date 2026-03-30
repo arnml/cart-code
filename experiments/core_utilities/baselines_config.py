@@ -12,6 +12,43 @@ MODELS = [
 ]
 
 # ============================================================================
+# LLM Provider & Pricing Configuration
+# ============================================================================
+# Maps each model to its provider and pricing info (per 1M tokens)
+# Last validated: 2026-03-29
+
+LLM_CONFIG = {
+    "gpt-4o-mini": {
+        "provider": "openai",
+        "input_price_per_1m": 0.15,
+        "output_price_per_1m": 0.60,
+    },
+    "gpt-5.4-mini": {
+        "provider": "openai",
+        "input_price_per_1m": 0.20,
+        "output_price_per_1m": 0.80,
+    },
+    "claude-haiku-4-5": {
+        "provider": "anthropic",
+        "input_price_per_1m": 0.80,
+        "output_price_per_1m": 4.00,
+        "cache_read_price_per_1m": 0.24,
+    },
+    "claude-sonnet-4-6": {
+        "provider": "anthropic",
+        "input_price_per_1m": 3.00,
+        "output_price_per_1m": 15.00,
+        "cache_read_price_per_1m": 0.90,
+    },
+}
+
+# Provider grouping for routing
+PROVIDER_MODELS = {
+    "openai": ["gpt-4o-mini", "gpt-5.4-mini"],
+    "anthropic": ["claude-haiku-4-5", "claude-sonnet-4-6"],
+}
+
+# ============================================================================
 # Baseline Methods
 # ============================================================================
 

@@ -142,9 +142,9 @@ def _process_method(
     print(f"\nMethod: {method_name}")
     new_results = []
     method_results = []
-
+    
     for i, sample in enumerate(ds):
-        qid = sample["question_id"]
+        qid = sample["id"]
         key = (qid, method_name)
 
         if key in cache:
@@ -152,25 +152,25 @@ def _process_method(
             print(f"  [{i+1}/{len(ds)}] {qid} (cached)")
         else:
             try:
-                pred = method_fn(sample, model)
+                pred, input_tokens, output_tokens, cost_usd = method_fn(sample, model)
                 result = {
                     "question_id": qid,
                     "method": method_name,
                     "n_total": n_rows,
                     "answer_pred": pred,
                     "answer_gt": sample["answer"],
-                    "input_tokens": 0,  # Placeholder: implement token tracking
-                    "output_tokens": 0,  # Placeholder: implement token tracking
-                    "cost_usd": 0.0,  # Placeholder: implement cost computation
+                    "input_tokens": input_tokens,
+                    "output_tokens": output_tokens,
+                    "cost_usd": cost_usd,
                 }
 
                 # Evaluate
                 metrics = evaluate_sample(
                     pred,
                     sample["answer"],
-                    result["input_tokens"],
-                    result["output_tokens"],
-                    result["cost_usd"],
+                    input_tokens,
+                    output_tokens,
+                    cost_usd,
                 )
                 result.update(
                     {
