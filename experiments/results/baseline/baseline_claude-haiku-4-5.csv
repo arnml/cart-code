@@ -1,0 +1,52 @@
+question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,output_tokens,cost_usd
+5ae143ed55429920d5234360,always_think,1755,1755,1.0,1.0,1.0,1.0,102,6,0.0001056
+5abc19705542993a06baf86e,always_think,"I need to identify who starred in ""Black Book"" and then determine what heritage that actress/writer is.
+
+""Black Book"" is a 2006 Dutch film directed by Paul Verhoeven. The lead actress is Carice van Houten, who is also a writer. She is Dutch-born and of Dutch heritage.
+
+Dutch",Dutch,0.0,0.04347826086956522,0.022222222222222223,1.0,90,76,0.00037600000000000003
+5ac3e0f7554299194317388b,always_think,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,91,7,0.0001008
+5ae518655542993aec5ec139,always_think,40,40 members,0.0,0.6666666666666666,1.0,0.5,100,5,0.0001
+5ab985eb554299131ca42360,always_think,Greyia,Greyia,1.0,1.0,1.0,1.0,95,7,0.00010400000000000001
+5a8753d95542994846c1cd63,always_think,yes,yes,1.0,1.0,1.0,1.0,100,4,9.6e-05
+5ab97d0a5542996be202051e,always_think,John André,John André,1.0,1.0,1.0,1.0,102,5,0.0001016
+5adef1b35542993a75d263af,always_think,I don't have reliable information in my knowledge base to answer this question about Ethel Houbiers and which Mexican and American film actress she provided a French voice for. I cannot provide a confident answer.,Salma Hayek Pinault,0.0,0.0,0.0,0.0,98,46,0.0002624
+5a73b55855429978a71e9086,always_think,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,107,7,0.00011360000000000001
+5ae80919554299540e5a56f6,always_think,Norman McCord,The Changing Scottish Landscape,0.0,0.0,0.0,0.0,102,6,0.0001056
+5ae143ed55429920d5234360,retrieval_k3,1755,1755,1.0,1.0,1.0,1.0,447,6,0.0003816
+5abc19705542993a06baf86e,retrieval_k3,Dutch,Dutch,1.0,1.0,1.0,1.0,448,4,0.00037440000000000005
+5ac3e0f7554299194317388b,retrieval_k3,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,596,7,0.0005048
+5ae518655542993aec5ec139,retrieval_k3,40,40 members,0.0,0.6666666666666666,1.0,0.5,457,5,0.0003856
+5ab985eb554299131ca42360,retrieval_k3,Greyia,Greyia,1.0,1.0,1.0,1.0,433,7,0.0003744
+5a8753d95542994846c1cd63,retrieval_k3,no,yes,0.0,0.0,0.0,0.0,461,4,0.00038480000000000003
+5ab97d0a5542996be202051e,retrieval_k3,John André,John André,1.0,1.0,1.0,1.0,506,5,0.0004248
+5adef1b35542993a75d263af,retrieval_k3,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,465,9,0.000408
+5a73b55855429978a71e9086,retrieval_k3,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,500,7,0.000428
+5ae80919554299540e5a56f6,retrieval_k3,"1991's ""The Changing Scottish Landscape""",The Changing Scottish Landscape,0.0,0.8571428571428571,0.75,1.0,406,15,0.00038480000000000003
+5ae143ed55429920d5234360,retrieval_k5,1755,1755,1.0,1.0,1.0,1.0,641,6,0.0005368000000000001
+5abc19705542993a06baf86e,retrieval_k5,Dutch,Dutch,1.0,1.0,1.0,1.0,835,4,0.0006839999999999999
+5ac3e0f7554299194317388b,retrieval_k5,"The question appears to be asking about common actors between two different ""American Beauty"" films. Based on the provided context:
+
+- American Beauty (1999) stars Kevin Spacey, Annette Bening, Thora Birch, Wes Bentley, Chris Cooper, and Allison Janney.
+- American Beauty (1927) stars Billie Dove, Walter McGrail, and Margaret Livingston.
+
+There is no actor mentioned in the context who appears in both films.
+
+No common actor is identified in the provided context.",Kevin Spacey,0.0,0.05882352941176471,0.030303030303030304,1.0,767,125,0.0011136000000000002
+5ae518655542993aec5ec139,retrieval_k5,40,40 members,0.0,0.6666666666666666,1.0,0.5,713,5,0.0005904
+5ab985eb554299131ca42360,retrieval_k5,Greyia,Greyia,1.0,1.0,1.0,1.0,766,7,0.0006408000000000001
+5a8753d95542994846c1cd63,retrieval_k5,no,yes,0.0,0.0,0.0,0.0,605,4,0.0005
+5ab97d0a5542996be202051e,retrieval_k5,John André,John André,1.0,1.0,1.0,1.0,792,5,0.0006536000000000001
+5adef1b35542993a75d263af,retrieval_k5,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,756,9,0.0006408000000000001
+5a73b55855429978a71e9086,retrieval_k5,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,887,7,0.0007376
+5ae80919554299540e5a56f6,retrieval_k5,"1991's ""The Changing Scottish Landscape""",The Changing Scottish Landscape,0.0,0.8571428571428571,0.75,1.0,750,15,0.00066
+5ae143ed55429920d5234360,retrieval_k10,1755,1755,1.0,1.0,1.0,1.0,1120,6,0.00092
+5abc19705542993a06baf86e,retrieval_k10,Dutch,Dutch,1.0,1.0,1.0,1.0,1549,4,0.0012552
+5ac3e0f7554299194317388b,retrieval_k10,"I cannot answer this question based on the provided context. The question asks which actor ""American Beauty and American Beauty have in common,"" but this appears to be asking about two different things with the same name. The context mentions the 1999 American Beauty film (starring Kevin Spacey, Annette Bening, etc.) and the 1927 American Beauty film (starring Billie Dove), but there is no information indicating they share any common actors.",Kevin Spacey,0.0,0.059701492537313446,0.03076923076923077,1.0,1509,100,0.0016072
+5ae518655542993aec5ec139,retrieval_k10,40,40 members,0.0,0.6666666666666666,1.0,0.5,1489,5,0.0012112000000000002
+5ab985eb554299131ca42360,retrieval_k10,Calibanus,Greyia,0.0,0.0,0.0,0.0,1978,6,0.0016064
+5a8753d95542994846c1cd63,retrieval_k10,no,yes,0.0,0.0,0.0,0.0,1106,4,0.0009008
+5ab97d0a5542996be202051e,retrieval_k10,John André,John André,1.0,1.0,1.0,1.0,1711,5,0.0013888000000000001
+5adef1b35542993a75d263af,retrieval_k10,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,1256,9,0.0010408000000000001
+5a73b55855429978a71e9086,retrieval_k10,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,1955,7,0.001592
+5ae80919554299540e5a56f6,retrieval_k10,"1991's ""The Changing Scottish Landscape""",The Changing Scottish Landscape,0.0,0.8571428571428571,0.75,1.0,1290,15,0.0010919999999999999

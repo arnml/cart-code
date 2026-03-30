@@ -1,9 +1,41 @@
 question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,output_tokens,cost_usd
-5ae143ed55429920d5234360,always_think,1940,1755,0.0,0.0,0.0,0.0,89,2,1.455e-05
-5abc19705542993a06baf86e,always_think,Jewish heritage,Dutch,0.0,0.0,0.0,0.0,79,3,1.365e-05
+5ae143ed55429920d5234360,always_think,1918,1755,0.0,0.0,0.0,0.0,89,2,1.455e-05
+5abc19705542993a06baf86e,always_think,Indian,Dutch,0.0,0.0,0.0,0.0,79,1,1.245e-05
+5ac3e0f7554299194317388b,always_think,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,80,3,1.38e-05
+5ae518655542993aec5ec139,always_think,49 members,40 members,0.0,0.5,0.5,0.5,89,2,1.455e-05
+5ab985eb554299131ca42360,always_think,Calibanus,Greyia,0.0,0.0,0.0,0.0,82,3,1.4099999999999999e-05
+5a8753d95542994846c1cd63,always_think,yes,yes,1.0,1.0,1.0,1.0,86,1,1.35e-05
+5ab97d0a5542996be202051e,always_think,John André,John André,1.0,1.0,1.0,1.0,90,2,1.47e-05
+5adef1b35542993a75d263af,always_think,Marilyn Monroe,Salma Hayek Pinault,0.0,0.0,0.0,0.0,85,3,1.455e-05
+5a73b55855429978a71e9086,always_think,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,93,4,1.6349999999999998e-05
+5ae80919554299540e5a56f6,always_think,W. M. MacKenzie,The Changing Scottish Landscape,0.0,0.0,0.0,0.0,90,6,1.71e-05
 5ae143ed55429920d5234360,retrieval_k3,1755,1755,1.0,1.0,1.0,1.0,392,2,6e-05
 5abc19705542993a06baf86e,retrieval_k3,Dutch,Dutch,1.0,1.0,1.0,1.0,534,1,8.07e-05
+5ac3e0f7554299194317388b,retrieval_k3,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,515,3,7.905e-05
+5ae518655542993aec5ec139,retrieval_k3,20 members,40 members,0.0,0.5,0.5,0.5,449,2,6.855e-05
+5ab985eb554299131ca42360,retrieval_k3,Calibanus,Greyia,0.0,0.0,0.0,0.0,467,3,7.185e-05
+5a8753d95542994846c1cd63,retrieval_k3,no,yes,0.0,0.0,0.0,0.0,496,1,7.5e-05
+5ab97d0a5542996be202051e,retrieval_k3,John André,John André,1.0,1.0,1.0,1.0,472,2,7.2e-05
+5adef1b35542993a75d263af,retrieval_k3,Penélope Cruz,Salma Hayek Pinault,0.0,0.0,0.0,0.0,252,4,4.0199999999999995e-05
+5a73b55855429978a71e9086,retrieval_k3,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,428,4,6.66e-05
+5ae80919554299540e5a56f6,retrieval_k3,"""The Changing Scottish Landscape""",The Changing Scottish Landscape,1.0,1.0,1.0,1.0,356,5,5.6399999999999995e-05
 5ae143ed55429920d5234360,retrieval_k5,1755,1755,1.0,1.0,1.0,1.0,583,2,8.865e-05
 5abc19705542993a06baf86e,retrieval_k5,Jewish,Dutch,0.0,0.0,0.0,0.0,771,2,0.00011685
+5ac3e0f7554299194317388b,retrieval_k5,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,716,3,0.0001092
+5ae518655542993aec5ec139,retrieval_k5,40,40 members,0.0,0.6666666666666666,1.0,0.5,614,1,9.269999999999999e-05
+5ab985eb554299131ca42360,retrieval_k5,Greyia,Greyia,1.0,1.0,1.0,1.0,819,2,0.00012405
+5a8753d95542994846c1cd63,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,621,1,9.374999999999999e-05
+5ab97d0a5542996be202051e,retrieval_k5,John André,John André,1.0,1.0,1.0,1.0,736,2,0.00011159999999999999
+5adef1b35542993a75d263af,retrieval_k5,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,451,4,7.005e-05
+5a73b55855429978a71e9086,retrieval_k5,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,864,4,0.000132
+5ae80919554299540e5a56f6,retrieval_k5,"""The Changing Scottish Landscape""",The Changing Scottish Landscape,1.0,1.0,1.0,1.0,656,5,0.0001014
 5ae143ed55429920d5234360,retrieval_k10,1755,1755,1.0,1.0,1.0,1.0,953,2,0.00014414999999999998
 5abc19705542993a06baf86e,retrieval_k10,Dutch,Dutch,1.0,1.0,1.0,1.0,1390,1,0.0002091
+5ac3e0f7554299194317388b,retrieval_k10,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,1341,3,0.00020295
+5ae518655542993aec5ec139,retrieval_k10,40,40 members,0.0,0.6666666666666666,1.0,0.5,1380,1,0.00020759999999999998
+5ab985eb554299131ca42360,retrieval_k10,Greyia,Greyia,1.0,1.0,1.0,1.0,1806,2,0.00027209999999999995
+5a8753d95542994846c1cd63,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,971,1,0.00014625
+5ab97d0a5542996be202051e,retrieval_k10,John André,John André,1.0,1.0,1.0,1.0,1590,2,0.0002397
+5adef1b35542993a75d263af,retrieval_k10,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,1096,4,0.00016680000000000002
+5a73b55855429978a71e9086,retrieval_k10,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,1715,4,0.00025965
+5ae80919554299540e5a56f6,retrieval_k10,"""The Changing Scottish Landscape""",The Changing Scottish Landscape,1.0,1.0,1.0,1.0,1126,5,0.0001719

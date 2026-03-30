@@ -1,0 +1,43 @@
+question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,output_tokens,cost_usd
+5ae143ed55429920d5234360,always_think,"Sergei Aleksandrovich Tokarev was a professor at Moscow State University, which was founded in 1755.
+
+1755",1755,0.0,0.125,0.06666666666666667,1.0,102,33,0.0008010000000000001
+5abc19705542993a06baf86e,always_think,Dutch-Jewish,Dutch,0.0,0.0,0.0,0.0,90,6,0.00036
+5ac3e0f7554299194317388b,always_think,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,91,7,0.000378
+5ae518655542993aec5ec139,always_think,40,40 members,0.0,0.6666666666666666,1.0,0.5,100,5,0.00037499999999999995
+5ab985eb554299131ca42360,always_think,Greyia,Greyia,1.0,1.0,1.0,1.0,95,7,0.00039
+5a8753d95542994846c1cd63,always_think,no,yes,0.0,0.0,0.0,0.0,100,4,0.00035999999999999997
+5ab97d0a5542996be202051e,always_think,John André,John André,1.0,1.0,1.0,1.0,102,5,0.000381
+5adef1b35542993a75d263af,always_think,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,98,9,0.000429
+5a73b55855429978a71e9086,always_think,London Heathrow Airport,Gatwick Airport,0.0,0.4,0.3333333333333333,0.5,107,9,0.000456
+5ae80919554299540e5a56f6,always_think,W. Douglas Simpson,The Changing Scottish Landscape,0.0,0.0,0.0,0.0,102,7,0.000411
+5ae143ed55429920d5234360,retrieval_k3,1755,1755,1.0,1.0,1.0,1.0,447,6,0.001431
+5abc19705542993a06baf86e,retrieval_k3,Dutch,Dutch,1.0,1.0,1.0,1.0,448,4,0.0014039999999999999
+5ac3e0f7554299194317388b,retrieval_k3,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,596,7,0.0018930000000000002
+5ae518655542993aec5ec139,retrieval_k3,40,40 members,0.0,0.6666666666666666,1.0,0.5,457,5,0.001446
+5ab985eb554299131ca42360,retrieval_k3,Greyia,Greyia,1.0,1.0,1.0,1.0,433,7,0.001404
+5a8753d95542994846c1cd63,retrieval_k3,no,yes,0.0,0.0,0.0,0.0,461,4,0.0014429999999999998
+5ab97d0a5542996be202051e,retrieval_k3,John André,John André,1.0,1.0,1.0,1.0,506,5,0.001593
+5adef1b35542993a75d263af,retrieval_k3,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,465,9,0.00153
+5a73b55855429978a71e9086,retrieval_k3,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,500,7,0.001605
+5ae80919554299540e5a56f6,retrieval_k3,"1991's ""The Changing Scottish Landscape""",The Changing Scottish Landscape,0.0,0.8571428571428571,0.75,1.0,406,15,0.0014429999999999998
+5ae143ed55429920d5234360,retrieval_k5,1755,1755,1.0,1.0,1.0,1.0,641,6,0.002013
+5abc19705542993a06baf86e,retrieval_k5,Dutch,Dutch,1.0,1.0,1.0,1.0,835,4,0.002565
+5ac3e0f7554299194317388b,retrieval_k5,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,767,7,0.002406
+5ae518655542993aec5ec139,retrieval_k5,40,40 members,0.0,0.6666666666666666,1.0,0.5,713,5,0.002214
+5ab985eb554299131ca42360,retrieval_k5,Greyia,Greyia,1.0,1.0,1.0,1.0,766,7,0.002403
+5a8753d95542994846c1cd63,retrieval_k5,no,yes,0.0,0.0,0.0,0.0,605,4,0.001875
+5ab97d0a5542996be202051e,retrieval_k5,John André,John André,1.0,1.0,1.0,1.0,792,5,0.002451
+5adef1b35542993a75d263af,retrieval_k5,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,756,9,0.002403
+5a73b55855429978a71e9086,retrieval_k5,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,887,7,0.0027660000000000002
+5ae80919554299540e5a56f6,retrieval_k5,"1991's ""The Changing Scottish Landscape""",The Changing Scottish Landscape,0.0,0.8571428571428571,0.75,1.0,750,15,0.0024749999999999998
+5ae143ed55429920d5234360,retrieval_k10,1755,1755,1.0,1.0,1.0,1.0,1120,6,0.00345
+5abc19705542993a06baf86e,retrieval_k10,Dutch,Dutch,1.0,1.0,1.0,1.0,1549,4,0.004707
+5ac3e0f7554299194317388b,retrieval_k10,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,1509,7,0.004632
+5ae518655542993aec5ec139,retrieval_k10,40,40 members,0.0,0.6666666666666666,1.0,0.5,1489,5,0.004542
+5ab985eb554299131ca42360,retrieval_k10,Greyia,Greyia,1.0,1.0,1.0,1.0,1978,7,0.006039
+5a8753d95542994846c1cd63,retrieval_k10,no,yes,0.0,0.0,0.0,0.0,1106,4,0.0033780000000000004
+5ab97d0a5542996be202051e,retrieval_k10,John André,John André,1.0,1.0,1.0,1.0,1711,5,0.005208000000000001
+5adef1b35542993a75d263af,retrieval_k10,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,1256,9,0.0039030000000000002
+5a73b55855429978a71e9086,retrieval_k10,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,1955,7,0.0059700000000000005
+5ae80919554299540e5a56f6,retrieval_k10,"1991's ""The Changing Scottish Landscape""",The Changing Scottish Landscape,0.0,0.8571428571428571,0.75,1.0,1290,15,0.0040950000000000005
