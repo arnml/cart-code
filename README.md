@@ -70,3 +70,8 @@ uv run python -m experiments.analyse_baseline <MODEL_NAME>
 ```bash
 uv run python -m experiments.plot_baseline_f1_vs_k
 ```
+
+### Plot baseline EM split
+```bash
+uv run python -m experiments.plot_baseline_em_percentage
+```
