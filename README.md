@@ -75,3 +75,7 @@ uv run python -m experiments.plot_baseline_f1_vs_k
 ```bash
 uv run python -m experiments.plot_baseline_em_percentage
 ```
+
+### Run adaptive_k
+```bash
+uv run python -m experiments.run_adaptive_k <MODEL_NAME> <SAMPLE_SIZE>```

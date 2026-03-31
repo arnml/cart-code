@@ -4,8 +4,8 @@ Main baseline evaluation script for CART paper.
 Evaluates LLM performance on HotpotQA using different retrieval strategies.
 
 Usage from root:
-    python -m experiments.run_baseline gpt-4o-mini 2
-    python -m experiments.run_baseline claude-sonnet-4-6 100
+    uv run python -m experiments.run_baseline gpt-4o-mini 2
+    uv run python -m experiments.run_baseline claude-sonnet-4-6 100
 """
 
 import csv
@@ -194,7 +194,7 @@ def run_baseline(model: str, n_rows: int, methods: list[str] | None = None) -> N
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print("Usage: python -m experiments.run_baseline <model> <n_rows>")
+        print("Usage: uv run python -m experiments.run_baseline <model> <n_rows>")
         print(f"\nAvailable models: {', '.join(MODELS)}")
         print(f"Available methods: {', '.join(METHODS)}")
         sys.exit(1)

@@ -196,7 +196,7 @@ def analyse_baseline(model: str) -> None:
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python -m experiments.analyse_baseline <model>")
+        print("Usage: uv run python -m experiments.analyse_baseline <model>")
         print("\nExample:")
         print("  uv run python -m experiments.analyse_baseline gpt-4o-mini")
         print("  uv run python -m experiments.analyse_baseline claude-sonnet-4-6")
