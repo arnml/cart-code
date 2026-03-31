@@ -56,7 +56,12 @@ py -m pip install uv
 uv sync
 ```
 
-### Run baselines
+### Baselines
 ```bash
 uv run python -m experiments.run_baseline <MODEL_NAME> <SAMPLE_SIZE>
+```
+
+### Analise baselines
+```bash
+uv run python -m experiments.analyse_baseline <MODEL_NAME>
 ```
