@@ -71,7 +71,7 @@ uv run python -m experiments.run_baseline <MODEL_NAME> <SAMPLE_SIZE> [max_worker
 uv run python -m experiments.analyse_baseline <MODEL_NAME>
 ```
 
-### Plot baseline F1 vs k
+### Plot baseline F1 by method
 ```bash
 uv run python -m experiments.plot_baseline_f1_vs_k
 ```
