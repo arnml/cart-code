@@ -49,6 +49,32 @@ The distance from Sacramento to Atwater is approximately 110-120 miles (about 2 
 
 110 miles",about 115 miles (185 km),0.0,0.05633802816901409,0.030303030303030304,0.4,92,106,0.0004976000000000001
 5ae12a4b55429920d52342df,always_think,Ghazni,Puli Alam,0.0,0.0,0.0,0.0,100,7,0.00010800000000000001
+5ae22eae554299495565da30,always_think,"I need to find where Black Crescent Mountain is located, then find the 2010 population of that town.
+
+Black Crescent Mountain is located in Gallup, New Mexico.
+
+According to the 2010 census, Gallup, New Mexico had a population of 21,678.
+
+21,678",310,0.0,0.0,0.0,0.0,100,73,0.000372
+5ab6aa4c55429953192ad359,always_think,Endeavour,"""Kitty Hawk""",0.0,0.0,0.0,0.0,100,6,0.00010400000000000001
+5adf3e835542993a75d26442,always_think,S.H.I.E.L.D.,Marvel,0.0,0.0,0.0,0.0,96,15,0.00013680000000000002
+5a8ee3a755429917b4a5be02,always_think,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,114,9,0.0001272
+5ac0dcf25542996f0d89cc2c,always_think,Christopher Leonard,Jane Mayer,0.0,0.0,0.0,0.0,102,5,0.0001016
+5a7e618155429949594199b0,always_think,Rensselaer County,Albany,0.0,0.0,0.0,0.0,101,10,0.00012080000000000001
+5ab916e155429919ba4e23a4,always_think,Michael Fassbender,Chiwetel Ejiofor,0.0,0.0,0.0,0.0,99,8,0.00011119999999999999
+5a713b325542994082a3e6b5,always_think,Agra,Agra,1.0,1.0,1.0,1.0,95,6,0.0001
+5a87c13f5542996e4f30890c,always_think,Rome,Rome,1.0,1.0,1.0,1.0,107,4,0.0001016
+5a8843cd5542994846c1ce75,always_think,Shire River,Buffalo,0.0,0.0,0.0,0.0,103,7,0.00011040000000000001
+5ab90d8955429916710eb0f1,always_think,American Airlines Center,Smoothie King Center,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,98,6,0.00010240000000000001
+5ae788fa55429952e35ea964,always_think,harmonica solos,extensive use of segues,0.0,0.0,0.0,0.0,97,7,0.0001056
+5ae1925a554299492dc91b48,always_think,Algernon Charles Swinburne,Charlotte Carnegie,0.0,0.0,0.0,0.0,102,13,0.0001336
+5ae1443855429920d5234362,always_think,World War II,World War II,1.0,1.0,1.0,1.0,119,6,0.0001192
+5ac54c435542993e66e822d1,always_think,Iowa,Oklahoma State University,0.0,0.0,0.0,0.0,94,4,9.12e-05
+5a7a77425542995eb53be83e,always_think,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,94,5,9.52e-05
+5a7153d05542994082a3e7dc,always_think,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,112,10,0.0001296
+5ae361805542992e3233c3c9,always_think,North Carolina,Georgetown University,0.0,0.0,0.0,0.0,108,5,0.0001064
+5a72688c5542997f827839b2,always_think,Turkey,Turkey,1.0,1.0,1.0,1.0,102,4,9.76e-05
+5a7ce0ce554299452d57ba92,always_think,William McKinley,William McKinley,1.0,1.0,1.0,1.0,113,7,0.0001184
 5ae143ed55429920d5234360,retrieval_k3,1755,1755,1.0,1.0,1.0,1.0,447,6,0.0003816
 5abc19705542993a06baf86e,retrieval_k3,Dutch,Dutch,1.0,1.0,1.0,1.0,448,4,0.00037440000000000005
 5ac3e0f7554299194317388b,retrieval_k3,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,596,7,0.0005048
@@ -79,6 +105,32 @@ The distance from Sacramento to Atwater is approximately 110-120 miles (about 2 
 5ade25ed5542997c77aded70,retrieval_k3,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,704,5,0.0005832000000000001
 5a78ae8b5542990784727730,retrieval_k3,115 miles,about 115 miles (185 km),0.0,0.5714285714285715,1.0,0.4,447,7,0.0003856
 5ae12a4b55429920d52342df,retrieval_k3,Kabul,Puli Alam,0.0,0.0,0.0,0.0,520,6,0.00043999999999999996
+5ae22eae554299495565da30,retrieval_k3,"I cannot answer this question based on the provided context. The context discusses the location of Black Crescent Mountain (in Randolph, New Hampshire) but does not provide information about the 2010 population of Randolph.",310,0.0,0.0,0.0,0.0,417,51,0.0005376000000000001
+5ab6aa4c55429953192ad359,retrieval_k3,"I need to find information about the Command Module from the Apollo 14 mission (where Moon trees were taken into space according to the context).
+
+From context [1]: Moon trees were taken into orbit around the Moon by Stuart Roosa during the Apollo 14 mission in 1971. Roosa was the Command Module Pilot on the Apollo 14 mission.
+
+However, the provided context does not include specific information about the nickname of the Command Module used on Apollo 14. The context discusses the Apollo spacecraft components in general terms but does not provide the specific nickname for the Apollo 14 Command Module.
+
+Based on the provided context alone, I cannot answer this question.","""Kitty Hawk""",0.0,0.0,0.0,0.0,569,145,0.0010352
+5adf3e835542993a75d26442,retrieval_k3,"Nick Fury, Agent of S.H.I.E.L.D.",Marvel,0.0,0.0,0.0,0.0,389,21,0.0003952
+5a8ee3a755429917b4a5be02,retrieval_k3,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,393,9,0.00035040000000000006
+5ac0dcf25542996f0d89cc2c,retrieval_k3,Jane Mayer,Jane Mayer,1.0,1.0,1.0,1.0,559,7,0.0004752
+5a7e618155429949594199b0,retrieval_k3,Albany County,Albany,0.0,0.6666666666666666,0.5,1.0,702,5,0.0005816
+5ab916e155429919ba4e23a4,retrieval_k3,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,409,11,0.0003712
+5a713b325542994082a3e6b5,retrieval_k3,Delhi,Agra,0.0,0.0,0.0,0.0,610,4,0.000504
+5a87c13f5542996e4f30890c,retrieval_k3,Rome,Rome,1.0,1.0,1.0,1.0,465,4,0.000388
+5a8843cd5542994846c1ce75,retrieval_k3,Mwabvi River,Buffalo,0.0,0.0,0.0,0.0,473,9,0.00041440000000000004
+5ab90d8955429916710eb0f1,retrieval_k3,Smoothie King Center,Smoothie King Center,1.0,1.0,1.0,1.0,378,8,0.00033440000000000005
+5ae788fa55429952e35ea964,retrieval_k3,jam band sound,extensive use of segues,0.0,0.0,0.0,0.0,347,6,0.0003016
+5ae1925a554299492dc91b48,retrieval_k3,Lady Charlotte Elliot,Charlotte Carnegie,0.0,0.4,0.3333333333333333,0.5,341,8,0.00030480000000000004
+5ae1443855429920d5234362,retrieval_k3,World War II,World War II,1.0,1.0,1.0,1.0,558,6,0.0004704
+5ac54c435542993e66e822d1,retrieval_k3,Oklahoma State,Oklahoma State University,0.0,0.8,1.0,0.6666666666666666,516,5,0.0004328
+5a7a77425542995eb53be83e,retrieval_k3,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,529,5,0.00044320000000000004
+5a7153d05542994082a3e7dc,retrieval_k3,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,504,10,0.00044320000000000004
+5ae361805542992e3233c3c9,retrieval_k3,Georgetown University,Georgetown University,1.0,1.0,1.0,1.0,513,5,0.00043040000000000005
+5a72688c5542997f827839b2,retrieval_k3,Turkey,Turkey,1.0,1.0,1.0,1.0,537,4,0.00044560000000000004
+5a7ce0ce554299452d57ba92,retrieval_k3,William McKinley,William McKinley,1.0,1.0,1.0,1.0,468,7,0.0004024
 5ae143ed55429920d5234360,retrieval_k5,1755,1755,1.0,1.0,1.0,1.0,641,6,0.0005368000000000001
 5abc19705542993a06baf86e,retrieval_k5,Dutch,Dutch,1.0,1.0,1.0,1.0,835,4,0.0006839999999999999
 5ac3e0f7554299194317388b,retrieval_k5,"The question appears to be asking about common actors between two different ""American Beauty"" films. Based on the provided context:
@@ -116,6 +168,26 @@ No common actor is identified in the provided context.",Kevin Spacey,0.0,0.05882
 5ade25ed5542997c77aded70,retrieval_k5,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,1123,5,0.0009184000000000001
 5a78ae8b5542990784727730,retrieval_k5,about 115 miles (185 km) south of Sacramento,about 115 miles (185 km),0.0,0.7692307692307693,0.625,1.0,573,16,0.0005224
 5ae12a4b55429920d52342df,retrieval_k5,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,694,9,0.0005912000000000001
+5ae22eae554299495565da30,retrieval_k5,310,310,1.0,1.0,1.0,1.0,642,5,0.0005336000000000001
+5ab6aa4c55429953192ad359,retrieval_k5,Kitty Hawk,"""Kitty Hawk""",1.0,1.0,1.0,1.0,878,8,0.0007344000000000001
+5adf3e835542993a75d26442,retrieval_k5,Nick Fury vs. S.H.I.E.L.D.,Marvel,0.0,0.0,0.0,0.0,622,20,0.0005776
+5a8ee3a755429917b4a5be02,retrieval_k5,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,631,9,0.0005408
+5ac0dcf25542996f0d89cc2c,retrieval_k5,Jane Mayer,Jane Mayer,1.0,1.0,1.0,1.0,828,7,0.0006904000000000001
+5a7e618155429949594199b0,retrieval_k5,Albany County,Albany,0.0,0.6666666666666666,0.5,1.0,1110,5,0.0009080000000000001
+5ab916e155429919ba4e23a4,retrieval_k5,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,778,11,0.0006664
+5a713b325542994082a3e6b5,retrieval_k5,Agra,Agra,1.0,1.0,1.0,1.0,815,6,0.0006760000000000001
+5a87c13f5542996e4f30890c,retrieval_k5,Rome,Rome,1.0,1.0,1.0,1.0,673,4,0.0005543999999999999
+5a8843cd5542994846c1ce75,retrieval_k5,Mwabvi river,Buffalo,0.0,0.0,0.0,0.0,780,9,0.00066
+5ab90d8955429916710eb0f1,retrieval_k5,Smoothie King Center,Smoothie King Center,1.0,1.0,1.0,1.0,748,8,0.0006304
+5ae788fa55429952e35ea964,retrieval_k5,jam band sound,extensive use of segues,0.0,0.0,0.0,0.0,524,6,0.00044320000000000004
+5ae1925a554299492dc91b48,retrieval_k5,Lady Charlotte Elliot,Charlotte Carnegie,0.0,0.4,0.3333333333333333,0.5,528,8,0.00045440000000000004
+5ae1443855429920d5234362,retrieval_k5,World War II,World War II,1.0,1.0,1.0,1.0,807,6,0.0006696
+5ac54c435542993e66e822d1,retrieval_k5,Oklahoma State,Oklahoma State University,0.0,0.8,1.0,0.6666666666666666,821,5,0.0006768000000000001
+5a7a77425542995eb53be83e,retrieval_k5,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,845,5,0.000696
+5a7153d05542994082a3e7dc,retrieval_k5,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,790,10,0.000672
+5ae361805542992e3233c3c9,retrieval_k5,Georgetown University,Georgetown University,1.0,1.0,1.0,1.0,994,5,0.0008152000000000001
+5a72688c5542997f827839b2,retrieval_k5,Turkey,Turkey,1.0,1.0,1.0,1.0,739,4,0.0006072
+5a7ce0ce554299452d57ba92,retrieval_k5,William McKinley,William McKinley,1.0,1.0,1.0,1.0,909,7,0.0007552
 5ae143ed55429920d5234360,retrieval_k10,1755,1755,1.0,1.0,1.0,1.0,1120,6,0.00092
 5abc19705542993a06baf86e,retrieval_k10,Dutch,Dutch,1.0,1.0,1.0,1.0,1549,4,0.0012552
 5ac3e0f7554299194317388b,retrieval_k10,"I cannot answer this question based on the provided context. The question asks which actor ""American Beauty and American Beauty have in common,"" but this appears to be asking about two different things with the same name. The context mentions the 1999 American Beauty film (starring Kevin Spacey, Annette Bening, etc.) and the 1927 American Beauty film (starring Billie Dove), but there is no information indicating they share any common actors.",Kevin Spacey,0.0,0.059701492537313446,0.03076923076923077,1.0,1509,100,0.0016072
@@ -146,3 +218,23 @@ No common actor is identified in the provided context.",Kevin Spacey,0.0,0.05882
 5ade25ed5542997c77aded70,retrieval_k10,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,1738,5,0.0014104000000000002
 5a78ae8b5542990784727730,retrieval_k10,115 miles,about 115 miles (185 km),0.0,0.5714285714285715,1.0,0.4,1443,7,0.0011824000000000001
 5ae12a4b55429920d52342df,retrieval_k10,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,1941,9,0.0015888000000000002
+5ae22eae554299495565da30,retrieval_k10,310,310,1.0,1.0,1.0,1.0,1640,5,0.001332
+5ab6aa4c55429953192ad359,retrieval_k10,Kitty Hawk,"""Kitty Hawk""",1.0,1.0,1.0,1.0,1689,8,0.0013832
+5adf3e835542993a75d26442,retrieval_k10,"Nick Fury, Agent of S.H.I.E.L.D.",Marvel,0.0,0.0,0.0,0.0,1357,21,0.0011696000000000002
+5a8ee3a755429917b4a5be02,retrieval_k10,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,1052,9,0.0008776000000000001
+5ac0dcf25542996f0d89cc2c,retrieval_k10,Jane Mayer,Jane Mayer,1.0,1.0,1.0,1.0,1425,7,0.001168
+5a7e618155429949594199b0,retrieval_k10,Albany County,Albany,0.0,0.6666666666666666,0.5,1.0,1970,5,0.001596
+5ab916e155429919ba4e23a4,retrieval_k10,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,1091,11,0.0009168000000000001
+5a713b325542994082a3e6b5,retrieval_k10,Agra,Agra,1.0,1.0,1.0,1.0,1432,6,0.0011696
+5a87c13f5542996e4f30890c,retrieval_k10,Rome,Rome,1.0,1.0,1.0,1.0,1645,4,0.0013319999999999999
+5a8843cd5542994846c1ce75,retrieval_k10,Mwabvi river,Buffalo,0.0,0.0,0.0,0.0,1544,9,0.0012712
+5ab90d8955429916710eb0f1,retrieval_k10,Smoothie King Center,Smoothie King Center,1.0,1.0,1.0,1.0,1532,8,0.0012576
+5ae788fa55429952e35ea964,retrieval_k10,jam band sound featuring John Popper's harmonica,extensive use of segues,0.0,0.0,0.0,0.0,1173,14,0.0009944
+5ae1925a554299492dc91b48,retrieval_k10,Lady Charlotte Elliot,Charlotte Carnegie,0.0,0.4,0.3333333333333333,0.5,1081,8,0.0008968000000000001
+5ae1443855429920d5234362,retrieval_k10,World War II,World War II,1.0,1.0,1.0,1.0,2037,6,0.0016536
+5ac54c435542993e66e822d1,retrieval_k10,Oklahoma State,Oklahoma State University,0.0,0.8,1.0,0.6666666666666666,2051,5,0.0016608000000000003
+5a7a77425542995eb53be83e,retrieval_k10,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,1286,5,0.0010488
+5a7153d05542994082a3e7dc,retrieval_k10,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,1571,10,0.0012968000000000003
+5ae361805542992e3233c3c9,retrieval_k10,Georgetown University,Georgetown University,1.0,1.0,1.0,1.0,1988,5,0.0016104000000000001
+5a72688c5542997f827839b2,retrieval_k10,Turkey,Turkey,1.0,1.0,1.0,1.0,1418,4,0.0011504
+5a7ce0ce554299452d57ba92,retrieval_k10,William McKinley,William McKinley,1.0,1.0,1.0,1.0,1681,7,0.0013728000000000002

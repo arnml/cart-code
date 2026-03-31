@@ -30,6 +30,26 @@ question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,out
 5ade25ed5542997c77aded70,always_think,World War I,the Cold War (1947–91),0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,92,6,2.3200000000000005e-05
 5a78ae8b5542990784727730,always_think,about 85 miles,about 115 miles (185 km),0.0,0.5,0.6666666666666666,0.4,79,13,2.62e-05
 5ae12a4b55429920d52342df,always_think,Lashkar Gah,Puli Alam,0.0,0.0,0.0,0.0,86,14,2.84e-05
+5ae22eae554299495565da30,always_think,"1,151",310,0.0,0.0,0.0,0.0,85,12,2.6600000000000003e-05
+5ab6aa4c55429953192ad359,always_think,Charlie Brown,"""Kitty Hawk""",0.0,0.0,0.0,0.0,88,11,2.64e-05
+5adf3e835542993a75d26442,always_think,"Marvel Comics
+",Marvel,0.0,0.6666666666666666,0.5,1.0,82,12,2.6000000000000002e-05
+5a8ee3a755429917b4a5be02,always_think,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,97,12,2.9e-05
+5ac0dcf25542996f0d89cc2c,always_think,Christopher Leonard,Jane Mayer,0.0,0.0,0.0,0.0,89,11,2.6600000000000003e-05
+5a7e618155429949594199b0,always_think,Saratoga County,Albany,0.0,0.0,0.0,0.0,90,13,2.84e-05
+5ab916e155429919ba4e23a4,always_think,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,84,15,2.8800000000000002e-05
+5a713b325542994082a3e6b5,always_think,Agra,Agra,1.0,1.0,1.0,1.0,80,5,1.9999999999999998e-05
+5a87c13f5542996e4f30890c,always_think,Catania,Rome,0.0,0.0,0.0,0.0,94,12,2.84e-05
+5ab90d8955429916710eb0f1,always_think,Toyota Center,Smoothie King Center,0.0,0.4,0.5,0.3333333333333333,85,11,2.58e-05
+5ae788fa55429952e35ea964,always_think,extended harmonica solos,extensive use of segues,0.0,0.0,0.0,0.0,83,7,2.22e-05
+5ae1925a554299492dc91b48,always_think,William McGonagall,Charlotte Carnegie,0.0,0.0,0.0,0.0,87,15,2.9400000000000003e-05
+5ae1443855429920d5234362,always_think,World War II,World War II,1.0,1.0,1.0,1.0,105,12,3.06e-05
+5ac54c435542993e66e822d1,always_think,Oklahoma,Oklahoma State University,0.0,0.5,1.0,0.3333333333333333,80,11,2.48e-05
+5a7a77425542995eb53be83e,always_think,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,81,11,2.5e-05
+5a7153d05542994082a3e7dc,always_think,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,94,8,2.52e-05
+5ae361805542992e3233c3c9,always_think,Western Kentucky University,Georgetown University,0.0,0.4,0.3333333333333333,0.5,94,12,2.84e-05
+5a72688c5542997f827839b2,always_think,Turkey,Turkey,1.0,1.0,1.0,1.0,84,4,2e-05
+5a7ce0ce554299452d57ba92,always_think,William McKinley,William McKinley,1.0,1.0,1.0,1.0,100,7,2.5600000000000002e-05
 5ae143ed55429920d5234360,retrieval_k3,1755,1755,1.0,1.0,1.0,1.0,391,5,8.22e-05
 5abc19705542993a06baf86e,retrieval_k3,Dutch,Dutch,1.0,1.0,1.0,1.0,533,4,0.0001098
 5ac3e0f7554299194317388b,retrieval_k3,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,514,6,0.0001076
@@ -60,6 +80,26 @@ question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,out
 5ade25ed5542997c77aded70,retrieval_k3,World War I,the Cold War (1947–91),0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,584,6,0.0001216
 5a78ae8b5542990784727730,retrieval_k3,115 miles,about 115 miles (185 km),0.0,0.5714285714285715,1.0,0.4,438,5,9.160000000000002e-05
 5ae12a4b55429920d52342df,retrieval_k3,Pul-i-Alam,Puli Alam,0.0,0.0,0.0,0.0,446,7,9.48e-05
+5ae22eae554299495565da30,retrieval_k3,2725,310,0.0,0.0,0.0,0.0,357,5,7.54e-05
+5ab6aa4c55429953192ad359,retrieval_k3,Charlie Brown,"""Kitty Hawk""",0.0,0.0,0.0,0.0,509,11,0.0001106
+5adf3e835542993a75d26442,retrieval_k3,Nick Fury vs. S.H.I.E.L.D.,Marvel,0.0,0.0,0.0,0.0,433,14,9.78e-05
+5a8ee3a755429917b4a5be02,retrieval_k3,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,355,6,7.58e-05
+5ac0dcf25542996f0d89cc2c,retrieval_k3,Jane Mayer,Jane Mayer,1.0,1.0,1.0,1.0,529,5,0.00010980000000000001
+5a7e618155429949594199b0,retrieval_k3,Albany County,Albany,0.0,0.6666666666666666,0.5,1.0,660,6,0.00013680000000000002
+5ab916e155429919ba4e23a4,retrieval_k3,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,565,9,0.0001202
+5a713b325542994082a3e6b5,retrieval_k3,Agra,Agra,1.0,1.0,1.0,1.0,370,5,7.8e-05
+5a87c13f5542996e4f30890c,retrieval_k3,Lucca,Rome,0.0,0.0,0.0,0.0,436,11,9.6e-05
+5a8843cd5542994846c1ce75,retrieval_k3,Mwabvi river,Buffalo,0.0,0.0,0.0,0.0,414,7,8.840000000000001e-05
+5ab90d8955429916710eb0f1,retrieval_k3,Erie Insurance Arena,Smoothie King Center,0.0,0.0,0.0,0.0,397,7,8.5e-05
+5ae788fa55429952e35ea964,retrieval_k3,John Popper's harmonica,extensive use of segues,0.0,0.0,0.0,0.0,306,9,6.84e-05
+5ae1925a554299492dc91b48,retrieval_k3,Lady Charlotte Elliot,Charlotte Carnegie,0.0,0.4,0.3333333333333333,0.5,301,6,6.5e-05
+5ae1443855429920d5234362,retrieval_k3,World War II,World War II,1.0,1.0,1.0,1.0,361,6,7.7e-05
+5ac54c435542993e66e822d1,retrieval_k3,Oklahoma State University,Oklahoma State University,1.0,1.0,1.0,1.0,546,7,0.0001148
+5a7a77425542995eb53be83e,retrieval_k3,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,567,5,0.00011740000000000001
+5a7153d05542994082a3e7dc,retrieval_k3,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,360,8,7.840000000000001e-05
+5ae361805542992e3233c3c9,retrieval_k3,Georgetown University,Georgetown University,1.0,1.0,1.0,1.0,510,12,0.0001116
+5a72688c5542997f827839b2,retrieval_k3,Turkey,Turkey,1.0,1.0,1.0,1.0,453,4,9.38e-05
+5a7ce0ce554299452d57ba92,retrieval_k3,William McKinley,William McKinley,1.0,1.0,1.0,1.0,433,7,9.22e-05
 5ae143ed55429920d5234360,retrieval_k5,1755,1755,1.0,1.0,1.0,1.0,582,5,0.00012040000000000001
 5abc19705542993a06baf86e,retrieval_k5,Dutch,Dutch,1.0,1.0,1.0,1.0,770,4,0.0001572
 5ac3e0f7554299194317388b,retrieval_k5,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,715,6,0.00014780000000000001
@@ -90,6 +130,26 @@ question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,out
 5ade25ed5542997c77aded70,retrieval_k5,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,888,5,0.00018160000000000002
 5a78ae8b5542990784727730,retrieval_k5,115 miles (185 km),about 115 miles (185 km),0.0,0.888888888888889,1.0,0.8,680,9,0.0001432
 5ae12a4b55429920d52342df,retrieval_k5,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,586,6,0.000122
+5ae22eae554299495565da30,retrieval_k5,310,310,1.0,1.0,1.0,1.0,549,4,0.00011300000000000001
+5ab6aa4c55429953192ad359,retrieval_k5,Command Module Pilot,"""Kitty Hawk""",0.0,0.0,0.0,0.0,762,6,0.00015720000000000003
+5adf3e835542993a75d26442,retrieval_k5,Nick Fury vs. S.H.I.E.L.D.,Marvel,0.0,0.0,0.0,0.0,533,14,0.0001178
+5a8ee3a755429917b4a5be02,retrieval_k5,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,555,6,0.0001158
+5ac0dcf25542996f0d89cc2c,retrieval_k5,Jane Mayer,Jane Mayer,1.0,1.0,1.0,1.0,771,5,0.0001582
+5a7e618155429949594199b0,retrieval_k5,Albany County,Albany,0.0,0.6666666666666666,0.5,1.0,999,6,0.0002046
+5ab916e155429919ba4e23a4,retrieval_k5,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,631,9,0.00013340000000000002
+5a713b325542994082a3e6b5,retrieval_k5,Agra,Agra,1.0,1.0,1.0,1.0,567,5,0.00011740000000000001
+5a87c13f5542996e4f30890c,retrieval_k5,Rome,Rome,1.0,1.0,1.0,1.0,568,4,0.0001168
+5a8843cd5542994846c1ce75,retrieval_k5,Mwabvi river,Buffalo,0.0,0.0,0.0,0.0,682,7,0.000142
+5ab90d8955429916710eb0f1,retrieval_k5,Smoothie King Center,Smoothie King Center,1.0,1.0,1.0,1.0,612,7,0.000128
+5ae788fa55429952e35ea964,retrieval_k5,jam band sound,extensive use of segues,0.0,0.0,0.0,0.0,454,6,9.56e-05
+5ae1925a554299492dc91b48,retrieval_k5,Lady Charlotte Elliot,Charlotte Carnegie,0.0,0.4,0.3333333333333333,0.5,449,6,9.460000000000001e-05
+5ae1443855429920d5234362,retrieval_k5,World War II,World War II,1.0,1.0,1.0,1.0,750,6,0.0001548
+5ac54c435542993e66e822d1,retrieval_k5,Oklahoma State University,Oklahoma State University,1.0,1.0,1.0,1.0,1184,7,0.0002424
+5a7a77425542995eb53be83e,retrieval_k5,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,778,5,0.0001596
+5a7153d05542994082a3e7dc,retrieval_k5,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,564,8,0.00011920000000000002
+5ae361805542992e3233c3c9,retrieval_k5,Georgetown University,Georgetown University,1.0,1.0,1.0,1.0,852,6,0.0001752
+5a72688c5542997f827839b2,retrieval_k5,Turkey,Turkey,1.0,1.0,1.0,1.0,647,4,0.0001326
+5a7ce0ce554299452d57ba92,retrieval_k5,William McKinley,William McKinley,1.0,1.0,1.0,1.0,804,7,0.0001664
 5ae143ed55429920d5234360,retrieval_k10,1755,1755,1.0,1.0,1.0,1.0,952,5,0.00019439999999999998
 5abc19705542993a06baf86e,retrieval_k10,Dutch,Dutch,1.0,1.0,1.0,1.0,1389,4,0.00028100000000000005
 5ac3e0f7554299194317388b,retrieval_k10,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,1340,6,0.0002728
@@ -121,3 +181,23 @@ question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,out
 5ade25ed5542997c77aded70,retrieval_k10,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,1578,5,0.0003196
 5a78ae8b5542990784727730,retrieval_k10,115 miles (185 km) south of Sacramento,about 115 miles (185 km),0.0,0.6666666666666666,0.5714285714285714,0.8,1287,12,0.00026700000000000004
 5ae12a4b55429920d52342df,retrieval_k10,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,1665,6,0.0003378
+5ae22eae554299495565da30,retrieval_k10,310,310,1.0,1.0,1.0,1.0,1456,4,0.0002944
+5ab6aa4c55429953192ad359,retrieval_k10,Kitty Hawk,"""Kitty Hawk""",1.0,1.0,1.0,1.0,1536,6,0.00031200000000000005
+5adf3e835542993a75d26442,retrieval_k10,Nick Fury vs. S.H.I.E.L.D.,Marvel,0.0,0.0,0.0,0.0,1146,14,0.00024040000000000002
+5a8ee3a755429917b4a5be02,retrieval_k10,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,892,6,0.0001832
+5ac0dcf25542996f0d89cc2c,retrieval_k10,Jane Mayer,Jane Mayer,1.0,1.0,1.0,1.0,1307,5,0.0002654
+5a7e618155429949594199b0,retrieval_k10,Albany County,Albany,0.0,0.6666666666666666,0.5,1.0,1813,6,0.00036740000000000004
+5ab916e155429919ba4e23a4,retrieval_k10,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,950,9,0.00019720000000000002
+5a713b325542994082a3e6b5,retrieval_k10,Agra,Agra,1.0,1.0,1.0,1.0,1161,5,0.0002362
+5a87c13f5542996e4f30890c,retrieval_k10,Rome,Rome,1.0,1.0,1.0,1.0,1454,4,0.00029400000000000004
+5a8843cd5542994846c1ce75,retrieval_k10,Mwabvi river,Buffalo,0.0,0.0,0.0,0.0,1353,7,0.0002762
+5ab90d8955429916710eb0f1,retrieval_k10,Smoothie King Center,Smoothie King Center,1.0,1.0,1.0,1.0,1390,7,0.00028359999999999995
+5ae788fa55429952e35ea964,retrieval_k10,jam band sound,extensive use of segues,0.0,0.0,0.0,0.0,1040,6,0.0002128
+5ae1925a554299492dc91b48,retrieval_k10,Lady Charlotte Elliot,Charlotte Carnegie,0.0,0.4,0.3333333333333333,0.5,940,6,0.0001928
+5ae1443855429920d5234362,retrieval_k10,World War II,World War II,1.0,1.0,1.0,1.0,1821,6,0.0003690000000000001
+5ac54c435542993e66e822d1,retrieval_k10,Oklahoma State University,Oklahoma State University,1.0,1.0,1.0,1.0,1872,7,0.00038
+5a7a77425542995eb53be83e,retrieval_k10,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,1186,5,0.0002412
+5a7153d05542994082a3e7dc,retrieval_k10,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,1343,8,0.000275
+5ae361805542992e3233c3c9,retrieval_k10,Georgetown University,Georgetown University,1.0,1.0,1.0,1.0,1779,6,0.00036060000000000004
+5a72688c5542997f827839b2,retrieval_k10,Turkey,Turkey,1.0,1.0,1.0,1.0,1178,4,0.00023880000000000003
+5a7ce0ce554299452d57ba92,retrieval_k10,William McKinley,William McKinley,1.0,1.0,1.0,1.0,1549,7,0.00031539999999999997
