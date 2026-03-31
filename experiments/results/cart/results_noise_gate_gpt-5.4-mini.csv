@@ -1,9 +1,9 @@
 question_id,method,threshold,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,output_tokens,cost_usd
 5ae143ed55429920d5234360,noise_gate,0.2,1755,1755,1.0,1.0,1.0,1.0,850,5,0.000174
 5ae143ed55429920d5234360,noise_gate,0.3,1755,1755,1.0,1.0,1.0,1.0,590,5,0.000122
-5ae143ed55429920d5234360,noise_gate,0.5,1755,1755,1.0,1.0,1.0,1.0,204,11,4.96e-05
+5ae143ed55429920d5234360,noise_gate,0.5,1755,1755,1.0,1.0,1.0,1.0,204,5,4.4800000000000005e-05
 5abc19705542993a06baf86e,noise_gate,0.2,Dutch,Dutch,1.0,1.0,1.0,1.0,1397,4,0.00028260000000000004
-5abc19705542993a06baf86e,noise_gate,0.3,Dutch-American,Dutch,0.0,0.0,0.0,0.0,936,5,0.0001912
+5abc19705542993a06baf86e,noise_gate,0.3,Dutch-Canadian,Dutch,0.0,0.0,0.0,0.0,936,6,0.00019200000000000003
 5abc19705542993a06baf86e,noise_gate,0.5,"Dutch
 ",Dutch,1.0,1.0,1.0,1.0,212,5,4.640000000000001e-05
 5ac3e0f7554299194317388b,noise_gate,0.2,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,1187,6,0.0002422
@@ -27,12 +27,12 @@ question_id,method,threshold,answer_pred,answer_gt,em,f1,precision,recall,input_
 5a73b55855429978a71e9086,noise_gate,0.2,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,1722,7,0.00035000000000000005
 5a73b55855429978a71e9086,noise_gate,0.3,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,1722,7,0.00035000000000000005
 5a73b55855429978a71e9086,noise_gate,0.5,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,435,7,9.26e-05
-5ae80919554299540e5a56f6,noise_gate,0.2,Cairnburgh Castle,The Changing Scottish Landscape,0.0,0.0,0.0,0.0,1133,9,0.00023380000000000005
-5ae80919554299540e5a56f6,noise_gate,0.3,The Changing Scottish Landscape,The Changing Scottish Landscape,1.0,1.0,1.0,1.0,931,7,0.00019180000000000003
+5ae80919554299540e5a56f6,noise_gate,0.2,The Changing Scottish Landscape,The Changing Scottish Landscape,1.0,1.0,1.0,1.0,1133,7,0.00023220000000000003
+5ae80919554299540e5a56f6,noise_gate,0.3,Cairnburgh Castle,The Changing Scottish Landscape,0.0,0.0,0.0,0.0,931,9,0.00019340000000000004
 5ae80919554299540e5a56f6,noise_gate,0.5,Cairnburgh Castle,The Changing Scottish Landscape,0.0,0.0,0.0,0.0,183,9,4.38e-05
-5ae361605542994393b9e69b,noise_gate,0.2,Naval Submarine Base New London,"""Home of the Submarine Force""",0.0,0.22222222222222224,0.2,0.25,1069,10,0.00022180000000000002
+5ae361605542994393b9e69b,noise_gate,0.2,Home of the Submarine Force,"""Home of the Submarine Force""",1.0,1.0,1.0,1.0,1069,9,0.00022100000000000003
 5ae361605542994393b9e69b,noise_gate,0.3,Naval Submarine Base New London,"""Home of the Submarine Force""",0.0,0.22222222222222224,0.2,0.25,681,10,0.0001442
-5ae361605542994393b9e69b,noise_gate,0.5,submarine escape training tank,"""Home of the Submarine Force""",0.0,0.25,0.25,0.25,283,8,6.3e-05
+5ae361605542994393b9e69b,noise_gate,0.5,submarine school,"""Home of the Submarine Force""",0.0,0.3333333333333333,0.5,0.25,283,6,6.14e-05
 5ac3a76e554299741d48a2be,noise_gate,0.2,U2,U2,1.0,1.0,1.0,1.0,1057,5,0.0002154
 5ac3a76e554299741d48a2be,noise_gate,0.3,U2,U2,1.0,1.0,1.0,1.0,765,5,0.000157
 5ac3a76e554299741d48a2be,noise_gate,0.5,U2,U2,1.0,1.0,1.0,1.0,319,5,6.780000000000001e-05
@@ -41,7 +41,7 @@ question_id,method,threshold,answer_pred,answer_gt,em,f1,precision,recall,input_
 5a7557d75542992d0ec05f68,noise_gate,0.5,Laurie Metcalf,Laurie Metcalf,1.0,1.0,1.0,1.0,764,8,0.0001592
 5a8d12ca5542994ba4e3dbe2,noise_gate,0.2,Nairobi,"Nairobi, Kenya",0.0,0.6666666666666666,1.0,0.5,796,5,0.0001632
 5a8d12ca5542994ba4e3dbe2,noise_gate,0.3,Nairobi,"Nairobi, Kenya",0.0,0.6666666666666666,1.0,0.5,326,5,6.92e-05
-5a8d12ca5542994ba4e3dbe2,noise_gate,0.5,Nairobi,"Nairobi, Kenya",0.0,0.6666666666666666,1.0,0.5,326,5,6.92e-05
+5a8d12ca5542994ba4e3dbe2,noise_gate,0.5,"Nairobi, Kenya","Nairobi, Kenya",1.0,1.0,1.0,1.0,326,7,7.08e-05
 5ab7f6d35542993667794070,noise_gate,0.2,Cyclic Defrost,Cyclic Defrost,1.0,1.0,1.0,1.0,1611,7,0.00032780000000000005
 5ab7f6d35542993667794070,noise_gate,0.3,Cyclic Defrost,Cyclic Defrost,1.0,1.0,1.0,1.0,1550,7,0.0003156
 5ab7f6d35542993667794070,noise_gate,0.5,Cyclic Defrost,Cyclic Defrost,1.0,1.0,1.0,1.0,278,7,6.12e-05
@@ -49,7 +49,7 @@ question_id,method,threshold,answer_pred,answer_gt,em,f1,precision,recall,input_
 5ac3d9135542995c82c4ac4c,noise_gate,0.3,729,729 at the 2010 census,0.0,0.4,1.0,0.25,812,4,0.00016560000000000001
 5ac3d9135542995c82c4ac4c,noise_gate,0.5,729,729 at the 2010 census,0.0,0.4,1.0,0.25,212,4,4.560000000000001e-05
 5ae129115542990adbacf722,noise_gate,0.2,Francis McPeake,Francis McPeake,1.0,1.0,1.0,1.0,1736,8,0.00035360000000000003
-5ae129115542990adbacf722,noise_gate,0.3,The Braes of Balquhither,Francis McPeake,0.0,0.0,0.0,0.0,1238,11,0.0002564
+5ae129115542990adbacf722,noise_gate,0.3,Wild Mountain Thyme,Francis McPeake,0.0,0.0,0.0,0.0,1238,7,0.0002532
 5ae129115542990adbacf722,noise_gate,0.5,Francis McPeake,Francis McPeake,1.0,1.0,1.0,1.0,456,8,9.760000000000001e-05
 5a86769c5542994775f60776,noise_gate,0.2,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,1539,8,0.0003142
 5a86769c5542994775f60776,noise_gate,0.3,The Magic Christian,Slaughterhouse-Five,0.0,0.0,0.0,0.0,720,6,0.0001488
@@ -64,12 +64,12 @@ question_id,method,threshold,answer_pred,answer_gt,em,f1,precision,recall,input_
 5ac19f405542991316484b5b,noise_gate,0.3,dogs,dogs,1.0,1.0,1.0,1.0,277,4,5.860000000000001e-05
 5ac19f405542991316484b5b,noise_gate,0.5,dogs,dogs,1.0,1.0,1.0,1.0,277,4,5.860000000000001e-05
 5ae382ee5542992e3233c430,noise_gate,0.2,Classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,1564,6,0.0003176
-5ae382ee5542992e3233c430,noise_gate,0.3,classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,1564,6,0.0003176
+5ae382ee5542992e3233c430,noise_gate,0.3,Classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,1564,6,0.0003176
 5ae382ee5542992e3233c430,noise_gate,0.5,Classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,966,6,0.00019800000000000002
-5adcdf455542994ed6169c11,noise_gate,0.2,Royal Air Force,Royal Air Force,1.0,1.0,1.0,1.0,1079,6,0.00022060000000000002
-5adcdf455542994ed6169c11,noise_gate,0.3,Royal Air Force,Royal Air Force,1.0,1.0,1.0,1.0,1079,6,0.00022060000000000002
-5adcdf455542994ed6169c11,noise_gate,0.5,Royal Air Force,Royal Air Force,1.0,1.0,1.0,1.0,660,6,0.00013680000000000002
-5ac35a7e554299741d48a257,noise_gate,0.2,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,1149,5,0.0002338
+5adcdf455542994ed6169c11,noise_gate,0.2,RAF Tangmere,Royal Air Force,0.0,0.0,0.0,0.0,1079,6,0.00022060000000000002
+5adcdf455542994ed6169c11,noise_gate,0.3,RAF Tangmere,Royal Air Force,0.0,0.0,0.0,0.0,1079,6,0.00022060000000000002
+5adcdf455542994ed6169c11,noise_gate,0.5,RAF,Royal Air Force,0.0,0.0,0.0,0.0,660,4,0.0001352
+5ac35a7e554299741d48a257,noise_gate,0.2,Norwegian language,Norwegian language,1.0,1.0,1.0,1.0,1149,6,0.0002346
 5ac35a7e554299741d48a257,noise_gate,0.3,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,400,5,8.400000000000001e-05
 5ac35a7e554299741d48a257,noise_gate,0.5,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,159,5,3.58e-05
 5ab2659e554299340b5254b2,noise_gate,0.2,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,1218,7,0.0002492
@@ -80,13 +80,13 @@ question_id,method,threshold,answer_pred,answer_gt,em,f1,precision,recall,input_
 5adcbb815542994ed6169bde,noise_gate,0.5,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,598,7,0.0001252
 5a74f8bd5542993748c8976a,noise_gate,0.2,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,1371,7,0.00027979999999999997
 5a74f8bd5542993748c8976a,noise_gate,0.3,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,298,7,6.52e-05
-5a74f8bd5542993748c8976a,noise_gate,0.5,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,96,13,2.96e-05
-5ade25ed5542997c77aded70,noise_gate,0.2,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,1586,5,0.00032120000000000006
+5a74f8bd5542993748c8976a,noise_gate,0.5,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,96,7,2.4800000000000003e-05
+5ade25ed5542997c77aded70,noise_gate,0.2,World War I,the Cold War (1947–91),0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,1586,6,0.0003220000000000001
 5ade25ed5542997c77aded70,noise_gate,0.3,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,1486,5,0.0003012
 5ade25ed5542997c77aded70,noise_gate,0.5,World War I,the Cold War (1947–91),0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,507,6,0.0001062
 5a78ae8b5542990784727730,noise_gate,0.2,115 miles (185 km) south of Sacramento,about 115 miles (185 km),0.0,0.6666666666666666,0.5714285714285714,0.8,1295,12,0.0002686
-5a78ae8b5542990784727730,noise_gate,0.3,115 miles (185 km) south of Sacramento,about 115 miles (185 km),0.0,0.6666666666666666,0.5714285714285714,0.8,1040,12,0.00021759999999999998
-5a78ae8b5542990784727730,noise_gate,0.5,60 miles,about 115 miles (185 km),0.0,0.28571428571428575,0.5,0.2,179,5,3.9800000000000005e-05
+5a78ae8b5542990784727730,noise_gate,0.3,115 miles (185 km),about 115 miles (185 km),0.0,0.888888888888889,1.0,0.8,1040,9,0.0002152
+5a78ae8b5542990784727730,noise_gate,0.5,about 72 miles,about 115 miles (185 km),0.0,0.5,0.6666666666666666,0.4,179,7,4.1400000000000003e-05
 5ae12a4b55429920d52342df,noise_gate,0.2,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,1673,6,0.0003394
 5ae12a4b55429920d52342df,noise_gate,0.3,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,667,6,0.00013820000000000003
 5ae12a4b55429920d52342df,noise_gate,0.5,Pul-i-Alam,Puli Alam,0.0,0.0,0.0,0.0,454,7,9.640000000000001e-05
@@ -95,7 +95,7 @@ question_id,method,threshold,answer_pred,answer_gt,em,f1,precision,recall,input_
 5ae22eae554299495565da30,noise_gate,0.5,noanswer,310,0.0,0.0,0.0,0.0,313,5,6.66e-05
 5ab6aa4c55429953192ad359,noise_gate,0.2,Kitty Hawk,"""Kitty Hawk""",1.0,1.0,1.0,1.0,1544,6,0.00031360000000000003
 5ab6aa4c55429953192ad359,noise_gate,0.3,Kitty Hawk,"""Kitty Hawk""",1.0,1.0,1.0,1.0,1544,6,0.00031360000000000003
-5ab6aa4c55429953192ad359,noise_gate,0.5,Command Module Pilot,"""Kitty Hawk""",0.0,0.0,0.0,0.0,517,6,0.0001082
+5ab6aa4c55429953192ad359,noise_gate,0.5,Columbia,"""Kitty Hawk""",0.0,0.0,0.0,0.0,517,5,0.00010740000000000001
 5adf3e835542993a75d26442,noise_gate,0.2,Fenris (comics),Marvel,0.0,0.0,0.0,0.0,1154,9,0.000238
 5adf3e835542993a75d26442,noise_gate,0.3,Nick Fury vs. S.H.I.E.L.D.,Marvel,0.0,0.0,0.0,0.0,1075,14,0.0002262
 5adf3e835542993a75d26442,noise_gate,0.5,Nick Fury vs. S.H.I.E.L.D.,Marvel,0.0,0.0,0.0,0.0,979,14,0.00020700000000000002
@@ -111,7 +111,7 @@ question_id,method,threshold,answer_pred,answer_gt,em,f1,precision,recall,input_
 5ab916e155429919ba4e23a4,noise_gate,0.2,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,639,9,0.00013500000000000003
 5ab916e155429919ba4e23a4,noise_gate,0.3,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,599,9,0.00012700000000000002
 5ab916e155429919ba4e23a4,noise_gate,0.5,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,90,15,3e-05
-5a713b325542994082a3e6b5,noise_gate,0.2,noanswer,Agra,0.0,0.0,0.0,0.0,1169,5,0.0002378
+5a713b325542994082a3e6b5,noise_gate,0.2,Agra,Agra,1.0,1.0,1.0,1.0,1169,5,0.0002378
 5a713b325542994082a3e6b5,noise_gate,0.3,Agra,Agra,1.0,1.0,1.0,1.0,1076,5,0.00021920000000000002
 5a713b325542994082a3e6b5,noise_gate,0.5,Agra,Agra,1.0,1.0,1.0,1.0,882,5,0.0001804
 5a87c13f5542996e4f30890c,noise_gate,0.2,Rome,Rome,1.0,1.0,1.0,1.0,1462,4,0.0002956000000000001
@@ -125,17 +125,17 @@ question_id,method,threshold,answer_pred,answer_gt,em,f1,precision,recall,input_
 5ab90d8955429916710eb0f1,noise_gate,0.5,Smoothie King Center,Smoothie King Center,1.0,1.0,1.0,1.0,185,7,4.26e-05
 5ae788fa55429952e35ea964,noise_gate,0.2,jam band sound,extensive use of segues,0.0,0.0,0.0,0.0,1048,6,0.00021440000000000003
 5ae788fa55429952e35ea964,noise_gate,0.3,jam band sound,extensive use of segues,0.0,0.0,0.0,0.0,1048,6,0.00021440000000000003
-5ae788fa55429952e35ea964,noise_gate,0.5,their trademark jam band sound,extensive use of segues,0.0,0.0,0.0,0.0,597,8,0.0001258
+5ae788fa55429952e35ea964,noise_gate,0.5,jam band sound,extensive use of segues,0.0,0.0,0.0,0.0,597,6,0.0001242
 5ae1925a554299492dc91b48,noise_gate,0.2,Lady Charlotte Elliot,Charlotte Carnegie,0.0,0.4,0.3333333333333333,0.5,948,6,0.00019440000000000004
 5ae1925a554299492dc91b48,noise_gate,0.3,Lady Charlotte Elliot,Charlotte Carnegie,0.0,0.4,0.3333333333333333,0.5,747,6,0.0001542
-5ae1925a554299492dc91b48,noise_gate,0.5,James Kenneth Stephen,Charlotte Carnegie,0.0,0.0,0.0,0.0,93,12,2.82e-05
+5ae1925a554299492dc91b48,noise_gate,0.5,Lord Alfred Douglas,Charlotte Carnegie,0.0,0.0,0.0,0.0,93,12,2.82e-05
 5ae1443855429920d5234362,noise_gate,0.2,World War II,World War II,1.0,1.0,1.0,1.0,1829,6,0.0003706
 5ae1443855429920d5234362,noise_gate,0.3,World War II,World War II,1.0,1.0,1.0,1.0,1829,6,0.0003706
 5ae1443855429920d5234362,noise_gate,0.5,World War II,World War II,1.0,1.0,1.0,1.0,489,6,0.0001026
-5ac54c435542993e66e822d1,noise_gate,0.2,Oklahoma State,Oklahoma State University,0.0,0.8,1.0,0.6666666666666666,1600,6,0.00032480000000000003
-5ac54c435542993e66e822d1,noise_gate,0.3,Oklahoma State,Oklahoma State University,0.0,0.8,1.0,0.6666666666666666,1192,6,0.0002432
+5ac54c435542993e66e822d1,noise_gate,0.2,Oklahoma State University,Oklahoma State University,1.0,1.0,1.0,1.0,1600,7,0.0003256
+5ac54c435542993e66e822d1,noise_gate,0.3,Oklahoma State University,Oklahoma State University,1.0,1.0,1.0,1.0,1192,7,0.000244
 5ac54c435542993e66e822d1,noise_gate,0.5,Oklahoma State University,Oklahoma State University,1.0,1.0,1.0,1.0,220,7,4.96e-05
-5a7a77425542995eb53be83e,noise_gate,0.2,Brady Seals,Brady Seals,1.0,1.0,1.0,1.0,1194,7,0.0002444
+5a7a77425542995eb53be83e,noise_gate,0.2,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,1194,5,0.0002428
 5a7a77425542995eb53be83e,noise_gate,0.3,Brady Seals,Brady Seals,1.0,1.0,1.0,1.0,1076,7,0.00022080000000000003
 5a7a77425542995eb53be83e,noise_gate,0.5,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,575,5,0.000119
 5a7153d05542994082a3e7dc,noise_gate,0.2,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,1351,8,0.0002766
@@ -143,10 +143,160 @@ question_id,method,threshold,answer_pred,answer_gt,em,f1,precision,recall,input_
 5a7153d05542994082a3e7dc,noise_gate,0.5,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,997,8,0.0002058
 5ae361805542992e3233c3c9,noise_gate,0.2,Georgetown University,Georgetown University,1.0,1.0,1.0,1.0,1556,6,0.00031600000000000004
 5ae361805542992e3233c3c9,noise_gate,0.3,Georgetown University,Georgetown University,1.0,1.0,1.0,1.0,1388,6,0.00028240000000000003
-5ae361805542992e3233c3c9,noise_gate,0.5,Southeastern Oklahoma State University,Georgetown University,0.0,0.3333333333333333,0.25,0.5,207,15,5.3400000000000004e-05
+5ae361805542992e3233c3c9,noise_gate,0.5,Southwest Texas State University,Georgetown University,0.0,0.3333333333333333,0.25,0.5,207,14,5.2600000000000005e-05
 5a72688c5542997f827839b2,noise_gate,0.2,Turkey,Turkey,1.0,1.0,1.0,1.0,1186,4,0.00024040000000000002
 5a72688c5542997f827839b2,noise_gate,0.3,Turkey,Turkey,1.0,1.0,1.0,1.0,1141,4,0.00023140000000000001
 5a72688c5542997f827839b2,noise_gate,0.5,Turkey,Turkey,1.0,1.0,1.0,1.0,328,4,6.88e-05
 5a7ce0ce554299452d57ba92,noise_gate,0.2,William McKinley,William McKinley,1.0,1.0,1.0,1.0,1308,7,0.0002672
 5a7ce0ce554299452d57ba92,noise_gate,0.3,William McKinley,William McKinley,1.0,1.0,1.0,1.0,1114,7,0.00022840000000000002
 5a7ce0ce554299452d57ba92,noise_gate,0.5,William McKinley,William McKinley,1.0,1.0,1.0,1.0,594,7,0.00012440000000000002
+5a83411655429966c78a6b5d,noise_gate,0.2,Justin Spitzer,Justin Spitzer,1.0,1.0,1.0,1.0,1858,6,0.00037640000000000004
+5a83411655429966c78a6b5d,noise_gate,0.3,Justin Spitzer,Justin Spitzer,1.0,1.0,1.0,1.0,1858,6,0.00037640000000000004
+5a83411655429966c78a6b5d,noise_gate,0.5,Justin Spitzer,Justin Spitzer,1.0,1.0,1.0,1.0,190,6,4.2800000000000004e-05
+5a877dd65542993e715abf79,noise_gate,0.2,no,no,1.0,1.0,1.0,1.0,1172,4,0.0002376
+5a877dd65542993e715abf79,noise_gate,0.3,no,no,1.0,1.0,1.0,1.0,1172,4,0.0002376
+5a877dd65542993e715abf79,noise_gate,0.5,no,no,1.0,1.0,1.0,1.0,507,4,0.00010460000000000001
+5ab6087a554299110f2199be,noise_gate,0.2,yes,yes,1.0,1.0,1.0,1.0,1680,4,0.0003392
+5ab6087a554299110f2199be,noise_gate,0.3,no,yes,0.0,0.0,0.0,0.0,1680,4,0.0003392
+5ab6087a554299110f2199be,noise_gate,0.5,no,yes,0.0,0.0,0.0,0.0,364,4,7.599999999999999e-05
+5adbd70c55429947ff173843,noise_gate,0.2,Personal History,Personal History,1.0,1.0,1.0,1.0,440,5,9.2e-05
+5adbd70c55429947ff173843,noise_gate,0.3,Katharine Graham's memoir,Personal History,0.0,0.0,0.0,0.0,353,8,7.700000000000001e-05
+5adbd70c55429947ff173843,noise_gate,0.5,Personal History,Personal History,1.0,1.0,1.0,1.0,180,5,4e-05
+5a7796e05542992a6e59df0f,noise_gate,0.2,the Netherlands,Netherlands,1.0,1.0,1.0,1.0,1040,5,0.00021199999999999998
+5a7796e05542992a6e59df0f,noise_gate,0.3,Netherlands,Netherlands,1.0,1.0,1.0,1.0,678,5,0.00013959999999999998
+5a7796e05542992a6e59df0f,noise_gate,0.5,Netherlands,Netherlands,1.0,1.0,1.0,1.0,483,5,0.0001006
+5abc030e554299642a094bdc,noise_gate,0.2,1945 to 1951,1945 to 1951,1.0,1.0,1.0,1.0,1531,9,0.0003134
+5abc030e554299642a094bdc,noise_gate,0.3,1945 to 1951,1945 to 1951,1.0,1.0,1.0,1.0,1188,9,0.00024480000000000004
+5abc030e554299642a094bdc,noise_gate,0.5,1945 to 1951,1945 to 1951,1.0,1.0,1.0,1.0,312,15,7.440000000000002e-05
+5a7bb7f2554299042af8f7b6,noise_gate,0.2,Gweilo,Gweilo,1.0,1.0,1.0,1.0,1254,6,0.00025560000000000003
+5a7bb7f2554299042af8f7b6,noise_gate,0.3,Gweilo,Gweilo,1.0,1.0,1.0,1.0,954,6,0.0001956
+5a7bb7f2554299042af8f7b6,noise_gate,0.5,gweilo,Gweilo,1.0,1.0,1.0,1.0,246,6,5.4000000000000005e-05
+5a8b3de95542997f31a41cc3,noise_gate,0.2,1993,Tian Tan Buddha,0.0,0.0,0.0,0.0,1468,5,0.0002976
+5a8b3de95542997f31a41cc3,noise_gate,0.3,1993,Tian Tan Buddha,0.0,0.0,0.0,0.0,1079,5,0.0002198
+5a8b3de95542997f31a41cc3,noise_gate,0.5,1993,Tian Tan Buddha,0.0,0.0,0.0,0.0,88,5,2.16e-05
+5ab3bfd3554299233954ff99,noise_gate,0.2,Dirk Nowitzki,Dirk Werner Nowitzki,0.0,0.8,1.0,0.6666666666666666,1965,8,0.0003994
+5ab3bfd3554299233954ff99,noise_gate,0.3,Dirk Nowitzki,Dirk Werner Nowitzki,0.0,0.8,1.0,0.6666666666666666,1965,8,0.0003994
+5ab3bfd3554299233954ff99,noise_gate,0.5,Dirk Nowitzki,Dirk Werner Nowitzki,0.0,0.8,1.0,0.6666666666666666,475,8,0.00010140000000000001
+5ab9b7d555429970cfb8eb7a,noise_gate,0.2,Henry Lau,Henry Lau,1.0,1.0,1.0,1.0,1045,5,0.000213
+5ab9b7d555429970cfb8eb7a,noise_gate,0.3,Henry Lau,Henry Lau,1.0,1.0,1.0,1.0,1045,5,0.000213
+5ab9b7d555429970cfb8eb7a,noise_gate,0.5,Henry Lau,Henry Lau,1.0,1.0,1.0,1.0,728,5,0.00014959999999999998
+5ab6bf6d55429953192ad372,noise_gate,0.2,no,no,1.0,1.0,1.0,1.0,1603,4,0.00032380000000000006
+5ab6bf6d55429953192ad372,noise_gate,0.3,no,no,1.0,1.0,1.0,1.0,1603,4,0.00032380000000000006
+5ab6bf6d55429953192ad372,noise_gate,0.5,no,no,1.0,1.0,1.0,1.0,973,4,0.0001978
+5ae7cb9b5542994a481bbde2,noise_gate,0.2,Kamehameha I,Kalokuokamaile,0.0,0.0,0.0,0.0,1023,8,0.000211
+5ae7cb9b5542994a481bbde2,noise_gate,0.3,Kalokuokamaile,Kalokuokamaile,1.0,1.0,1.0,1.0,436,8,9.360000000000001e-05
+5ae7cb9b5542994a481bbde2,noise_gate,0.5,John Young,Kalokuokamaile,0.0,0.0,0.0,0.0,211,5,4.6200000000000005e-05
+5ab1d6545542997061209588,noise_gate,0.2,12,Bocelli became completely blind at the age of 12,0.0,0.2222222222222222,1.0,0.125,859,4,0.000175
+5ab1d6545542997061209588,noise_gate,0.3,12,Bocelli became completely blind at the age of 12,0.0,0.2222222222222222,1.0,0.125,701,4,0.00014340000000000002
+5ab1d6545542997061209588,noise_gate,0.5,12,Bocelli became completely blind at the age of 12,0.0,0.2222222222222222,1.0,0.125,205,4,4.4200000000000004e-05
+5addcb215542997dc7907033,noise_gate,0.2,Naomi Campbell,Naomi Elaine Campbell,0.0,0.8,1.0,0.6666666666666666,2283,6,0.00046140000000000005
+5addcb215542997dc7907033,noise_gate,0.3,Naomi Campbell,Naomi Elaine Campbell,0.0,0.8,1.0,0.6666666666666666,1960,6,0.0003968
+5addcb215542997dc7907033,noise_gate,0.5,Naomi Campbell,Naomi Elaine Campbell,0.0,0.8,1.0,0.6666666666666666,469,6,9.860000000000001e-05
+5ae528ed5542993aec5ec16e,noise_gate,0.2,Revengers Tragedy,Revengers Tragedy,1.0,1.0,1.0,1.0,1203,8,0.00024700000000000004
+5ae528ed5542993aec5ec16e,noise_gate,0.3,Revengers Tragedy,Revengers Tragedy,1.0,1.0,1.0,1.0,1123,8,0.000231
+5ae528ed5542993aec5ec16e,noise_gate,0.5,Revengers Tragedy,Revengers Tragedy,1.0,1.0,1.0,1.0,303,8,6.7e-05
+5a8c7ced5542995e66a4761c,noise_gate,0.2,entertainment industry,entertainment,0.0,0.6666666666666666,0.5,1.0,1259,7,0.00025739999999999997
+5a8c7ced5542995e66a4761c,noise_gate,0.3,entertainment industry,entertainment,0.0,0.6666666666666666,0.5,1.0,597,7,0.000125
+5a8c7ced5542995e66a4761c,noise_gate,0.5,entertainment industry,entertainment,0.0,0.6666666666666666,0.5,1.0,267,7,5.9000000000000004e-05
+5a72f74a55429901807daf59,noise_gate,0.2,Rosie O'Donnell,Rosie O'Donnell,1.0,1.0,1.0,1.0,1159,8,0.00023820000000000002
+5a72f74a55429901807daf59,noise_gate,0.3,Rob Reiner,Rosie O'Donnell,0.0,0.0,0.0,0.0,502,12,0.00011
+5a72f74a55429901807daf59,noise_gate,0.5,Rosie O'Donnell,Rosie O'Donnell,1.0,1.0,1.0,1.0,226,8,5.16e-05
+5ae1d4e8554299234fd04312,noise_gate,0.2,Rob Sitch,"Robert Ian ""Rob"" Sitch",0.0,0.6666666666666666,1.0,0.5,1587,6,0.0003222
+5ae1d4e8554299234fd04312,noise_gate,0.3,Rob Sitch,"Robert Ian ""Rob"" Sitch",0.0,0.6666666666666666,1.0,0.5,1587,6,0.0003222
+5ae1d4e8554299234fd04312,noise_gate,0.5,Rob Sitch,"Robert Ian ""Rob"" Sitch",0.0,0.6666666666666666,1.0,0.5,186,6,4.2000000000000004e-05
+5a80aeef5542992097ad301a,noise_gate,0.2,The Shins,The Shins,1.0,1.0,1.0,1.0,1559,6,0.0003166
+5a80aeef5542992097ad301a,noise_gate,0.3,The Shins,The Shins,1.0,1.0,1.0,1.0,1559,6,0.0003166
+5a80aeef5542992097ad301a,noise_gate,0.5,The Shins,The Shins,1.0,1.0,1.0,1.0,321,6,6.9e-05
+5a7f66f155429969796c1a33,noise_gate,0.2,"Denmark, Norway, Sweden",Denmark–Norway–Sweden,0.0,0.0,0.0,0.0,1310,9,0.00026920000000000004
+5a7f66f155429969796c1a33,noise_gate,0.3,"Denmark, Norway, Sweden",Denmark–Norway–Sweden,0.0,0.0,0.0,0.0,1150,9,0.00023720000000000002
+5a7f66f155429969796c1a33,noise_gate,0.5,"Denmark, Norway, and Sweden",Denmark–Norway–Sweden,0.0,0.0,0.0,0.0,1150,10,0.000238
+5abbda84554299642a094b5b,noise_gate,0.2,Mach number,2,0.0,0.0,0.0,0.0,1276,5,0.0002592
+5abbda84554299642a094b5b,noise_gate,0.3,Mach number,2,0.0,0.0,0.0,0.0,1148,5,0.0002336
+5abbda84554299642a094b5b,noise_gate,0.5,Mach 2,2,0.0,0.6666666666666666,0.5,1.0,257,6,5.6200000000000004e-05
+5abe3dc65542993f32c2a0c4,noise_gate,0.2,11,8,0.0,0.0,0.0,0.0,1517,4,0.0003066000000000001
+5abe3dc65542993f32c2a0c4,noise_gate,0.3,11,8,0.0,0.0,0.0,0.0,1517,4,0.0003066000000000001
+5abe3dc65542993f32c2a0c4,noise_gate,0.5,8,8,1.0,1.0,1.0,1.0,948,4,0.00019280000000000002
+5ae489ab5542995ad6573d62,noise_gate,0.2,Mookie Blaylock,Mookie Blaylock,1.0,1.0,1.0,1.0,1662,8,0.00033880000000000005
+5ae489ab5542995ad6573d62,noise_gate,0.3,Mookie Blaylock,Mookie Blaylock,1.0,1.0,1.0,1.0,1662,8,0.00033880000000000005
+5ae489ab5542995ad6573d62,noise_gate,0.5,Mookie Blaylock,Mookie Blaylock,1.0,1.0,1.0,1.0,347,8,7.580000000000001e-05
+5a7e1b7155429965cec5ea6c,noise_gate,0.2,Fiat Chrysler Automobiles N.V.,Fiat Chrysler Automobiles N.V.,1.0,1.0,1.0,1.0,1173,11,0.0002434
+5a7e1b7155429965cec5ea6c,noise_gate,0.3,Fiat Chrysler Automobiles,Fiat Chrysler Automobiles N.V.,0.0,0.8571428571428571,1.0,0.75,1173,8,0.000241
+5a7e1b7155429965cec5ea6c,noise_gate,0.5,Chrysler,Fiat Chrysler Automobiles N.V.,0.0,0.4,1.0,0.25,286,6,6.2e-05
+5a8fae205542997ba9cb32ec,noise_gate,0.2,mystery-drama television series,American-Canadian mystery-drama,0.0,0.4,0.3333333333333333,0.5,1125,10,0.000233
+5a8fae205542997ba9cb32ec,noise_gate,0.3,Open Heart,American-Canadian mystery-drama,0.0,0.0,0.0,0.0,600,5,0.000124
+5a8fae205542997ba9cb32ec,noise_gate,0.5,Open Heart,American-Canadian mystery-drama,0.0,0.0,0.0,0.0,192,5,4.240000000000001e-05
+5ae588cb55429960a22e0300,noise_gate,0.2,Chaerophyllum,Chaerophyllum,1.0,1.0,1.0,1.0,960,7,0.0001976
+5ae588cb55429960a22e0300,noise_gate,0.3,Chaerophyllum,Chaerophyllum,1.0,1.0,1.0,1.0,433,7,9.22e-05
+5ae588cb55429960a22e0300,noise_gate,0.5,Chaerophyllum,Chaerophyllum,1.0,1.0,1.0,1.0,327,7,7.1e-05
+5a75e62f5542992d0ec06013,noise_gate,0.2,Tropicana Casino & Resort Atlantic City,Tropicana Casino & Resort,0.0,0.7499999999999999,0.6,1.0,1325,11,0.0002738
+5a75e62f5542992d0ec06013,noise_gate,0.3,Tropicana Casino & Resort Atlantic City,Tropicana Casino & Resort,0.0,0.7499999999999999,0.6,1.0,1325,11,0.0002738
+5a75e62f5542992d0ec06013,noise_gate,0.5,Tropicana Casino & Resort Atlantic City,Tropicana Casino & Resort,0.0,0.7499999999999999,0.6,1.0,870,11,0.0001828
+5ac113e2554299294b21909a,noise_gate,0.2,"Frank Wildhorn, Leslie Bricusse and Steve Cuden","Wildhorn, Bricusse and Cuden",0.0,0.7272727272727273,0.5714285714285714,1.0,1184,15,0.00024880000000000003
+5ac113e2554299294b21909a,noise_gate,0.3,"Frank Wildhorn, Leslie Bricusse and Steve Cuden","Wildhorn, Bricusse and Cuden",0.0,0.7272727272727273,0.5714285714285714,1.0,835,15,0.000179
+5ac113e2554299294b21909a,noise_gate,0.5,Frank Wildhorn,"Wildhorn, Bricusse and Cuden",0.0,0.3333333333333333,0.5,0.25,200,6,4.4800000000000005e-05
+5a82fe5055429966c78a6ad3,noise_gate,0.2,evangelical Christian,evangelical Christian,1.0,1.0,1.0,1.0,2233,7,0.00045220000000000004
+5a82fe5055429966c78a6ad3,noise_gate,0.3,Christianity,evangelical Christian,0.0,0.0,0.0,0.0,1827,5,0.00036940000000000003
+5a82fe5055429966c78a6ad3,noise_gate,0.5,The Church of the Nazarene,evangelical Christian,0.0,0.0,0.0,0.0,119,15,3.58e-05
+5a7e05ba5542995f4f402392,noise_gate,0.2,The Late Late Show,The Late Late Show,1.0,1.0,1.0,1.0,1618,7,0.0003292
+5a7e05ba5542995f4f402392,noise_gate,0.3,The Late Late Show,The Late Late Show,1.0,1.0,1.0,1.0,1194,7,0.0002444
+5a7e05ba5542995f4f402392,noise_gate,0.5,The Late Late Show,The Late Late Show,1.0,1.0,1.0,1.0,477,7,0.000101
+5a7264ed5542990c210a411a,noise_gate,0.2,Blood and Soil,Blood and soil,1.0,1.0,1.0,1.0,1647,6,0.00033420000000000005
+5a7264ed5542990c210a411a,noise_gate,0.3,Blood and soil,Blood and soil,1.0,1.0,1.0,1.0,1647,6,0.00033420000000000005
+5a7264ed5542990c210a411a,noise_gate,0.5,Blood and soil,Blood and soil,1.0,1.0,1.0,1.0,407,6,8.62e-05
+5a8ed10b5542995085b374a0,noise_gate,0.2,The Visit,The Visit,1.0,1.0,1.0,1.0,1221,5,0.0002482
+5a8ed10b5542995085b374a0,noise_gate,0.3,The Visit,The Visit,1.0,1.0,1.0,1.0,962,5,0.0001964
+5a8ed10b5542995085b374a0,noise_gate,0.5,The Visit,The Visit,1.0,1.0,1.0,1.0,349,5,7.38e-05
+5add8f055542990dbb2f7e6d,noise_gate,0.2,Rudolf Höss,Rudolf Höss,1.0,1.0,1.0,1.0,1487,8,0.0003038
+5add8f055542990dbb2f7e6d,noise_gate,0.3,Rudolf Höss,Rudolf Höss,1.0,1.0,1.0,1.0,1487,8,0.0003038
+5add8f055542990dbb2f7e6d,noise_gate,0.5,Rudolf Höss,Rudolf Höss,1.0,1.0,1.0,1.0,654,8,0.0001372
+5a86ab7755429960ec39b6bf,noise_gate,0.2,adventure novel,an adventure novel,1.0,1.0,1.0,1.0,904,6,0.0001856
+5a86ab7755429960ec39b6bf,noise_gate,0.3,novel,an adventure novel,0.0,0.6666666666666666,1.0,0.5,802,5,0.00016439999999999998
+5a86ab7755429960ec39b6bf,noise_gate,0.5,science fiction,an adventure novel,0.0,0.0,0.0,0.0,91,11,2.7e-05
+5a7a112a5542990783324e2b,noise_gate,0.2,drummers,drummer,0.0,0.0,0.0,0.0,1088,5,0.00022160000000000002
+5a7a112a5542990783324e2b,noise_gate,0.3,drummers,drummer,0.0,0.0,0.0,0.0,861,5,0.0001762
+5a7a112a5542990783324e2b,noise_gate,0.5,heavy metal drummers,drummer,0.0,0.0,0.0,0.0,399,7,8.540000000000002e-05
+5ab870ee5542990e739ec8f6,noise_gate,0.2,Madeleine L'Engle,Madeleine L'Engle,1.0,1.0,1.0,1.0,1182,9,0.0002436
+5ab870ee5542990e739ec8f6,noise_gate,0.3,Madeleine L'Engle,Madeleine L'Engle,1.0,1.0,1.0,1.0,468,9,0.00010080000000000001
+5ab870ee5542990e739ec8f6,noise_gate,0.5,Madeleine L'Engle,Madeleine L'Engle,1.0,1.0,1.0,1.0,164,9,4e-05
+5a8810485542997e5c09a590,noise_gate,0.2,1.6 million passengers,1.6 million passengers,1.0,1.0,1.0,1.0,1613,8,0.00032900000000000003
+5a8810485542997e5c09a590,noise_gate,0.3,1.6 million passengers,1.6 million passengers,1.0,1.0,1.0,1.0,1249,8,0.0002562
+5a8810485542997e5c09a590,noise_gate,0.5,1.6 million,1.6 million passengers,0.0,0.8,1.0,0.6666666666666666,161,7,3.7800000000000004e-05
+5a8208ee5542990a1d231f1e,noise_gate,0.2,silhouette of a large green dinosaur,dinosaur,0.0,0.33333333333333337,0.2,1.0,1427,10,0.00029340000000000003
+5a8208ee5542990a1d231f1e,noise_gate,0.3,a large green dinosaur,dinosaur,0.0,0.5,0.3333333333333333,1.0,1185,7,0.0002426
+5a8208ee5542990a1d231f1e,noise_gate,0.5,a large green dinosaur,dinosaur,0.0,0.5,0.3333333333333333,1.0,367,7,7.900000000000001e-05
+5a86399e5542994775f60733,noise_gate,0.2,Punjabi/Pashtun,Punjabi/Pashtun,1.0,1.0,1.0,1.0,1650,9,0.0003372
+5a86399e5542994775f60733,noise_gate,0.3,Punjabi/Pashtun,Punjabi/Pashtun,1.0,1.0,1.0,1.0,1650,9,0.0003372
+5a86399e5542994775f60733,noise_gate,0.5,Norwegian,Punjabi/Pashtun,0.0,0.0,0.0,0.0,323,5,6.860000000000001e-05
+5a78e9a2554299148911f995,noise_gate,0.2,Drillers Stadium,Drillers Stadium,1.0,1.0,1.0,1.0,1959,6,0.00039660000000000004
+5a78e9a2554299148911f995,noise_gate,0.3,Drillers Stadium,Drillers Stadium,1.0,1.0,1.0,1.0,1514,6,0.0003076
+5a78e9a2554299148911f995,noise_gate,0.5,Drillers Stadium,Drillers Stadium,1.0,1.0,1.0,1.0,311,6,6.7e-05
+5a84995d5542997b5ce3fee4,noise_gate,0.2,Alachua County,Alachua,0.0,0.6666666666666666,0.5,1.0,1674,7,0.00034040000000000003
+5a84995d5542997b5ce3fee4,noise_gate,0.3,Alachua County,Alachua,0.0,0.6666666666666666,0.5,1.0,1039,7,0.0002134
+5a84995d5542997b5ce3fee4,noise_gate,0.5,Alachua County,Alachua,0.0,0.6666666666666666,0.5,1.0,394,13,8.920000000000001e-05
+5ab941c2554299743d22ea88,noise_gate,0.2,C. J. Cherryh,"Carolyn Janice Cherry (born September 1, 1942), better known by the pen name C. J. Cherryh,",0.0,0.33333333333333337,1.0,0.2,1250,9,0.0002572
+5ab941c2554299743d22ea88,noise_gate,0.3,C. J. Cherryh,"Carolyn Janice Cherry (born September 1, 1942), better known by the pen name C. J. Cherryh,",0.0,0.33333333333333337,1.0,0.2,607,9,0.0001286
+5ab941c2554299743d22ea88,noise_gate,0.5,C. J. Cherryh,"Carolyn Janice Cherry (born September 1, 1942), better known by the pen name C. J. Cherryh,",0.0,0.33333333333333337,1.0,0.2,410,9,8.92e-05
+5a8e5f1f5542995a26add4d6,noise_gate,0.2,Sapsali,Sapsali,1.0,1.0,1.0,1.0,1695,6,0.0003438
+5a8e5f1f5542995a26add4d6,noise_gate,0.3,Sapsali,Sapsali,1.0,1.0,1.0,1.0,590,6,0.0001228
+5a8e5f1f5542995a26add4d6,noise_gate,0.5,Sapsali,Sapsali,1.0,1.0,1.0,1.0,307,6,6.62e-05
+5abf1ad15542997ec76fd3c2,noise_gate,0.2,"Gilbert du Motier, Marquis de Lafayette",Marquis de Lafayette,0.0,0.6666666666666666,0.5,1.0,1324,12,0.0002744
+5abf1ad15542997ec76fd3c2,noise_gate,0.3,Marquis de Lafayette,Marquis de Lafayette,1.0,1.0,1.0,1.0,1324,7,0.00027039999999999996
+5abf1ad15542997ec76fd3c2,noise_gate,0.5,Marquis de Lafayette,Marquis de Lafayette,1.0,1.0,1.0,1.0,251,7,5.58e-05
+5ae5cf625542996de7b71a22,noise_gate,0.2,University of Texas Longhorns football team,University of Texas Longhorns,0.0,0.8,0.6666666666666666,1.0,1325,11,0.0002738
+5ae5cf625542996de7b71a22,noise_gate,0.3,Texas Longhorns,University of Texas Longhorns,0.0,0.6666666666666666,1.0,0.5,763,7,0.0001582
+5ae5cf625542996de7b71a22,noise_gate,0.5,University of Texas Longhorns football team,University of Texas Longhorns,0.0,0.8,0.6666666666666666,1.0,282,11,6.520000000000001e-05
+5a7c8ae855429935c91b5207,noise_gate,0.2,Alexander Borodin,Alexander Porfiryevich Borodin,0.0,0.8,1.0,0.6666666666666666,1056,6,0.00021600000000000002
+5a7c8ae855429935c91b5207,noise_gate,0.3,Alexander Borodin,Alexander Porfiryevich Borodin,0.0,0.8,1.0,0.6666666666666666,538,6,0.00011240000000000001
+5a7c8ae855429935c91b5207,noise_gate,0.5,Alexander Borodin,Alexander Porfiryevich Borodin,0.0,0.8,1.0,0.6666666666666666,228,6,5.0400000000000005e-05
+5a87106555429960ec39b71f,noise_gate,0.2,Rob Reiner,Rob Reiner,1.0,1.0,1.0,1.0,1262,6,0.0002572
+5a87106555429960ec39b71f,noise_gate,0.3,Rob Reiner,Rob Reiner,1.0,1.0,1.0,1.0,562,6,0.0001172
+5a87106555429960ec39b71f,noise_gate,0.5,Rob Reiner,Rob Reiner,1.0,1.0,1.0,1.0,317,6,6.82e-05
+5a7f296f55429934daa2fd10,noise_gate,0.2,1974,1974,1.0,1.0,1.0,1.0,1113,5,0.0002266
+5a7f296f55429934daa2fd10,noise_gate,0.3,1994,1974,0.0,0.0,0.0,0.0,967,5,0.0001974
+5a7f296f55429934daa2fd10,noise_gate,0.5,1974,1974,1.0,1.0,1.0,1.0,183,5,4.0600000000000004e-05
+5ae14b5c55429920d52343aa,noise_gate,0.2,Anderson Silva,Anderson Silva,1.0,1.0,1.0,1.0,1699,6,0.00034460000000000003
+5ae14b5c55429920d52343aa,noise_gate,0.3,Anderson Silva,Anderson Silva,1.0,1.0,1.0,1.0,1596,6,0.00032400000000000007
+5ae14b5c55429920d52343aa,noise_gate,0.5,Anderson Silva,Anderson Silva,1.0,1.0,1.0,1.0,439,6,9.26e-05
+5a88b3b4554299206df2b336,noise_gate,0.2,opera,music,0.0,0.0,0.0,0.0,604,4,0.000124
+5a88b3b4554299206df2b336,noise_gate,0.3,opera,music,0.0,0.0,0.0,0.0,332,4,6.96e-05
+5a88b3b4554299206df2b336,noise_gate,0.5,opera,music,0.0,0.0,0.0,0.0,236,10,5.52e-05
