@@ -1,14 +1,13 @@
-"""Baseline method implementations for HotpotQA evaluation.
+"""Shared helpers for HotpotQA baseline evaluation.
 
 Includes:
-- always_think: No retrieval, pure reasoning
-- retrieval_k3/k5/k10: Dense retrieval by embedding similarity
+- flatten_context: HotpotQA context normalization
+- build_always_think_prompt / build_retrieval_prompt: Prompt templates
+- call_llm: Provider routing and model invocation
 """
 
-from experiments.embedding_utils import retrieve_top_k
 
-
-def _flatten_context(context: dict) -> list[str]:
+def flatten_context(context: dict) -> list[str]:
     """Convert HotpotQA context format to list of strings.
 
     Combines title and sentences into natural-reading paragraphs.
@@ -35,24 +34,13 @@ def _flatten_context(context: dict) -> list[str]:
     return paragraphs
 
 
-def always_think(sample: dict, model: str) -> tuple[str, int, int, float]:
-    """No retrieval — just ask the LLM the question.
-
-    This is a baseline of pure reasoning without access to supporting documents.
-
-    Args:
-        sample: HotpotQA sample with "question" key
-        model: Model name (passed for API routing)
-
-    Returns:
-        Tuple of (answer, input_tokens, output_tokens, cost_usd)
-    """
-    question = sample["question"]
-    prompt = f"""Answer the HotpotQA question.
+def build_always_think_prompt(question: str) -> str:
+    """Build the prompt for the no-retrieval baseline."""
+    return f"""Answer the HotpotQA question.
 
 Rules:
 - Output only the final answer.
-- If the answer is yes or no, output exactly: yes or no.
+- If the answer is yes, no or noanswer, output exactly: yes or no or noanswer.
 - Otherwise output a short span or entity name only.
 - Do not include any explanation.
 - Do not repeat the question.
@@ -61,101 +49,15 @@ Question: {question}
 
 Answer:"""
 
-    # Call LLM and get answer + tokens + cost
-    answer, input_tokens, output_tokens, cost_usd = call_llm(prompt, model)
-    return answer, input_tokens, output_tokens, cost_usd
 
-
-def retrieval_k3(sample: dict, model: str) -> tuple[str, int, int, float]:
-    """Retrieve top-3 paragraphs by embedding similarity, then ask LLM.
-
-    Args:
-        sample: HotpotQA sample
-        model: Model name
-
-    Returns:
-        Tuple of (answer, input_tokens, output_tokens, cost_usd)
-    """
-    return _retrieval_kn(sample, model, k=3)
-
-
-def retrieval_k5(sample: dict, model: str) -> tuple[str, int, int, float]:
-    """Retrieve top-5 paragraphs by embedding similarity, then ask LLM.
-
-    Args:
-        sample: HotpotQA sample
-        model: Model name
-
-    Returns:
-        Tuple of (answer, input_tokens, output_tokens, cost_usd)
-    """
-    return _retrieval_kn(sample, model, k=5)
-
-
-def retrieval_k10(sample: dict, model: str) -> tuple[str, int, int, float]:
-    """Retrieve top-10 paragraphs by embedding similarity, then ask LLM.
-
-    Args:
-        sample: HotpotQA sample
-        model: Model name
-
-    Returns:
-        Tuple of (answer, input_tokens, output_tokens, cost_usd)
-    """
-    return _retrieval_kn(sample, model, k=10)
-
-
-def _retrieval_kn(sample: dict, model: str, k: int) -> tuple[str, int, int, float]:
-    """Generic retrieval-based method.
-
-    Retrieves top-k paragraphs by embedding similarity to the question,
-    then asks the LLM to answer based on those paragraphs.
-
-    Note: supporting_facts from the sample are ignored here and only used
-    during evaluation for reference.
-
-    Args:
-        sample: HotpotQA sample with "question" and "context" keys
-        model: LLM model name
-        k: Number of paragraphs to retrieve
-
-    Returns:
-        Tuple of (answer, input_tokens, output_tokens, cost_usd)
-
-    Raises:
-        KeyError: If LLM model not in EMBEDDING_CONFIG
-    """
-    question = sample["question"]
-    context = sample["context"]
-
-    from experiments.baselines_config import LLM_TO_EMBEDDING
-
-    # Flatten context to list of paragraph strings
-    # Note: We use titles + paragraph text for retrieval, not supporting_facts
-    paragraphs = _flatten_context(context)
-
-    # Get embedding config for this LLM model (includes provider, model, max_tokens)
-    emb_config = LLM_TO_EMBEDDING[model]
-
-    # Retrieve top-k paragraphs by embedding similarity to the question
-    top_paragraphs, _ = retrieve_top_k(
-        question=question,
-        paragraphs=paragraphs,
-        k=k,
-        provider=emb_config["provider"],
-        embedding_model=emb_config["embedding_model"],
-        token_budget=emb_config["max_tokens"],
-    )
-
-    # Build prompt with retrieved context
-    context_str = "\n\n".join(
-        [f"[{i+1}] {p}" for i, p in enumerate(top_paragraphs)]
-    )
-    prompt = f"""Answer the HotpotQA question using only the provided context.
+def build_retrieval_prompt(question: str, paragraphs: list[str]) -> str:
+    """Build the prompt for retrieval-augmented answering."""
+    context_str = "\n\n".join([f"[{i+1}] {p}" for i, p in enumerate(paragraphs)])
+    return f"""Answer the HotpotQA question using only the provided context.
 
 Rules:
 - Output only the final answer.
-- If the answer is yes or no, output exactly: yes or no.
+- If the answer is yes, no or noanswer, output exactly: yes or no or noanswer.
 - Otherwise output a short span or entity name only.
 - Do not include any explanation.
 - Do not repeat the question.
@@ -167,37 +69,6 @@ Context:
 Question: {question}
 
 Answer:"""
-
-    # Call LLM with context-augmented prompt and get tokens + cost
-    answer, input_tokens, output_tokens, cost_usd = call_llm(prompt, model)
-    return answer, input_tokens, output_tokens, cost_usd
-
-
-def get_method(method_name: str):
-    """Return the method function by name.
-
-    Args:
-        method_name: One of "always_think", "retrieval_k3", "retrieval_k5", "retrieval_k10"
-
-    Returns:
-        Callable method(sample, model) -> str
-
-    Raises:
-        ValueError: If method_name is not recognized
-    """
-    methods = {
-        "always_think": always_think,
-        "retrieval_k3": retrieval_k3,
-        "retrieval_k5": retrieval_k5,
-        "retrieval_k10": retrieval_k10,
-    }
-
-    if method_name not in methods:
-        raise ValueError(
-            f"Unknown method: {method_name}. Available: {list(methods.keys())}"
-        )
-
-    return methods[method_name]
 
 
 def call_llm(prompt: str, model: str) -> tuple[str, int, int, float]:

@@ -38,7 +38,7 @@ def load_csv(model: str) -> tuple[list[dict[str, str]], Path]:
         )
 
     results = []
-    with open(csv_path) as f:
+    with open(csv_path, encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             results.append(row)
@@ -161,7 +161,7 @@ def save_summary(model: str, summary: str) -> None:
     results_dir = Path(__file__).parent / "results" / "baseline"
     md_path = results_dir / f"analysis_{model}.md"
 
-    md_path.write_text(summary)
+    md_path.write_text(summary, encoding="utf-8")
     print(f"Summary saved: {md_path}")
 
 
