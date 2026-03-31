@@ -1,0 +1,527 @@
+% This is samplepaper.tex, a sample chapter demonstrating the
+% LLNCS macro package for Springer Computer Science proceedings;
+% Version 2.21 of 2022/01/12
+%
+\documentclass[runningheads]{llncs}
+%
+\usepackage[T1]{fontenc}
+% T1 fonts will be used to generate the final print and online PDFs,
+% so please use T1 fonts in your manuscript whenever possible.
+% Other font encondings may result in incorrect characters.
+%
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{xspace}
+
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following two lines
+% to display URLs in blue roman font according to Springer's eBook style:
+%\usepackage{color}
+%\renewcommand\UrlFont{\color{blue}\rmfamily}
+%\urlstyle{rm}
+%
+\begin{document}
+%
+\title{CART: Cost-Penalized Adaptive Routing for Test-Time Retrieval}
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\author{First Author\inst{1}\orcidID{0000-1111-2222-3333} \and
+Second Author\inst{2,3}\orcidID{1111-2222-3333-4444} \and
+Third Author\inst{3}\orcidID{2222--3333-4444-5555}}
+%
+\authorrunning{F. Author et al.}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{Universidade de São Paulo, BR \and
+Springer Heidelberg, Tiergartenstr. 17, 69121 Heidelberg, Germany
+\email{lncs@springer.com}\\
+\url{http://www.springer.com/gp/computer-science/lncs} \and
+ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
+\email{\{abc,lncs\}@uni-heidelberg.de}}
+%
+\maketitle              % typeset the header of the contribution
+%
+
+\begin{abstract}
+Retrieval-augmented generation (RAG) is commonly implemented as a fixed top-$k$ pipeline, retrieving the highest-ranked passages and passing them to the generator~\cite{klesel2025rag,zhao2026aigcsurvey,yu2024rankrag,lee2025setr,verma2026reflectiverag}. While simple,  this design can struggle when retrieval cost and distractor noise matter. We study this issue on HotpotQA distractor dataset, where each question includes 10 paragraphs but only 2 contain supporting facts~\cite{yang2018hotpotqa}. Our baselines show that retrieval consistently improves answer quality, optimal $k$ varies by model, and larger $k$ is not always beneficial under noise. Within the OpenAI family, GPT-4o-mini achieves its best F1 with $k=10$ (0.804), while GPT-5.4-mini has a stronger no-retrieval baseline but still benefits from retrieval; moreover, GPT-4o-mini with improved retrieval policy outperforms GPT-5.4-mini across fixed baselines. 
+
+These findings motivate CART (Cost-Penalized Adaptive Routing for Test-Time Retrieval), a training-free controller that adaptively decides whether to retrieve and how much context to retain at inference time. CART integrates adaptive-$k$ selection via similarity gaps~\cite{taguchi2025adaptivek}, a UCB-Cost routing policy extending UCB1~\cite{auer2002ucb1}, and a noise-filtering gate. We argue that retrieval policy should be treated as an adaptive systems decision rather than a fixed top-$k$ hyperparameter.
+
+\keywords{Retrieval-Augmented Generation \and Test-time compute \and Adaptive Routing \and Bandits \and Token efficiency}
+\end{abstract}
+
+\section{Introduction}
+
+Retrieval-augmented generation (RAG) is a standard approach for improving large language model (LLM) performance on knowledge-intensive tasks~\cite{lewis2020rag}. In many deployed and benchmarked RAG systems, retrieval is still implemented as a fixed top-$k$ policy that appends the same number of documents to every query~\cite{klesel2025rag,zhao2026aigcsurvey,yu2024rankrag,lee2025setr,verma2026reflectiverag}. This design is straightforward, but it assumes that all queries benefit from the same retrieval budget. In practice, that assumption is often too rigid: some queries can be answered from parametric knowledge alone, some require external evidence, and increasing $k$ can add both token cost and irrelevant context.
+
+This issue becomes sharper on multi-hop question answering. We evaluate on HotpotQA~\cite{yang2018hotpotqa}, a benchmark designed to require reasoning across multiple pieces of evidence. In the distractor setting used here, each example contains exactly 10 paragraphs: 2 contain the supporting facts and 8 are distractors. This makes the dataset especially useful for studying both retrieval utility and retrieval noise. In such settings, larger $k$ is not guaranteed to help; more context can instead dilute the evidence signal.
+
+Our baseline experiments already suggest that retrieval should be treated as an adaptive systems decision rather than a fixed preprocessing step. Across tested models, retrieval improves answer quality over pure parametric answering, but the best retrieval depth varies by model and objective. Within the OpenAI family, GPT-4o-mini paired with a stronger retrieval policy can outperform GPT-5.4-mini under a weaker one, showing that model recency alone does not determine downstream QA performance. This observation motivates our central claim: \emph{retrieval policy is a first-order factor in system performance, not a minor hyperparameter.}
+
+We address this problem with CART (\textbf{C}ost-\textbf{P}enalized \textbf{A}daptive \textbf{R}outing for \textbf{T}est-time Retrieval), a training-free controller that decides, at inference time, whether to retrieve and how much context to pass to the model. CART combines three ideas: (i) adaptive-$k$ context selection based on inter-document similarity gaps~\cite{taguchi2025adaptivek}, (ii) a UCB-Cost routing policy that extends UCB1~\cite{auer2002ucb1} with an explicit token-cost penalty, and (iii) a noise-filtering gate that suppresses low-value or redundant context before generation.
+
+Our experiments focus primarily on OpenAI models, where comparisons are cleaner and provider-specific confounds are reduced. Anthropic models are included as auxiliary reference baselines. Across these baselines, we observe three consistent patterns: retrieval is useful, fixed top-$k$ is does not work well in all cases, and additional context is not uniformly beneficial. Together, these patterns motivate adaptive, cost-aware, and noise-aware retrieval control at inference time.
+
+Our contributions are:
+\begin{enumerate}
+    \item We formulate retrieval control as a training-free inference-time routing problem under a quality--cost tradeoff.
+    \item We introduce CART, which combines adaptive-$k$ selection, cost-aware action selection, and noise filtering without modifying model weights.
+    \item We provide baseline evidence that fixed retrieval budgets do not transfer reliably across models and that stronger models still benefit from retrieval on HotpotQA.
+    \item We show that a smaller model with a better retrieval policy can outperform a newer model with a weaker one, reinforcing the importance of retrieval control as a systems decision.
+\end{enumerate}
+
+\section{Related Work}
+
+\subsection{Fixed-Budget Retrieval in RAG}
+
+Foundational RAG systems use a fixed top-$k$ retriever~\cite{lewis2020rag}, and recent journal treatments still describe plain or vanilla RAG in exactly these terms. Klesel and Wittmann~\cite{klesel2025rag} summarize plain RAG as retrieving the most relevant chunks or documents, most commonly by selecting the top $k$ hits. Zhao et al.~\cite{zhao2026aigcsurvey} likewise review RAG as top-$k$ similarity retrieval followed by augmentation and generation. Recent peer-reviewed RAG papers continue to position fixed top-$k$ as the default point of comparison: RankRAG~\cite{yu2024rankrag} notes that LLMs typically use top-$k$ contexts from a retriever, SetR~\cite{lee2025setr} critiques existing approaches that rerank top-$k$ passages, and ReflectiveRAG~\cite{verma2026reflectiverag} explicitly contrasts its method with current fixed top-$k$ retrieval pipelines.
+
+\subsection{Adaptive Retrieval with Training}
+
+Several methods adapt retrieval behavior through training. Self-RAG~\cite{asai2024selfrag} learns retrieval control through reflection tokens. DRAGIN~\cite{su2024dragin} dynamically triggers retrieval based on real-time information needs. DioR~\cite{guo2025dior}, RetrievalQA~\cite{zhang2024retrievalqa}, and RA-RAG~\cite{hwang2025rarag} all explore learned or additional retrieval adaptation mechanisms. These approaches demonstrate the value of adaptive retrieval, but they require additional training, specialized learned components, or both.
+
+\subsection{Training-Free Adaptive Context Selection}
+
+Among training-free methods, Adaptive-k~\cite{taguchi2025adaptivek} is most closely related to our setting. It selects the number of retrieved documents on a per-query basis using similarity-score gaps, showing that useful context can often be compact. However, Adaptive-k assumes that retrieval has already been invoked. Our problem is broader: we study both \emph{whether} to retrieve and \emph{how much} context to retain, under an explicit token-cost objective.
+
+\subsection{Retrieval, Reasoning, and Test-Time Compute}
+
+Other work studies tighter integration between retrieval and reasoning. IRCoT interleaves retrieval with chain-of-thought reasoning for multi-step QA~\cite{trivedi2023interleave}, while ReAct couples reasoning traces with actions such as search or environment interaction~\cite{yao2023react}. In parallel, a growing literature on adaptive test-time compute studies how much reasoning compute to allocate at inference time~\cite{snell2025ttc}. CART is complementary to this line of work: rather than controlling reasoning depth alone, it controls evidence acquisition cost.
+
+\subsection{Benchmark Validity and Contamination}
+
+Open-domain QA benchmarks may overlap with model training data~\cite{li2024c2leva,yi2026membership}. We therefore avoid interpreting stronger no-retrieval performance as definitive evidence that a model robustly ``knows'' the answer. Broader pretraining exposure or contamination may contribute to parametric-only performance. However, our main empirical point does not depend on distinguishing these causes: even newer models with stronger no-retrieval baselines continue to benefit from retrieval on HotpotQA.
+
+\section{CART: Training-Free Test-Time Controller}
+
+\subsection{Problem Setup}
+
+Given a query $q$, a retrieval pool $D$, and a language model $m$, our goal is to choose an inference strategy that balances answer quality and token cost. We consider two high-level actions:
+\[
+A = \{\texttt{think}, \texttt{retrieve}\}.
+\]
+The \texttt{think} action answers directly from parametric knowledge. The \texttt{retrieve} action first retrieves candidate documents, then answers using filtered context.
+
+We summarize quality relative to token use with:
+\begin{equation}
+\eta = \frac{F1}{\log(1+T)},
+\end{equation}
+where $T$ is the total number of input and output tokens. We use $\eta$ only as a compact efficiency summary alongside standard QA metrics.
+
+\subsection{Adaptive-$K$ Selection}
+
+CART begins with a broad retrieval step that returns the top-$N$ candidates for a query, where $N=10$ in our current setup. Let the similarity scores of the retrieved documents be
+\[
+s_1 \ge s_2 \ge \cdots \ge s_N.
+\]
+Following Adaptive-k~\cite{taguchi2025adaptivek}, CART selects a query-specific cut point using the largest adjacent gap:
+\begin{equation}
+k^* = \arg\max_{1 \le i < N} \left(s_i - s_{i+1}\right).
+\end{equation}
+Intuitively, this selects the compact cluster of highly relevant documents and avoids blindly passing the full retrieved list to the generator. This is especially useful on HotpotQA distractor examples, where many documents are intentionally irrelevant.
+
+\subsection{UCB-Cost Policy}
+
+CART treats routing as a lightweight bandit problem. For each action $a \in A$, we maintain an estimated utility $\hat{Q}(a)$ and a visit count $n_a$. We then score actions using
+\begin{equation}
+\mathrm{score}(a) = \hat{Q}(a) + \beta \sqrt{\frac{\ln N_t}{n_a + 1}} - \lambda \, c(a),
+\end{equation}
+where $N_t$ is the number of decisions made so far, $c(a)$ is the normalized cost of the action, $\beta$ controls exploration, and $\lambda$ controls cost sensitivity. The key addition relative to standard UCB1~\cite{auer2002ucb1} is the explicit cost penalty term $-\lambda c(a)$, which biases the controller toward cheaper actions when expected quality is similar.
+
+In our setting, \texttt{think} is cheaper than \texttt{retrieve}, but retrieval may yield better answer quality. The policy therefore learns to prefer retrieval when the expected gain justifies the added token cost.
+
+\subsection{Noise Gate}
+
+After adaptive-$k$ selection, CART applies a simple noise gate before generation. The gate removes:
+\begin{enumerate}
+    \item documents whose query similarity is below a minimum threshold, and
+    \item documents that are highly redundant with already selected context.
+\end{enumerate}
+This component is motivated directly by the HotpotQA distractor setting. Because 8 of the 10 context paragraphs are intentionally irrelevant, passing more retrieved text is not guaranteed to help. The noise gate is meant to preserve useful evidence while reducing distractor spillover into the generation stage.
+
+\subsection{Pseudocode}
+
+Algorithm~\ref{alg:cart} summarizes the full procedure.
+
+\begin{algorithm}[t]
+\caption{CART inference}
+\label{alg:cart}
+\begin{algorithmic}[1]
+\Require Query $q$, model $m$, retrieval pool $D$, pool size $N$
+\State Retrieve top-$N$ candidate documents $C = \{d_1,\dots,d_N\}$ for $q$
+\State Compute similarity scores $s_1 \ge \cdots \ge s_N$
+\State Select $k^*$ using the largest-gap rule
+\State Keep top-$k^*$ documents: $R \leftarrow \{d_1,\dots,d_{k^*}\}$
+\State Apply noise filtering to $R$
+\State Compute $\mathrm{score}(\texttt{think})$ and $\mathrm{score}(\texttt{retrieve})$
+\If{$\mathrm{score}(\texttt{retrieve}) > \mathrm{score}(\texttt{think})$ and $R \neq \emptyset$}
+    \State Answer using retrieved context $R$
+    \State $a \leftarrow \texttt{retrieve}$
+\Else
+    \State Answer directly from parametric knowledge
+    \State $a \leftarrow \texttt{think}$
+\EndIf
+\State Update action statistics for $a$
+\State \Return answer, chosen action, selected context size
+\end{algorithmic}
+\end{algorithm}
+
+\section{Experimental Setup}
+
+\subsection{Tasks and Datasets}
+
+We evaluate on HotpotQA~\cite{yang2018hotpotqa} using the \texttt{distractor} subset and the validation split. HotpotQA is a multi-hop question answering benchmark in which the model must reason across multiple pieces of evidence. In the distractor setting, each example contains exactly 10 documents: 2 contain the supporting facts and 8 are distractors. This makes the dataset well suited for studying both retrieval utility and retrieval noise.
+
+\begin{table}[t]
+\centering
+\caption{HotpotQA configuration used in this work.}
+\label{tab:hotpot_config}
+\begin{tabular}{ll}
+\toprule
+Field & Value \\
+\midrule
+Dataset & HotpotQA \\
+Subset & distractor \\
+Split & validation \\
+Reasoning type & multi-hop QA \\
+Documents per example & 10 \\
+Relevant documents & 2 \\
+Distractor documents & 8 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Each example follows the standard HotpotQA structure with fields such as \texttt{\_id}, \texttt{question}, \texttt{answer}, \texttt{type}, \texttt{level}, \texttt{supporting\_facts}, and \texttt{context}. The \texttt{supporting\_facts} field identifies the necessary evidence sentences, while the \texttt{context} field provides the 10 paragraph candidates used in the distractor setup.
+
+\begin{table}[t]
+\centering
+\caption{Core fields of a HotpotQA distractor example.}
+\label{tab:hotpot_fields}
+\begin{tabular}{lp{8cm}}
+\toprule
+Field & Description \\
+\midrule
+\texttt{\_id} & Unique example identifier \\
+\texttt{question} & Natural-language question \\
+\texttt{answer} & Gold answer string or yes/no label \\
+\texttt{type} & Reasoning type: bridge or comparison \\
+\texttt{level} & Difficulty level \\
+\texttt{supporting\_facts} & List of title/sentence-index pairs needed for the answer \\
+\texttt{context} & Ten documents: two relevant and eight distractors \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Evaluation Metrics}
+
+We report:
+\begin{itemize}
+    \item \textbf{EM}: exact match
+    \item \textbf{F1}: token-level F1
+    \item \textbf{Input / Output / Total Tokens}: average token usage per example
+    \item \textbf{Token-Eff}: $F1 / \log(1+T)$
+    \item \textbf{Cost-Eff}: quality relative to estimated API cost
+\end{itemize}
+
+Our main paper emphasis is on F1 and Token-Eff. Cost-Eff is reported as a secondary systems metric.
+
+\subsection{Baselines}
+
+We compare CART against four fixed policies:
+\begin{itemize}
+    \item \textbf{always\_think}: no retrieval, answer directly
+    \item \textbf{retrieval\_k3}: retrieve top 3 paragraphs
+    \item \textbf{retrieval\_k5}: retrieve top 5 paragraphs
+    \item \textbf{retrieval\_k10}: retrieve top 10 paragraphs
+\end{itemize}
+
+These baselines are meant to answer two questions:
+\begin{enumerate}
+    \item Does retrieval help relative to parametric-only answering?
+    \item If retrieval helps, is there a single fixed $k$ that works best across models?
+\end{enumerate}
+
+\subsection{Implementation Details}
+
+Our main experiments focus on two OpenAI models:
+\begin{itemize}
+    \item \texttt{gpt-4o-mini}
+    \item \texttt{gpt-5.4-mini}
+\end{itemize}
+We use these as the primary setting for CART because within-provider comparisons reduce confounds related to tokenization, pricing, and provider-specific prompting behavior.
+
+As auxiliary reference baselines, we also report:
+\begin{itemize}
+    \item Claude Haiku 4.5
+    \item Claude Sonnet 4.6
+\end{itemize}
+
+For the fixed baselines, retrieval is performed over the 10 paragraphs provided by each HotpotQA distractor example. CART uses the same retrieval pool and differs only in how it selects context and routes between actions.
+
+\section{Results and Analysis}
+
+\subsection{Main Results (vs.\ Baselines)}
+
+Table~\ref{tab:openai_baselines} reports the main baseline comparison for the two OpenAI models. Retrieval improves F1 for both models, but the best retrieval depth differs depending on the objective. For GPT-4o-mini, the highest F1 is achieved by \texttt{retrieval\_k10}, while the best Token-Eff is achieved by \texttt{retrieval\_k5}. For GPT-5.4-mini, the highest F1 is achieved by \texttt{retrieval\_k10}, but the best Token-Eff is achieved by \texttt{retrieval\_k3}. These results already show that fixed retrieval budgets do not transfer cleanly across models.
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\caption{Main baseline results on the OpenAI models (HotpotQA distractor validation, $n=20$).}
+\label{tab:openai_baselines}
+\begin{tabular}{llrrrrrrrrrr}
+\toprule
+Model & Method & Input & Output & Total & Cost (USD) & EM & F1 & Prec. & Recall & Token-Eff & Cost-Eff \\
+\midrule
+\multirow{4}{*}{GPT-4o-mini}
+& always\_think  & 86.7  & 3.1 & 89.8   & 1.49e-05 & 0.300 & 0.325 & 0.325 & 0.325 & 0.0721 & 21830.39 \\
+& retrieval\_k3  & 451.4 & 2.9 & 454.4  & 6.95e-05 & 0.550 & 0.645 & 0.700 & 0.625 & 0.1054 & 9286.25 \\
+& retrieval\_k5  & 711.9 & 3.0 & 714.9  & 1.09e-04 & 0.600 & 0.737 & 0.808 & 0.708 & 0.1121 & 6782.83 \\
+& retrieval\_k10 & 1472.4 & 3.1 & 1475.5 & 2.23e-04 & 0.700 & 0.804 & 0.860 & 0.783 & 0.1102 & 3611.42 \\
+\midrule
+\multirow{4}{*}{GPT-5.4-mini}
+& always\_think  & 85.7  & 10.8 & 96.5   & 2.58e-05 & 0.300 & 0.373 & 0.383 & 0.375 & 0.0815 & 14464.68 \\
+& retrieval\_k3  & 450.4 & 6.1  & 456.6  & 9.50e-05 & 0.550 & 0.660 & 0.725 & 0.633 & 0.1077 & 6949.56 \\
+& retrieval\_k5  & 710.9 & 5.9  & 716.8  & 1.47e-04 & 0.550 & 0.677 & 0.750 & 0.646 & 0.1029 & 4606.62 \\
+& retrieval\_k10 & 1471.4 & 6.5 & 1478.0 & 3.00e-04 & 0.550 & 0.688 & 0.760 & 0.658 & 0.0942 & 2296.27 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Table~\ref{tab:anthropic_baselines} reports the auxiliary Anthropic baselines. These results show the same broad pattern: retrieval remains useful, but the best retrieval depth is not constant. We treat these numbers as supporting evidence rather than the core basis for CART.
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\caption{Auxiliary baseline results on Anthropic models (HotpotQA distractor validation, $n=20$).}
+\label{tab:anthropic_baselines}
+\begin{tabular}{llrrrrrrrrrr}
+\toprule
+Model & Method & Input & Output & Total & Cost (USD) & EM & F1 & Prec. & Recall & Token-Eff & Cost-Eff \\
+\midrule
+\multirow{4}{*}{Claude Haiku 4.5}
+& always\_think  & 99.6  & 21.2 & 120.8  & 1.64e-04 & 0.400 & 0.436 & 0.452 & 0.487 & 0.0908 & 2652.50 \\
+& retrieval\_k3  & 485.1 & 7.6  & 492.7  & 4.18e-04 & 0.550 & 0.728 & 0.794 & 0.708 & 0.1174 & 1739.29 \\
+& retrieval\_k5  & 780.1 & 13.3 & 793.5  & 6.78e-04 & 0.550 & 0.722 & 0.789 & 0.746 & 0.1082 & 1066.34 \\
+& retrieval\_k10 & 1652.0 & 12.1 & 1664.0 & 1.37e-03 & 0.500 & 0.673 & 0.739 & 0.696 & 0.0907 & 490.97 \\
+\midrule
+\multirow{4}{*}{Claude Sonnet 4.6}
+& always\_think  & 99.6  & 28.0 & 127.6  & 7.19e-04 & 0.350 & 0.468 & 0.481 & 0.583 & 0.0964 & 651.18 \\
+& retrieval\_k3  & 485.1 & 7.2  & 492.3  & 1.56e-03 & 0.550 & 0.736 & 0.812 & 0.708 & 0.1187 & 470.92 \\
+& retrieval\_k5  & 780.1 & 7.4  & 787.5  & 2.45e-03 & 0.600 & 0.770 & 0.838 & 0.746 & 0.1154 & 313.91 \\
+& retrieval\_k10 & 1652.0 & 7.4 & 1659.3 & 5.07e-03 & 0.600 & 0.770 & 0.838 & 0.746 & 0.1038 & 151.87 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Table~\ref{tab:family_summary} summarizes the within-family pattern. Within the OpenAI pair, GPT-5.4-mini has a somewhat stronger no-retrieval baseline than GPT-4o-mini, but retrieval still improves performance substantially. More importantly, a smaller model with a stronger retrieval policy can outperform a newer model with a weaker one: GPT-4o-mini with \texttt{retrieval\_k10} exceeds GPT-5.4-mini across all fixed baselines reported here. Within the Anthropic pair, Sonnet 4.6 has a slightly stronger no-retrieval baseline than Haiku 4.5, but both still benefit substantially from retrieval; Haiku remains markedly more cost-efficient.
+
+\begin{table*}[t]
+\centering
+\caption{Family-level summary across providers.}
+\label{tab:family_summary}
+\begin{tabular}{llrrrrl}
+\toprule
+Provider & Model & always\_think F1 & Best retrieval F1 & Gain & Best F1 method & Best Token-Eff method \\
+\midrule
+OpenAI & GPT-4o-mini      & 0.325 & 0.804 & +0.479 & retrieval\_k10 & retrieval\_k5 \\
+OpenAI & GPT-5.4-mini     & 0.373 & 0.688 & +0.315 & retrieval\_k10 & retrieval\_k3 \\
+Anthropic & Claude Haiku 4.5  & 0.436 & 0.728 & +0.292 & retrieval\_k3  & retrieval\_k3 \\
+Anthropic & Claude Sonnet 4.6 & 0.468 & 0.770 & +0.302 & retrieval\_k5 / k10 & retrieval\_k3 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Cost--Performance Tradeoff}
+
+\textbf{To be expanded.}
+
+This subsection will compare fixed baselines and CART under both F1 and Token-Eff, with emphasis on the quality--cost tradeoff. A natural figure here is a scatter plot of F1 versus total tokens for all methods and models.
+
+\subsection{Adaptivity Across Models}
+
+\textbf{To be expanded.}
+
+The OpenAI pair is the main focus of this analysis. GPT-5.4-mini shows a stronger no-retrieval baseline than GPT-4o-mini, but both models still benefit from retrieval. At the same time, their best fixed retrieval budgets differ depending on whether we optimize for peak F1 or token efficiency. This is the central motivation for CART: retrieval policy should adapt to both model capability and query conditions rather than being fixed globally.
+
+\subsection{Ablation Study}
+
+\textbf{To be expanded.}
+
+We will later isolate the contributions of:
+\begin{itemize}
+    \item adaptive-$k$ selection,
+    \item the UCB-Cost routing term, and
+    \item the noise-filtering gate.
+\end{itemize}
+
+\section{Discussion}
+
+Our baseline results support three practical conclusions. First, even newer models with stronger no-retrieval baselines still benefit from retrieval on HotpotQA. This matters because higher parametric-only performance does not guarantee that answering from memory is sufficient. Broader pretraining exposure or contamination may improve no-retrieval performance, but retrieval remains useful.
+
+Second, the HotpotQA distractor setting makes retrieval noise a first-class issue. Each example contains 8 distractor documents, so larger $k$ is not automatically beneficial. In our baselines, increasing retrieval depth sometimes improves F1 and sometimes degrades token efficiency or even answer quality. This supports the need for both adaptive context sizing and explicit noise control.
+
+Third, model capability and retrieval policy interact in a nontrivial way. Within the OpenAI pair, GPT-4o-mini combined with a stronger retrieval policy outperforms GPT-5.4-mini across the fixed baselines reported here. This reinforces the idea that a smaller model can be surpassed by a stronger retrieval policy, and conversely that a newer model can underperform if paired with a suboptimal retrieval budget. In other words, retrieval policy is a major part of the system, not just an implementation detail.
+
+We deliberately focus CART on OpenAI models in the main experiments. This design choice keeps the central analysis cleaner and reduces cross-provider confounds such as pricing, tokenization, and provider-specific prompting behavior. Anthropic results remain useful as auxiliary evidence that the broader retrieval pattern is not unique to one provider.
+
+We note several limitations. HotpotQA is not contamination-free, so retrieval gains should not be interpreted as a clean decomposition between knowledge and memorization. Our current results are also limited to single-turn QA and fixed baseline policies. Future work should test whether the same patterns hold in multi-turn agent settings and on contamination-resistant benchmarks.
+
+\section{Conclusion}
+
+\textbf{To be completed after full CART experiments.}
+
+\begin{thebibliography}{99}
+
+\bibitem{asai2024selfrag}
+Asai, A., Wu, Z., Wang, Y., Sil, A., Hajishirzi, H.:
+Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection.
+In: \emph{International Conference on Learning Representations (ICLR)} (2024)
+% \url{https://openreview.net/forum?id=jbNjgmE0OP}
+% \url{https://arxiv.org/abs/2310.11511}
+
+\bibitem{auer2002ucb1}
+Auer, P., Cesa-Bianchi, N., Fischer, P.:
+Finite-time Analysis of the Multiarmed Bandit Problem.
+\emph{Machine Learning} \textbf{47}(2--3), 235--256 (2002)
+
+\bibitem{guo2025dior}
+Guo, H., Zhu, J., Di, S., Shi, W., Chen, Z., Xu, J.:
+DioR: Adaptive Cognitive Detection and Contextual Retrieval Optimization for Dynamic Retrieval-Augmented Generation.
+In: \emph{Proceedings of ACL} (2025)
+% \url{https://aclanthology.org/2025.acl-long.148/}
+% \url{https://arxiv.org/abs/2504.10198}
+
+\bibitem{hwang2025rarag}
+Hwang, J., Park, J., Park, H., Kim, D., Park, S., Ok, J.:
+Retrieval-Augmented Generation with Estimation of Source Reliability.
+In: \emph{Proceedings of EMNLP}, pp.~34279--34303 (2025)
+% \url{https://aclanthology.org/2025.emnlp-main.1738/}
+
+\bibitem{klesel2025rag}
+Klesel, M., Wittmann, H.~F.:
+Retrieval-Augmented Generation (RAG).
+\emph{Business \& Information Systems Engineering} \textbf{67}, 551--561 (2025)
+% \url{https://link.springer.com/article/10.1007/s12599-025-00945-3}
+
+\bibitem{lee2025setr}
+Lee, D., Jo, Y., Park, H., Lee, M.:
+Shifting from Ranking to Set Selection for Retrieval Augmented Generation.
+In: \emph{Proceedings of ACL}, pp.~17606--17619 (2025)
+% \url{https://aclanthology.org/2025.acl-long.861/}
+% \url{https://arxiv.org/abs/2507.06838}
+
+\bibitem{lewis2020rag}
+Lewis, P., Perez, E., Piktus, A., et al.:
+Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.
+In: \emph{Advances in Neural Information Processing Systems (NeurIPS)} (2020)
+
+\bibitem{li2024c2leva}
+Li, Y., et al.:
+C$^2$LEVA: Toward Comprehensive and Contamination-Free Language Model Evaluation.
+\emph{arXiv preprint} (2024)
+% \url{https://arxiv.org/abs/2412.04947}
+
+\bibitem{li2025bestpractices}
+Li, S., Stenzel, L., Eickhoff, C., Bahrainian, S.~A.:
+Enhancing Retrieval-Augmented Generation: A Study of Best Practices.
+In: \emph{Proceedings of COLING}, pp.~6705--6717 (2025)
+% \url{https://aclanthology.org/2025.coling-main.449/}
+
+\bibitem{snell2025ttc}
+Snell, C., Lee, J., Xu, K., Kumar, A.:
+Scaling LLM Test-Time Compute Optimally Can be More Effective than Scaling Parameters for Reasoning.
+In: \emph{International Conference on Learning Representations (ICLR)} (2025)
+% \url{https://iclr.cc/virtual/2025/oral/31924}
+% \url{https://arxiv.org/abs/2408.03314}
+
+\bibitem{su2024dragin}
+Su, W., Tang, Y., Ai, Q., Wu, Z., Liu, Y.:
+DRAGIN: Dynamic Retrieval Augmented Generation Based on Real-Time Information Needs.
+In: \emph{Proceedings of ACL} (2024)
+% \url{https://aclanthology.org/2024.acl-long.702/}
+
+\bibitem{taguchi2025adaptivek}
+Taguchi, C., Maekawa, S., Bhutani, N.:
+Efficient Context Selection for Long-Context QA: No Tuning, No Iteration, Just Adaptive-k.
+In: \emph{Proceedings of EMNLP}, pp.~20105--20130 (2025)
+% \url{https://aclanthology.org/2025.emnlp-main.1017/}
+% \url{https://arxiv.org/abs/2506.08479}
+
+\bibitem{trivedi2023interleave}
+Trivedi, H., Balasubramanian, N., Khot, T., Sabharwal, A.:
+Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions.
+In: \emph{Proceedings of ACL}, pp.~10014--10037 (2023)
+% \url{https://aclanthology.org/2023.acl-long.557/}
+% \url{https://arxiv.org/abs/2212.10509}
+
+\bibitem{verma2026reflectiverag}
+Verma, A., Gupta, S., Pillai, S., Sircar, P., Gupta, D.:
+ReflectiveRAG: Rethinking Adaptivity in Retrieval-Augmented Generation.
+In: \emph{Proceedings of EACL, Industry Track} (2026)
+% \url{https://aclanthology.org/2026.eacl-industry.27/}
+
+\bibitem{wang2024bestpractices}
+Wang, X., Wang, Z., Gao, X., et al.:
+Searching for Best Practices in Retrieval-Augmented Generation.
+In: \emph{Proceedings of EMNLP}, pp.~17716--17736 (2024)
+% \url{https://aclanthology.org/2024.emnlp-main.981/}
+
+\bibitem{yang2018hotpotqa}
+Yang, Z., Qi, P., Zhang, S., Bengio, Y., Cohen, W.~W., Salakhutdinov, R., Manning, C.~D.:
+HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering.
+In: \emph{Proceedings of EMNLP} (2018)
+
+\bibitem{yao2023react}
+Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., Cao, Y.:
+ReAct: Synergizing Reasoning and Acting in Language Models.
+In: \emph{International Conference on Learning Representations (ICLR)} (2023)
+% \url{https://react-lm.github.io/}
+% \url{https://arxiv.org/abs/2210.03629}
+
+\bibitem{yi2026membership}
+Yi, J., Li, Y.:
+Membership Inference on LLMs in the Wild.
+\emph{arXiv preprint} (2026)
+% \url{https://arxiv.org/abs/2601.11314}
+
+\bibitem{yu2024rankrag}
+Yu, Y., Ping, W., Liu, Z., Wang, B., You, J., Zhang, C., Shoeybi, M., Catanzaro, B.:
+RankRAG: Unifying Context Ranking with Retrieval-Augmented Generation in LLMs.
+In: \emph{Advances in Neural Information Processing Systems (NeurIPS)} (2024)
+% \url{https://arxiv.org/abs/2407.02485}
+
+\bibitem{zhang2024retrievalqa}
+Zhang, Z., Fang, M., Chen, L.:
+RetrievalQA: Assessing Adaptive Retrieval-Augmented Generation for Short-form Open-Domain Question Answering.
+In: \emph{Findings of ACL}, pp.~6963--6975 (2024)
+% \url{https://aclanthology.org/2024.findings-acl.415/}
+% \url{https://arxiv.org/abs/2402.16457}
+
+\bibitem{zhao2026aigcsurvey}
+Zhao, P., Zhang, H., Yu, Q., Wang, Z., Geng, Y., Fu, F., Yang, L., Zhang, W., Jiang, J., Cui, B.:
+Retrieval-Augmented Generation for AI-Generated Content: A Survey.
+\emph{Data Science and Engineering} \textbf{11}, 1--29 (2026)
+% \url{https://link.springer.com/article/10.1007/s41019-025-00335-5}
+% \url{https://arxiv.org/abs/2402.19473}
+
+\bibitem{jiang2016adaptive}
+Jiang, J., Allan, J.:
+Adaptive Effort for Search Evaluation Metrics.
+In: Ferro, N., et al. (eds.) \emph{Advances in Information Retrieval (ECIR 2016)}.
+Lecture Notes in Computer Science, vol.~9626. Springer, Cham (2016)
+% \url{https://doi.org/10.1007/978-3-319-30671-1_14}
+% \url{https://ciir-publications.cs.umass.edu/getpdf.php?id=1201}
+
+\end{thebibliography}
+\end{document}
