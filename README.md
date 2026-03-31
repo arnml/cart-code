@@ -95,3 +95,22 @@ uv run python -m experiments.run_adaptive_k <MODEL_NAME> <SAMPLE_SIZE> [max_work
 ```bash
 uv run python -m experiments.analyse_adaptive_k <MODEL_NAME> <SAMPLE_SIZE>
 ```
+
+### Run noise_gate
+```bash
+uv run python -m experiments.run_noise_gate <MODEL_NAME> <SAMPLE_SIZE> [max_workers]
+```
+
+This runs the noise-gate ablation with similarity thresholds
+`0.2`, `0.3`, and `0.5`, and writes
+`experiments/results/cart/results_noise_gate_<MODEL_NAME>.csv` with the
+`threshold` column alongside the per-sample metrics.
+
+### Analyse noise_gate
+```bash
+uv run python -m experiments.analyse_noise_gate <MODEL_NAME>
+```
+
+This reads `experiments/results/cart/results_noise_gate_<MODEL_NAME>.csv`
+and writes `experiments/results/cart/analysis_noise_gate_<MODEL_NAME>.md`
+with one metric table whose columns are the thresholds.

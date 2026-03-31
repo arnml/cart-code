@@ -1,0 +1,152 @@
+question_id,method,threshold,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,output_tokens,cost_usd
+5ae143ed55429920d5234360,noise_gate,0.2,1755,1755,1.0,1.0,1.0,1.0,850,5,0.000174
+5ae143ed55429920d5234360,noise_gate,0.3,1755,1755,1.0,1.0,1.0,1.0,590,5,0.000122
+5ae143ed55429920d5234360,noise_gate,0.5,1755,1755,1.0,1.0,1.0,1.0,204,11,4.96e-05
+5abc19705542993a06baf86e,noise_gate,0.2,Dutch,Dutch,1.0,1.0,1.0,1.0,1397,4,0.00028260000000000004
+5abc19705542993a06baf86e,noise_gate,0.3,Dutch-American,Dutch,0.0,0.0,0.0,0.0,936,5,0.0001912
+5abc19705542993a06baf86e,noise_gate,0.5,"Dutch
+",Dutch,1.0,1.0,1.0,1.0,212,5,4.640000000000001e-05
+5ac3e0f7554299194317388b,noise_gate,0.2,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,1187,6,0.0002422
+5ac3e0f7554299194317388b,noise_gate,0.3,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,1028,6,0.00021040000000000002
+5ac3e0f7554299194317388b,noise_gate,0.5,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,593,6,0.00012340000000000002
+5ae518655542993aec5ec139,noise_gate,0.2,40,40 members,0.0,0.6666666666666666,1.0,0.5,1387,4,0.00028060000000000004
+5ae518655542993aec5ec139,noise_gate,0.3,40,40 members,0.0,0.6666666666666666,1.0,0.5,1021,4,0.00020740000000000003
+5ae518655542993aec5ec139,noise_gate,0.5,40,40 members,0.0,0.6666666666666666,1.0,0.5,213,4,4.58e-05
+5ab985eb554299131ca42360,noise_gate,0.2,Calibanus,Greyia,0.0,0.0,0.0,0.0,1579,6,0.00032060000000000004
+5ab985eb554299131ca42360,noise_gate,0.3,Calibanus,Greyia,0.0,0.0,0.0,0.0,1579,6,0.00032060000000000004
+5ab985eb554299131ca42360,noise_gate,0.5,Greyia,Greyia,1.0,1.0,1.0,1.0,256,5,5.520000000000001e-05
+5a8753d95542994846c1cd63,noise_gate,0.2,no,yes,0.0,0.0,0.0,0.0,667,4,0.0001366
+5a8753d95542994846c1cd63,noise_gate,0.3,no,yes,0.0,0.0,0.0,0.0,565,4,0.00011619999999999999
+5a8753d95542994846c1cd63,noise_gate,0.5,no,yes,0.0,0.0,0.0,0.0,357,4,7.46e-05
+5ab97d0a5542996be202051e,noise_gate,0.2,John André,John André,1.0,1.0,1.0,1.0,1597,5,0.0003234
+5ab97d0a5542996be202051e,noise_gate,0.3,John André,John André,1.0,1.0,1.0,1.0,1404,5,0.0002848
+5ab97d0a5542996be202051e,noise_gate,0.5,John André,John André,1.0,1.0,1.0,1.0,479,5,9.980000000000001e-05
+5adef1b35542993a75d263af,noise_gate,0.2,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,1103,7,0.00022620000000000002
+5adef1b35542993a75d263af,noise_gate,0.3,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,1103,7,0.00022620000000000002
+5adef1b35542993a75d263af,noise_gate,0.5,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,154,7,3.6400000000000004e-05
+5a73b55855429978a71e9086,noise_gate,0.2,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,1722,7,0.00035000000000000005
+5a73b55855429978a71e9086,noise_gate,0.3,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,1722,7,0.00035000000000000005
+5a73b55855429978a71e9086,noise_gate,0.5,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,435,7,9.26e-05
+5ae80919554299540e5a56f6,noise_gate,0.2,Cairnburgh Castle,The Changing Scottish Landscape,0.0,0.0,0.0,0.0,1133,9,0.00023380000000000005
+5ae80919554299540e5a56f6,noise_gate,0.3,The Changing Scottish Landscape,The Changing Scottish Landscape,1.0,1.0,1.0,1.0,931,7,0.00019180000000000003
+5ae80919554299540e5a56f6,noise_gate,0.5,Cairnburgh Castle,The Changing Scottish Landscape,0.0,0.0,0.0,0.0,183,9,4.38e-05
+5ae361605542994393b9e69b,noise_gate,0.2,Naval Submarine Base New London,"""Home of the Submarine Force""",0.0,0.22222222222222224,0.2,0.25,1069,10,0.00022180000000000002
+5ae361605542994393b9e69b,noise_gate,0.3,Naval Submarine Base New London,"""Home of the Submarine Force""",0.0,0.22222222222222224,0.2,0.25,681,10,0.0001442
+5ae361605542994393b9e69b,noise_gate,0.5,submarine escape training tank,"""Home of the Submarine Force""",0.0,0.25,0.25,0.25,283,8,6.3e-05
+5ac3a76e554299741d48a2be,noise_gate,0.2,U2,U2,1.0,1.0,1.0,1.0,1057,5,0.0002154
+5ac3a76e554299741d48a2be,noise_gate,0.3,U2,U2,1.0,1.0,1.0,1.0,765,5,0.000157
+5ac3a76e554299741d48a2be,noise_gate,0.5,U2,U2,1.0,1.0,1.0,1.0,319,5,6.780000000000001e-05
+5a7557d75542992d0ec05f68,noise_gate,0.2,Laurie Metcalf,Laurie Metcalf,1.0,1.0,1.0,1.0,1675,8,0.0003414
+5a7557d75542992d0ec05f68,noise_gate,0.3,Laurie Metcalf,Laurie Metcalf,1.0,1.0,1.0,1.0,1675,8,0.0003414
+5a7557d75542992d0ec05f68,noise_gate,0.5,Laurie Metcalf,Laurie Metcalf,1.0,1.0,1.0,1.0,764,8,0.0001592
+5a8d12ca5542994ba4e3dbe2,noise_gate,0.2,Nairobi,"Nairobi, Kenya",0.0,0.6666666666666666,1.0,0.5,796,5,0.0001632
+5a8d12ca5542994ba4e3dbe2,noise_gate,0.3,Nairobi,"Nairobi, Kenya",0.0,0.6666666666666666,1.0,0.5,326,5,6.92e-05
+5a8d12ca5542994ba4e3dbe2,noise_gate,0.5,Nairobi,"Nairobi, Kenya",0.0,0.6666666666666666,1.0,0.5,326,5,6.92e-05
+5ab7f6d35542993667794070,noise_gate,0.2,Cyclic Defrost,Cyclic Defrost,1.0,1.0,1.0,1.0,1611,7,0.00032780000000000005
+5ab7f6d35542993667794070,noise_gate,0.3,Cyclic Defrost,Cyclic Defrost,1.0,1.0,1.0,1.0,1550,7,0.0003156
+5ab7f6d35542993667794070,noise_gate,0.5,Cyclic Defrost,Cyclic Defrost,1.0,1.0,1.0,1.0,278,7,6.12e-05
+5ac3d9135542995c82c4ac4c,noise_gate,0.2,729,729 at the 2010 census,0.0,0.4,1.0,0.25,1954,4,0.00039400000000000004
+5ac3d9135542995c82c4ac4c,noise_gate,0.3,729,729 at the 2010 census,0.0,0.4,1.0,0.25,812,4,0.00016560000000000001
+5ac3d9135542995c82c4ac4c,noise_gate,0.5,729,729 at the 2010 census,0.0,0.4,1.0,0.25,212,4,4.560000000000001e-05
+5ae129115542990adbacf722,noise_gate,0.2,Francis McPeake,Francis McPeake,1.0,1.0,1.0,1.0,1736,8,0.00035360000000000003
+5ae129115542990adbacf722,noise_gate,0.3,The Braes of Balquhither,Francis McPeake,0.0,0.0,0.0,0.0,1238,11,0.0002564
+5ae129115542990adbacf722,noise_gate,0.5,Francis McPeake,Francis McPeake,1.0,1.0,1.0,1.0,456,8,9.760000000000001e-05
+5a86769c5542994775f60776,noise_gate,0.2,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,1539,8,0.0003142
+5a86769c5542994775f60776,noise_gate,0.3,The Magic Christian,Slaughterhouse-Five,0.0,0.0,0.0,0.0,720,6,0.0001488
+5a86769c5542994775f60776,noise_gate,0.5,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,247,8,5.580000000000001e-05
+5ab31864554299233954ff06,noise_gate,0.2,Sarod,strings,0.0,0.0,0.0,0.0,1544,5,0.0003128
+5ab31864554299233954ff06,noise_gate,0.3,Sarod,strings,0.0,0.0,0.0,0.0,1396,5,0.0002832
+5ab31864554299233954ff06,noise_gate,0.5,Sarod,strings,0.0,0.0,0.0,0.0,221,5,4.8200000000000006e-05
+5a7b1023554299042af8f6c2,noise_gate,0.2,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,1638,7,0.0003332000000000001
+5a7b1023554299042af8f6c2,noise_gate,0.3,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,1474,7,0.00030040000000000004
+5a7b1023554299042af8f6c2,noise_gate,0.5,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,979,7,0.00020140000000000002
+5ac19f405542991316484b5b,noise_gate,0.2,dogs,dogs,1.0,1.0,1.0,1.0,806,4,0.0001644
+5ac19f405542991316484b5b,noise_gate,0.3,dogs,dogs,1.0,1.0,1.0,1.0,277,4,5.860000000000001e-05
+5ac19f405542991316484b5b,noise_gate,0.5,dogs,dogs,1.0,1.0,1.0,1.0,277,4,5.860000000000001e-05
+5ae382ee5542992e3233c430,noise_gate,0.2,Classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,1564,6,0.0003176
+5ae382ee5542992e3233c430,noise_gate,0.3,classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,1564,6,0.0003176
+5ae382ee5542992e3233c430,noise_gate,0.5,Classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,966,6,0.00019800000000000002
+5adcdf455542994ed6169c11,noise_gate,0.2,Royal Air Force,Royal Air Force,1.0,1.0,1.0,1.0,1079,6,0.00022060000000000002
+5adcdf455542994ed6169c11,noise_gate,0.3,Royal Air Force,Royal Air Force,1.0,1.0,1.0,1.0,1079,6,0.00022060000000000002
+5adcdf455542994ed6169c11,noise_gate,0.5,Royal Air Force,Royal Air Force,1.0,1.0,1.0,1.0,660,6,0.00013680000000000002
+5ac35a7e554299741d48a257,noise_gate,0.2,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,1149,5,0.0002338
+5ac35a7e554299741d48a257,noise_gate,0.3,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,400,5,8.400000000000001e-05
+5ac35a7e554299741d48a257,noise_gate,0.5,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,159,5,3.58e-05
+5ab2659e554299340b5254b2,noise_gate,0.2,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,1218,7,0.0002492
+5ab2659e554299340b5254b2,noise_gate,0.3,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,870,7,0.0001796
+5ab2659e554299340b5254b2,noise_gate,0.5,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,479,7,0.00010140000000000001
+5adcbb815542994ed6169bde,noise_gate,0.2,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,1248,7,0.0002552
+5adcbb815542994ed6169bde,noise_gate,0.3,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,1248,7,0.0002552
+5adcbb815542994ed6169bde,noise_gate,0.5,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,598,7,0.0001252
+5a74f8bd5542993748c8976a,noise_gate,0.2,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,1371,7,0.00027979999999999997
+5a74f8bd5542993748c8976a,noise_gate,0.3,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,298,7,6.52e-05
+5a74f8bd5542993748c8976a,noise_gate,0.5,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,96,13,2.96e-05
+5ade25ed5542997c77aded70,noise_gate,0.2,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,1586,5,0.00032120000000000006
+5ade25ed5542997c77aded70,noise_gate,0.3,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,1486,5,0.0003012
+5ade25ed5542997c77aded70,noise_gate,0.5,World War I,the Cold War (1947–91),0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,507,6,0.0001062
+5a78ae8b5542990784727730,noise_gate,0.2,115 miles (185 km) south of Sacramento,about 115 miles (185 km),0.0,0.6666666666666666,0.5714285714285714,0.8,1295,12,0.0002686
+5a78ae8b5542990784727730,noise_gate,0.3,115 miles (185 km) south of Sacramento,about 115 miles (185 km),0.0,0.6666666666666666,0.5714285714285714,0.8,1040,12,0.00021759999999999998
+5a78ae8b5542990784727730,noise_gate,0.5,60 miles,about 115 miles (185 km),0.0,0.28571428571428575,0.5,0.2,179,5,3.9800000000000005e-05
+5ae12a4b55429920d52342df,noise_gate,0.2,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,1673,6,0.0003394
+5ae12a4b55429920d52342df,noise_gate,0.3,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,667,6,0.00013820000000000003
+5ae12a4b55429920d52342df,noise_gate,0.5,Pul-i-Alam,Puli Alam,0.0,0.0,0.0,0.0,454,7,9.640000000000001e-05
+5ae22eae554299495565da30,noise_gate,0.2,310,310,1.0,1.0,1.0,1.0,1464,4,0.00029600000000000004
+5ae22eae554299495565da30,noise_gate,0.3,310,310,1.0,1.0,1.0,1.0,646,4,0.00013240000000000002
+5ae22eae554299495565da30,noise_gate,0.5,noanswer,310,0.0,0.0,0.0,0.0,313,5,6.66e-05
+5ab6aa4c55429953192ad359,noise_gate,0.2,Kitty Hawk,"""Kitty Hawk""",1.0,1.0,1.0,1.0,1544,6,0.00031360000000000003
+5ab6aa4c55429953192ad359,noise_gate,0.3,Kitty Hawk,"""Kitty Hawk""",1.0,1.0,1.0,1.0,1544,6,0.00031360000000000003
+5ab6aa4c55429953192ad359,noise_gate,0.5,Command Module Pilot,"""Kitty Hawk""",0.0,0.0,0.0,0.0,517,6,0.0001082
+5adf3e835542993a75d26442,noise_gate,0.2,Fenris (comics),Marvel,0.0,0.0,0.0,0.0,1154,9,0.000238
+5adf3e835542993a75d26442,noise_gate,0.3,Nick Fury vs. S.H.I.E.L.D.,Marvel,0.0,0.0,0.0,0.0,1075,14,0.0002262
+5adf3e835542993a75d26442,noise_gate,0.5,Nick Fury vs. S.H.I.E.L.D.,Marvel,0.0,0.0,0.0,0.0,979,14,0.00020700000000000002
+5a8ee3a755429917b4a5be02,noise_gate,0.2,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,900,6,0.00018480000000000002
+5a8ee3a755429917b4a5be02,noise_gate,0.3,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,900,6,0.00018480000000000002
+5a8ee3a755429917b4a5be02,noise_gate,0.5,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,228,6,5.0400000000000005e-05
+5ac0dcf25542996f0d89cc2c,noise_gate,0.2,Jane Mayer,Jane Mayer,1.0,1.0,1.0,1.0,867,5,0.0001774
+5ac0dcf25542996f0d89cc2c,noise_gate,0.3,Jane Mayer,Jane Mayer,1.0,1.0,1.0,1.0,779,5,0.0001598
+5ac0dcf25542996f0d89cc2c,noise_gate,0.5,Jane Mayer,Jane Mayer,1.0,1.0,1.0,1.0,779,5,0.0001598
+5a7e618155429949594199b0,noise_gate,0.2,Albany County,Albany,0.0,0.6666666666666666,0.5,1.0,1821,6,0.0003690000000000001
+5a7e618155429949594199b0,noise_gate,0.3,Albany County,Albany,0.0,0.6666666666666666,0.5,1.0,1821,6,0.0003690000000000001
+5a7e618155429949594199b0,noise_gate,0.5,Albany County,Albany,0.0,0.6666666666666666,0.5,1.0,1319,6,0.0002686
+5ab916e155429919ba4e23a4,noise_gate,0.2,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,639,9,0.00013500000000000003
+5ab916e155429919ba4e23a4,noise_gate,0.3,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,599,9,0.00012700000000000002
+5ab916e155429919ba4e23a4,noise_gate,0.5,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,90,15,3e-05
+5a713b325542994082a3e6b5,noise_gate,0.2,noanswer,Agra,0.0,0.0,0.0,0.0,1169,5,0.0002378
+5a713b325542994082a3e6b5,noise_gate,0.3,Agra,Agra,1.0,1.0,1.0,1.0,1076,5,0.00021920000000000002
+5a713b325542994082a3e6b5,noise_gate,0.5,Agra,Agra,1.0,1.0,1.0,1.0,882,5,0.0001804
+5a87c13f5542996e4f30890c,noise_gate,0.2,Rome,Rome,1.0,1.0,1.0,1.0,1462,4,0.0002956000000000001
+5a87c13f5542996e4f30890c,noise_gate,0.3,Rome,Rome,1.0,1.0,1.0,1.0,1462,4,0.0002956000000000001
+5a87c13f5542996e4f30890c,noise_gate,0.5,Rome,Rome,1.0,1.0,1.0,1.0,812,4,0.00016560000000000001
+5a8843cd5542994846c1ce75,noise_gate,0.2,Mwabvi river,Buffalo,0.0,0.0,0.0,0.0,1361,7,0.00027780000000000003
+5a8843cd5542994846c1ce75,noise_gate,0.3,Mwabvi river,Buffalo,0.0,0.0,0.0,0.0,996,7,0.00020480000000000002
+5a8843cd5542994846c1ce75,noise_gate,0.5,Mwabvi river,Buffalo,0.0,0.0,0.0,0.0,385,7,8.26e-05
+5ab90d8955429916710eb0f1,noise_gate,0.2,Smoothie King Center,Smoothie King Center,1.0,1.0,1.0,1.0,1398,7,0.0002852
+5ab90d8955429916710eb0f1,noise_gate,0.3,Smoothie King Center,Smoothie King Center,1.0,1.0,1.0,1.0,1398,7,0.0002852
+5ab90d8955429916710eb0f1,noise_gate,0.5,Smoothie King Center,Smoothie King Center,1.0,1.0,1.0,1.0,185,7,4.26e-05
+5ae788fa55429952e35ea964,noise_gate,0.2,jam band sound,extensive use of segues,0.0,0.0,0.0,0.0,1048,6,0.00021440000000000003
+5ae788fa55429952e35ea964,noise_gate,0.3,jam band sound,extensive use of segues,0.0,0.0,0.0,0.0,1048,6,0.00021440000000000003
+5ae788fa55429952e35ea964,noise_gate,0.5,their trademark jam band sound,extensive use of segues,0.0,0.0,0.0,0.0,597,8,0.0001258
+5ae1925a554299492dc91b48,noise_gate,0.2,Lady Charlotte Elliot,Charlotte Carnegie,0.0,0.4,0.3333333333333333,0.5,948,6,0.00019440000000000004
+5ae1925a554299492dc91b48,noise_gate,0.3,Lady Charlotte Elliot,Charlotte Carnegie,0.0,0.4,0.3333333333333333,0.5,747,6,0.0001542
+5ae1925a554299492dc91b48,noise_gate,0.5,James Kenneth Stephen,Charlotte Carnegie,0.0,0.0,0.0,0.0,93,12,2.82e-05
+5ae1443855429920d5234362,noise_gate,0.2,World War II,World War II,1.0,1.0,1.0,1.0,1829,6,0.0003706
+5ae1443855429920d5234362,noise_gate,0.3,World War II,World War II,1.0,1.0,1.0,1.0,1829,6,0.0003706
+5ae1443855429920d5234362,noise_gate,0.5,World War II,World War II,1.0,1.0,1.0,1.0,489,6,0.0001026
+5ac54c435542993e66e822d1,noise_gate,0.2,Oklahoma State,Oklahoma State University,0.0,0.8,1.0,0.6666666666666666,1600,6,0.00032480000000000003
+5ac54c435542993e66e822d1,noise_gate,0.3,Oklahoma State,Oklahoma State University,0.0,0.8,1.0,0.6666666666666666,1192,6,0.0002432
+5ac54c435542993e66e822d1,noise_gate,0.5,Oklahoma State University,Oklahoma State University,1.0,1.0,1.0,1.0,220,7,4.96e-05
+5a7a77425542995eb53be83e,noise_gate,0.2,Brady Seals,Brady Seals,1.0,1.0,1.0,1.0,1194,7,0.0002444
+5a7a77425542995eb53be83e,noise_gate,0.3,Brady Seals,Brady Seals,1.0,1.0,1.0,1.0,1076,7,0.00022080000000000003
+5a7a77425542995eb53be83e,noise_gate,0.5,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,575,5,0.000119
+5a7153d05542994082a3e7dc,noise_gate,0.2,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,1351,8,0.0002766
+5a7153d05542994082a3e7dc,noise_gate,0.3,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,1351,8,0.0002766
+5a7153d05542994082a3e7dc,noise_gate,0.5,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,997,8,0.0002058
+5ae361805542992e3233c3c9,noise_gate,0.2,Georgetown University,Georgetown University,1.0,1.0,1.0,1.0,1556,6,0.00031600000000000004
+5ae361805542992e3233c3c9,noise_gate,0.3,Georgetown University,Georgetown University,1.0,1.0,1.0,1.0,1388,6,0.00028240000000000003
+5ae361805542992e3233c3c9,noise_gate,0.5,Southeastern Oklahoma State University,Georgetown University,0.0,0.3333333333333333,0.25,0.5,207,15,5.3400000000000004e-05
+5a72688c5542997f827839b2,noise_gate,0.2,Turkey,Turkey,1.0,1.0,1.0,1.0,1186,4,0.00024040000000000002
+5a72688c5542997f827839b2,noise_gate,0.3,Turkey,Turkey,1.0,1.0,1.0,1.0,1141,4,0.00023140000000000001
+5a72688c5542997f827839b2,noise_gate,0.5,Turkey,Turkey,1.0,1.0,1.0,1.0,328,4,6.88e-05
+5a7ce0ce554299452d57ba92,noise_gate,0.2,William McKinley,William McKinley,1.0,1.0,1.0,1.0,1308,7,0.0002672
+5a7ce0ce554299452d57ba92,noise_gate,0.3,William McKinley,William McKinley,1.0,1.0,1.0,1.0,1114,7,0.00022840000000000002
+5a7ce0ce554299452d57ba92,noise_gate,0.5,William McKinley,William McKinley,1.0,1.0,1.0,1.0,594,7,0.00012440000000000002

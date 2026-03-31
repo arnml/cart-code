@@ -1,74 +1,37 @@
 """Shared helpers for HotpotQA baseline evaluation.
 
 Includes:
-- flatten_context: HotpotQA context normalization
-- build_always_think_prompt / build_retrieval_prompt: Prompt templates
+- flatten_context / build_always_think_prompt / build_retrieval_prompt:
+  Preprocessing and prompt templates
 - call_llm: Provider routing and model invocation
 """
 
+from typing import Any
 
-def flatten_context(context: dict) -> list[str]:
-    """Convert HotpotQA context format to list of strings.
+from experiments.preprocessing import (
+    build_always_think_prompt as _build_always_think_prompt,
+)
+from experiments.preprocessing import (
+    build_retrieval_prompt as _build_retrieval_prompt,
+)
+from experiments.preprocessing import (
+    flatten_context as _flatten_context,
+)
 
-    Combines title and sentences into natural-reading paragraphs.
-    Handles empty sentences, messy spacing, and edge cases robustly.
 
-    Args:
-        context: Dict with "title" and "sentences" keys from HotpotQA
-                 Both are lists of equal length (one paragraph per index)
-
-    Returns:
-        List of paragraph strings (title. sentences joined)
-    """
-    titles = context.get("title", [])
-    sentences_list = context.get("sentences", [])
-
-    paragraphs = []
-    for title, sentences in zip(titles, sentences_list):
-        title = str(title).strip()
-        # Filter and clean sentences
-        sent_text = " ".join(s.strip() for s in sentences if s and s.strip())
-        # Combine with period for natural reading in embeddings
-        para_text = f"{title}. {sent_text}" if sent_text else title
-        paragraphs.append(para_text)
-    return paragraphs
+def flatten_context(context: dict[str, Any]) -> list[str]:
+    """Backward-compatible wrapper for preprocessing.flatten_context."""
+    return _flatten_context(context)
 
 
 def build_always_think_prompt(question: str) -> str:
-    """Build the prompt for the no-retrieval baseline."""
-    return f"""Answer the HotpotQA question.
-
-Rules:
-- Output only the final answer.
-- If the answer is yes, no or noanswer, output exactly: yes or no or noanswer.
-- Otherwise output a short span or entity name only.
-- Do not include any explanation.
-- Do not repeat the question.
-
-Question: {question}
-
-Answer:"""
+    """Backward-compatible wrapper for preprocessing.build_always_think_prompt."""
+    return _build_always_think_prompt(question)
 
 
 def build_retrieval_prompt(question: str, paragraphs: list[str]) -> str:
-    """Build the prompt for retrieval-augmented answering."""
-    context_str = "\n\n".join([f"[{i+1}] {p}" for i, p in enumerate(paragraphs)])
-    return f"""Answer the HotpotQA question using only the provided context.
-
-Rules:
-- Output only the final answer.
-- If the answer is yes, no or noanswer, output exactly: yes or no or noanswer.
-- Otherwise output a short span or entity name only.
-- Do not include any explanation.
-- Do not repeat the question.
-- If multiple positions/titles are mentioned, output only the one that directly answers the question.
-
-Context:
-{context_str}
-
-Question: {question}
-
-Answer:"""
+    """Backward-compatible wrapper for preprocessing.build_retrieval_prompt."""
+    return _build_retrieval_prompt(question, paragraphs)
 
 
 def call_llm(prompt: str, model: str) -> tuple[str, int, int, float]:
