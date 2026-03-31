@@ -76,6 +76,11 @@ uv run python -m experiments.analyse_baseline <MODEL_NAME>
 uv run python -m experiments.plot_baseline_f1_vs_k
 ```
 
+### Plot baseline methods vs adaptive-k F1 by method
+```bash
+uv run python -m experiments.plot_baseline_vs_adaptive_k_f1_vs_k gpt-5.4-mini
+```
+
 ### Plot baseline EM split
 ```bash
 uv run python -m experiments.plot_baseline_em_percentage
