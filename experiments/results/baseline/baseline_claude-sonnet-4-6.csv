@@ -41,6 +41,22 @@ percussion",strings,0.0,0.0,0.0,0.0,94,25,0.000657
 5a7b1023554299042af8f6c2,always_think,"Ride a Wild Pony (1975) came before The Many Adventures of Winnie the Pooh (1977).
 
 Ride a Wild Pony",Ride a Wild Pony,0.0,0.33333333333333337,0.2,1.0,108,39,0.0009090000000000001
+5ac19f405542991316484b5b,always_think,dogs,dogs,1.0,1.0,1.0,1.0,99,4,0.000357
+5ae382ee5542992e3233c430,always_think,offensive realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.16666666666666669,0.5,0.1,99,6,0.00038700000000000003
+5adcdf455542994ed6169c11,always_think,Royal Air Force,Royal Air Force,1.0,1.0,1.0,1.0,97,6,0.00038100000000000005
+5ac35a7e554299741d48a257,always_think,"Torstein Ellingsen was the drummer of the band Datarock, which is a Norwegian band. The ethnic group here refers to Norwegians, who speak Norwegian.
+
+Norwegian",Norwegian language,0.0,0.08695652173913042,0.047619047619047616,0.5,100,42,0.00093
+5ab2659e554299340b5254b2,always_think,"The Sasanian Empire succeeded the Parthian Empire.
+
+Parthian Empire",the Parthian Empire,0.0,0.4444444444444445,0.2857142857142857,1.0,112,20,0.000636
+5adcbb815542994ed6169bde,always_think,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,112,8,0.00045599999999999997
+5a74f8bd5542993748c8976a,always_think,"Tim Cluess became head coach of Iona in 2010, Steve Prohm became head coach of Iowa State in 2015.
+
+Tim Cluess",Tim Cluess,0.0,0.17391304347826084,0.09523809523809523,1.0,105,42,0.0009450000000000001
+5ade25ed5542997c77aded70,always_think,World War I,the Cold War (1947–91),0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,104,6,0.000402
+5a78ae8b5542990784727730,always_think,99 miles,about 115 miles (185 km),0.0,0.28571428571428575,0.5,0.2,92,7,0.000381
+5ae12a4b55429920d52342df,always_think,Ghazni,Puli Alam,0.0,0.0,0.0,0.0,100,7,0.000405
 5ae143ed55429920d5234360,retrieval_k3,1755,1755,1.0,1.0,1.0,1.0,447,6,0.001431
 5abc19705542993a06baf86e,retrieval_k3,Dutch,Dutch,1.0,1.0,1.0,1.0,448,4,0.0014039999999999999
 5ac3e0f7554299194317388b,retrieval_k3,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,596,7,0.0018930000000000002
@@ -61,6 +77,16 @@ Ride a Wild Pony",Ride a Wild Pony,0.0,0.33333333333333337,0.2,1.0,108,39,0.0009
 5a86769c5542994775f60776,retrieval_k3,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,541,10,0.001773
 5ab31864554299233954ff06,retrieval_k3,stringed instrument,strings,0.0,0.0,0.0,0.0,531,6,0.001683
 5a7b1023554299042af8f6c2,retrieval_k3,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,506,10,0.001668
+5ac19f405542991316484b5b,retrieval_k3,dogs,dogs,1.0,1.0,1.0,1.0,522,4,0.0016259999999999998
+5ae382ee5542992e3233c430,retrieval_k3,Classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,645,6,0.002025
+5adcdf455542994ed6169c11,retrieval_k3,RAF,Royal Air Force,0.0,0.0,0.0,0.0,435,4,0.001365
+5ac35a7e554299741d48a257,retrieval_k3,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,432,4,0.001356
+5ab2659e554299340b5254b2,retrieval_k3,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,502,7,0.001611
+5adcbb815542994ed6169bde,retrieval_k3,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,429,8,0.001407
+5a74f8bd5542993748c8976a,retrieval_k3,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,495,8,0.001605
+5ade25ed5542997c77aded70,retrieval_k3,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,704,5,0.002187
+5a78ae8b5542990784727730,retrieval_k3,115 miles,about 115 miles (185 km),0.0,0.5714285714285715,1.0,0.4,447,7,0.001446
+5ae12a4b55429920d52342df,retrieval_k3,Pul-i-Alam,Puli Alam,0.0,0.0,0.0,0.0,520,12,0.00174
 5ae143ed55429920d5234360,retrieval_k5,1755,1755,1.0,1.0,1.0,1.0,641,6,0.002013
 5abc19705542993a06baf86e,retrieval_k5,Dutch,Dutch,1.0,1.0,1.0,1.0,835,4,0.002565
 5ac3e0f7554299194317388b,retrieval_k5,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,767,7,0.002406
@@ -81,6 +107,16 @@ Ride a Wild Pony",Ride a Wild Pony,0.0,0.33333333333333337,0.2,1.0,108,39,0.0009
 5a86769c5542994775f60776,retrieval_k5,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,848,10,0.0026939999999999998
 5ab31864554299233954ff06,retrieval_k5,stringed instrument,strings,0.0,0.0,0.0,0.0,730,6,0.00228
 5a7b1023554299042af8f6c2,retrieval_k5,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,924,10,0.002922
+5ac19f405542991316484b5b,retrieval_k5,dogs,dogs,1.0,1.0,1.0,1.0,903,4,0.002769
+5ae382ee5542992e3233c430,retrieval_k5,Classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,793,6,0.002469
+5adcdf455542994ed6169c11,retrieval_k5,RAF,Royal Air Force,0.0,0.0,0.0,0.0,744,4,0.002292
+5ac35a7e554299741d48a257,retrieval_k5,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,773,4,0.002379
+5ab2659e554299340b5254b2,retrieval_k5,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,805,7,0.00252
+5adcbb815542994ed6169bde,retrieval_k5,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,737,8,0.0023309999999999997
+5a74f8bd5542993748c8976a,retrieval_k5,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,829,8,0.002607
+5ade25ed5542997c77aded70,retrieval_k5,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,1123,5,0.003444
+5a78ae8b5542990784727730,retrieval_k5,115 miles,about 115 miles (185 km),0.0,0.5714285714285715,1.0,0.4,573,7,0.001824
+5ae12a4b55429920d52342df,retrieval_k5,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,694,9,0.0022170000000000002
 5ae143ed55429920d5234360,retrieval_k10,1755,1755,1.0,1.0,1.0,1.0,1120,6,0.00345
 5abc19705542993a06baf86e,retrieval_k10,Dutch,Dutch,1.0,1.0,1.0,1.0,1549,4,0.004707
 5ac3e0f7554299194317388b,retrieval_k10,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,1509,7,0.004632
@@ -101,3 +137,13 @@ Ride a Wild Pony",Ride a Wild Pony,0.0,0.33333333333333337,0.2,1.0,108,39,0.0009
 5a86769c5542994775f60776,retrieval_k10,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,1703,10,0.005259
 5ab31864554299233954ff06,retrieval_k10,stringed instrument,strings,0.0,0.0,0.0,0.0,1821,6,0.005553
 5a7b1023554299042af8f6c2,retrieval_k10,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,1939,10,0.005967
+5ac19f405542991316484b5b,retrieval_k10,dogs,dogs,1.0,1.0,1.0,1.0,1580,4,0.0048000000000000004
+5ae382ee5542992e3233c430,retrieval_k10,Classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,1749,6,0.005337
+5adcdf455542994ed6169c11,retrieval_k10,Royal Air Force (RAF),Royal Air Force,0.0,0.8571428571428571,0.75,1.0,1233,9,0.003834
+5ac35a7e554299741d48a257,retrieval_k10,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,2320,4,0.00702
+5ab2659e554299340b5254b2,retrieval_k10,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,1370,7,0.004215
+5adcbb815542994ed6169bde,retrieval_k10,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,1415,8,0.004365
+5a74f8bd5542993748c8976a,retrieval_k10,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,1742,8,0.005346
+5ade25ed5542997c77aded70,retrieval_k10,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,1738,5,0.005289
+5a78ae8b5542990784727730,retrieval_k10,115 miles,about 115 miles (185 km),0.0,0.5714285714285715,1.0,0.4,1443,7,0.0044340000000000004
+5ae12a4b55429920d52342df,retrieval_k10,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,1941,9,0.005958

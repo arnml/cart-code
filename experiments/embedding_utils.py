@@ -1,19 +1,11 @@
-"""Embedding utilities with token-aware truncation and persistent caching.
+"""Embedding utilities with token-aware truncation.
 
 Supports multiple providers (OpenAI, Anthropic via Voyage AI) with a unified interface.
-Automatically caches embeddings to avoid re-computing identical texts.
+No caching - embeddings are cheap and caching causes race conditions with parallel runs.
 """
-
-import hashlib
-import json
-from datetime import datetime, timezone
-from pathlib import Path
 
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-
-# Cache root — created lazily at first use
-_CACHE_ROOT = Path(__file__).parent / "cache" / "embeddings_cache"
 
 
 def _get_encoding(model: str):
@@ -57,60 +49,6 @@ def _truncate(text: str, model: str, token_budget: int) -> str:
     return enc.decode(tokens[:token_budget])
 
 
-def _text_hash(text: str) -> str:
-    """Create stable hash of text.
-
-    Hash is computed on truncated text, so different token budgets
-    produce different cache entries for the same raw input.
-    """
-    return hashlib.sha256(text.encode()).hexdigest()
-
-
-def _cache_path(provider: str, token_budget: int) -> Path:
-    """Return path to the cache JSON file for this provider and token budget."""
-    return _CACHE_ROOT / provider / str(token_budget) / "embeddings.json"
-
-
-def _load_cache(provider: str, token_budget: int) -> dict:
-    """Load existing cache or create empty cache structure.
-
-    Args:
-        provider: "openai" or "anthropic"
-        token_budget: Token budget for this cache
-
-    Returns:
-        Dictionary mapping text hash → embedding vector (list of floats)
-    """
-    cache_file = _cache_path(provider, token_budget)
-
-    if cache_file.exists():
-        with open(cache_file) as f:
-            data = json.load(f)
-        return data.get("embeddings", {})
-
-    return {}
-
-
-def _save_cache(provider: str, token_budget: int, cache: dict) -> None:
-    """Save embeddings cache to disk.
-
-    Args:
-        provider: "openai" or "anthropic"
-        token_budget: Token budget for this cache
-        cache: Dictionary mapping text hash → embedding vector
-    """
-    cache_file = _cache_path(provider, token_budget)
-    cache_file.parent.mkdir(parents=True, exist_ok=True)
-
-    data = {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-        "provider": provider,
-        "token_budget": token_budget,
-        "embeddings": cache,
-    }
-
-    with open(cache_file, "w") as f:
-        json.dump(data, f, indent=2)
 
 
 def embed_text(
@@ -119,7 +57,7 @@ def embed_text(
     embedding_model: str,
     token_budget: int,
 ) -> list[float]:
-    """Embed text using specified provider, with caching.
+    """Embed text using specified provider.
 
     Args:
         text: Text to embed
@@ -135,25 +73,14 @@ def embed_text(
     """
     # Truncate to budget
     truncated = _truncate(text, embedding_model, token_budget)
-    text_hash = _text_hash(truncated)
-
-    # Check cache
-    cache = _load_cache(provider, token_budget)
-    if text_hash in cache:
-        return cache[text_hash]
 
     # Fetch embedding
     if provider == "openai":
-        embedding = _embed_openai(truncated, embedding_model)
+        return _embed_openai(truncated, embedding_model)
     elif provider == "anthropic":
-        embedding = _embed_anthropic(truncated, embedding_model)
+        return _embed_anthropic(truncated, embedding_model)
     else:
         raise ValueError(f"Unknown embedding provider: {provider}")
-
-    # Cache and return
-    cache[text_hash] = embedding
-    _save_cache(provider, token_budget, cache)
-    return embedding
 
 
 def _embed_openai(text: str, model: str) -> list[float]:

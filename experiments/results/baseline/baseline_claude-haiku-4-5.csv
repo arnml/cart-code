@@ -33,6 +33,22 @@ Delhi, Iowa has a population of approximately 439.
 5a86769c5542994775f60776,always_think,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,107,10,0.00012560000000000002
 5ab31864554299233954ff06,always_think,violin,strings,0.0,0.0,0.0,0.0,94,4,9.12e-05
 5a7b1023554299042af8f6c2,always_think,The Many Adventures of Winnie the Pooh,Ride a Wild Pony,0.0,0.0,0.0,0.0,108,14,0.0001424
+5ac19f405542991316484b5b,always_think,dogs,dogs,1.0,1.0,1.0,1.0,99,4,9.52e-05
+5ae382ee5542992e3233c430,always_think,military realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.16666666666666669,0.5,0.1,99,6,0.0001032
+5adcdf455542994ed6169c11,always_think,Royal Air Force,Royal Air Force,1.0,1.0,1.0,1.0,97,6,0.0001016
+5ac35a7e554299741d48a257,always_think,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,100,4,9.6e-05
+5ab2659e554299340b5254b2,always_think,Sassanid Empire,the Parthian Empire,0.0,0.5,0.5,0.5,112,8,0.0001216
+5adcbb815542994ed6169bde,always_think,Stone Brewing,Stone Brewing,1.0,1.0,1.0,1.0,112,6,0.00011360000000000001
+5a74f8bd5542993748c8976a,always_think,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,105,8,0.000116
+5ade25ed5542997c77aded70,always_think,World War I,the Cold War (1947–91),0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,104,6,0.0001072
+5a78ae8b5542990784727730,always_think,"I need to find information about a flight school in Atwater and its distance from Sacramento.
+
+Atwater is a city in Merced County, California. There is Castle Air Museum in Atwater which has aviation facilities. However, the most notable flight school connection in Atwater is to Atwater Municipal Airport (also known as Castle Airport).
+
+The distance from Sacramento to Atwater is approximately 110-120 miles (about 2 hours driving).
+
+110 miles",about 115 miles (185 km),0.0,0.05633802816901409,0.030303030303030304,0.4,92,106,0.0004976000000000001
+5ae12a4b55429920d52342df,always_think,Ghazni,Puli Alam,0.0,0.0,0.0,0.0,100,7,0.00010800000000000001
 5ae143ed55429920d5234360,retrieval_k3,1755,1755,1.0,1.0,1.0,1.0,447,6,0.0003816
 5abc19705542993a06baf86e,retrieval_k3,Dutch,Dutch,1.0,1.0,1.0,1.0,448,4,0.00037440000000000005
 5ac3e0f7554299194317388b,retrieval_k3,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,596,7,0.0005048
@@ -53,6 +69,16 @@ Delhi, Iowa has a population of approximately 439.
 5a86769c5542994775f60776,retrieval_k3,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,541,10,0.0004728
 5ab31864554299233954ff06,retrieval_k3,Stringed instrument,strings,0.0,0.0,0.0,0.0,531,7,0.0004528
 5a7b1023554299042af8f6c2,retrieval_k3,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,506,10,0.0004448
+5ac19f405542991316484b5b,retrieval_k3,dogs,dogs,1.0,1.0,1.0,1.0,522,4,0.0004336
+5ae382ee5542992e3233c430,retrieval_k3,Classical Realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,645,7,0.000544
+5adcdf455542994ed6169c11,retrieval_k3,Royal Air Force (RAF),Royal Air Force,0.0,0.8571428571428571,0.75,1.0,435,9,0.000384
+5ac35a7e554299741d48a257,retrieval_k3,Norwegian language,Norwegian language,1.0,1.0,1.0,1.0,432,5,0.0003656
+5ab2659e554299340b5254b2,retrieval_k3,Sasanian Empire,the Parthian Empire,0.0,0.5,0.5,0.5,502,7,0.0004296
+5adcbb815542994ed6169bde,retrieval_k3,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,429,8,0.00037520000000000007
+5a74f8bd5542993748c8976a,retrieval_k3,I cannot answer this question with the provided context. The context contains information about Steve Prohm's coaching tenures but does not contain any information about Tim Cluess or his coaching duration.,Tim Cluess,0.0,0.12903225806451613,0.06896551724137931,1.0,495,44,0.000572
+5ade25ed5542997c77aded70,retrieval_k3,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,704,5,0.0005832000000000001
+5a78ae8b5542990784727730,retrieval_k3,115 miles,about 115 miles (185 km),0.0,0.5714285714285715,1.0,0.4,447,7,0.0003856
+5ae12a4b55429920d52342df,retrieval_k3,Kabul,Puli Alam,0.0,0.0,0.0,0.0,520,6,0.00043999999999999996
 5ae143ed55429920d5234360,retrieval_k5,1755,1755,1.0,1.0,1.0,1.0,641,6,0.0005368000000000001
 5abc19705542993a06baf86e,retrieval_k5,Dutch,Dutch,1.0,1.0,1.0,1.0,835,4,0.0006839999999999999
 5ac3e0f7554299194317388b,retrieval_k5,"The question appears to be asking about common actors between two different ""American Beauty"" films. Based on the provided context:
@@ -80,6 +106,16 @@ No common actor is identified in the provided context.",Kevin Spacey,0.0,0.05882
 5a86769c5542994775f60776,retrieval_k5,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,848,10,0.0007184000000000001
 5ab31864554299233954ff06,retrieval_k5,Stringed instrument,strings,0.0,0.0,0.0,0.0,730,7,0.000612
 5a7b1023554299042af8f6c2,retrieval_k5,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,924,10,0.0007792000000000001
+5ac19f405542991316484b5b,retrieval_k5,dogs,dogs,1.0,1.0,1.0,1.0,903,4,0.0007384000000000001
+5ae382ee5542992e3233c430,retrieval_k5,Classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,793,6,0.0006584000000000002
+5adcdf455542994ed6169c11,retrieval_k5,Royal Air Force (RAF),Royal Air Force,0.0,0.8571428571428571,0.75,1.0,744,9,0.0006312000000000001
+5ac35a7e554299741d48a257,retrieval_k5,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,773,4,0.0006344
+5ab2659e554299340b5254b2,retrieval_k5,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,805,7,0.0006720000000000001
+5adcbb815542994ed6169bde,retrieval_k5,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,737,8,0.0006216
+5a74f8bd5542993748c8976a,retrieval_k5,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,829,8,0.0006952000000000001
+5ade25ed5542997c77aded70,retrieval_k5,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,1123,5,0.0009184000000000001
+5a78ae8b5542990784727730,retrieval_k5,about 115 miles (185 km) south of Sacramento,about 115 miles (185 km),0.0,0.7692307692307693,0.625,1.0,573,16,0.0005224
+5ae12a4b55429920d52342df,retrieval_k5,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,694,9,0.0005912000000000001
 5ae143ed55429920d5234360,retrieval_k10,1755,1755,1.0,1.0,1.0,1.0,1120,6,0.00092
 5abc19705542993a06baf86e,retrieval_k10,Dutch,Dutch,1.0,1.0,1.0,1.0,1549,4,0.0012552
 5ac3e0f7554299194317388b,retrieval_k10,"I cannot answer this question based on the provided context. The question asks which actor ""American Beauty and American Beauty have in common,"" but this appears to be asking about two different things with the same name. The context mentions the 1999 American Beauty film (starring Kevin Spacey, Annette Bening, etc.) and the 1927 American Beauty film (starring Billie Dove), but there is no information indicating they share any common actors.",Kevin Spacey,0.0,0.059701492537313446,0.03076923076923077,1.0,1509,100,0.0016072
@@ -100,3 +136,13 @@ No common actor is identified in the provided context.",Kevin Spacey,0.0,0.05882
 5a86769c5542994775f60776,retrieval_k10,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,1703,10,0.0014024000000000003
 5ab31864554299233954ff06,retrieval_k10,Stringed instrument,strings,0.0,0.0,0.0,0.0,1821,7,0.0014848000000000003
 5a7b1023554299042af8f6c2,retrieval_k10,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,1939,10,0.0015912
+5ac19f405542991316484b5b,retrieval_k10,dogs,dogs,1.0,1.0,1.0,1.0,1580,4,0.0012799999999999999
+5ae382ee5542992e3233c430,retrieval_k10,Classical Realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,1749,7,0.0014272
+5adcdf455542994ed6169c11,retrieval_k10,Royal Air Force,Royal Air Force,1.0,1.0,1.0,1.0,1233,6,0.0010104
+5ac35a7e554299741d48a257,retrieval_k10,Norwegian language,Norwegian language,1.0,1.0,1.0,1.0,2320,5,0.001876
+5ab2659e554299340b5254b2,retrieval_k10,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,1370,7,0.001124
+5adcbb815542994ed6169bde,retrieval_k10,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,1415,8,0.0011639999999999999
+5a74f8bd5542993748c8976a,retrieval_k10,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,1742,8,0.0014256
+5ade25ed5542997c77aded70,retrieval_k10,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,1738,5,0.0014104000000000002
+5a78ae8b5542990784727730,retrieval_k10,115 miles,about 115 miles (185 km),0.0,0.5714285714285715,1.0,0.4,1443,7,0.0011824000000000001
+5ae12a4b55429920d52342df,retrieval_k10,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,1941,9,0.0015888000000000002

@@ -19,6 +19,16 @@ question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,out
 5a86769c5542994775f60776,always_think,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,92,5,1.68e-05
 5ab31864554299233954ff06,always_think,Saxophone,strings,0.0,0.0,0.0,0.0,80,3,1.38e-05
 5a7b1023554299042af8f6c2,always_think,The Many Adventures of Winnie the Pooh,Ride a Wild Pony,0.0,0.0,0.0,0.0,90,7,1.77e-05
+5ac19f405542991316484b5b,always_think,dog breeds,dogs,0.0,0.0,0.0,0.0,82,2,1.35e-05
+5ae382ee5542992e3233c430,always_think,political realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.16666666666666669,0.5,0.1,84,3,1.44e-05
+5adcdf455542994ed6169c11,always_think,Royal Air Force,Royal Air Force,1.0,1.0,1.0,1.0,84,3,1.44e-05
+5ac35a7e554299741d48a257,always_think,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,87,2,1.4249999999999999e-05
+5ab2659e554299340b5254b2,always_think,Sassanid Empire,the Parthian Empire,0.0,0.5,0.5,0.5,95,4,1.665e-05
+5adcbb815542994ed6169bde,always_think,Stone Brewing,Stone Brewing,1.0,1.0,1.0,1.0,96,2,1.56e-05
+5a74f8bd5542993748c8976a,always_think,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,91,4,1.605e-05
+5ade25ed5542997c77aded70,always_think,World War I,the Cold War (1947–91),0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,93,3,1.575e-05
+5a78ae8b5542990784727730,always_think,Atwater,about 115 miles (185 km),0.0,0.0,0.0,0.0,80,2,1.32e-05
+5ae12a4b55429920d52342df,always_think,Pul-e-Alam,Puli Alam,0.0,0.0,0.0,0.0,87,4,1.545e-05
 5ae143ed55429920d5234360,retrieval_k3,1755,1755,1.0,1.0,1.0,1.0,392,2,6e-05
 5abc19705542993a06baf86e,retrieval_k3,Dutch,Dutch,1.0,1.0,1.0,1.0,534,1,8.07e-05
 5ac3e0f7554299194317388b,retrieval_k3,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,515,3,7.905e-05
@@ -39,6 +49,16 @@ question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,out
 5a86769c5542994775f60776,retrieval_k3,The Magic Christian,Slaughterhouse-Five,0.0,0.0,0.0,0.0,565,3,8.655e-05
 5ab31864554299233954ff06,retrieval_k3,Sarod,strings,0.0,0.0,0.0,0.0,466,2,7.11e-05
 5a7b1023554299042af8f6c2,retrieval_k3,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,439,4,6.824999999999999e-05
+5ac19f405542991316484b5b,retrieval_k3,dog breeds,dogs,0.0,0.0,0.0,0.0,445,2,6.795e-05
+5ae382ee5542992e3233c430,retrieval_k3,Classical Realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,442,4,6.87e-05
+5adcdf455542994ed6169c11,retrieval_k3,RAF,Royal Air Force,0.0,0.0,0.0,0.0,379,1,5.745e-05
+5ac35a7e554299741d48a257,retrieval_k3,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,393,2,6.015e-05
+5ab2659e554299340b5254b2,retrieval_k3,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,472,4,7.32e-05
+5adcbb815542994ed6169bde,retrieval_k3,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,376,4,5.879999999999999e-05
+5a74f8bd5542993748c8976a,retrieval_k3,Steve Prohm,Tim Cluess,0.0,0.0,0.0,0.0,435,3,6.705e-05
+5ade25ed5542997c77aded70,retrieval_k3,the Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,585,3,8.955000000000001e-05
+5a78ae8b5542990784727730,retrieval_k3,115 miles,about 115 miles (185 km),0.0,0.5714285714285715,1.0,0.4,439,2,6.704999999999999e-05
+5ae12a4b55429920d52342df,retrieval_k3,Pul-i-Alam,Puli Alam,0.0,0.0,0.0,0.0,447,4,6.945000000000001e-05
 5ae143ed55429920d5234360,retrieval_k5,1755,1755,1.0,1.0,1.0,1.0,583,2,8.865e-05
 5abc19705542993a06baf86e,retrieval_k5,Jewish,Dutch,0.0,0.0,0.0,0.0,771,2,0.00011685
 5ac3e0f7554299194317388b,retrieval_k5,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,716,3,0.0001092
@@ -59,6 +79,16 @@ question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,out
 5a86769c5542994775f60776,retrieval_k5,The Magic Christian,Slaughterhouse-Five,0.0,0.0,0.0,0.0,772,3,0.0001176
 5ab31864554299233954ff06,retrieval_k5,Sarod,strings,0.0,0.0,0.0,0.0,836,2,0.0001266
 5a7b1023554299042af8f6c2,retrieval_k5,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,752,4,0.0001152
+5ac19f405542991316484b5b,retrieval_k5,dog breeds,dogs,0.0,0.0,0.0,0.0,708,2,0.00010740000000000001
+5ae382ee5542992e3233c430,retrieval_k5,Classical Realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,959,4,0.00014625
+5adcdf455542994ed6169c11,retrieval_k5,Royal Air Force,Royal Air Force,1.0,1.0,1.0,1.0,653,3,9.975000000000001e-05
+5ac35a7e554299741d48a257,retrieval_k5,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,693,2,0.00010515000000000001
+5ab2659e554299340b5254b2,retrieval_k5,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,610,4,9.39e-05
+5adcbb815542994ed6169bde,retrieval_k5,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,591,4,9.104999999999999e-05
+5a74f8bd5542993748c8976a,retrieval_k5,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,740,4,0.0001134
+5ade25ed5542997c77aded70,retrieval_k5,the Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,889,3,0.00013514999999999998
+5a78ae8b5542990784727730,retrieval_k5,115 miles,about 115 miles (185 km),0.0,0.5714285714285715,1.0,0.4,681,2,0.00010334999999999999
+5ae12a4b55429920d52342df,retrieval_k5,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,587,3,8.985e-05
 5ae143ed55429920d5234360,retrieval_k10,1755,1755,1.0,1.0,1.0,1.0,953,2,0.00014414999999999998
 5abc19705542993a06baf86e,retrieval_k10,Dutch,Dutch,1.0,1.0,1.0,1.0,1390,1,0.0002091
 5ac3e0f7554299194317388b,retrieval_k10,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,1341,3,0.00020295
@@ -79,3 +109,13 @@ question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,out
 5a86769c5542994775f60776,retrieval_k10,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,1532,5,0.00023279999999999997
 5ab31864554299233954ff06,retrieval_k10,Sarod,strings,0.0,0.0,0.0,0.0,1642,2,0.00024749999999999994
 5a7b1023554299042af8f6c2,retrieval_k10,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,1631,4,0.00024704999999999996
+5ac19f405542991316484b5b,retrieval_k10,dog breeds,dogs,0.0,0.0,0.0,0.0,1368,2,0.0002064
+5ae382ee5542992e3233c430,retrieval_k10,Classical Realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,1557,4,0.00023595
+5adcdf455542994ed6169c11,retrieval_k10,Royal Air Force,Royal Air Force,1.0,1.0,1.0,1.0,1072,3,0.00016259999999999997
+5ac35a7e554299741d48a257,retrieval_k10,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,1990,2,0.00029969999999999997
+5ab2659e554299340b5254b2,retrieval_k10,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,1211,4,0.00018405
+5adcbb815542994ed6169bde,retrieval_k10,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,1241,4,0.00018855
+5a74f8bd5542993748c8976a,retrieval_k10,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,1531,4,0.00023205
+5ade25ed5542997c77aded70,retrieval_k10,Crimean War,the Cold War (1947–91),0.0,0.4,0.5,0.3333333333333333,1579,3,0.00023864999999999997
+5a78ae8b5542990784727730,retrieval_k10,115 miles,about 115 miles (185 km),0.0,0.5714285714285715,1.0,0.4,1288,2,0.00019439999999999998
+5ae12a4b55429920d52342df,retrieval_k10,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,1666,3,0.0002517
