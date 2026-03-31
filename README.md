@@ -66,7 +66,7 @@ uv run python -m experiments.download_dataset
 uv run python -m experiments.run_baseline <MODEL_NAME> <SAMPLE_SIZE> [max_workers]
 ```
 
-### Analise baselines
+### Analyse baselines
 ```bash
 uv run python -m experiments.analyse_baseline <MODEL_NAME>
 ```
