@@ -65,3 +65,8 @@ uv run python -m experiments.run_baseline <MODEL_NAME> <SAMPLE_SIZE>
 ```bash
 uv run python -m experiments.analyse_baseline <MODEL_NAME>
 ```
+
+### Plot baseline F1 vs k
+```bash
+uv run python -m experiments.plot_baseline_f1_vs_k
+```
