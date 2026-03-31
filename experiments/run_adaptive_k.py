@@ -5,20 +5,28 @@ Implements Stage 2 of CART: find natural evidence cluster cutpoint.
 Usage from root:
     uv run python -m experiments.run_adaptive_k gpt-4o-mini 2
     uv run python -m experiments.run_adaptive_k claude-sonnet-4-6 100
+    uv run python -m experiments.run_adaptive_k claude-sonnet-4-6 100 20
 """
 
 import csv
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from experiments.cache_dataset import load_dataset_cached
 from experiments.eval_utils import evaluate_sample
 from experiments.baselines_config import MODELS, DATASET_CONFIG
-from experiments.baselines import _flatten_context, call_llm
+from experiments.baselines import (
+    flatten_context,
+    build_retrieval_prompt,
+    call_llm,
+)
 from experiments.embedding_utils import retrieve_top_k
 
 RESULTS_DIR = Path(__file__).parent / "results" / "cart"
 RESULTS_DIR.mkdir(exist_ok=True, parents=True)
+DEFAULT_MAX_WORKERS = 20
+METHOD_NAME = "adaptive_k"
 
 
 def adaptive_k_select(
@@ -56,30 +64,44 @@ def adaptive_k_select(
     return max_gap_idx
 
 
-def load_or_create_csv(model: str) -> tuple[dict[str, dict], Path]:
-    """Load existing CSV or create structure. Returns (cache_dict, path).
+ResultDict = dict[str, str | int | float]
 
-    Args:
-        model: Model name
 
-    Returns:
-        Tuple of (cache dict keyed by question_id, csv path)
-    """
-    csv_path = RESULTS_DIR / f"results_adaptive_k_{model}.csv"
-    cache = {}
+def _build_result(
+    sample: dict,
+    pred: str,
+    input_tokens: int,
+    output_tokens: int,
+    cost_usd: float,
+    k_star: int,
+) -> ResultDict:
+    """Build a result row and attach evaluation metrics."""
+    result: ResultDict = {
+        "question_id": sample["id"],
+        "method": METHOD_NAME,
+        "answer_pred": pred,
+        "answer_gt": sample["answer"],
+        "input_tokens": input_tokens,
+        "output_tokens": output_tokens,
+        "cost_usd": cost_usd,
+        "k_star": k_star,
+    }
 
-    if csv_path.exists():
-        with open(csv_path) as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                cache[row["question_id"]] = row
-
-    return cache, csv_path
+    metrics = evaluate_sample(pred, sample["answer"])
+    result.update(
+        {
+            "em": metrics.em,
+            "f1": metrics.f1,
+            "precision": metrics.precision,
+            "recall": metrics.recall,
+        }
+    )
+    return result
 
 
 def save_csv(
     model: str,
-    results: list[dict[str, str | int | float]],
+    results: list[ResultDict],
 ) -> None:
     """Save per-record results to CSV.
 
@@ -104,7 +126,7 @@ def save_csv(
         "k_star",
     ]
 
-    with open(csv_path, "w", newline="") as f:
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=keys)
         writer.writeheader()
         writer.writerows(results)
@@ -129,7 +151,7 @@ def run_adaptive_k_method(
     from experiments.baselines_config import LLM_TO_EMBEDDING
 
     # Flatten context to list of paragraph strings
-    paragraphs = _flatten_context(context)
+    paragraphs = flatten_context(context)
 
     # Get embedding config for this LLM model
     emb_config = LLM_TO_EMBEDDING[model]
@@ -151,43 +173,59 @@ def run_adaptive_k_method(
     selected_paragraphs = top_paragraphs[:k_star]
 
     # Build prompt with selected context
-    context_str = "\n\n".join(
-        [f"[{i+1}] {p}" for i, p in enumerate(selected_paragraphs)]
-    )
-    prompt = f"""Answer the HotpotQA question using only the provided context.
-
-Rules:
-- Output only the final answer.
-- If the answer is yes or no, output exactly: yes or no.
-- Otherwise output a short span or entity name only.
-- Do not include any explanation.
-- Do not repeat the question.
-- If multiple positions/titles are mentioned, output only the one that directly answers the question.
-
-Context:
-{context_str}
-
-Question: {question}
-
-Answer:"""
+    prompt = build_retrieval_prompt(question, selected_paragraphs)
 
     # Call LLM and get answer + tokens + cost
     answer, input_tokens, output_tokens, cost_usd = call_llm(prompt, model)
     return answer, input_tokens, output_tokens, cost_usd, k_star
 
 
-def run_adaptive_k(model: str, n_rows: int) -> None:
+def _process_sample(
+    sample_idx: int,
+    sample: dict,
+    model: str,
+) -> tuple[int, str, ResultDict | None, list[str]]:
+    """Process one sample end-to-end.
+
+    The adaptive-k retrieval and generation path runs once per sample so
+    thread workers can keep the result join logic simple.
+    """
+    qid = sample["id"]
+
+    try:
+        pred, input_tokens, output_tokens, cost_usd, k_star = run_adaptive_k_method(
+            sample, model
+        )
+        result = _build_result(
+            sample=sample,
+            pred=pred,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            cost_usd=cost_usd,
+            k_star=k_star,
+        )
+        return sample_idx, qid, result, [f"{METHOD_NAME}=OK"]
+    except Exception as e:
+        return sample_idx, qid, None, [f"{METHOD_NAME}=ERROR: {e}"]
+
+
+def run_adaptive_k(
+    model: str,
+    n_rows: int,
+    max_workers: int = DEFAULT_MAX_WORKERS,
+) -> None:
     """Run adaptive-k evaluation for a model.
 
     Args:
         model: Model name
         n_rows: Number of rows to evaluate
+        max_workers: Number of threads used to process samples in parallel
     """
     print("\n" + "="*70)
-    print(f"Running adaptive-k: {model} (n={n_rows})")
+    print(f"Running adaptive-k: {model} (n={n_rows}, workers={max_workers})")
     print("="*70)
 
-    # Load dataset using cache
+    # Load the local dataset snapshot.
     print("Loading HotpotQA...")
     ds = load_dataset_cached(
         dataset_name=DATASET_CONFIG["dataset_name"],
@@ -197,57 +235,29 @@ def run_adaptive_k(model: str, n_rows: int) -> None:
     )
     print(f"Loaded {len(ds)} samples")
 
-    # Load cache
-    cache, csv_path = load_or_create_csv(model)
-    print(f"Cache: {len(cache)} existing results")
+    csv_path = RESULTS_DIR / f"results_adaptive_k_{model}.csv"
+    print("Rewriting results CSV from scratch for this run")
 
-    # Process all samples
-    print("\nProcessing samples...")
-    all_results = []
+    worker_count = min(max_workers, len(ds)) if ds else 1
+    print(f"Processing samples with {worker_count} threads...")
 
-    for i, sample in enumerate(ds):
-        qid = sample["id"]
+    results_by_sample: list[ResultDict | None] = [None] * len(ds)
+    with ThreadPoolExecutor(max_workers=worker_count) as executor:
+        futures = [
+            executor.submit(_process_sample, i, sample, model)
+            for i, sample in enumerate(ds)
+        ]
 
-        if qid in cache:
-            result = cache[qid]
-            print(f"  [{i+1}/{len(ds)}] {qid} (cached)")
-        else:
-            try:
-                pred, input_tokens, output_tokens, cost_usd, k_star = run_adaptive_k_method(
-                    sample, model
-                )
-                result = {
-                    "question_id": qid,
-                    "method": "adaptive_k",
-                    "answer_pred": pred,
-                    "answer_gt": sample["answer"],
-                    "input_tokens": input_tokens,
-                    "output_tokens": output_tokens,
-                    "cost_usd": cost_usd,
-                    "k_star": k_star,
-                }
+        for future in as_completed(futures):
+            sample_idx, qid, result, statuses = future.result()
+            if result is not None:
+                results_by_sample[sample_idx] = result
+            print(f"  [{sample_idx+1}/{len(ds)}] {qid}: {', '.join(statuses)}")
 
-                # Evaluate
-                metrics = evaluate_sample(
-                    pred,
-                    sample["answer"],
-                )
-                result.update(
-                    {
-                        "em": metrics.em,
-                        "f1": metrics.f1,
-                        "precision": metrics.precision,
-                        "recall": metrics.recall,
-                    }
-                )
-
-                print(f"  [{i+1}/{len(ds)}] {qid} OK")
-
-            except Exception as e:
-                print(f"  [{i+1}/{len(ds)}] {qid} ERROR: {e}")
-                continue
-
-        all_results.append(result)
+    all_results: list[ResultDict] = []
+    for result in results_by_sample:
+        if result is not None:
+            all_results.append(result)
 
     # Save CSV
     print(f"\nSaving CSV: {csv_path}")
@@ -260,16 +270,20 @@ def run_adaptive_k(model: str, n_rows: int) -> None:
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print("Usage: uv run python -m experiments.run_adaptive_k <model> <n_rows>")
+        print(
+            "Usage: uv run python -m experiments.run_adaptive_k "
+            "<model> <n_rows> [max_workers]"
+        )
         print(f"\nAvailable models: {', '.join(MODELS)}")
         sys.exit(1)
 
     model = sys.argv[1]
     n_rows = int(sys.argv[2])
+    max_workers = int(sys.argv[3]) if len(sys.argv) >= 4 else DEFAULT_MAX_WORKERS
 
     if model not in MODELS:
         print(f"Unknown model: {model}")
         print(f"Available: {MODELS}")
         sys.exit(1)
 
-    run_adaptive_k(model, n_rows)
+    run_adaptive_k(model, n_rows, max_workers=max_workers)
