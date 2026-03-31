@@ -58,16 +58,6 @@ So the paper’s central move is:
 
 > Treat retrieval as a cost-aware routing problem, not as a fixed top-𝑘 k preprocessing step.
 
-## Central Empirical Discovery
-```
-gpt-4o-mini:   k=5 retrieval maximizes efficiency (0.110) > think-only (0.089)
-gpt-5.4-mini:  think-only maximizes efficiency (0.117) > k=5 (0.114)
-haiku 4.5:     verbose uncertainty — 279 tokens at F1=0.283
-```
-The stronger model answers more from memory. No static policy is optimal across
-model generations. 22% of queries require retrieval for gpt-4o-mini; only 12%
-for gpt-5.4-mini — but never zero.
-
 ## The Contribution
 CART is a **training-free test-time controller** with three components:
 1. **Adaptive-K selection**: find k* via largest similarity score gap (Taguchi et al. EMNLP 2025)
@@ -97,171 +87,6 @@ CART'S NOVELTY (not in either source):
 The result: a policy that automatically shifts routing behavior
 based on model capability without being told to do so.
 ```
-
-## CART vs Search More, Think Less (SMTL)
-
-```
-SMTL (Chen et al. arXiv:2602.22675, Feb 2026):
-  Strategy: Replace sequential reasoning with PARALLEL evidence acquisition
-  Training: Required (SFT + RL, full end-to-end agent training)
-  Scope: Long-horizon web research agents (BrowseComp, GAIA)
-  Routing: No per-query think/retrieve decision — always searches
-  Cost: Not modeled as a decision variable
-
-CART:
-  Strategy: Decide PER-QUERY whether to retrieve or think
-  Training: None — training-free test-time controller
-  Scope: Single-turn RAG QA under token budget constraint
-  Routing: UCB-Cost policy with explicit cost penalty
-  Cost: First-class decision variable via λ·cost(a) term
-  Key finding: Routing automatically adapts to model capability
-```
-
-## The Gap (why this is publishable)
-Existing training-free adaptive methods (LEASH, Wu et al. taxonomy) address
-**how long to reason** inside a CoT chain. Self-RAG, DRAGIN, DioR address
-whether/when to retrieve but all require training or learned classifiers.
-No prior **training-free** work addresses **whether to retrieve at all and how
-much, with explicit cost constraints**. That is CART's specific gap.
-
-## Primary Metric (CART's proposed metric — not from prior work)
-
-    η(r, q) = F1(r, q) / log(1 + T(r))                              (8)
-
-**Origin:** This formula does not appear in any prior paper. Papers like
-SmartRAG (ICLR 2025) and Adaptive-k (EMNLP 2025) plot or tabulate F1 and
-tokens as separate quantities — they inspire the idea that both matter, but
-neither formalizes a combined scalar. η = F1/log(1+T) is CART's contribution.
-
----
-
-### The core problem: F1 and T live on incomparable scales
-
-F1 ∈ [0, 1] by definition. Token count T ∈ [~100, 10000+] in practice —
-a range of 2–3 orders of magnitude. If you divide F1 by T directly (linear),
-T dominates entirely: a 4000-token CoT response is penalized 28× more than
-a 142-token think response in the denominator, regardless of quality.
-The metric collapses into "fewest tokens wins."
-
-This is the same problem that motivates **feature normalization** in machine
-learning: when one dimension has range [0, 10000] and another has range [0, 1],
-the first dominates any distance or ratio computation. The standard solution
-is to compress the large dimension to a comparable scale. That is exactly what
-log(1+T) does for token counts.
-
----
-
-### Alternative denominator functions — full comparison
-
-All concave (sub-linear) functions compress the token range. The question is
-how much compression is right.
-
-| Denominator f(T) | f'(T) | f''(T) | Shape | Compression 142→10000 |
-|---|---|---|---|---|
-| T (linear) | 1 | 0 | linear | **70.4×** ← token count dominates |
-| √(1+T) | 1/2√(1+T) | −1/4(1+T)^1.5 | concave | 8.4× |
-| **(1+T)^0.25** | 0.25(1+T)^−0.75 | −0.19(1+T)^−1.75 | concave | 2.9× |
-| **log(1+T)** | 1/(1+T) | −1/(1+T)² | concave | **1.86×** ← chosen |
-
-All sub-linear functions are strictly concave (f'' < 0). The log is not
-special in type — it is the extreme of the family: it provides the strongest
-compression, reducing the 70× raw token spread to only 1.86×.
-
-**Why not √(1+T)?** Still an 8.4× compression — a 10,000-token CoT response
-gets a denominator 8.4× larger than a 142-token response. Quality differences
-would still be swamped. The CoT insurance is too weak.
-
-**Why not (1+T)^0.25?** 2.9× compression. Better than sqrt but η_max varies
-too widely: η_max(T=142) = 0.289 vs η_max(T=10000) = 0.100 — a 2.9× range
-in the theoretical ceiling, making cross-condition comparison unstable.
-
-**Why log(1+T)?** Compression to 1.86×. The denominator increases from 4.96
-(T=142) to only 9.21 (T=10000), keeping the metric dominated by F1 quality
-differences rather than token count differences. Even a perfect CoT response
-at 4000 tokens (η_max = 0.121) competes with a perfect think response at
-142 tokens (η_max = 0.202) — they differ by 1.7×, not 28×. The metric gives
-CoT reasoning a fair chance while still penalizing unnecessary verbosity.
-
----
-
-### Range of η
-
-```
-Theoretical span: η ∈ [0, +∞)
-
-  η_min = 0.000      (F1=0, any T — wrong answer, any cost)
-  η_max → +∞         (as T → 0, log(1+T) → 0 — denominator vanishes)
-
-  In practice T > 0 always for LLM calls. For T ≥ 1 token: η_max = 1.443.
-  This is not a concern: real LLM responses always have T ≥ ~50 tokens
-  (prompt + completion). For T ≥ 100: η_max ≈ 0.217.
-
-Practical span for single-turn QA (T ≥ ~100 tokens):
-  η_max ≈ 0.202      (F1=1, T=142 — perfect answer at min observed cost)
-  η_max_cot = 0.109  (F1=1, T=10000 — perfect heavy CoT)
-
-Observed in our experiments (Day 2 baselines):
-  [0.050, 0.117]     — stable, readable range for all 3 models
-
-Interpretation:
-  η > 0.10  → strong efficiency  (CART target for both models)
-  η ~ 0.05  → poor efficiency    (Haiku: verbose + low quality)
-  η = 0.00  → wrong answer regardless of cost
-```
-
-η is not bounded in [0,1] — it is an efficiency ratio, not a probability.
-This is intentional and correct: accuracy/cost ratios in economics are
-unbounded above. What makes η useful is not a fixed ceiling but that
-log compression keeps practical values in a narrow, comparable range
-([0, ~0.20] for real LLM calls) regardless of whether T is 142 or 10,000.
-The equation is simple to compute, easy to understand, and grounded in the
-same motivation as feature normalization: prevent one dimension from dominating.
-
----
-
-### IR Precedents (motivate the form — do NOT use as "this formula exists")
-
-An extensive cross-domain search (1990–2026) confirmed no prior paper uses
-η = F1/log(1+T) with these exact symbols and semantics. The formula is CART's.
-However, the literature strongly supports its two components separately:
-
-**For the log denominator (diminishing-returns discounting):**
-- Järvelin & Kekäläinen 2002 (DCG, TOIS): divides document gain by log(rank) —
-  canonical precedent for "reward divided by log-like cost" in IR evaluation
-- Jiang & Allan 2016 (ECIR): explicitly formalizes IR metrics as gain/effort
-  ratios: M = E(gain)/E(effort) — the most direct conceptual precedent
-- Smucker & Clarke 2012 (TBG, SIGIR): utility discounted by time cost —
-  validates that cost should enter the evaluation denominator
-- Wong 2019 (NetScore, ICIAR): log-scaled quality/complexity ratio for DNNs —
-  cross-domain precedent for log compression of dynamic range
-
-**For the "effort" interpretation of tokens:**
-- Sakai & Dou 2013 (U-measure, SIGIR): utility discounted by position in
-  text read — "text read ≈ tokens processed" maps directly to T
-- Yilmaz et al. 2014 (CIKM): utility ≠ relevance; effort mediates value —
-  justifies explicit cost normalization for RAG
-
-**Gap statement (copy to paper):**
-"While IR evaluation has long incorporated user effort through rank-based
-logarithmic discounting [Järvelin & Kekäläinen 2002] and gain/effort
-formulations [Jiang & Allan 2016], no standard metric normalizes answer-level
-F1 by a logarithmically transformed token cost for retrieval-augmented LLM
-systems. We introduce η to fill this gap."
-
----
-
-### Reasoning chain for the paper (copy to Section 3.6)
-
-1. F1 ∈ [0,1] and T ∈ [100, 10000+] — incomparable scales
-2. Direct ratio F1/T reduces to "fewest tokens wins" (70× denominator range)
-3. Log compression: 70× → 1.86× — quality now drives the metric
-4. Strictly concave (f'' = −1/(1+T)² < 0): diminishing marginal cost per token,
-   analogous to log discounting in DCG [Järvelin & Kekäläinen 2002]
-5. Handles CoT: perfect 4000-token CoT gets η≈0.121 vs η≈0.202 for perfect
-   think — fair comparison, not catastrophic penalization
-6. η ∈ [0, +∞) theoretically; [0, ~0.20] in practice for QA — stable and
-   interpretable without normalization to a fixed scale
-7. No prior paper uses this exact formula — it is CART's proposed metric
 
 ## BRACIS 2026 Track
 **Track 3 — General Applications.** Novel application of established methods.
@@ -298,38 +123,6 @@ Aligns with: Machine Learning, Large Language Models, Information Retrieval.
 Verbose uncertainty, not reasoning: generates hedging paragraphs ("If the
 question is asking about a common actor...") and confident wrong answers
 ("1724" when answer is "1755"). Demonstrates token count ≠ reasoning quality.
-
-## 2.2 CART Targets (cross-model diagnostic)
-
-**CART target** = question where think-only F1 < 0.3 AND k=5 F1 > 0.6.
-These genuinely require external retrieval. CART must route these to "retrieve."
-
-| Model | CART Targets | N | % |
-|---|---|---|---|
-| gpt-4o-mini | 11 | 50 | 22% |
-| gpt-5.4-mini | 6 | 50 | 12% |
-| haiku 4.5 | 10 | 50 | 20% |
-
-**Hard in 2+ models:**
-Q29 (Puli Alam), Q30 (310), Q35 (Albany), Q38 (Rome),
-Q7 (Salma Hayek Pinault), Q9 (The Changing Scottish Landscape)
-
-**Only in gpt-4o-mini (gpt-5.4-mini already knows these):**
-Q12 (Laurie Metcalf), Q14 (Cyclic Defrost), Q28 (~115 miles),
-Q34 (Jane Mayer), Q41 (extensive use of segues)
-
-## 2.3 CART Performance Targets
-
-```
-gpt-4o-mini:   F1 ≥ 0.70  |  tokens ≤ 420  |  η ≥ 0.120
-gpt-5.4-mini:  F1 ≥ 0.72  |  tokens ≤ 350  |  η ≥ 0.130
-
-Routing proof (most important Day 3 output):
-  gpt-4o-mini:  think ~20%,  retrieve ~80%
-  gpt-5.4-mini: think ~40%,  retrieve ~60%
-```
-
----
 
 # SECTION 3: COMPLETE RELATED PAPER MAP (27 papers)
 
@@ -612,13 +405,6 @@ Optional framing: CART as a lightweight System M meta-controller.
 ---
 
 # SECTION 4: CART METHOD — COMPLETE TECHNICAL EXPLANATION
-
-This section is the technical reference for the method. It contains everything
-a collaborator needs to understand, implement, or explain CART — including all
-equations referenced in the paper skeleton (Section 5) and the precise
-relationship between pseudocode and implementation.
-
----
 
 ## Overview: What CART Does
 
