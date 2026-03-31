@@ -52,33 +52,34 @@ ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
 %
 \maketitle              % typeset the header of the contribution
 %
-
 \begin{abstract}
-Retrieval-augmented generation (RAG) is commonly implemented as a fixed top-$k$ pipeline, retrieving the highest-ranked passages and passing them to the generator~\cite{klesel2025rag,zhao2026aigcsurvey,yu2024rankrag,lee2025setr,verma2026reflectiverag}. While simple,  this design can struggle when retrieval cost and distractor noise matter. We study this issue on HotpotQA distractor dataset, where each question includes 10 paragraphs but only 2 contain supporting facts~\cite{yang2018hotpotqa}. Our baselines show that retrieval consistently improves answer quality, optimal $k$ varies by model, and larger $k$ is not always beneficial under noise. Within the OpenAI family, GPT-4o-mini achieves its best F1 with $k=10$ (0.804), while GPT-5.4-mini has a stronger no-retrieval baseline but still benefits from retrieval; moreover, GPT-4o-mini with improved retrieval policy outperforms GPT-5.4-mini across fixed baselines. 
+Retrieval-augmented generation (RAG) is commonly implemented as a fixed top-$k$ pipeline, retrieving the highest-ranked passages and passing them to the generator~\cite{klesel2025rag,zhao2026aigcsurvey,yu2024rankrag,lee2025setr,verma2026reflectiverag}. Although effective, fixed-$k$ retrieval has two important drawbacks: larger $k$ increases token-processing and generation costs, and it can expose the model to noisy or weakly relevant context~\cite{wang2024bestpractices,li2025bestpractices}. These costs are especially important in retrieval-intensive workloads, where small per-query overheads accumulate into substantial system-level expense. In the HotpotQA distractor setting, however, larger fixed retrieval budgets remain strong quality baselines: across all tested models, F1 improves monotonically from no retrieval to $k=10$. For GPT-5.4-mini, mean total tokens increase from 103.5 to 1452.5 ($14.0\times$) while F1 rises from 0.387 to 0.792; for Claude Haiku 4.5, tokens increase from 132.7 to 1639.8 ($12.4\times$) while F1 rises from 0.367 to 0.779. Thus, in this benchmark, the systems problem is not that larger $k$ is harmful on average, but that strong fixed-$k$ policies are expensive.
 
-These findings motivate CART (Cost-Penalized Adaptive Routing for Test-Time Retrieval), a training-free controller that adaptively decides whether to retrieve and how much context to retain at inference time. CART integrates adaptive-$k$ selection via similarity gaps~\cite{taguchi2025adaptivek}, a UCB-Cost routing policy extending UCB1~\cite{auer2002ucb1}, and a noise-filtering gate. We argue that retrieval policy should be treated as an adaptive systems decision rather than a fixed top-$k$ hyperparameter. All code for replication is in \url{https://github.com/arnml/cart-code}
+A natural alternative is Adaptive-$k$~\cite{taguchi2025adaptivek}, which aims to reduce cost by selecting only the most relevant passages. However, in our evaluation on GPT-5.4-mini, Adaptive-$k$ selects a compact mean $k^*=3.02$ yet achieves only 0.627 F1, underperforming fixed $k=3$, $k=5$, and $k=10$. We hypothesize that this occurs because HotpotQA distractor paragraphs are deliberately semantically similar, so naive similarity-gap truncation cannot reliably isolate the true supporting evidence.
 
-\keywords{Retrieval-Augmented Generation \and Test-time compute \and Adaptive Routing \and Bandits \and Token efficiency}
+These findings motivate CART (Cost-Penalized Adaptive Routing for Test-Time Retrieval), a training-free controller that decides whether to retrieve, when retrieval is worth its token cost, and what context to keep. CART combines adaptive-$k$ selection via similarity gaps~\cite{taguchi2025adaptivek}, a UCB-Cost routing policy extending UCB1~\cite{auer2002ucb1}, and a noise-filtering gate. Our goal is to approach the answer quality of strong fixed-$k$ baselines, especially $k=10$, while using substantially fewer tokens. Code is available at \url{https://github.com/arnml/cart-code}.
+
+\keywords{Retrieval-Augmented Generation \and Test-time Compute \and Adaptive Routing \and Bandits \and Token Cost}
 \end{abstract}
 
 \section{Introduction}
 
-Retrieval-augmented generation (RAG) is a standard approach for improving large language model (LLM) performance on knowledge-intensive tasks~\cite{lewis2020rag}. In many deployed and benchmarked RAG systems, retrieval is still implemented as a fixed top-$k$ policy that appends the same number of documents to every query~\cite{klesel2025rag,zhao2026aigcsurvey,yu2024rankrag,lee2025setr,verma2026reflectiverag}. This design is straightforward, but it assumes that all queries benefit from the same retrieval budget. In practice, that assumption is often too rigid: some queries can be answered from parametric knowledge alone, some require external evidence, and increasing $k$ can add both token cost and irrelevant context.
+Retrieval-augmented generation (RAG) is a standard approach for improving large language model (LLM) performance on knowledge-intensive tasks~\cite{lewis2020rag}. In many deployed and benchmarked RAG systems, retrieval is still implemented as a fixed top-$k$ policy that appends the same number of documents to every query~\cite{klesel2025rag,zhao2026aigcsurvey,yu2024rankrag,lee2025setr,verma2026reflectiverag}. This design is straightforward, but it assumes that all queries benefit from the same retrieval budget. In practice, that assumption is often too rigid: some queries can be answered from parametric knowledge alone, some require external evidence, and increasing $k$ increases the token budget substantially.
 
-This issue becomes sharper on multi-hop question answering. We evaluate on HotpotQA~\cite{yang2018hotpotqa}, a benchmark designed to require reasoning across multiple pieces of evidence. In the distractor setting used here, each example contains exactly 10 paragraphs: 2 contain the supporting facts and 8 are distractors. This makes the dataset especially useful for studying both retrieval utility and retrieval noise. In such settings, larger $k$ is not guaranteed to help; more context can instead dilute the evidence signal.
+This issue becomes sharper on multi-hop question answering. We evaluate on HotpotQA~\cite{yang2018hotpotqa}, a benchmark designed to require reasoning across multiple pieces of evidence. In the distractor setting used here, each example contains exactly 10 paragraphs: 2 contain the supporting facts and 8 are distractors. This makes the dataset especially useful for studying both retrieval utility and retrieval difficulty. In our updated baselines, average F1 rises steadily as more retrieved paragraphs are provided. That upward trend is visible in the F1-vs.-$k$ plot and suggests that, for this dataset and these models, larger context budgets are often usable. A plausible reason is that the paragraphs are short relative to modern context windows. However, the systems cost is still substantial: for GPT-5.4-mini, mean total tokens increase from 103.5 in \texttt{always\_think} to 1452.5 in \texttt{retrieval\_k10}, roughly a 14$\times$ increase.
 
-Our baseline experiments already suggest that retrieval should be treated as an adaptive systems decision rather than a fixed preprocessing step. Across tested models, retrieval improves answer quality over pure parametric answering, but the best retrieval depth varies by model and objective. Within the OpenAI family, GPT-4o-mini paired with a stronger retrieval policy can outperform GPT-5.4-mini under a weaker one, showing that model recency alone does not determine downstream QA performance. This observation motivates our central claim: \emph{retrieval policy is a first-order factor in system performance, not a minor hyperparameter.}
+We take fixed $k=10$ as a strong quality upper baseline and ask whether a smarter controller can recover similar answer quality with far fewer tokens. A natural candidate is Adaptive-$k$~\cite{taguchi2025adaptivek}, which selects a query-specific cutoff from similarity-score gaps. Intuitively, this should be an efficient way to keep only the most relevant paragraphs. Yet our results show that Adaptive-$k$ alone does not solve the problem in this benchmark. On GPT-5.4-mini it selects a compact mean $k^*=3.02$, but with F1 0.627 it underperforms even fixed \texttt{retrieval\_k3} (0.651). This suggests that the hard part is not only \emph{how many} paragraphs to keep, but also \emph{whether} retrieval is needed at all and \emph{which} retrieved paragraphs are genuinely useful when distractors are semantically similar.
 
 We address this problem with CART (\textbf{C}ost-\textbf{P}enalized \textbf{A}daptive \textbf{R}outing for \textbf{T}est-time Retrieval), a training-free controller that decides, at inference time, whether to retrieve and how much context to pass to the model. CART combines three ideas: (i) adaptive-$k$ context selection based on inter-document similarity gaps~\cite{taguchi2025adaptivek}, (ii) a UCB-Cost routing policy that extends UCB1~\cite{auer2002ucb1} with an explicit token-cost penalty, and (iii) a noise-filtering gate that suppresses low-value or redundant context before generation.
 
-Our experiments focus primarily on OpenAI models, where comparisons are cleaner and provider-specific confounds are reduced. Anthropic models are included as auxiliary reference baselines. Across these baselines, we observe three consistent patterns: retrieval is useful, fixed top-$k$ is does not work well in all cases, and additional context is not uniformly beneficial. Together, these patterns motivate adaptive, cost-aware, and noise-aware retrieval control at inference time.
+Our experiments focus primarily on OpenAI models, where comparisons are cleaner and provider-specific confounds are reduced. Anthropic models are included as auxiliary reference baselines. Across these baselines, we observe three consistent patterns: retrieval is useful, fixed $k=10$ is a strong but expensive baseline, and Adaptive-$k$ alone does not yet match the strongest fixed baselines. Together, these patterns motivate adaptive, cost-aware, and noise-aware retrieval control at inference time.
 
 Our contributions are:
 \begin{enumerate}
     \item We formulate retrieval control as a training-free inference-time routing problem under a quality--cost tradeoff.
-    \item We introduce CART, which combines adaptive-$k$ selection, cost-aware action selection, and noise filtering without modifying model weights.
-    \item We provide baseline evidence that fixed retrieval budgets do not transfer reliably across models and that stronger models still benefit from retrieval on HotpotQA.
-    \item We show that a smaller model with a better retrieval policy can outperform a newer model with a weaker one, reinforcing the importance of retrieval control as a systems decision.
+    \item We provide updated baseline evidence on HotpotQA showing that fixed $k=10$ is a strong quality baseline but requires roughly 12$\times$--15$\times$ more tokens than no retrieval.
+    \item We provide a partial Adaptive-$k$ ablation showing that similarity-gap truncation alone does not match the strongest fixed baselines in this distractor setting.
+    \item We introduce CART as a controller for deciding whether to retrieve, when retrieval is worth the added token cost, and what retrieved context to preserve.
 \end{enumerate}
 
 \section{Related Work}
@@ -93,7 +94,7 @@ Several methods adapt retrieval behavior through training. Self-RAG~\cite{asai20
 
 \subsection{Training-Free Adaptive Context Selection}
 
-Among training-free methods, Adaptive-k~\cite{taguchi2025adaptivek} is most closely related to our setting. It selects the number of retrieved documents on a per-query basis using similarity-score gaps, showing that useful context can often be compact. However, Adaptive-k assumes that retrieval has already been invoked. Our problem is broader: we study both \emph{whether} to retrieve and \emph{how much} context to retain, under an explicit token-cost objective.
+Among training-free methods, Adaptive-k~\cite{taguchi2025adaptivek} is most closely related to our setting. It selects the number of retrieved documents on a per-query basis using similarity-score gaps, showing that useful context can often be compact. However, Adaptive-k assumes that retrieval has already been invoked. Our problem is broader: we study whether to retrieve, when retrieval is worth its cost, and how much context to retain under an explicit token-budget objective.
 
 \subsection{Retrieval, Reasoning, and Test-Time Compute}
 
@@ -123,7 +124,7 @@ Following Adaptive-k~\cite{taguchi2025adaptivek}, CART selects a query-specific 
 \begin{equation}
 k^* = \arg\max_{1 \le i < N} \left(s_i - s_{i+1}\right).
 \end{equation}
-Intuitively, this selects the compact cluster of highly relevant documents and avoids blindly passing the full retrieved list to the generator. This is especially useful on HotpotQA distractor examples, where many documents are intentionally irrelevant.
+Intuitively, this selects the compact cluster of highly relevant documents and avoids blindly passing the full retrieved list to the generator. In the current benchmark, however, distractor paragraphs are often semantically similar enough that similarity-gap selection alone may not recover the true supporting evidence, which is exactly why Adaptive-$k$ is only one component of CART rather than the entire method.
 
 \subsection{UCB-Cost Policy}
 
@@ -142,7 +143,7 @@ After adaptive-$k$ selection, CART applies a simple noise gate before generation
     \item documents whose query similarity is below a minimum threshold, and
     \item documents that are highly redundant with already selected context.
 \end{enumerate}
-This component is motivated directly by the HotpotQA distractor setting. Because 8 of the 10 context paragraphs are intentionally irrelevant, passing more retrieved text is not guaranteed to help. The noise gate is meant to preserve useful evidence while reducing distractor spillover into the generation stage.
+This component is motivated directly by the HotpotQA distractor setting. Because 8 of the 10 context paragraphs are intentionally irrelevant yet often still topically related, passing more retrieved text is not guaranteed to provide only useful evidence. The noise gate is meant to preserve high-value context while reducing distractor spillover into the generation stage.
 
 \subsection{Pseudocode}
 
@@ -175,7 +176,7 @@ Algorithm~\ref{alg:cart} summarizes the full procedure.
 
 \subsection{Tasks and Datasets}
 
-We evaluate on HotpotQA~\cite{yang2018hotpotqa} using the \texttt{distractor} subset and the validation split. HotpotQA is a multi-hop question answering benchmark in which the model must reason across multiple pieces of evidence. In the distractor setting, each example contains exactly 10 documents: 2 contain the supporting facts and 8 are distractors. This makes the dataset well suited for studying both retrieval utility and retrieval noise.
+We evaluate on HotpotQA~\cite{yang2018hotpotqa} using the \texttt{distractor} subset and the validation split. HotpotQA is a multi-hop question answering benchmark in which the model must reason across multiple pieces of evidence. In the distractor setting, each example contains exactly 10 documents: 2 contain the supporting facts and 8 are distractors. This makes the dataset well suited for studying both retrieval utility and retrieval difficulty.
 
 \begin{table}[t]
 \centering
@@ -224,9 +225,10 @@ We report:
     \item \textbf{EM}: exact match
     \item \textbf{F1}: token-level F1
     \item \textbf{Input / Output / Total Tokens}: average token usage per example
+    \item \textbf{Cost}: average cost per example in USD
 \end{itemize}
 
-Our main paper emphasis is on F1 and Token-Eff. Cost-Eff is reported as a secondary systems metric.
+Our main paper emphasis is on F1, token usage, and cost. We no longer report derived token-efficiency or cost-efficiency metrics, since the central practical question is whether CART can approach strong fixed-baseline quality with a substantially smaller token budget.
 
 \subsection{Baselines}
 
@@ -241,7 +243,7 @@ We compare CART against four fixed policies:
 These baselines are meant to answer two questions:
 \begin{enumerate}
     \item Does retrieval help relative to parametric-only answering?
-    \item If retrieval helps, is there a single fixed $k$ that works best across models?
+    \item If fixed $k=10$ is a strong quality baseline, how much token cost does it impose relative to cheaper strategies?
 \end{enumerate}
 
 \subsection{Implementation Details}
@@ -253,148 +255,162 @@ Our main experiments focus on two OpenAI models:
 \end{itemize}
 We use these as the primary setting for CART because within-provider comparisons reduce confounds related to tokenization, pricing, and provider-specific prompting behavior.
 
-As auxiliary reference baselines, we also report:
-\begin{itemize}
-    \item Claude Haiku 4.5
-    \item Claude Sonnet 4.6
-\end{itemize}
+For the updated OpenAI baselines, we evaluate a random sample of $n=400$ HotpotQA distractor validation examples. The \texttt{gpt-4o-mini} retrieval runs completed on 399 examples, while the remaining OpenAI runs completed on the full 400; all table values are averages over completed examples. As auxiliary reference baselines, we also report Claude Haiku 4.5 on $n=400$ examples and Claude Sonnet 4.6 on $n=50$ examples. We retain the smaller Sonnet run as a preliminary reference point and treat it more cautiously than the larger OpenAI and Haiku runs.
 
-For the fixed baselines, retrieval is performed over the 10 paragraphs provided by each HotpotQA distractor example. CART uses the same retrieval pool and differs only in how it selects context and routes between actions.
+For the fixed baselines, retrieval is performed over the 10 paragraphs provided by each HotpotQA distractor example. CART uses the same retrieval pool and differs only in how it selects context and routes between actions. We also report a partial Adaptive-$k$ evaluation on \texttt{gpt-5.4-mini} over $n=400$ examples, isolating the context-selection component before adding routing and noise filtering.
 
 \section{Results and Analysis}
 
 \subsection{Main Results (vs.\ Baselines)}
 
-
 \begin{figure}
     \centering
-    
+
     \begin{subfigure}{\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{images/baseline_f1_vs_k_points.pdf}
+        \includegraphics[width=\linewidth]{images/baseline_f1_vs_k.pdf}
         \caption{F1 vs k points}
     \end{subfigure}
-    
+
     \vspace{0.5em}
-    
+
     \begin{subfigure}{\linewidth}
         \centering
         \includegraphics[width=\linewidth]{images/baseline_em_percentage_vs_k.pdf}
         \caption{EM percentage vs k}
     \end{subfigure}
-    
+
     \caption{Baseline results}
     \label{fig:baselinesparse}
 \end{figure}
 
-Table~\ref{tab:openai_baselines} reports the main baseline comparison for the two OpenAI models. Retrieval improves F1 for both models, but the best retrieval depth differs depending on the objective. For GPT-4o-mini, the highest F1 is achieved by \texttt{retrieval\_k10}, while the best Token-Eff is achieved by \texttt{retrieval\_k5}. For GPT-5.4-mini, the highest F1 is achieved by \texttt{retrieval\_k10}, but the best Token-Eff is achieved by \texttt{retrieval\_k3}. These results already show that fixed retrieval budgets do not transfer cleanly across models.
+Table~\ref{tab:openai_baselines} reports the main baseline comparison for the two OpenAI models. Retrieval improves F1 substantially for both models, and the average trend rises steadily with larger $k$: GPT-4o-mini goes from 0.305 in \texttt{always\_think} to 0.707 at \texttt{retrieval\_k10}, while GPT-5.4-mini goes from 0.387 to 0.792. The quality gains are large, but so is the token cost. For GPT-5.4-mini, mean total tokens rise from 103.5 to 1452.5; for GPT-4o-mini, they rise from 96.9 to 1450.7. This makes \texttt{retrieval\_k10} a strong quality baseline but also an expensive one, which is exactly the frontier CART aims to improve.
 
 \begin{table*}[t]
 \centering
 \scriptsize
-\caption{Main baseline results on the OpenAI models (HotpotQA distractor validation, $n=20$).}
+\caption{Main baseline results on the OpenAI models (HotpotQA distractor validation; target random sample $n=400$, with 399 completed GPT-4o-mini retrieval runs).}
 \label{tab:openai_baselines}
-\begin{tabular}{llrrrrrrrrrr}
+\begin{tabular}{llrrrrrrrr}
 \toprule
-Model & Method & Input & Output & Total & Cost (USD) & EM & F1 & Prec. & Recall & Token-Eff & Cost-Eff \\
+Model & Method & Input & Output & Total & Cost (USD) & EM & F1 & Prec. & Recall \\
 \midrule
 \multirow{4}{*}{GPT-4o-mini}
-& always\_think  & 86.7  & 3.1 & 89.8   & 1.49e-05 & 0.300 & 0.325 & 0.325 & 0.325 & 0.0721 & 21830.39 \\
-& retrieval\_k3  & 451.4 & 2.9 & 454.4  & 6.95e-05 & 0.550 & 0.645 & 0.700 & 0.625 & 0.1054 & 9286.25 \\
-& retrieval\_k5  & 711.9 & 3.0 & 714.9  & 1.09e-04 & 0.600 & 0.737 & 0.808 & 0.708 & 0.1121 & 6782.83 \\
-& retrieval\_k10 & 1472.4 & 3.1 & 1475.5 & 2.23e-04 & 0.700 & 0.804 & 0.860 & 0.783 & 0.1102 & 3611.42 \\
+& always\_think  & 94.2  & 2.7 & 96.9   & 1.58e-05 & 0.245 & 0.305 & 0.324 & 0.302 \\
+& retrieval\_k3  & 465.7 & 3.2 & 468.9  & 7.18e-05 & 0.479 & 0.588 & 0.626 & 0.587 \\
+& retrieval\_k5  & 726.5 & 3.1 & 729.6  & 1.11e-04 & 0.489 & 0.632 & 0.681 & 0.628 \\
+& retrieval\_k10 & 1447.6 & 3.2 & 1450.7 & 2.19e-04 & 0.559 & 0.707 & 0.760 & 0.702 \\
 \midrule
 \multirow{4}{*}{GPT-5.4-mini}
-& always\_think  & 85.7  & 10.8 & 96.5   & 2.58e-05 & 0.300 & 0.373 & 0.383 & 0.375 & 0.0815 & 14464.68 \\
-& retrieval\_k3  & 450.4 & 6.1  & 456.6  & 9.50e-05 & 0.550 & 0.660 & 0.725 & 0.633 & 0.1077 & 6949.56 \\
-& retrieval\_k5  & 710.9 & 5.9  & 716.8  & 1.47e-04 & 0.550 & 0.677 & 0.750 & 0.646 & 0.1029 & 4606.62 \\
-& retrieval\_k10 & 1471.4 & 6.5 & 1478.0 & 3.00e-04 & 0.550 & 0.688 & 0.760 & 0.658 & 0.0942 & 2296.27 \\
+& always\_think  & 93.2  & 10.3 & 103.5   & 2.69e-05 & 0.278 & 0.387 & 0.412 & 0.388 \\
+& retrieval\_k3  & 464.4 & 6.9  & 471.3  & 9.84e-05 & 0.510 & 0.651 & 0.684 & 0.657 \\
+& retrieval\_k5  & 725.0 & 6.7  & 731.7  & 1.50e-04 & 0.555 & 0.716 & 0.757 & 0.720 \\
+& retrieval\_k10 & 1445.8 & 6.7 & 1452.5 & 2.95e-04 & 0.632 & 0.792 & 0.831 & 0.798 \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-Table~\ref{tab:anthropic_baselines} reports the auxiliary Anthropic baselines. These results show the same broad pattern: retrieval remains useful, but the best retrieval depth is not constant. We treat these numbers as supporting evidence rather than the core basis for CART.
+Table~\ref{tab:anthropic_baselines} reports the auxiliary Anthropic baselines. The larger Haiku run now tells essentially the same story as the OpenAI runs: F1 improves monotonically through $k=10$, rising from 0.367 to 0.779 while total tokens rise from 132.7 to 1639.8. The preliminary Sonnet results show the same upward pattern, reaching F1 0.784 at $k=10$. Together, these results suggest that on HotpotQA distractor, fixed $k=10$ is a strong quality baseline across all tested models. The problem is therefore not that larger $k$ fails on average, but that always using all ten paragraphs is expensive.
 
 \begin{table*}[t]
 \centering
 \scriptsize
-\caption{Auxiliary baseline results on Anthropic models (HotpotQA distractor validation, $n=20$).}
+\caption{Auxiliary baseline results on Anthropic models (HotpotQA distractor validation; Claude Haiku 4.5 at $n=400$, Claude Sonnet 4.6 at $n=50$).}
 \label{tab:anthropic_baselines}
-\begin{tabular}{llrrrrrrrrrr}
+\begin{tabular}{llrrrrrrrr}
 \toprule
-Model & Method & Input & Output & Total & Cost (USD) & EM & F1 & Prec. & Recall & Token-Eff & Cost-Eff \\
+Model & Method & Input & Output & Total & Cost (USD) & EM & F1 & Prec. & Recall \\
 \midrule
 \multirow{4}{*}{Claude Haiku 4.5}
-& always\_think  & 99.6  & 21.2 & 120.8  & 1.64e-04 & 0.400 & 0.436 & 0.452 & 0.487 & 0.0908 & 2652.50 \\
-& retrieval\_k3  & 485.1 & 7.6  & 492.7  & 4.18e-04 & 0.550 & 0.728 & 0.794 & 0.708 & 0.1174 & 1739.29 \\
-& retrieval\_k5  & 780.1 & 13.3 & 793.5  & 6.78e-04 & 0.550 & 0.722 & 0.789 & 0.746 & 0.1082 & 1066.34 \\
-& retrieval\_k10 & 1652.0 & 12.1 & 1664.0 & 1.37e-03 & 0.500 & 0.673 & 0.739 & 0.696 & 0.0907 & 490.97 \\
+& always\_think  & 111.5  & 21.1 & 132.7  & 1.74e-04 & 0.278 & 0.367 & 0.385 & 0.403 \\
+& retrieval\_k3  & 516.3 & 8.0  & 524.3  & 4.45e-04 & 0.540 & 0.681 & 0.710 & 0.692 \\
+& retrieval\_k5  & 808.7 & 8.6 & 817.3  & 6.82e-04 & 0.585 & 0.727 & 0.758 & 0.740 \\
+& retrieval\_k10 & 1631.2 & 8.6 & 1639.8 & 1.34e-03 & 0.620 & 0.779 & 0.813 & 0.795 \\
 \midrule
 \multirow{4}{*}{Claude Sonnet 4.6}
-& always\_think  & 99.6  & 28.0 & 127.6  & 7.19e-04 & 0.350 & 0.468 & 0.481 & 0.583 & 0.0964 & 651.18 \\
-& retrieval\_k3  & 485.1 & 7.2  & 492.3  & 1.56e-03 & 0.550 & 0.736 & 0.812 & 0.708 & 0.1187 & 470.92 \\
-& retrieval\_k5  & 780.1 & 7.4  & 787.5  & 2.45e-03 & 0.600 & 0.770 & 0.838 & 0.746 & 0.1154 & 313.91 \\
-& retrieval\_k10 & 1652.0 & 7.4 & 1659.3 & 5.07e-03 & 0.600 & 0.770 & 0.838 & 0.746 & 0.1038 & 151.87 \\
+& always\_think  & 101.4  & 30.7 & 132.1  & 7.65e-04 & 0.320 & 0.441 & 0.454 & 0.551 \\
+& retrieval\_k3  & 490.2 & 7.2  & 497.4  & 1.58e-03 & 0.540 & 0.705 & 0.778 & 0.680 \\
+& retrieval\_k5  & 780.8 & 7.0  & 787.8  & 2.45e-03 & 0.560 & 0.755 & 0.818 & 0.745 \\
+& retrieval\_k10 & 1604.7 & 7.4 & 1612.0 & 4.92e-03 & 0.600 & 0.784 & 0.850 & 0.765 \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-Table~\ref{tab:family_summary} summarizes the within-family pattern. Within the OpenAI pair, GPT-5.4-mini has a somewhat stronger no-retrieval baseline than GPT-4o-mini, but retrieval still improves performance substantially. More importantly, a smaller model with a stronger retrieval policy can outperform a newer model with a weaker one: GPT-4o-mini with \texttt{retrieval\_k10} exceeds GPT-5.4-mini across all fixed baselines reported here. Within the Anthropic pair, Sonnet 4.6 has a slightly stronger no-retrieval baseline than Haiku 4.5, but both still benefit substantially from retrieval; Haiku remains markedly more cost-efficient.
+Table~\ref{tab:k10_summary} summarizes the main systems pattern across providers. In every tested model, moving from \texttt{always\_think} to \texttt{retrieval\_k10} produces a large F1 gain, but it also multiplies total token usage by roughly 12$\times$--15$\times$. This is the key motivation for CART: the target is not merely to beat no retrieval, but to approach the quality of \texttt{retrieval\_k10} while spending substantially fewer tokens.
 
 \begin{table*}[t]
 \centering
-\caption{Family-level summary across providers.}
-\label{tab:family_summary}
-\begin{tabular}{llrrrrl}
+\caption{Quality gain and token expansion from \texttt{always\_think} to \texttt{retrieval\_k10}.}
+\label{tab:k10_summary}
+\begin{tabular}{llrrrrrr}
 \toprule
-Provider & Model & always\_think F1 & Best retrieval F1 & Gain & Best F1 method & Best Token-Eff method \\
+Provider & Model & always\_think F1 & k10 F1 & F1 Gain & always\_think Tokens & k10 Tokens & Token Multiplier \\
 \midrule
-OpenAI & GPT-4o-mini      & 0.325 & 0.804 & +0.479 & retrieval\_k10 & retrieval\_k5 \\
-OpenAI & GPT-5.4-mini     & 0.373 & 0.688 & +0.315 & retrieval\_k10 & retrieval\_k3 \\
-Anthropic & Claude Haiku 4.5  & 0.436 & 0.728 & +0.292 & retrieval\_k3  & retrieval\_k3 \\
-Anthropic & Claude Sonnet 4.6 & 0.468 & 0.770 & +0.302 & retrieval\_k5 / k10 & retrieval\_k3 \\
+OpenAI & GPT-4o-mini      & 0.305 & 0.707 & +0.402 & 96.9  & 1450.7 & 14.97$\times$ \\
+OpenAI & GPT-5.4-mini     & 0.387 & 0.792 & +0.405 & 103.5 & 1452.5 & 14.03$\times$ \\
+Anthropic & Claude Haiku 4.5  & 0.367 & 0.779 & +0.412 & 132.7 & 1639.8 & 12.36$\times$ \\
+Anthropic & Claude Sonnet 4.6 & 0.441 & 0.784 & +0.343 & 132.1 & 1612.0 & 12.20$\times$ \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
 \subsection{Cost--Performance Tradeoff}
 
-\textbf{To be expanded.}
+Across all four models, moving from \texttt{always\_think} to retrieval produces large gains in EM and F1. On this benchmark, the average quality trend with larger $k$ is upward rather than downward. However, those gains are bought with a dramatic increase in token usage. For example, GPT-5.4-mini improves from F1 0.387 to 0.792 as mean total tokens increase from 103.5 to 1452.5, and Claude Haiku 4.5 improves from 0.367 to 0.779 as tokens increase from 132.7 to 1639.8. The key systems question is therefore: can we retain most of the quality of fixed $k=10$ without paying the full token cost of always passing all ten paragraphs?
 
-This subsection will compare fixed baselines and CART under both F1 and Token-Eff, with emphasis on the quality--cost tradeoff. A natural figure here is a scatter plot of F1 versus total tokens for all methods and models.
+Cost is still useful to report because it is easy to read and compare, but token usage is the optimization target in this work. The per-example cost remains small in absolute terms, yet the underlying token budgets scale sharply with larger $k$. For deployment-oriented systems, that token growth matters for throughput, latency, and total spend even when the individual dollar amounts remain modest.
 
-\subsection{Adaptivity Across Models}
+\subsection{Adaptivity Across Queries}
 
-\textbf{To be expanded.}
+The updated results suggest a shift in emphasis. Average performance no longer argues strongly for a smaller global fixed $k$; instead, it shows that fixed $k=10$ is a strong upper baseline. But a global $k=10$ policy still spends the full retrieval budget on every example, including questions that may be answerable without retrieval or with much less context. This is where adaptivity remains important. The problem is not to find one universally best small $k$, but to allocate retrieval only when it is useful and to keep only the parts of retrieved context that actually contribute to answering.
 
-The OpenAI pair is the main focus of this analysis. GPT-5.4-mini shows a stronger no-retrieval baseline than GPT-4o-mini, but both models still benefit from retrieval. At the same time, their best fixed retrieval budgets differ depending on whether we optimize for peak F1 or token efficiency. This is the central motivation for CART: retrieval policy should adapt to both model capability and query conditions rather than being fixed globally.
+This is also why query-level control matters more than model-level averages. Even if $k=10$ wins on average, that does not imply every query needs ten paragraphs. CART is intended to learn exactly this distinction: whether to retrieve, when retrieval is worth the extra budget, and what subset of retrieved context should survive to generation.
 
 \subsection{Ablation Study}
 
-\textbf{To be expanded.}
+We currently have a partial ablation for Adaptive-$k$ alone on \texttt{gpt-5.4-mini}. Table~\ref{tab:adaptivek_partial} shows that the method selects compact contexts, with mean $k^*=3.02$ and median $k^*=2$. On its face, this seems promising: it uses 483.1 mean total tokens, far below fixed \texttt{retrieval\_k10} at 1452.5. However, its F1 is only 0.627, which is below fixed \texttt{retrieval\_k3} (0.651), \texttt{retrieval\_k5} (0.716), and \texttt{retrieval\_k10} (0.792). In other words, naive Adaptive-$k$ is efficient in token count but not yet competitive in answer quality.
 
-We will later isolate the contributions of:
-\begin{itemize}
-    \item adaptive-$k$ selection,
-    \item the UCB-Cost routing term, and
-    \item the noise-filtering gate.
-\end{itemize}
+This result is important for the paper. Adaptive-$k$ looks like the natural answer to the token problem, but in this benchmark it is not enough. A plausible explanation is that the distractor paragraphs are deliberately built to sound relevant, so simple embedding similarity and gap-based truncation do not reliably identify the true supporting evidence. This is exactly the gap CART is designed to address by combining context selection with routing and noise filtering.
+
+\begin{table}[t]
+\centering
+\caption{Partial Adaptive-$k$ evaluation on GPT-5.4-mini (HotpotQA distractor validation, $n=400$).}
+\label{tab:adaptivek_partial}
+\begin{tabular}{lr}
+\toprule
+Metric & Value \\
+\midrule
+EM & 0.475 \\
+F1 & 0.627 \\
+Precision & 0.668 \\
+Recall & 0.630 \\
+Input Tokens (mean) & 476.2 \\
+Output Tokens (mean) & 6.8 \\
+Total Tokens (mean) & 483.1 \\
+Cost (mean, USD) & 1.01e-04 \\
+Mean $k^*$ & 3.02 \\
+Median $k^*$ & 2 \\
+Min / Max $k^*$ & 1 / 9 \\
+Stdev $k^*$ & 2.51 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Discussion}
 
-Our baseline results support three practical conclusions. First, even newer models with stronger no-retrieval baselines still benefit from retrieval on HotpotQA. This matters because higher parametric-only performance does not guarantee that answering from memory is sufficient. Broader pretraining exposure or contamination may improve no-retrieval performance, but retrieval remains useful.
+Our updated baselines support three practical conclusions. First, retrieval remains a major lever for multi-hop QA performance. Across all tested models, moving from \texttt{always\_think} to \texttt{retrieval\_k10} yields a large F1 gain.
 
-Second, the HotpotQA distractor setting makes retrieval noise a first-class issue. Each example contains 8 distractor documents, so larger $k$ is not automatically beneficial. In our baselines, increasing retrieval depth sometimes improves F1 and sometimes degrades token efficiency or even answer quality. This supports the need for both adaptive context sizing and explicit noise control.
+Second, the current HotpotQA distractor results suggest that average performance often improves with more retrieved context. This likely reflects a combination of short paragraph lengths and modern long-context models. We therefore should not frame the benchmark as showing that larger $k$ is broadly harmful. Instead, we should frame it as showing that fixed $k=10$ is a strong but expensive baseline.
 
-Third, model capability and retrieval policy interact in a nontrivial way. Within the OpenAI pair, GPT-4o-mini combined with a stronger retrieval policy outperforms GPT-5.4-mini across the fixed baselines reported here. This reinforces the idea that a smaller model can be surpassed by a stronger retrieval policy, and conversely that a newer model can underperform if paired with a suboptimal retrieval budget. In other words, retrieval policy is a major part of the system, not just an implementation detail.
+Third, the partial Adaptive-$k$ ablation shows why the problem is not solved by naive semantic truncation. Although Adaptive-$k$ chooses compact contexts, it loses too much answer quality in the current setting. This suggests that semantically similar distractors make ``retrieve the top few by embedding signal'' an incomplete solution. In other words, the hard problem is not just how many paragraphs to keep, but whether retrieval is needed at all, when it is worth paying for, and what retrieved evidence is actually useful.
 
 We deliberately focus CART on OpenAI models in the main experiments. This design choice keeps the central analysis cleaner and reduces cross-provider confounds such as pricing, tokenization, and provider-specific prompting behavior. Anthropic results remain useful as auxiliary evidence that the broader retrieval pattern is not unique to one provider.
 
-We note several limitations. HotpotQA is not contamination-free, so retrieval gains should not be interpreted as a clean decomposition between knowledge and memorization. Our current results are also limited to single-turn QA and fixed baseline policies. Future work should test whether the same patterns hold in multi-turn agent settings and on contamination-resistant benchmarks.
+We note several limitations. HotpotQA is not contamination-free, so retrieval gains should not be interpreted as a clean decomposition between knowledge and memorization. Our current results are also limited to single-turn QA, fixed baseline policies, and a partial Adaptive-$k$ ablation rather than the full CART controller. Future work should test whether the same patterns hold in multi-turn agent settings and on contamination-resistant benchmarks.
 
 \section{Conclusion}
 
-\textbf{To be completed after full CART experiments.}
+Our updated HotpotQA distractor baselines show that fixed \texttt{retrieval\_k10} is a strong quality baseline across all tested models, but it requires roughly 12$\times$--15$\times$ more tokens than no retrieval. A partial Adaptive-$k$ evaluation on GPT-5.4-mini selects compact contexts and uses far fewer tokens than $k=10$, but it does not match the quality of the strongest fixed baselines. This motivates the full CART design: not just adaptive truncation, but a controller for deciding whether to retrieve, when retrieval is worth the token cost, and what retrieved context should be preserved. The next step is to test whether the full controller can approach the quality of fixed $k=10$ while operating with a substantially smaller token budget.
 
 \begin{thebibliography}{99}
 
