@@ -16,10 +16,11 @@
 \usepackage{algpseudocode}
 \usepackage{graphicx}
 \usepackage{xspace}
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{hyperref}
 
-% Used for displaying a sample figure. If possible, figure files should
-% be included in EPS format.
-%
 % If you use the hyperref package, please uncomment the following two lines
 % to display URLs in blue roman font according to Springer's eBook style:
 %\usepackage{color}
@@ -55,7 +56,7 @@ ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
 \begin{abstract}
 Retrieval-augmented generation (RAG) is commonly implemented as a fixed top-$k$ pipeline, retrieving the highest-ranked passages and passing them to the generator~\cite{klesel2025rag,zhao2026aigcsurvey,yu2024rankrag,lee2025setr,verma2026reflectiverag}. While simple,  this design can struggle when retrieval cost and distractor noise matter. We study this issue on HotpotQA distractor dataset, where each question includes 10 paragraphs but only 2 contain supporting facts~\cite{yang2018hotpotqa}. Our baselines show that retrieval consistently improves answer quality, optimal $k$ varies by model, and larger $k$ is not always beneficial under noise. Within the OpenAI family, GPT-4o-mini achieves its best F1 with $k=10$ (0.804), while GPT-5.4-mini has a stronger no-retrieval baseline but still benefits from retrieval; moreover, GPT-4o-mini with improved retrieval policy outperforms GPT-5.4-mini across fixed baselines. 
 
-These findings motivate CART (Cost-Penalized Adaptive Routing for Test-Time Retrieval), a training-free controller that adaptively decides whether to retrieve and how much context to retain at inference time. CART integrates adaptive-$k$ selection via similarity gaps~\cite{taguchi2025adaptivek}, a UCB-Cost routing policy extending UCB1~\cite{auer2002ucb1}, and a noise-filtering gate. We argue that retrieval policy should be treated as an adaptive systems decision rather than a fixed top-$k$ hyperparameter.
+These findings motivate CART (Cost-Penalized Adaptive Routing for Test-Time Retrieval), a training-free controller that adaptively decides whether to retrieve and how much context to retain at inference time. CART integrates adaptive-$k$ selection via similarity gaps~\cite{taguchi2025adaptivek}, a UCB-Cost routing policy extending UCB1~\cite{auer2002ucb1}, and a noise-filtering gate. We argue that retrieval policy should be treated as an adaptive systems decision rather than a fixed top-$k$ hyperparameter. All code for replication is in \url{https://github.com/arnml/cart-code}
 
 \keywords{Retrieval-Augmented Generation \and Test-time compute \and Adaptive Routing \and Bandits \and Token efficiency}
 \end{abstract}
@@ -111,12 +112,6 @@ Given a query $q$, a retrieval pool $D$, and a language model $m$, our goal is t
 A = \{\texttt{think}, \texttt{retrieve}\}.
 \]
 The \texttt{think} action answers directly from parametric knowledge. The \texttt{retrieve} action first retrieves candidate documents, then answers using filtered context.
-
-We summarize quality relative to token use with:
-\begin{equation}
-\eta = \frac{F1}{\log(1+T)},
-\end{equation}
-where $T$ is the total number of input and output tokens. We use $\eta$ only as a compact efficiency summary alongside standard QA metrics.
 
 \subsection{Adaptive-$K$ Selection}
 
@@ -229,8 +224,6 @@ We report:
     \item \textbf{EM}: exact match
     \item \textbf{F1}: token-level F1
     \item \textbf{Input / Output / Total Tokens}: average token usage per example
-    \item \textbf{Token-Eff}: $F1 / \log(1+T)$
-    \item \textbf{Cost-Eff}: quality relative to estimated API cost
 \end{itemize}
 
 Our main paper emphasis is on F1 and Token-Eff. Cost-Eff is reported as a secondary systems metric.
@@ -271,6 +264,28 @@ For the fixed baselines, retrieval is performed over the 10 paragraphs provided 
 \section{Results and Analysis}
 
 \subsection{Main Results (vs.\ Baselines)}
+
+
+\begin{figure}
+    \centering
+    
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/baseline_f1_vs_k_points.pdf}
+        \caption{F1 vs k points}
+    \end{subfigure}
+    
+    \vspace{0.5em}
+    
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/baseline_em_percentage_vs_k.pdf}
+        \caption{EM percentage vs k}
+    \end{subfigure}
+    
+    \caption{Baseline results}
+    \label{fig:baselinesparse}
+\end{figure}
 
 Table~\ref{tab:openai_baselines} reports the main baseline comparison for the two OpenAI models. Retrieval improves F1 for both models, but the best retrieval depth differs depending on the objective. For GPT-4o-mini, the highest F1 is achieved by \texttt{retrieval\_k10}, while the best Token-Eff is achieved by \texttt{retrieval\_k5}. For GPT-5.4-mini, the highest F1 is achieved by \texttt{retrieval\_k10}, but the best Token-Eff is achieved by \texttt{retrieval\_k3}. These results already show that fixed retrieval budgets do not transfer cleanly across models.
 
