@@ -1,0 +1,1610 @@
+question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,output_tokens,cost_usd
+5ae143ed55429920d5234360,always_think,1724,1755,0.0,0.0,0.0,0.0,94,11,2.76e-05
+5ae143ed55429920d5234360,retrieval_k3,1755,1755,1.0,1.0,1.0,1.0,397,5,8.340000000000001e-05
+5ae143ed55429920d5234360,retrieval_k5,1755,1755,1.0,1.0,1.0,1.0,588,5,0.00012160000000000001
+5ae143ed55429920d5234360,retrieval_k10,1755,1755,1.0,1.0,1.0,1.0,958,5,0.0001956
+5abc19705542993a06baf86e,always_think,French-Canadian heritage,Dutch,0.0,0.0,0.0,0.0,84,13,2.7200000000000004e-05
+5abc19705542993a06baf86e,retrieval_k3,Dutch,Dutch,1.0,1.0,1.0,1.0,539,4,0.000111
+5abc19705542993a06baf86e,retrieval_k5,Dutch,Dutch,1.0,1.0,1.0,1.0,776,4,0.0001584
+5abc19705542993a06baf86e,retrieval_k10,Dutch,Dutch,1.0,1.0,1.0,1.0,1395,4,0.00028220000000000003
+5ac3e0f7554299194317388b,always_think,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,85,6,2.18e-05
+5ac3e0f7554299194317388b,retrieval_k3,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,520,6,0.00010879999999999999
+5ac3e0f7554299194317388b,retrieval_k5,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,721,6,0.00014900000000000002
+5ac3e0f7554299194317388b,retrieval_k10,Kevin Spacey,Kevin Spacey,1.0,1.0,1.0,1.0,1346,6,0.000274
+5ae518655542993aec5ec139,always_think,40,40 members,0.0,0.6666666666666666,1.0,0.5,94,4,2.2e-05
+5ae518655542993aec5ec139,retrieval_k3,20,40 members,0.0,0.0,0.0,0.0,454,4,9.400000000000001e-05
+5ae518655542993aec5ec139,retrieval_k5,40,40 members,0.0,0.6666666666666666,1.0,0.5,619,4,0.000127
+5ae518655542993aec5ec139,retrieval_k10,40,40 members,0.0,0.6666666666666666,1.0,0.5,1385,4,0.00028020000000000003
+5ab985eb554299131ca42360,always_think,Calibanus,Greyia,0.0,0.0,0.0,0.0,87,12,2.7000000000000006e-05
+5ab985eb554299131ca42360,retrieval_k3,Calibanus,Greyia,0.0,0.0,0.0,0.0,472,6,9.92e-05
+5ab985eb554299131ca42360,retrieval_k5,Calibanus,Greyia,0.0,0.0,0.0,0.0,824,6,0.00016960000000000003
+5ab985eb554299131ca42360,retrieval_k10,Calibanus,Greyia,0.0,0.0,0.0,0.0,1811,6,0.00036700000000000003
+5a8753d95542994846c1cd63,always_think,yes,yes,1.0,1.0,1.0,1.0,91,10,2.62e-05
+5a8753d95542994846c1cd63,retrieval_k3,no,yes,0.0,0.0,0.0,0.0,501,4,0.00010339999999999999
+5a8753d95542994846c1cd63,retrieval_k5,no,yes,0.0,0.0,0.0,0.0,626,4,0.0001284
+5a8753d95542994846c1cd63,retrieval_k10,no,yes,0.0,0.0,0.0,0.0,976,4,0.00019840000000000002
+5ab97d0a5542996be202051e,always_think,John Andre,John André,0.0,0.5,0.5,0.5,95,11,2.78e-05
+5ab97d0a5542996be202051e,retrieval_k3,John André,John André,1.0,1.0,1.0,1.0,477,5,9.94e-05
+5ab97d0a5542996be202051e,retrieval_k5,John André,John André,1.0,1.0,1.0,1.0,741,5,0.0001522
+5ab97d0a5542996be202051e,retrieval_k10,John André,John André,1.0,1.0,1.0,1.0,1595,5,0.000323
+5adef1b35542993a75d263af,always_think,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,90,13,2.84e-05
+5adef1b35542993a75d263af,retrieval_k3,Penélope Cruz and Salma Hayek,Salma Hayek Pinault,0.0,0.5,0.4,0.6666666666666666,257,12,6.1000000000000005e-05
+5adef1b35542993a75d263af,retrieval_k5,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,456,7,9.680000000000001e-05
+5adef1b35542993a75d263af,retrieval_k10,Salma Hayek,Salma Hayek Pinault,0.0,0.8,1.0,0.6666666666666666,1101,7,0.0002258
+5a73b55855429978a71e9086,always_think,London Gatwick Airport,Gatwick Airport,0.0,0.8,0.6666666666666666,1.0,98,7,2.5200000000000003e-05
+5a73b55855429978a71e9086,retrieval_k3,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,433,7,9.22e-05
+5a73b55855429978a71e9086,retrieval_k5,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,869,7,0.00017940000000000002
+5a73b55855429978a71e9086,retrieval_k10,Gatwick Airport,Gatwick Airport,1.0,1.0,1.0,1.0,1720,7,0.00034960000000000004
+5ae80919554299540e5a56f6,always_think,M. R. James,The Changing Scottish Landscape,0.0,0.0,0.0,0.0,95,14,3.0200000000000002e-05
+5ae80919554299540e5a56f6,retrieval_k3,The Changing Scottish Landscape,The Changing Scottish Landscape,1.0,1.0,1.0,1.0,361,7,7.780000000000001e-05
+5ae80919554299540e5a56f6,retrieval_k5,The Changing Scottish Landscape,The Changing Scottish Landscape,1.0,1.0,1.0,1.0,661,7,0.00013780000000000002
+5ae80919554299540e5a56f6,retrieval_k10,The Changing Scottish Landscape,The Changing Scottish Landscape,1.0,1.0,1.0,1.0,1131,7,0.00023180000000000002
+5ae361605542994393b9e69b,always_think,Naval Training Center Great Lakes,"""Home of the Submarine Force""",0.0,0.0,0.0,0.0,89,15,2.9800000000000003e-05
+5ae361605542994393b9e69b,retrieval_k3,US Naval Submarine Base New London submarine school,"""Home of the Submarine Force""",0.0,0.16666666666666666,0.125,0.25,413,12,9.22e-05
+5ae361605542994393b9e69b,retrieval_k5,Naval Submarine Base New London,"""Home of the Submarine Force""",0.0,0.22222222222222224,0.2,0.25,679,10,0.00014380000000000003
+5ae361605542994393b9e69b,retrieval_k10,Naval Submarine Base New London,"""Home of the Submarine Force""",0.0,0.22222222222222224,0.2,0.25,1636,10,0.0003352
+5ac3a76e554299741d48a2be,always_think,U2,U2,1.0,1.0,1.0,1.0,93,5,2.26e-05
+5ac3a76e554299741d48a2be,retrieval_k3,U2,U2,1.0,1.0,1.0,1.0,478,5,9.960000000000001e-05
+5ac3a76e554299741d48a2be,retrieval_k5,U2,U2,1.0,1.0,1.0,1.0,701,5,0.0001442
+5ac3a76e554299741d48a2be,retrieval_k10,U2,U2,1.0,1.0,1.0,1.0,1364,5,0.0002768
+5a7557d75542992d0ec05f68,always_think,Laurie Metcalf,Laurie Metcalf,1.0,1.0,1.0,1.0,86,8,2.3599999999999998e-05
+5a7557d75542992d0ec05f68,retrieval_k3,Laurie Metcalf,Laurie Metcalf,1.0,1.0,1.0,1.0,589,8,0.0001242
+5a7557d75542992d0ec05f68,retrieval_k5,Laurie Metcalf,Laurie Metcalf,1.0,1.0,1.0,1.0,886,8,0.00018360000000000002
+5a7557d75542992d0ec05f68,retrieval_k10,Laurie Metcalf,Laurie Metcalf,1.0,1.0,1.0,1.0,1673,8,0.000341
+5a8d12ca5542994ba4e3dbe2,always_think,London,"Nairobi, Kenya",0.0,0.0,0.0,0.0,96,10,2.7200000000000004e-05
+5a8d12ca5542994ba4e3dbe2,retrieval_k3,Nairobi,"Nairobi, Kenya",0.0,0.6666666666666666,1.0,0.5,453,5,9.460000000000001e-05
+5a8d12ca5542994ba4e3dbe2,retrieval_k5,Nairobi,"Nairobi, Kenya",0.0,0.6666666666666666,1.0,0.5,794,5,0.0001628
+5a8d12ca5542994ba4e3dbe2,retrieval_k10,Nairobi,"Nairobi, Kenya",0.0,0.6666666666666666,1.0,0.5,1294,5,0.0002628
+5ab7f6d35542993667794070,always_think,"Bend It!
+",Cyclic Defrost,0.0,0.0,0.0,0.0,98,7,2.5200000000000003e-05
+5ab7f6d35542993667794070,retrieval_k3,Cyclic Defrost,Cyclic Defrost,1.0,1.0,1.0,1.0,377,7,8.1e-05
+5ab7f6d35542993667794070,retrieval_k5,Cyclic Defrost,Cyclic Defrost,1.0,1.0,1.0,1.0,573,7,0.00012020000000000001
+5ab7f6d35542993667794070,retrieval_k10,Cyclic Defrost,Cyclic Defrost,1.0,1.0,1.0,1.0,1609,7,0.00032740000000000004
+5ac3d9135542995c82c4ac4c,always_think,noanswer,729 at the 2010 census,0.0,0.0,0.0,0.0,91,11,2.7e-05
+5ac3d9135542995c82c4ac4c,retrieval_k3,729,729 at the 2010 census,0.0,0.4,1.0,0.25,409,4,8.5e-05
+5ac3d9135542995c82c4ac4c,retrieval_k5,729,729 at the 2010 census,0.0,0.4,1.0,0.25,664,4,0.000136
+5ac3d9135542995c82c4ac4c,retrieval_k10,729,729 at the 2010 census,0.0,0.4,1.0,0.25,1952,4,0.0003936000000000001
+5ae129115542990adbacf722,always_think,The Clancy Brothers,Francis McPeake,0.0,0.0,0.0,0.0,90,7,2.36e-05
+5ae129115542990adbacf722,retrieval_k3,Francis McPeake,Francis McPeake,1.0,1.0,1.0,1.0,514,8,0.00010920000000000001
+5ae129115542990adbacf722,retrieval_k5,"Francis McPeake
+",Francis McPeake,1.0,1.0,1.0,1.0,784,9,0.00016400000000000003
+5ae129115542990adbacf722,retrieval_k10,Francis McPeake,Francis McPeake,1.0,1.0,1.0,1.0,1782,8,0.00036280000000000004
+5a86769c5542994775f60776,always_think,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,97,14,3.06e-05
+5a86769c5542994775f60776,retrieval_k3,The Magic Christian,Slaughterhouse-Five,0.0,0.0,0.0,0.0,570,6,0.0001188
+5a86769c5542994775f60776,retrieval_k5,The Magic Christian,Slaughterhouse-Five,0.0,0.0,0.0,0.0,777,6,0.00016020000000000002
+5a86769c5542994775f60776,retrieval_k10,Slaughterhouse-Five,Slaughterhouse-Five,1.0,1.0,1.0,1.0,1537,8,0.00031380000000000004
+5ab31864554299233954ff06,always_think,guitar,strings,0.0,0.0,0.0,0.0,85,11,2.58e-05
+5ab31864554299233954ff06,retrieval_k3,Sarod,strings,0.0,0.0,0.0,0.0,471,5,9.82e-05
+5ab31864554299233954ff06,retrieval_k5,Sarod,strings,0.0,0.0,0.0,0.0,841,5,0.0001722
+5ab31864554299233954ff06,retrieval_k10,Sarod,strings,0.0,0.0,0.0,0.0,1647,5,0.0003334
+5a7b1023554299042af8f6c2,always_think,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,95,13,2.9400000000000003e-05
+5a7b1023554299042af8f6c2,retrieval_k3,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,444,7,9.440000000000002e-05
+5a7b1023554299042af8f6c2,retrieval_k5,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,757,7,0.000157
+5a7b1023554299042af8f6c2,retrieval_k10,Ride a Wild Pony,Ride a Wild Pony,1.0,1.0,1.0,1.0,1636,7,0.00033280000000000007
+5ac19f405542991316484b5b,always_think,dogs,dogs,1.0,1.0,1.0,1.0,87,4,2.0600000000000003e-05
+5ac19f405542991316484b5b,retrieval_k3,dogs,dogs,1.0,1.0,1.0,1.0,450,4,9.32e-05
+5ac19f405542991316484b5b,retrieval_k5,dogs,dogs,1.0,1.0,1.0,1.0,713,4,0.0001458
+5ac19f405542991316484b5b,retrieval_k10,dogs,dogs,1.0,1.0,1.0,1.0,1373,4,0.00027780000000000003
+5ae382ee5542992e3233c430,always_think,political realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.16666666666666669,0.5,0.1,89,6,2.2600000000000004e-05
+5ae382ee5542992e3233c430,retrieval_k3,Classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,447,6,9.42e-05
+5ae382ee5542992e3233c430,retrieval_k5,Classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,964,6,0.00019760000000000003
+5ae382ee5542992e3233c430,retrieval_k10,Classical realism,Modern thinkers associated with classical realism are Carl von Clausewitz,0.0,0.33333333333333337,1.0,0.2,1562,6,0.00031720000000000007
+5adcdf455542994ed6169c11,always_think,No. 242 Squadron RAF,Royal Air Force,0.0,0.0,0.0,0.0,89,15,2.9800000000000003e-05
+5adcdf455542994ed6169c11,retrieval_k3,RAF,Royal Air Force,0.0,0.0,0.0,0.0,384,4,8e-05
+5adcdf455542994ed6169c11,retrieval_k5,RAF,Royal Air Force,0.0,0.0,0.0,0.0,658,4,0.0001348
+5adcdf455542994ed6169c11,retrieval_k10,Royal Air Force,Royal Air Force,1.0,1.0,1.0,1.0,1077,6,0.0002202
+5ac35a7e554299741d48a257,always_think,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,92,11,2.7200000000000004e-05
+5ac35a7e554299741d48a257,retrieval_k3,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,398,5,8.360000000000001e-05
+5ac35a7e554299741d48a257,retrieval_k5,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,698,5,0.0001436
+5ac35a7e554299741d48a257,retrieval_k10,Norwegian,Norwegian language,0.0,0.6666666666666666,1.0,0.5,1995,5,0.000403
+5ab2659e554299340b5254b2,always_think,Sasanian Empire,the Parthian Empire,0.0,0.5,0.5,0.5,100,13,3.04e-05
+5ab2659e554299340b5254b2,retrieval_k3,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,477,7,0.000101
+5ab2659e554299340b5254b2,retrieval_k5,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,615,7,0.0001286
+5ab2659e554299340b5254b2,retrieval_k10,Parthian Empire,the Parthian Empire,1.0,1.0,1.0,1.0,1216,7,0.00024880000000000003
+5adcbb815542994ed6169bde,always_think,Stone Brewing Company,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,101,6,2.5000000000000005e-05
+5adcbb815542994ed6169bde,retrieval_k3,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,381,7,8.180000000000001e-05
+5adcbb815542994ed6169bde,retrieval_k5,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,596,7,0.0001248
+5adcbb815542994ed6169bde,retrieval_k10,Stone Brewing Co.,Stone Brewing,0.0,0.8,0.6666666666666666,1.0,1246,7,0.0002548
+5a74f8bd5542993748c8976a,always_think,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,96,13,2.96e-05
+5a74f8bd5542993748c8976a,retrieval_k3,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,440,7,9.36e-05
+5a74f8bd5542993748c8976a,retrieval_k5,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,745,7,0.0001546
+5a74f8bd5542993748c8976a,retrieval_k10,Tim Cluess,Tim Cluess,1.0,1.0,1.0,1.0,1536,7,0.0003128
+5ade25ed5542997c77aded70,always_think,World War I,the Cold War (1947–91),0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,98,6,2.4400000000000004e-05
+5ade25ed5542997c77aded70,retrieval_k3,World War I,the Cold War (1947–91),0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,590,6,0.0001228
+5ade25ed5542997c77aded70,retrieval_k5,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,894,5,0.0001828
+5ade25ed5542997c77aded70,retrieval_k10,Cold War,the Cold War (1947–91),0.0,0.8,1.0,0.6666666666666666,1584,5,0.0003208
+5a78ae8b5542990784727730,always_think,85 miles,about 115 miles (185 km),0.0,0.28571428571428575,0.5,0.2,85,11,2.58e-05
+5a78ae8b5542990784727730,retrieval_k3,115 miles (185 km),about 115 miles (185 km),0.0,0.888888888888889,1.0,0.8,444,9,9.600000000000002e-05
+5a78ae8b5542990784727730,retrieval_k5,115 miles (185 km) south of Sacramento,about 115 miles (185 km),0.0,0.6666666666666666,0.5714285714285714,0.8,686,12,0.00014680000000000002
+5a78ae8b5542990784727730,retrieval_k10,115 miles (185 km),about 115 miles (185 km),0.0,0.888888888888889,1.0,0.8,1293,9,0.0002658
+5ae12a4b55429920d52342df,always_think,Lashkar Gah,Puli Alam,0.0,0.0,0.0,0.0,92,14,2.9600000000000005e-05
+5ae12a4b55429920d52342df,retrieval_k3,Pul-i-Alam,Puli Alam,0.0,0.0,0.0,0.0,452,7,9.6e-05
+5ae12a4b55429920d52342df,retrieval_k5,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,592,6,0.0001232
+5ae12a4b55429920d52342df,retrieval_k10,Puli Alam,Puli Alam,1.0,1.0,1.0,1.0,1671,6,0.00033900000000000005
+5ae22eae554299495565da30,always_think,noanswer,310,0.0,0.0,0.0,0.0,91,11,2.7e-05
+5ae22eae554299495565da30,retrieval_k3,noanswer,310,0.0,0.0,0.0,0.0,363,11,8.14e-05
+5ae22eae554299495565da30,retrieval_k5,310,310,1.0,1.0,1.0,1.0,555,4,0.0001142
+5ae22eae554299495565da30,retrieval_k10,310,310,1.0,1.0,1.0,1.0,1462,4,0.0002956000000000001
+5ab6aa4c55429953192ad359,always_think,Charlie Brown,"""Kitty Hawk""",0.0,0.0,0.0,0.0,94,11,2.76e-05
+5ab6aa4c55429953192ad359,retrieval_k3,Apollo 14,"""Kitty Hawk""",0.0,0.0,0.0,0.0,515,6,0.00010779999999999999
+5ab6aa4c55429953192ad359,retrieval_k5,Apollo 14,"""Kitty Hawk""",0.0,0.0,0.0,0.0,768,6,0.00015840000000000003
+5ab6aa4c55429953192ad359,retrieval_k10,Kitty Hawk,"""Kitty Hawk""",1.0,1.0,1.0,1.0,1542,6,0.0003132
+5adf3e835542993a75d26442,always_think,"Nick Fury, Agent of S.H.I.E.L.D.",Marvel,0.0,0.0,0.0,0.0,88,15,2.96e-05
+5adf3e835542993a75d26442,retrieval_k3,Nick Fury vs. S.H.I.E.L.D.,Marvel,0.0,0.0,0.0,0.0,439,14,9.900000000000001e-05
+5adf3e835542993a75d26442,retrieval_k5,Nick Fury vs. S.H.I.E.L.D.,Marvel,0.0,0.0,0.0,0.0,539,14,0.000119
+5adf3e835542993a75d26442,retrieval_k10,Fenris (comics),Marvel,0.0,0.0,0.0,0.0,1152,9,0.00023760000000000003
+5a8ee3a755429917b4a5be02,always_think,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,103,12,3.0200000000000002e-05
+5a8ee3a755429917b4a5be02,retrieval_k3,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,361,6,7.7e-05
+5a8ee3a755429917b4a5be02,retrieval_k5,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,561,6,0.000117
+5a8ee3a755429917b4a5be02,retrieval_k10,Bing Crosby,"Harry Lillis ""Bing"" Crosby Jr.",0.0,0.5714285714285715,1.0,0.4,898,6,0.00018440000000000004
+5ac0dcf25542996f0d89cc2c,always_think,Daniel Schulman,Jane Mayer,0.0,0.0,0.0,0.0,95,12,2.8600000000000004e-05
+5ac0dcf25542996f0d89cc2c,retrieval_k3,Jane Mayer,Jane Mayer,1.0,1.0,1.0,1.0,535,5,0.000111
+5ac0dcf25542996f0d89cc2c,retrieval_k5,Jane Mayer,Jane Mayer,1.0,1.0,1.0,1.0,777,5,0.0001594
+5ac0dcf25542996f0d89cc2c,retrieval_k10,Jane Mayer,Jane Mayer,1.0,1.0,1.0,1.0,1313,5,0.00026660000000000003
+5a7e618155429949594199b0,always_think,Albany County,Albany,0.0,0.6666666666666666,0.5,1.0,96,6,2.4000000000000004e-05
+5a7e618155429949594199b0,retrieval_k3,Albany County,Albany,0.0,0.6666666666666666,0.5,1.0,666,6,0.00013800000000000002
+5a7e618155429949594199b0,retrieval_k5,Albany County,Albany,0.0,0.6666666666666666,0.5,1.0,1005,6,0.00020580000000000002
+5a7e618155429949594199b0,retrieval_k10,Albany County,Albany,0.0,0.6666666666666666,0.5,1.0,1819,6,0.0003686
+5ab916e155429919ba4e23a4,always_think,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,90,15,3e-05
+5ab916e155429919ba4e23a4,retrieval_k3,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,571,9,0.0001214
+5ab916e155429919ba4e23a4,retrieval_k5,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,637,9,0.00013460000000000002
+5ab916e155429919ba4e23a4,retrieval_k10,Chiwetel Ejiofor,Chiwetel Ejiofor,1.0,1.0,1.0,1.0,956,9,0.00019840000000000002
+5a713b325542994082a3e6b5,always_think,Agra,Agra,1.0,1.0,1.0,1.0,86,5,2.1199999999999997e-05
+5a713b325542994082a3e6b5,retrieval_k3,Agra,Agra,1.0,1.0,1.0,1.0,376,5,7.92e-05
+5a713b325542994082a3e6b5,retrieval_k5,Agra,Agra,1.0,1.0,1.0,1.0,573,5,0.00011860000000000001
+5a713b325542994082a3e6b5,retrieval_k10,Agra,Agra,1.0,1.0,1.0,1.0,1167,5,0.0002374
+5a87c13f5542996e4f30890c,always_think,Milan,Rome,0.0,0.0,0.0,0.0,100,11,2.8800000000000002e-05
+5a87c13f5542996e4f30890c,retrieval_k3,noanswer,Rome,0.0,0.0,0.0,0.0,442,11,9.72e-05
+5a87c13f5542996e4f30890c,retrieval_k5,Rome,Rome,1.0,1.0,1.0,1.0,574,4,0.00011800000000000001
+5a87c13f5542996e4f30890c,retrieval_k10,Rome,Rome,1.0,1.0,1.0,1.0,1460,4,0.0002952
+5a8843cd5542994846c1ce75,always_think,Shire River,Buffalo,0.0,0.0,0.0,0.0,94,12,2.84e-05
+5a8843cd5542994846c1ce75,retrieval_k3,Mwabvi river,Buffalo,0.0,0.0,0.0,0.0,420,7,8.96e-05
+5a8843cd5542994846c1ce75,retrieval_k5,Mwabvi river,Buffalo,0.0,0.0,0.0,0.0,688,7,0.00014319999999999998
+5a8843cd5542994846c1ce75,retrieval_k10,Mwabvi river,Buffalo,0.0,0.0,0.0,0.0,1359,7,0.0002774
+5ab90d8955429916710eb0f1,always_think,Smoothie King Center,Smoothie King Center,1.0,1.0,1.0,1.0,91,13,2.8599999999999997e-05
+5ab90d8955429916710eb0f1,retrieval_k3,Erie Insurance Arena,Smoothie King Center,0.0,0.0,0.0,0.0,403,7,8.620000000000001e-05
+5ab90d8955429916710eb0f1,retrieval_k5,Smoothie King Center,Smoothie King Center,1.0,1.0,1.0,1.0,618,7,0.0001292
+5ab90d8955429916710eb0f1,retrieval_k10,Smoothie King Center,Smoothie King Center,1.0,1.0,1.0,1.0,1396,7,0.0002848
+5ae788fa55429952e35ea964,always_think,extended harmonica solos,extensive use of segues,0.0,0.0,0.0,0.0,89,7,2.3400000000000003e-05
+5ae788fa55429952e35ea964,retrieval_k3,John Popper's harmonica,extensive use of segues,0.0,0.0,0.0,0.0,312,9,6.960000000000001e-05
+5ae788fa55429952e35ea964,retrieval_k5,jam band sound,extensive use of segues,0.0,0.0,0.0,0.0,460,6,9.68e-05
+5ae788fa55429952e35ea964,retrieval_k10,jam band sound,extensive use of segues,0.0,0.0,0.0,0.0,1046,6,0.00021400000000000002
+5ae1925a554299492dc91b48,always_think,Lord Kinloch Castle?,Charlotte Carnegie,0.0,0.0,0.0,0.0,93,14,2.9800000000000003e-05
+5ae1925a554299492dc91b48,retrieval_k3,Lady Charlotte Elliot,Charlotte Carnegie,0.0,0.4,0.3333333333333333,0.5,307,6,6.62e-05
+5ae1925a554299492dc91b48,retrieval_k5,Lady Charlotte Elliot,Charlotte Carnegie,0.0,0.4,0.3333333333333333,0.5,455,6,9.58e-05
+5ae1925a554299492dc91b48,retrieval_k10,Lady Charlotte Elliot,Charlotte Carnegie,0.0,0.4,0.3333333333333333,0.5,946,6,0.00019400000000000003
+5ae1443855429920d5234362,always_think,World War II,World War II,1.0,1.0,1.0,1.0,111,6,2.7000000000000006e-05
+5ae1443855429920d5234362,retrieval_k3,World War II,World War II,1.0,1.0,1.0,1.0,367,6,7.82e-05
+5ae1443855429920d5234362,retrieval_k5,World War II,World War II,1.0,1.0,1.0,1.0,756,6,0.00015600000000000002
+5ae1443855429920d5234362,retrieval_k10,World War II,World War II,1.0,1.0,1.0,1.0,1827,6,0.00037020000000000005
+5ac54c435542993e66e822d1,always_think,Oklahoma State University,Oklahoma State University,1.0,1.0,1.0,1.0,86,13,2.76e-05
+5ac54c435542993e66e822d1,retrieval_k3,Oklahoma State,Oklahoma State University,0.0,0.8,1.0,0.6666666666666666,552,6,0.0001152
+5ac54c435542993e66e822d1,retrieval_k5,Oklahoma State University,Oklahoma State University,1.0,1.0,1.0,1.0,1190,7,0.0002436
+5ac54c435542993e66e822d1,retrieval_k10,Oklahoma State University,Oklahoma State University,1.0,1.0,1.0,1.0,1878,7,0.00038120000000000005
+5a7a77425542995eb53be83e,always_think,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,87,11,2.6200000000000003e-05
+5a7a77425542995eb53be83e,retrieval_k3,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,573,5,0.00011860000000000001
+5a7a77425542995eb53be83e,retrieval_k5,Nick Carter,Brady Seals,0.0,0.0,0.0,0.0,784,5,0.0001608
+5a7a77425542995eb53be83e,retrieval_k10,Brady Seals,Brady Seals,1.0,1.0,1.0,1.0,1192,7,0.000244
+5a7153d05542994082a3e7dc,always_think,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,100,8,2.64e-05
+5a7153d05542994082a3e7dc,retrieval_k3,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,366,8,7.960000000000001e-05
+5a7153d05542994082a3e7dc,retrieval_k5,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,570,8,0.00012040000000000001
+5a7153d05542994082a3e7dc,retrieval_k10,Nusretiye Mosque,Nusretiye Mosque,1.0,1.0,1.0,1.0,1349,8,0.0002762
+5ae361805542992e3233c3c9,always_think,San Diego State University,Georgetown University,0.0,0.3333333333333333,0.25,0.5,100,13,3.04e-05
+5ae361805542992e3233c3c9,retrieval_k3,Georgetown University,Georgetown University,1.0,1.0,1.0,1.0,516,6,0.000108
+5ae361805542992e3233c3c9,retrieval_k5,Georgetown University,Georgetown University,1.0,1.0,1.0,1.0,858,6,0.00017640000000000003
+5ae361805542992e3233c3c9,retrieval_k10,Georgetown University,Georgetown University,1.0,1.0,1.0,1.0,1785,12,0.0003666
+5a72688c5542997f827839b2,always_think,Turkey,Turkey,1.0,1.0,1.0,1.0,90,4,2.12e-05
+5a72688c5542997f827839b2,retrieval_k3,Turkey,Turkey,1.0,1.0,1.0,1.0,459,4,9.5e-05
+5a72688c5542997f827839b2,retrieval_k5,Turkey,Turkey,1.0,1.0,1.0,1.0,653,4,0.0001338
+5a72688c5542997f827839b2,retrieval_k10,Turkey,Turkey,1.0,1.0,1.0,1.0,1184,4,0.00024
+5a7ce0ce554299452d57ba92,always_think,William McKinley,William McKinley,1.0,1.0,1.0,1.0,106,7,2.6800000000000004e-05
+5a7ce0ce554299452d57ba92,retrieval_k3,William McKinley,William McKinley,1.0,1.0,1.0,1.0,439,7,9.340000000000001e-05
+5a7ce0ce554299452d57ba92,retrieval_k5,William McKinley,William McKinley,1.0,1.0,1.0,1.0,810,7,0.0001676
+5a7ce0ce554299452d57ba92,retrieval_k10,William McKinley,William McKinley,1.0,1.0,1.0,1.0,1555,7,0.0003166
+5a83411655429966c78a6b5d,always_think,Dan Goor,Justin Spitzer,0.0,0.0,0.0,0.0,91,12,2.7799999999999998e-05
+5a83411655429966c78a6b5d,retrieval_k3,noanswer,Justin Spitzer,0.0,0.0,0.0,0.0,623,5,0.0001286
+5a83411655429966c78a6b5d,retrieval_k5,Justin Spitzer,Justin Spitzer,1.0,1.0,1.0,1.0,1244,6,0.00025360000000000004
+5a83411655429966c78a6b5d,retrieval_k10,Justin Spitzer,Justin Spitzer,1.0,1.0,1.0,1.0,1856,6,0.00037600000000000003
+5a877dd65542993e715abf79,always_think,no,no,1.0,1.0,1.0,1.0,89,10,2.5800000000000004e-05
+5a877dd65542993e715abf79,retrieval_k3,no,no,1.0,1.0,1.0,1.0,324,4,6.8e-05
+5a877dd65542993e715abf79,retrieval_k5,no,no,1.0,1.0,1.0,1.0,594,4,0.00012200000000000001
+5a877dd65542993e715abf79,retrieval_k10,no,no,1.0,1.0,1.0,1.0,1170,4,0.0002372
+5ab6087a554299110f2199be,always_think,no,yes,0.0,0.0,0.0,0.0,101,10,2.82e-05
+5ab6087a554299110f2199be,retrieval_k3,no,yes,0.0,0.0,0.0,0.0,362,4,7.560000000000001e-05
+5ab6087a554299110f2199be,retrieval_k5,no,yes,0.0,0.0,0.0,0.0,617,4,0.00012660000000000001
+5ab6087a554299110f2199be,retrieval_k10,no,yes,0.0,0.0,0.0,0.0,1678,4,0.00033880000000000005
+5adbd70c55429947ff173843,always_think,In Cold Blood,Personal History,0.0,0.0,0.0,0.0,93,12,2.82e-05
+5adbd70c55429947ff173843,retrieval_k3,Personal History,Personal History,1.0,1.0,1.0,1.0,351,5,7.42e-05
+5adbd70c55429947ff173843,retrieval_k5,Personal History,Personal History,1.0,1.0,1.0,1.0,552,5,0.0001144
+5adbd70c55429947ff173843,retrieval_k10,Personal History,Personal History,1.0,1.0,1.0,1.0,1064,5,0.0002168
+5a7796e05542992a6e59df0f,always_think,Netherlands,Netherlands,1.0,1.0,1.0,1.0,90,5,2.2e-05
+5a7796e05542992a6e59df0f,retrieval_k3,the Netherlands,Netherlands,1.0,1.0,1.0,1.0,374,5,7.88e-05
+5a7796e05542992a6e59df0f,retrieval_k5,the Netherlands,Netherlands,1.0,1.0,1.0,1.0,481,5,0.00010020000000000001
+5a7796e05542992a6e59df0f,retrieval_k10,Netherlands,Netherlands,1.0,1.0,1.0,1.0,1038,5,0.00021160000000000002
+5abc030e554299642a094bdc,always_think,1954,1945 to 1951,0.0,0.0,0.0,0.0,90,11,2.68e-05
+5abc030e554299642a094bdc,retrieval_k3,1945 to 1951,1945 to 1951,1.0,1.0,1.0,1.0,605,9,0.0001282
+5abc030e554299642a094bdc,retrieval_k5,1945 to 1951,1945 to 1951,1.0,1.0,1.0,1.0,945,9,0.00019620000000000003
+5abc030e554299642a094bdc,retrieval_k10,1945 to 1951,1945 to 1951,1.0,1.0,1.0,1.0,1727,9,0.00035260000000000006
+5a7bb7f2554299042af8f7b6,always_think,gwailo,Gweilo,0.0,0.0,0.0,0.0,92,6,2.3200000000000005e-05
+5a7bb7f2554299042af8f7b6,retrieval_k3,gweilo,Gweilo,1.0,1.0,1.0,1.0,528,6,0.0001104
+5a7bb7f2554299042af8f7b6,retrieval_k5,gweilo,Gweilo,1.0,1.0,1.0,1.0,669,6,0.0001386
+5a7bb7f2554299042af8f7b6,retrieval_k10,Gweilo,Gweilo,1.0,1.0,1.0,1.0,1252,6,0.0002552
+5a8b3de95542997f31a41cc3,always_think,2020,Tian Tan Buddha,0.0,0.0,0.0,0.0,88,5,2.16e-05
+5a8b3de95542997f31a41cc3,retrieval_k3,1993,Tian Tan Buddha,0.0,0.0,0.0,0.0,337,5,7.140000000000001e-05
+5a8b3de95542997f31a41cc3,retrieval_k5,1993,Tian Tan Buddha,0.0,0.0,0.0,0.0,718,5,0.00014759999999999998
+5a8b3de95542997f31a41cc3,retrieval_k10,1993,Tian Tan Buddha,0.0,0.0,0.0,0.0,1466,5,0.00029719999999999996
+5ab3bfd3554299233954ff99,always_think,Dirk Nowitzki,Dirk Werner Nowitzki,0.0,0.8,1.0,0.6666666666666666,97,8,2.58e-05
+5ab3bfd3554299233954ff99,retrieval_k3,Dirk Nowitzki,Dirk Werner Nowitzki,0.0,0.8,1.0,0.6666666666666666,922,8,0.0001908
+5ab3bfd3554299233954ff99,retrieval_k5,Dirk Nowitzki,Dirk Werner Nowitzki,0.0,0.8,1.0,0.6666666666666666,1171,8,0.00024060000000000002
+5ab3bfd3554299233954ff99,retrieval_k10,Dirk Nowitzki,Dirk Werner Nowitzki,0.0,0.8,1.0,0.6666666666666666,1963,8,0.000399
+5ab9b7d555429970cfb8eb7a,always_think,Henry Lau,Henry Lau,1.0,1.0,1.0,1.0,98,5,2.36e-05
+5ab9b7d555429970cfb8eb7a,retrieval_k3,Henry Lau,Henry Lau,1.0,1.0,1.0,1.0,377,11,8.42e-05
+5ab9b7d555429970cfb8eb7a,retrieval_k5,Henry Lau,Henry Lau,1.0,1.0,1.0,1.0,585,5,0.000121
+5ab9b7d555429970cfb8eb7a,retrieval_k10,Henry Lau,Henry Lau,1.0,1.0,1.0,1.0,1186,5,0.0002412
+5ab6bf6d55429953192ad372,always_think,no,no,1.0,1.0,1.0,1.0,86,10,2.5199999999999996e-05
+5ab6bf6d55429953192ad372,retrieval_k3,no,no,1.0,1.0,1.0,1.0,546,4,0.0001124
+5ab6bf6d55429953192ad372,retrieval_k5,no,no,1.0,1.0,1.0,1.0,971,4,0.0001974
+5ab6bf6d55429953192ad372,retrieval_k10,no,no,1.0,1.0,1.0,1.0,1601,4,0.00032340000000000005
+5ae7cb9b5542994a481bbde2,always_think,Franklin Pierce,Kalokuokamaile,0.0,0.0,0.0,0.0,86,12,2.68e-05
+5ae7cb9b5542994a481bbde2,retrieval_k3,Kalokuokamaile,Kalokuokamaile,1.0,1.0,1.0,1.0,434,14,9.800000000000001e-05
+5ae7cb9b5542994a481bbde2,retrieval_k5,Kalokuokamaile,Kalokuokamaile,1.0,1.0,1.0,1.0,894,8,0.0001852
+5ae7cb9b5542994a481bbde2,retrieval_k10,Kalokuokamaile,Kalokuokamaile,1.0,1.0,1.0,1.0,1683,8,0.000343
+5ab1d6545542997061209588,always_think,7,Bocelli became completely blind at the age of 12,0.0,0.0,0.0,0.0,86,10,2.5199999999999996e-05
+5ab1d6545542997061209588,retrieval_k3,12,Bocelli became completely blind at the age of 12,0.0,0.2222222222222222,1.0,0.125,233,4,4.9800000000000004e-05
+5ab1d6545542997061209588,retrieval_k5,12,Bocelli became completely blind at the age of 12,0.0,0.2222222222222222,1.0,0.125,413,4,8.58e-05
+5ab1d6545542997061209588,retrieval_k10,12,Bocelli became completely blind at the age of 12,0.0,0.2222222222222222,1.0,0.125,995,4,0.0002022
+5addcb215542997dc7907033,always_think,Naomi Campbell,Naomi Elaine Campbell,0.0,0.8,1.0,0.6666666666666666,103,6,2.5400000000000004e-05
+5addcb215542997dc7907033,retrieval_k3,Naomi Campbell,Naomi Elaine Campbell,0.0,0.8,1.0,0.6666666666666666,955,6,0.00019580000000000002
+5addcb215542997dc7907033,retrieval_k5,Naomi Campbell,Naomi Elaine Campbell,0.0,0.8,1.0,0.6666666666666666,1304,6,0.0002656
+5addcb215542997dc7907033,retrieval_k10,Naomi Campbell,Naomi Elaine Campbell,0.0,0.8,1.0,0.6666666666666666,2281,6,0.00046100000000000004
+5ae528ed5542993aec5ec16e,always_think,Walker,Revengers Tragedy,0.0,0.0,0.0,0.0,100,10,2.8000000000000003e-05
+5ae528ed5542993aec5ec16e,retrieval_k3,Revengers Tragedy,Revengers Tragedy,1.0,1.0,1.0,1.0,431,8,9.260000000000001e-05
+5ae528ed5542993aec5ec16e,retrieval_k5,Revengers Tragedy,Revengers Tragedy,1.0,1.0,1.0,1.0,666,8,0.0001396
+5ae528ed5542993aec5ec16e,retrieval_k10,Revengers Tragedy,Revengers Tragedy,1.0,1.0,1.0,1.0,1201,8,0.00024660000000000003
+5a8c7ced5542995e66a4761c,always_think,film industry,entertainment,0.0,0.0,0.0,0.0,86,5,2.1199999999999997e-05
+5a8c7ced5542995e66a4761c,retrieval_k3,entertainment industry,entertainment,0.0,0.6666666666666666,0.5,1.0,370,7,7.96e-05
+5a8c7ced5542995e66a4761c,retrieval_k5,entertainment industry,entertainment,0.0,0.6666666666666666,0.5,1.0,595,7,0.0001246
+5a8c7ced5542995e66a4761c,retrieval_k10,entertainment industry,entertainment,0.0,0.6666666666666666,0.5,1.0,1257,7,0.00025699999999999996
+5a72f74a55429901807daf59,always_think,Tommy Davidson,Rosie O'Donnell,0.0,0.0,0.0,0.0,96,12,2.8800000000000002e-05
+5a72f74a55429901807daf59,retrieval_k3,Bill Pullman,Rosie O'Donnell,0.0,0.0,0.0,0.0,433,6,9.14e-05
+5a72f74a55429901807daf59,retrieval_k5,Rosie O'Donnell,Rosie O'Donnell,1.0,1.0,1.0,1.0,575,8,0.00012140000000000001
+5a72f74a55429901807daf59,retrieval_k10,Rosie O'Donnell,Rosie O'Donnell,1.0,1.0,1.0,1.0,1157,8,0.0002378
+5ae1d4e8554299234fd04312,always_think,Ben Elton,"Robert Ian ""Rob"" Sitch",0.0,0.0,0.0,0.0,87,5,2.1400000000000002e-05
+5ae1d4e8554299234fd04312,retrieval_k3,Rob Sitch,"Robert Ian ""Rob"" Sitch",0.0,0.6666666666666666,1.0,0.5,443,6,9.340000000000001e-05
+5ae1d4e8554299234fd04312,retrieval_k5,Rob Sitch,"Robert Ian ""Rob"" Sitch",0.0,0.6666666666666666,1.0,0.5,676,6,0.00014000000000000001
+5ae1d4e8554299234fd04312,retrieval_k10,Rob Sitch,"Robert Ian ""Rob"" Sitch",0.0,0.6666666666666666,1.0,0.5,1585,6,0.0003218
+5a80aeef5542992097ad301a,always_think,The Shins,The Shins,1.0,1.0,1.0,1.0,95,12,2.8600000000000004e-05
+5a80aeef5542992097ad301a,retrieval_k3,The Shins,The Shins,1.0,1.0,1.0,1.0,406,6,8.6e-05
+5a80aeef5542992097ad301a,retrieval_k5,The Shins,The Shins,1.0,1.0,1.0,1.0,921,6,0.000189
+5a80aeef5542992097ad301a,retrieval_k10,The Shins,The Shins,1.0,1.0,1.0,1.0,1557,6,0.00031620000000000004
+5a7f66f155429969796c1a33,always_think,"Norway, Denmark and Sweden",Denmark–Norway–Sweden,0.0,0.0,0.0,0.0,97,15,3.1400000000000004e-05
+5a7f66f155429969796c1a33,retrieval_k3,"Norway, Denmark, and Sweden",Denmark–Norway–Sweden,0.0,0.0,0.0,0.0,622,10,0.00013240000000000002
+5a7f66f155429969796c1a33,retrieval_k5,Scandinavian Airlines System,Denmark–Norway–Sweden,0.0,0.0,0.0,0.0,927,8,0.0001918
+5a7f66f155429969796c1a33,retrieval_k10,Denmark–Norway–Sweden,Denmark–Norway–Sweden,1.0,1.0,1.0,1.0,1484,11,0.0003056
+5abbda84554299642a094b5b,always_think,Mach number,2,0.0,0.0,0.0,0.0,99,5,2.38e-05
+5abbda84554299642a094b5b,retrieval_k3,Mach 2,2,0.0,0.6666666666666666,0.5,1.0,496,6,0.000104
+5abbda84554299642a094b5b,retrieval_k5,Mach number,2,0.0,0.0,0.0,0.0,599,5,0.0001238
+5abbda84554299642a094b5b,retrieval_k10,Mach number,2,0.0,0.0,0.0,0.0,1274,5,0.0002588
+5abe3dc65542993f32c2a0c4,always_think,channel 5,8,0.0,0.0,0.0,0.0,92,12,2.8000000000000003e-05
+5abe3dc65542993f32c2a0c4,retrieval_k3,KULR,8,0.0,0.0,0.0,0.0,421,6,8.9e-05
+5abe3dc65542993f32c2a0c4,retrieval_k5,KULR,8,0.0,0.0,0.0,0.0,787,6,0.0001622
+5abe3dc65542993f32c2a0c4,retrieval_k10,11,8,0.0,0.0,0.0,0.0,1515,4,0.0003062
+5ae489ab5542995ad6573d62,always_think,Mookie Blaylock,Mookie Blaylock,1.0,1.0,1.0,1.0,113,14,3.38e-05
+5ae489ab5542995ad6573d62,retrieval_k3,Mookie Blaylock,Mookie Blaylock,1.0,1.0,1.0,1.0,522,8,0.00011080000000000001
+5ae489ab5542995ad6573d62,retrieval_k5,Mookie Blaylock,Mookie Blaylock,1.0,1.0,1.0,1.0,871,8,0.0001806
+5ae489ab5542995ad6573d62,retrieval_k10,Mookie Blaylock,Mookie Blaylock,1.0,1.0,1.0,1.0,1660,8,0.0003384
+5a7e1b7155429965cec5ea6c,always_think,General Motors,Fiat Chrysler Automobiles N.V.,0.0,0.0,0.0,0.0,95,11,2.78e-05
+5a7e1b7155429965cec5ea6c,retrieval_k3,Chrysler,Fiat Chrysler Automobiles N.V.,0.0,0.4,1.0,0.25,398,6,8.44e-05
+5a7e1b7155429965cec5ea6c,retrieval_k5,Chrysler,Fiat Chrysler Automobiles N.V.,0.0,0.4,1.0,0.25,594,6,0.00012360000000000002
+5a7e1b7155429965cec5ea6c,retrieval_k10,Fiat Chrysler Automobiles N.V.,Fiat Chrysler Automobiles N.V.,1.0,1.0,1.0,1.0,1171,11,0.00024300000000000002
+5a8fae205542997ba9cb32ec,always_think,drama series,American-Canadian mystery-drama,0.0,0.0,0.0,0.0,90,12,2.76e-05
+5a8fae205542997ba9cb32ec,retrieval_k3,Open Heart,American-Canadian mystery-drama,0.0,0.0,0.0,0.0,374,5,7.88e-05
+5a8fae205542997ba9cb32ec,retrieval_k5,mystery-drama television series,American-Canadian mystery-drama,0.0,0.4,0.3333333333333333,0.5,598,10,0.0001276
+5a8fae205542997ba9cb32ec,retrieval_k10,Open Heart,American-Canadian mystery-drama,0.0,0.0,0.0,0.0,1304,5,0.0002648
+5ae588cb55429960a22e0300,always_think,Chaerophyllum,Chaerophyllum,1.0,1.0,1.0,1.0,97,13,2.98e-05
+5ae588cb55429960a22e0300,retrieval_k3,Chaerophyllum,Chaerophyllum,1.0,1.0,1.0,1.0,325,7,7.06e-05
+5ae588cb55429960a22e0300,retrieval_k5,Chaerophyllum,Chaerophyllum,1.0,1.0,1.0,1.0,641,7,0.00013380000000000003
+5ae588cb55429960a22e0300,retrieval_k10,Chaerophyllum,Chaerophyllum,1.0,1.0,1.0,1.0,2040,7,0.00041359999999999997
+5a75e62f5542992d0ec06013,always_think,Borgata Hotel Casino & Spa,Tropicana Casino & Resort,0.0,0.28571428571428575,0.25,0.3333333333333333,97,10,2.7400000000000002e-05
+5a75e62f5542992d0ec06013,retrieval_k3,Borgata Hotel Casino & Spa,Tropicana Casino & Resort,0.0,0.28571428571428575,0.25,0.3333333333333333,465,10,0.000101
+5a75e62f5542992d0ec06013,retrieval_k5,Borgata Hotel Casino & Spa,Tropicana Casino & Resort,0.0,0.28571428571428575,0.25,0.3333333333333333,767,10,0.00016140000000000002
+5a75e62f5542992d0ec06013,retrieval_k10,Tropicana Casino & Resort Atlantic City,Tropicana Casino & Resort,0.0,0.7499999999999999,0.6,1.0,1323,11,0.00027340000000000003
+5ac113e2554299294b21909a,always_think,Don Black,"Wildhorn, Bricusse and Cuden",0.0,0.0,0.0,0.0,85,11,2.58e-05
+5ac113e2554299294b21909a,retrieval_k3,"Frank Wildhorn, Leslie Bricusse and Steve Cuden","Wildhorn, Bricusse and Cuden",0.0,0.7272727272727273,0.5714285714285714,1.0,367,15,8.540000000000002e-05
+5ac113e2554299294b21909a,retrieval_k5,Frank Wildhorn,"Wildhorn, Bricusse and Cuden",0.0,0.3333333333333333,0.5,0.25,668,6,0.0001384
+5ac113e2554299294b21909a,retrieval_k10,"Frank Wildhorn, Leslie Bricusse and Steve Cuden","Wildhorn, Bricusse and Cuden",0.0,0.7272727272727273,0.5714285714285714,1.0,1247,15,0.0002614
+5a82fe5055429966c78a6ad3,always_think,Christianity,evangelical Christian,0.0,0.0,0.0,0.0,119,11,3.26e-05
+5a82fe5055429966c78a6ad3,retrieval_k3,Evangelical Christian,evangelical Christian,1.0,1.0,1.0,1.0,467,7,9.900000000000001e-05
+5a82fe5055429966c78a6ad3,retrieval_k5,Christian,evangelical Christian,0.0,0.6666666666666666,1.0,0.5,730,4,0.0001492
+5a82fe5055429966c78a6ad3,retrieval_k10,Christian,evangelical Christian,0.0,0.6666666666666666,1.0,0.5,2231,4,0.0004494000000000001
+5a7e05ba5542995f4f402392,always_think,The Price Is Right,The Late Late Show,0.0,0.0,0.0,0.0,98,13,3.0000000000000004e-05
+5a7e05ba5542995f4f402392,retrieval_k3,The Late Late Show,The Late Late Show,1.0,1.0,1.0,1.0,475,7,0.0001006
+5a7e05ba5542995f4f402392,retrieval_k5,The Late Late Show,The Late Late Show,1.0,1.0,1.0,1.0,686,7,0.00014280000000000003
+5a7e05ba5542995f4f402392,retrieval_k10,The Late Late Show,The Late Late Show,1.0,1.0,1.0,1.0,1616,7,0.0003288000000000001
+5a7264ed5542990c210a411a,always_think,Blut und Boden,Blood and soil,0.0,0.0,0.0,0.0,106,13,3.16e-05
+5a7264ed5542990c210a411a,retrieval_k3,Blood and soil,Blood and soil,1.0,1.0,1.0,1.0,583,6,0.00012140000000000001
+5a7264ed5542990c210a411a,retrieval_k5,Blood and soil,Blood and soil,1.0,1.0,1.0,1.0,920,6,0.0001888
+5a7264ed5542990c210a411a,retrieval_k10,Blood and soil,Blood and soil,1.0,1.0,1.0,1.0,1645,6,0.0003338
+5a8ed10b5542995085b374a0,always_think,The Visit,The Visit,1.0,1.0,1.0,1.0,91,11,2.7e-05
+5a8ed10b5542995085b374a0,retrieval_k3,The Visit,The Visit,1.0,1.0,1.0,1.0,347,5,7.340000000000001e-05
+5a8ed10b5542995085b374a0,retrieval_k5,The Visit,The Visit,1.0,1.0,1.0,1.0,668,5,0.00013759999999999998
+5a8ed10b5542995085b374a0,retrieval_k10,The Visit,The Visit,1.0,1.0,1.0,1.0,1219,5,0.0002478
+5add8f055542990dbb2f7e6d,always_think,Rudolf Höss,Rudolf Höss,1.0,1.0,1.0,1.0,95,14,3.0200000000000002e-05
+5add8f055542990dbb2f7e6d,retrieval_k3,Kurt Gerstein,Rudolf Höss,0.0,0.0,0.0,0.0,546,7,0.0001148
+5add8f055542990dbb2f7e6d,retrieval_k5,Kurt Gerstein,Rudolf Höss,0.0,0.0,0.0,0.0,875,7,0.0001806
+5add8f055542990dbb2f7e6d,retrieval_k10,Rudolf Höss,Rudolf Höss,1.0,1.0,1.0,1.0,1485,8,0.0003034
+5a86ab7755429960ec39b6bf,always_think,science fiction,an adventure novel,0.0,0.0,0.0,0.0,91,11,2.7e-05
+5a86ab7755429960ec39b6bf,retrieval_k3,adventure novel,an adventure novel,1.0,1.0,1.0,1.0,433,12,9.620000000000001e-05
+5a86ab7755429960ec39b6bf,retrieval_k5,Treasure Island,an adventure novel,0.0,0.0,0.0,0.0,644,6,0.00013360000000000002
+5a86ab7755429960ec39b6bf,retrieval_k10,adventure novel,an adventure novel,1.0,1.0,1.0,1.0,1099,6,0.0002246
+5a7a112a5542990783324e2b,always_think,drummers,drummer,0.0,0.0,0.0,0.0,88,11,2.64e-05
+5a7a112a5542990783324e2b,retrieval_k3,drummers,drummer,0.0,0.0,0.0,0.0,438,5,9.160000000000002e-05
+5a7a112a5542990783324e2b,retrieval_k5,drummer,drummer,1.0,1.0,1.0,1.0,650,5,0.00013399999999999998
+5a7a112a5542990783324e2b,retrieval_k10,heavy metal drummer and musician,drummer,0.0,0.33333333333333337,0.2,1.0,1086,8,0.00022360000000000001
+5ab870ee5542990e739ec8f6,always_think,Madeleine L'Engle,Madeleine L'Engle,1.0,1.0,1.0,1.0,87,15,2.9400000000000003e-05
+5ab870ee5542990e739ec8f6,retrieval_k3,Madeleine L'Engle,Madeleine L'Engle,1.0,1.0,1.0,1.0,336,9,7.44e-05
+5ab870ee5542990e739ec8f6,retrieval_k5,Madeleine L'Engle,Madeleine L'Engle,1.0,1.0,1.0,1.0,647,9,0.0001366
+5ab870ee5542990e739ec8f6,retrieval_k10,Madeleine L'Engle,Madeleine L'Engle,1.0,1.0,1.0,1.0,1180,9,0.0002432
+5a8810485542997e5c09a590,always_think,6.9 million,1.6 million passengers,0.0,0.4,0.5,0.3333333333333333,90,13,2.84e-05
+5a8810485542997e5c09a590,retrieval_k3,"4,088,943",1.6 million passengers,0.0,0.0,0.0,0.0,608,8,0.00012800000000000002
+5a8810485542997e5c09a590,retrieval_k5,over 1.6 million passengers,1.6 million passengers,0.0,0.8571428571428571,0.75,1.0,887,10,0.0001854
+5a8810485542997e5c09a590,retrieval_k10,1.6 million,1.6 million passengers,0.0,0.8,1.0,0.6666666666666666,1611,7,0.00032780000000000005
+5a8208ee5542990a1d231f1e,always_think,dinosaur,dinosaur,1.0,1.0,1.0,1.0,102,11,2.92e-05
+5a8208ee5542990a1d231f1e,retrieval_k3,dinosaur,dinosaur,1.0,1.0,1.0,1.0,365,5,7.7e-05
+5a8208ee5542990a1d231f1e,retrieval_k5,a large green dinosaur,dinosaur,0.0,0.5,0.3333333333333333,1.0,957,7,0.00019700000000000002
+5a8208ee5542990a1d231f1e,retrieval_k10,dinosaur,dinosaur,1.0,1.0,1.0,1.0,1425,5,0.000289
+5a86399e5542994775f60733,always_think,Indian descent,Punjabi/Pashtun,0.0,0.0,0.0,0.0,93,11,2.7400000000000002e-05
+5a86399e5542994775f60733,retrieval_k3,Norwegian,Punjabi/Pashtun,0.0,0.0,0.0,0.0,421,5,8.82e-05
+5a86399e5542994775f60733,retrieval_k5,Punjabi/Pashtun,Punjabi/Pashtun,1.0,1.0,1.0,1.0,785,9,0.0001642
+5a86399e5542994775f60733,retrieval_k10,Punjabi/Pashtun,Punjabi/Pashtun,1.0,1.0,1.0,1.0,1648,9,0.00033680000000000006
+5a78e9a2554299148911f995,always_think,Allie P. Reynolds Stadium,Drillers Stadium,0.0,0.3333333333333333,0.25,0.5,102,15,3.24e-05
+5a78e9a2554299148911f995,retrieval_k3,Drillers Stadium,Drillers Stadium,1.0,1.0,1.0,1.0,431,6,9.1e-05
+5a78e9a2554299148911f995,retrieval_k5,Drillers Stadium,Drillers Stadium,1.0,1.0,1.0,1.0,1148,6,0.00023440000000000003
+5a78e9a2554299148911f995,retrieval_k10,Drillers Stadium,Drillers Stadium,1.0,1.0,1.0,1.0,1957,6,0.00039620000000000004
+5a84995d5542997b5ce3fee4,always_think,Alachua County,Alachua,0.0,0.6666666666666666,0.5,1.0,92,13,2.8800000000000002e-05
+5a84995d5542997b5ce3fee4,retrieval_k3,Alachua County,Alachua,0.0,0.6666666666666666,0.5,1.0,505,7,0.0001066
+5a84995d5542997b5ce3fee4,retrieval_k5,Alachua County,Alachua,0.0,0.6666666666666666,0.5,1.0,938,7,0.00019320000000000003
+5a84995d5542997b5ce3fee4,retrieval_k10,Alachua County,Alachua,0.0,0.6666666666666666,0.5,1.0,1672,7,0.00034
+5ab941c2554299743d22ea88,always_think,C. J. Cherryh,"Carolyn Janice Cherry (born September 1, 1942), better known by the pen name C. J. Cherryh,",0.0,0.33333333333333337,1.0,0.2,91,9,2.54e-05
+5ab941c2554299743d22ea88,retrieval_k3,C. J. Cherryh,"Carolyn Janice Cherry (born September 1, 1942), better known by the pen name C. J. Cherryh,",0.0,0.33333333333333337,1.0,0.2,446,9,9.64e-05
+5ab941c2554299743d22ea88,retrieval_k5,C. J. Cherryh,"Carolyn Janice Cherry (born September 1, 1942), better known by the pen name C. J. Cherryh,",0.0,0.33333333333333337,1.0,0.2,769,9,0.000161
+5ab941c2554299743d22ea88,retrieval_k10,C. J. Cherryh,"Carolyn Janice Cherry (born September 1, 1942), better known by the pen name C. J. Cherryh,",0.0,0.33333333333333337,1.0,0.2,1331,9,0.0002734
+5a8e5f1f5542995a26add4d6,always_think,Sapsali,Sapsali,1.0,1.0,1.0,1.0,94,6,2.36e-05
+5a8e5f1f5542995a26add4d6,retrieval_k3,Sapsali,Sapsali,1.0,1.0,1.0,1.0,446,6,9.4e-05
+5a8e5f1f5542995a26add4d6,retrieval_k5,Sapsali,Sapsali,1.0,1.0,1.0,1.0,797,6,0.0001642
+5a8e5f1f5542995a26add4d6,retrieval_k10,Sapsali,Sapsali,1.0,1.0,1.0,1.0,1954,6,0.0003956
+5abf1ad15542997ec76fd3c2,always_think,Lafayette,Marquis de Lafayette,0.0,0.5,1.0,0.3333333333333333,108,12,3.12e-05
+5abf1ad15542997ec76fd3c2,retrieval_k3,Marquis de Lafayette,Marquis de Lafayette,1.0,1.0,1.0,1.0,496,7,0.0001048
+5abf1ad15542997ec76fd3c2,retrieval_k5,Marquis de Lafayette,Marquis de Lafayette,1.0,1.0,1.0,1.0,690,7,0.0001436
+5abf1ad15542997ec76fd3c2,retrieval_k10,"Gilbert du Motier, Marquis de Lafayette",Marquis de Lafayette,0.0,0.6666666666666666,0.5,1.0,1322,12,0.00027400000000000005
+5ae5cf625542996de7b71a22,always_think,Texas Longhorns,University of Texas Longhorns,0.0,0.6666666666666666,1.0,0.5,92,13,2.8800000000000002e-05
+5ae5cf625542996de7b71a22,retrieval_k3,University of Texas Longhorns football team,University of Texas Longhorns,0.0,0.8,0.6666666666666666,1.0,416,11,9.2e-05
+5ae5cf625542996de7b71a22,retrieval_k5,University of Texas Longhorns football team,University of Texas Longhorns,0.0,0.8,0.6666666666666666,1.0,761,11,0.000161
+5ae5cf625542996de7b71a22,retrieval_k10,University of Texas Longhorns football team,University of Texas Longhorns,0.0,0.8,0.6666666666666666,1.0,1426,11,0.000294
+5a7c8ae855429935c91b5207,always_think,Alexander Borodin,Alexander Porfiryevich Borodin,0.0,0.8,1.0,0.6666666666666666,93,6,2.3400000000000003e-05
+5a7c8ae855429935c91b5207,retrieval_k3,Alexander Borodin,Alexander Porfiryevich Borodin,0.0,0.8,1.0,0.6666666666666666,466,6,9.8e-05
+5a7c8ae855429935c91b5207,retrieval_k5,Alexander Borodin,Alexander Porfiryevich Borodin,0.0,0.8,1.0,0.6666666666666666,649,6,0.00013460000000000002
+5a7c8ae855429935c91b5207,retrieval_k10,Alexander Borodin,Alexander Porfiryevich Borodin,0.0,0.8,1.0,0.6666666666666666,1232,6,0.00025120000000000003
+5a87106555429960ec39b71f,always_think,Rob Reiner,Rob Reiner,1.0,1.0,1.0,1.0,91,12,2.7799999999999998e-05
+5a87106555429960ec39b71f,retrieval_k3,Rob Reiner,Rob Reiner,1.0,1.0,1.0,1.0,445,6,9.379999999999999e-05
+5a87106555429960ec39b71f,retrieval_k5,Rob Reiner,Rob Reiner,1.0,1.0,1.0,1.0,711,6,0.00014700000000000002
+5a87106555429960ec39b71f,retrieval_k10,Rob Reiner,Rob Reiner,1.0,1.0,1.0,1.0,1260,6,0.0002568
+5a7f296f55429934daa2fd10,always_think,1988,1974,0.0,0.0,0.0,0.0,92,11,2.7200000000000004e-05
+5a7f296f55429934daa2fd10,retrieval_k3,1974,1974,1.0,1.0,1.0,1.0,316,5,6.720000000000001e-05
+5a7f296f55429934daa2fd10,retrieval_k5,2004,1974,0.0,0.0,0.0,0.0,618,5,0.00012759999999999998
+5a7f296f55429934daa2fd10,retrieval_k10,1974,1974,1.0,1.0,1.0,1.0,1277,5,0.0002594
+5ae14b5c55429920d52343aa,always_think,Anderson Silva,Anderson Silva,1.0,1.0,1.0,1.0,95,12,2.8600000000000004e-05
+5ae14b5c55429920d52343aa,retrieval_k3,Anderson Silva,Anderson Silva,1.0,1.0,1.0,1.0,675,6,0.0001398
+5ae14b5c55429920d52343aa,retrieval_k5,Anderson Silva,Anderson Silva,1.0,1.0,1.0,1.0,990,6,0.0002028
+5ae14b5c55429920d52343aa,retrieval_k10,Anderson Silva,Anderson Silva,1.0,1.0,1.0,1.0,1697,6,0.0003442
+5a88b3b4554299206df2b336,always_think,opera,music,0.0,0.0,0.0,0.0,90,10,2.6000000000000002e-05
+5a88b3b4554299206df2b336,retrieval_k3,opera,music,0.0,0.0,0.0,0.0,330,4,6.92e-05
+5a88b3b4554299206df2b336,retrieval_k5,opera,music,0.0,0.0,0.0,0.0,602,4,0.0001236
+5a88b3b4554299206df2b336,retrieval_k10,opera,music,0.0,0.0,0.0,0.0,1352,4,0.00027360000000000004
+5add67705542992ae4cec54f,always_think,Amanda Nunes,Rafael Souza dos Anjos,0.0,0.0,0.0,0.0,97,12,2.9e-05
+5add67705542992ae4cec54f,retrieval_k3,Rafael dos Anjos,Rafael Souza dos Anjos,0.0,0.8571428571428571,1.0,0.75,673,8,0.00014099999999999998
+5add67705542992ae4cec54f,retrieval_k5,Rafael Dos Anjos,Rafael Souza dos Anjos,0.0,0.8571428571428571,1.0,0.75,1041,8,0.0002146
+5add67705542992ae4cec54f,retrieval_k10,Rafael dos Anjos,Rafael Souza dos Anjos,0.0,0.8571428571428571,1.0,0.75,1755,8,0.0003574
+5a875fee5542996e4f3087ab,always_think,Lysiloma,Lysiloma,1.0,1.0,1.0,1.0,90,13,2.84e-05
+5a875fee5542996e4f3087ab,retrieval_k3,Lysiloma,Lysiloma,1.0,1.0,1.0,1.0,383,7,8.22e-05
+5a875fee5542996e4f3087ab,retrieval_k5,Lysiloma,Lysiloma,1.0,1.0,1.0,1.0,596,7,0.0001248
+5a875fee5542996e4f3087ab,retrieval_k10,Hydrocotyle umbellata,Lysiloma,0.0,0.0,0.0,0.0,1364,10,0.0002808
+5ab2b630554299545a2cfa17,always_think,yes,yes,1.0,1.0,1.0,1.0,93,4,2.18e-05
+5ab2b630554299545a2cfa17,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,430,4,8.92e-05
+5ab2b630554299545a2cfa17,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,637,4,0.0001306
+5ab2b630554299545a2cfa17,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,1517,4,0.0003066000000000001
+5a851ba95542997175ce1f81,always_think,Dallas,Dallas,1.0,1.0,1.0,1.0,94,4,2.2e-05
+5a851ba95542997175ce1f81,retrieval_k3,Dallas,Dallas,1.0,1.0,1.0,1.0,503,4,0.0001038
+5a851ba95542997175ce1f81,retrieval_k5,Dallas,Dallas,1.0,1.0,1.0,1.0,715,4,0.0001462
+5a851ba95542997175ce1f81,retrieval_k10,Dallas,Dallas,1.0,1.0,1.0,1.0,1420,4,0.00028720000000000004
+5ae1d0e8554299234fd0430a,always_think,Oswald,Guthred or Guthfrith,0.0,0.0,0.0,0.0,96,11,2.8000000000000003e-05
+5ae1d0e8554299234fd0430a,retrieval_k3,Guthred,Guthred or Guthfrith,0.0,0.5,1.0,0.3333333333333333,528,6,0.0001104
+5ae1d0e8554299234fd0430a,retrieval_k5,Guthred,Guthred or Guthfrith,0.0,0.5,1.0,0.3333333333333333,781,6,0.00016100000000000004
+5ae1d0e8554299234fd0430a,retrieval_k10,Guthred,Guthred or Guthfrith,0.0,0.5,1.0,0.3333333333333333,1809,6,0.0003666
+5ae1ebf95542997283cd22f2,always_think,Interstate 22,Interstate 22,1.0,1.0,1.0,1.0,90,7,2.36e-05
+5ae1ebf95542997283cd22f2,retrieval_k3,Interstate 22,Interstate 22,1.0,1.0,1.0,1.0,438,7,9.320000000000002e-05
+5ae1ebf95542997283cd22f2,retrieval_k5,Interstate 22,Interstate 22,1.0,1.0,1.0,1.0,862,7,0.00017800000000000002
+5ae1ebf95542997283cd22f2,retrieval_k10,Interstate 22,Interstate 22,1.0,1.0,1.0,1.0,1753,7,0.0003562
+5a81d0515542990a1d231ed4,always_think,"Reno, Nevada","Las Vegas Strip in Paradise, Nevada",0.0,0.25,0.5,0.16666666666666666,84,13,2.7200000000000004e-05
+5a81d0515542990a1d231ed4,retrieval_k3,Flamingo Las Vegas,"Las Vegas Strip in Paradise, Nevada",0.0,0.4444444444444444,0.6666666666666666,0.3333333333333333,351,8,7.66e-05
+5a81d0515542990a1d231ed4,retrieval_k5,Flamingo Las Vegas,"Las Vegas Strip in Paradise, Nevada",0.0,0.4444444444444444,0.6666666666666666,0.3333333333333333,663,8,0.000139
+5a81d0515542990a1d231ed4,retrieval_k10,Flamingo Las Vegas,"Las Vegas Strip in Paradise, Nevada",0.0,0.4444444444444444,0.6666666666666666,0.3333333333333333,1655,8,0.0003374
+5ae35e8c5542990afbd1e120,always_think,Grover Krantz,"Don Jeffrey ""Jeff"" Meldrum (born May 24, 1958) is a Professor of Anatomy and Anthropology",0.0,0.0,0.0,0.0,97,13,2.98e-05
+5ae35e8c5542990afbd1e120,retrieval_k3,Jeff Meldrum,"Don Jeffrey ""Jeff"" Meldrum (born May 24, 1958) is a Professor of Anatomy and Anthropology",0.0,0.25,1.0,0.14285714285714285,383,6,8.14e-05
+5ae35e8c5542990afbd1e120,retrieval_k5,Jeff Meldrum,"Don Jeffrey ""Jeff"" Meldrum (born May 24, 1958) is a Professor of Anatomy and Anthropology",0.0,0.25,1.0,0.14285714285714285,710,6,0.00014680000000000002
+5ae35e8c5542990afbd1e120,retrieval_k10,Jeff Meldrum,"Don Jeffrey ""Jeff"" Meldrum (born May 24, 1958) is a Professor of Anatomy and Anthropology",0.0,0.25,1.0,0.14285714285714285,1242,6,0.00025320000000000003
+5a87ed5b5542994846c1cdfc,always_think,noanswer,GNU GPLv3,0.0,0.0,0.0,0.0,110,11,3.08e-05
+5a87ed5b5542994846c1cdfc,retrieval_k3,GNU GPLv3 license,GNU GPLv3,0.0,0.8,0.6666666666666666,1.0,597,8,0.0001258
+5a87ed5b5542994846c1cdfc,retrieval_k5,GNU GPLv3 license,GNU GPLv3,0.0,0.8,0.6666666666666666,1.0,756,8,0.0001576
+5a87ed5b5542994846c1cdfc,retrieval_k10,GNU GPLv3,GNU GPLv3,1.0,1.0,1.0,1.0,1473,7,0.00030020000000000003
+5abc41315542993a06baf8bb,always_think,Julie Taymor,Julie Taymor,1.0,1.0,1.0,1.0,90,12,2.76e-05
+5abc41315542993a06baf8bb,retrieval_k3,Julie Taymor,Julie Taymor,1.0,1.0,1.0,1.0,370,12,8.36e-05
+5abc41315542993a06baf8bb,retrieval_k5,Julie Taymor,Julie Taymor,1.0,1.0,1.0,1.0,621,6,0.00012900000000000002
+5abc41315542993a06baf8bb,retrieval_k10,Julie Taymor,Julie Taymor,1.0,1.0,1.0,1.0,961,6,0.00019700000000000002
+5a7be1ab5542997c3ec972a9,always_think,anomalous phenomena,Fortean,0.0,0.0,0.0,0.0,84,7,2.2400000000000002e-05
+5a7be1ab5542997c3ec972a9,retrieval_k3,Fortean subjects,Fortean,0.0,0.6666666666666666,0.5,1.0,596,7,0.0001248
+5a7be1ab5542997c3ec972a9,retrieval_k5,Fortean subjects,Fortean,0.0,0.6666666666666666,0.5,1.0,810,7,0.0001676
+5a7be1ab5542997c3ec972a9,retrieval_k10,Fortean subjects,Fortean,0.0,0.6666666666666666,0.5,1.0,1477,7,0.00030100000000000005
+5a840e395542992ef85e239d,always_think,no,no,1.0,1.0,1.0,1.0,86,10,2.5199999999999996e-05
+5a840e395542992ef85e239d,retrieval_k3,no,no,1.0,1.0,1.0,1.0,481,4,9.94e-05
+5a840e395542992ef85e239d,retrieval_k5,no,no,1.0,1.0,1.0,1.0,658,4,0.0001348
+5a840e395542992ef85e239d,retrieval_k10,no,no,1.0,1.0,1.0,1.0,1204,4,0.000244
+5ae8167b55429952e35eaa06,always_think,Battle of the Little Bighorn,Battle of the Rosebud,0.0,0.5714285714285715,0.5,0.6666666666666666,84,10,2.48e-05
+5ae8167b55429952e35eaa06,retrieval_k3,Battle of the Rosebud,Battle of the Rosebud,1.0,1.0,1.0,1.0,523,8,0.00011100000000000001
+5ae8167b55429952e35eaa06,retrieval_k5,Battle of the Rosebud,Battle of the Rosebud,1.0,1.0,1.0,1.0,865,8,0.0001794
+5ae8167b55429952e35eaa06,retrieval_k10,Battle of the Rosebud,Battle of the Rosebud,1.0,1.0,1.0,1.0,1635,8,0.00033339999999999997
+5a776a805542993735360269,always_think,The World's Greatest Athlete,Double Agent,0.0,0.0,0.0,0.0,90,7,2.36e-05
+5a776a805542993735360269,retrieval_k3,Double Agent,Double Agent,1.0,1.0,1.0,1.0,461,5,9.620000000000001e-05
+5a776a805542993735360269,retrieval_k5,Double Agent,Double Agent,1.0,1.0,1.0,1.0,723,5,0.00014859999999999998
+5a776a805542993735360269,retrieval_k10,Double Agent,Double Agent,1.0,1.0,1.0,1.0,1686,5,0.00034120000000000005
+5ab4b9f75542990594ba9ca4,always_think,Lari White,People! and The Carnabeats,0.0,0.0,0.0,0.0,84,6,2.1600000000000003e-05
+5ab4b9f75542990594ba9ca4,retrieval_k3,People!,People! and The Carnabeats,0.0,0.5,1.0,0.3333333333333333,391,5,8.22e-05
+5ab4b9f75542990594ba9ca4,retrieval_k5,People!,People! and The Carnabeats,0.0,0.5,1.0,0.3333333333333333,945,5,0.000193
+5ab4b9f75542990594ba9ca4,retrieval_k10,People!,People! and The Carnabeats,0.0,0.5,1.0,0.3333333333333333,1947,5,0.0003934
+5a78e3b955429974737f78f1,always_think,Sherwood Stewart,Sherwood Stewart,1.0,1.0,1.0,1.0,86,12,2.68e-05
+5a78e3b955429974737f78f1,retrieval_k3,Sherwood Stewart,Sherwood Stewart,1.0,1.0,1.0,1.0,273,6,5.94e-05
+5a78e3b955429974737f78f1,retrieval_k5,Sherwood Stewart,Sherwood Stewart,1.0,1.0,1.0,1.0,348,6,7.44e-05
+5a78e3b955429974737f78f1,retrieval_k10,Sherwood Stewart,Sherwood Stewart,1.0,1.0,1.0,1.0,754,6,0.00015560000000000001
+5a851b0d5542997175ce1f7f,always_think,yes,yes,1.0,1.0,1.0,1.0,87,4,2.0600000000000003e-05
+5a851b0d5542997175ce1f7f,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,369,4,7.699999999999999e-05
+5a851b0d5542997175ce1f7f,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,572,4,0.0001176
+5a851b0d5542997175ce1f7f,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,1337,4,0.00027060000000000007
+5a78b5f7554299148911f95b,always_think,Todd McFarlane,Todd McFarlane,1.0,1.0,1.0,1.0,92,14,2.9600000000000005e-05
+5a78b5f7554299148911f95b,retrieval_k3,Todd McFarlane,Todd McFarlane,1.0,1.0,1.0,1.0,524,8,0.00011120000000000002
+5a78b5f7554299148911f95b,retrieval_k5,Todd McFarlane,Todd McFarlane,1.0,1.0,1.0,1.0,929,8,0.0001922
+5a78b5f7554299148911f95b,retrieval_k10,Todd McFarlane,Todd McFarlane,1.0,1.0,1.0,1.0,1854,8,0.0003772
+5ab4304a55429942dd415ec5,always_think,Mexico,South America,0.0,0.0,0.0,0.0,95,10,2.7e-05
+5ab4304a55429942dd415ec5,retrieval_k3,South America,South America,1.0,1.0,1.0,1.0,464,5,9.680000000000001e-05
+5ab4304a55429942dd415ec5,retrieval_k5,South America,South America,1.0,1.0,1.0,1.0,630,5,0.00013
+5ab4304a55429942dd415ec5,retrieval_k10,South America,South America,1.0,1.0,1.0,1.0,1348,5,0.00027360000000000004
+5a72dcb45542992359bc31af,always_think,Farmers Insurance Group,Aloe Vera of America,0.0,0.0,0.0,0.0,83,7,2.22e-05
+5a72dcb45542992359bc31af,retrieval_k3,Forever Living Products,Aloe Vera of America,0.0,0.0,0.0,0.0,449,6,9.460000000000001e-05
+5a72dcb45542992359bc31af,retrieval_k5,Forever Living Products,Aloe Vera of America,0.0,0.0,0.0,0.0,663,6,0.0001374
+5a72dcb45542992359bc31af,retrieval_k10,Aloe Vera of America,Aloe Vera of America,1.0,1.0,1.0,1.0,1468,8,0.00030000000000000003
+5a7e0ed25542991319bc9424,always_think,"March 8, 2009","November 1, 2000",0.0,0.0,0.0,0.0,89,16,3.0600000000000005e-05
+5a7e0ed25542991319bc9424,retrieval_k3,"November 1, 2000","November 1, 2000",1.0,1.0,1.0,1.0,493,10,0.00010660000000000002
+5a7e0ed25542991319bc9424,retrieval_k5,"November 1, 2000","November 1, 2000",1.0,1.0,1.0,1.0,651,10,0.00013820000000000003
+5a7e0ed25542991319bc9424,retrieval_k10,"November 1, 2000","November 1, 2000",1.0,1.0,1.0,1.0,1262,10,0.0002604
+5ab9e477554299232ef4a25d,always_think,Woolworth Building,Woolworth Building,1.0,1.0,1.0,1.0,87,13,2.7800000000000005e-05
+5ab9e477554299232ef4a25d,retrieval_k3,Woolworth Building,Woolworth Building,1.0,1.0,1.0,1.0,431,7,9.180000000000001e-05
+5ab9e477554299232ef4a25d,retrieval_k5,Woolworth Building,Woolworth Building,1.0,1.0,1.0,1.0,673,7,0.0001402
+5ab9e477554299232ef4a25d,retrieval_k10,Woolworth Building,Woolworth Building,1.0,1.0,1.0,1.0,1659,7,0.00033739999999999996
+5ab900045542991b5579f0c0,always_think,New York City,"Midtown Manhattan in New York City,",0.0,0.6666666666666666,1.0,0.5,92,12,2.8000000000000003e-05
+5ab900045542991b5579f0c0,retrieval_k3,Carnegie Hall,"Midtown Manhattan in New York City,",0.0,0.0,0.0,0.0,597,7,0.000125
+5ab900045542991b5579f0c0,retrieval_k5,"Midtown Manhattan, New York City","Midtown Manhattan in New York City,",0.0,0.9090909090909091,1.0,0.8333333333333334,824,10,0.00017280000000000003
+5ab900045542991b5579f0c0,retrieval_k10,Carnegie Hall,"Midtown Manhattan in New York City,",0.0,0.0,0.0,0.0,1475,7,0.00030060000000000004
+5ab6e848554299710c8d1faa,always_think,1995,"August 19, 1968",0.0,0.0,0.0,0.0,89,11,2.6600000000000003e-05
+5ab6e848554299710c8d1faa,retrieval_k3,"August 19, 1968","August 19, 1968",1.0,1.0,1.0,1.0,646,10,0.00013720000000000003
+5ab6e848554299710c8d1faa,retrieval_k5,1968,"August 19, 1968",0.0,0.5,1.0,0.3333333333333333,1019,5,0.0002078
+5ab6e848554299710c8d1faa,retrieval_k10,1968,"August 19, 1968",0.0,0.5,1.0,0.3333333333333333,1942,5,0.0003924
+5a7dc2495542997cc2c4749a,always_think,1984 Asian Winter Games,1984 South Asian Games,0.0,0.75,0.75,0.75,90,14,2.92e-05
+5a7dc2495542997cc2c4749a,retrieval_k3,1984 South Asian Games,1984 South Asian Games,1.0,1.0,1.0,1.0,440,8,9.44e-05
+5a7dc2495542997cc2c4749a,retrieval_k5,1984 South Asian Games,1984 South Asian Games,1.0,1.0,1.0,1.0,704,8,0.0001472
+5a7dc2495542997cc2c4749a,retrieval_k10,1984 South Asian Games,1984 South Asian Games,1.0,1.0,1.0,1.0,1381,8,0.0002826
+5a84e9d35542994c784dda84,always_think,England,the Switzerland national team,0.0,0.0,0.0,0.0,95,10,2.7e-05
+5a84e9d35542994c784dda84,retrieval_k3,Switzerland national team,the Switzerland national team,1.0,1.0,1.0,1.0,344,7,7.439999999999999e-05
+5a84e9d35542994c784dda84,retrieval_k5,Switzerland national team,the Switzerland national team,1.0,1.0,1.0,1.0,532,7,0.00011200000000000001
+5a84e9d35542994c784dda84,retrieval_k10,Switzerland national team,the Switzerland national team,1.0,1.0,1.0,1.0,1131,7,0.00023180000000000002
+5a7cfea2554299452d57babe,always_think,no</final,Werner Herzog Eats His Shoe,0.0,0.0,0.0,0.0,87,12,2.7000000000000006e-05
+5a7cfea2554299452d57babe,retrieval_k3,Werner Herzog Eats His Shoe,Werner Herzog Eats His Shoe,1.0,1.0,1.0,1.0,383,9,8.38e-05
+5a7cfea2554299452d57babe,retrieval_k5,Werner Herzog Eats His Shoe,Werner Herzog Eats His Shoe,1.0,1.0,1.0,1.0,713,9,0.0001498
+5a7cfea2554299452d57babe,retrieval_k10,Werner Herzog Eats His Shoe,Werner Herzog Eats His Shoe,1.0,1.0,1.0,1.0,1211,9,0.0002494
+5ae497f15542995ad6573db8,always_think,Ballyclare Comrades,Distillery,0.0,0.0,0.0,0.0,87,14,2.8600000000000004e-05
+5ae497f15542995ad6573db8,retrieval_k3,Port Vale,Distillery,0.0,0.0,0.0,0.0,292,5,6.24e-05
+5ae497f15542995ad6573db8,retrieval_k5,noanswer,Distillery,0.0,0.0,0.0,0.0,620,5,0.000128
+5ae497f15542995ad6573db8,retrieval_k10,Distillery,Distillery,1.0,1.0,1.0,1.0,1188,5,0.00024160000000000002
+5ae2133e554299495565d9e3,always_think,Maya Washington,Kristine Leahy,0.0,0.0,0.0,0.0,92,12,2.8000000000000003e-05
+5ae2133e554299495565d9e3,retrieval_k3,Kristine Leahy,Kristine Leahy,1.0,1.0,1.0,1.0,497,7,0.000105
+5ae2133e554299495565d9e3,retrieval_k5,Kristine Leahy,Kristine Leahy,1.0,1.0,1.0,1.0,727,7,0.000151
+5ae2133e554299495565d9e3,retrieval_k10,Kristine Leahy,Kristine Leahy,1.0,1.0,1.0,1.0,1373,7,0.0002802
+5abfe1115542997d64295909,always_think,paranormal tradition,Native American,0.0,0.0,0.0,0.0,92,7,2.4000000000000004e-05
+5abfe1115542997d64295909,retrieval_k3,Native American tradition,Native American,0.0,0.8,0.6666666666666666,1.0,430,6,9.08e-05
+5abfe1115542997d64295909,retrieval_k5,Native American tradition,Native American,0.0,0.8,0.6666666666666666,1.0,564,6,0.00011760000000000001
+5abfe1115542997d64295909,retrieval_k10,Thunderbird,Native American,0.0,0.0,0.0,0.0,1341,5,0.0002722
+5a8ce55f554299441c6b9f62,always_think,New York City,Tulsa,0.0,0.0,0.0,0.0,93,12,2.82e-05
+5a8ce55f554299441c6b9f62,retrieval_k3,Tulsa,Tulsa,1.0,1.0,1.0,1.0,603,5,0.0001246
+5a8ce55f554299441c6b9f62,retrieval_k5,Tulsa,Tulsa,1.0,1.0,1.0,1.0,948,5,0.00019360000000000002
+5a8ce55f554299441c6b9f62,retrieval_k10,"Tulsa, Oklahoma",Tulsa,0.0,0.6666666666666666,0.5,1.0,1829,7,0.00037140000000000003
+5a7c47c35542990527d55481,always_think,British American Tobacco,Army & Navy Stores,0.0,0.0,0.0,0.0,107,12,3.1e-05
+5a7c47c35542990527d55481,retrieval_k3,House of Fraser,Army & Navy Stores,0.0,0.0,0.0,0.0,627,6,0.00013020000000000002
+5a7c47c35542990527d55481,retrieval_k5,House of Fraser,Army & Navy Stores,0.0,0.0,0.0,0.0,894,6,0.00018360000000000002
+5a7c47c35542990527d55481,retrieval_k10,House of Fraser,Army & Navy Stores,0.0,0.0,0.0,0.0,1438,6,0.0002924
+5ab4107a554299753aec5a2f,always_think,1950,1961,0.0,0.0,0.0,0.0,88,11,2.64e-05
+5ab4107a554299753aec5a2f,retrieval_k3,1961,1961,1.0,1.0,1.0,1.0,446,5,9.32e-05
+5ab4107a554299753aec5a2f,retrieval_k5,1961,1961,1.0,1.0,1.0,1.0,631,5,0.0001302
+5ab4107a554299753aec5a2f,retrieval_k10,1961,1961,1.0,1.0,1.0,1.0,1442,5,0.0002924
+5a774e415542994aec3b7280,always_think,Ginger Zee,Kait Parker,0.0,0.0,0.0,0.0,87,12,2.7000000000000006e-05
+5a774e415542994aec3b7280,retrieval_k3,Kait Parker,Kait Parker,1.0,1.0,1.0,1.0,342,12,7.800000000000001e-05
+5a774e415542994aec3b7280,retrieval_k5,Kait Parker,Kait Parker,1.0,1.0,1.0,1.0,574,12,0.00012440000000000002
+5a774e415542994aec3b7280,retrieval_k10,Kait Parker,Kait Parker,1.0,1.0,1.0,1.0,1566,6,0.00031800000000000003
+5abdf06355429976d4830a2d,always_think,"The weighing of the heart
+",against the feather of truth,0.0,0.28571428571428575,0.3333333333333333,0.25,103,9,2.7800000000000005e-05
+5abdf06355429976d4830a2d,retrieval_k3,heart,against the feather of truth,0.0,0.0,0.0,0.0,642,4,0.0001316
+5abdf06355429976d4830a2d,retrieval_k5,heart was weighed against the feather of truth,against the feather of truth,0.0,0.7272727272727273,0.5714285714285714,1.0,871,11,0.000183
+5abdf06355429976d4830a2d,retrieval_k10,heart was weighed against the feather of truth,against the feather of truth,0.0,0.7272727272727273,0.5714285714285714,1.0,1793,11,0.00036740000000000004
+5a8ac4dd5542992d82986f76,always_think,Accrington,Barnoldswick,0.0,0.0,0.0,0.0,97,12,2.9e-05
+5a8ac4dd5542992d82986f76,retrieval_k3,Barnoldswick,Barnoldswick,1.0,1.0,1.0,1.0,435,6,9.18e-05
+5a8ac4dd5542992d82986f76,retrieval_k5,Barnoldswick,Barnoldswick,1.0,1.0,1.0,1.0,758,6,0.0001564
+5a8ac4dd5542992d82986f76,retrieval_k10,Barnoldswick,Barnoldswick,1.0,1.0,1.0,1.0,1309,6,0.00026660000000000003
+5a8f503c5542992414482a34,always_think,Canadian,English,0.0,0.0,0.0,0.0,94,4,2.2e-05
+5a8f503c5542992414482a34,retrieval_k3,British,English,0.0,0.0,0.0,0.0,291,4,6.14e-05
+5a8f503c5542992414482a34,retrieval_k5,British,English,0.0,0.0,0.0,0.0,507,4,0.00010460000000000001
+5a8f503c5542992414482a34,retrieval_k10,English,English,1.0,1.0,1.0,1.0,1280,4,0.0002592
+5a8ec55f5542995a26add50c,always_think,"1,254 feet",4145 ft,0.0,0.0,0.0,0.0,83,7,2.22e-05
+5a8ec55f5542995a26add50c,retrieval_k3,on top of Black Mountain,4145 ft,0.0,0.0,0.0,0.0,452,8,9.680000000000001e-05
+5a8ec55f5542995a26add50c,retrieval_k5,top of Black Mountain,4145 ft,0.0,0.0,0.0,0.0,662,7,0.000138
+5a8ec55f5542995a26add50c,retrieval_k10,noanswer,4145 ft,0.0,0.0,0.0,0.0,1184,5,0.0002408
+5ae1338d55429901ffe4ade1,always_think,caipirinha,the green fairy,0.0,0.0,0.0,0.0,102,13,3.08e-05
+5ae1338d55429901ffe4ade1,retrieval_k3,absinthe,the green fairy,0.0,0.0,0.0,0.0,459,5,9.580000000000001e-05
+5ae1338d55429901ffe4ade1,retrieval_k5,la fée verte,the green fairy,0.0,0.0,0.0,0.0,730,7,0.0001516
+5ae1338d55429901ffe4ade1,retrieval_k10,la fée verte,the green fairy,0.0,0.0,0.0,0.0,1616,13,0.00033360000000000003
+5a7bea3d5542996dd594b847,always_think,Tom Ellis,Sean Maguire,0.0,0.0,0.0,0.0,99,11,2.86e-05
+5a7bea3d5542996dd594b847,retrieval_k3,Sean Maguire,Sean Maguire,1.0,1.0,1.0,1.0,489,6,0.0001026
+5a7bea3d5542996dd594b847,retrieval_k5,Sean Maguire,Sean Maguire,1.0,1.0,1.0,1.0,736,6,0.00015200000000000004
+5a7bea3d5542996dd594b847,retrieval_k10,Sean Maguire,Sean Maguire,1.0,1.0,1.0,1.0,2091,6,0.00042300000000000004
+5a7f567e5542992097ad2f22,always_think,2001,2001,1.0,1.0,1.0,1.0,91,11,2.7e-05
+5a7f567e5542992097ad2f22,retrieval_k3,2001,2001,1.0,1.0,1.0,1.0,649,5,0.0001338
+5a7f567e5542992097ad2f22,retrieval_k5,2001,2001,1.0,1.0,1.0,1.0,1031,5,0.00021020000000000001
+5a7f567e5542992097ad2f22,retrieval_k10,2001,2001,1.0,1.0,1.0,1.0,1941,5,0.00039220000000000005
+5ac26ac15542992f1f2b38bc,always_think,Terry Southern,Sam Phillips,0.0,0.0,0.0,0.0,92,12,2.8000000000000003e-05
+5ac26ac15542992f1f2b38bc,retrieval_k3,noanswer,Sam Phillips,0.0,0.0,0.0,0.0,380,5,8e-05
+5ac26ac15542992f1f2b38bc,retrieval_k5,Hustle & Flow,Sam Phillips,0.0,0.0,0.0,0.0,736,8,0.00015360000000000002
+5ac26ac15542992f1f2b38bc,retrieval_k10,Sun Records founder Sam Phillips,Sam Phillips,0.0,0.5714285714285715,0.4,1.0,1296,8,0.0002656
+5adbcc085542996e6852523c,always_think,"Ahi poke, macadamia-crusted fish, and poi","poi, Kalua pig, poke, lomi salmon, opihi, haupia",0.0,0.28571428571428575,0.3333333333333333,0.25,88,16,3.04e-05
+5adbcc085542996e6852523c,retrieval_k3,"poi, Kalua pig, poke, lomi salmon, opihi, haupia and beer","poi, Kalua pig, poke, lomi salmon, opihi, haupia",0.0,0.888888888888889,0.8,1.0,509,22,0.0001194
+5adbcc085542996e6852523c,retrieval_k5,"poi, Kalua pig, poke, lomi salmon, opihi, haupia","poi, Kalua pig, poke, lomi salmon, opihi, haupia",1.0,1.0,1.0,1.0,760,20,0.00016800000000000002
+5adbcc085542996e6852523c,retrieval_k10,luau show,"poi, Kalua pig, poke, lomi salmon, opihi, haupia",0.0,0.0,0.0,0.0,1584,6,0.0003216
+5ae531695542990ba0bbb1fb,always_think,1952,1945,0.0,0.0,0.0,0.0,102,11,2.92e-05
+5ae531695542990ba0bbb1fb,retrieval_k3,1965,1945,0.0,0.0,0.0,0.0,471,5,9.82e-05
+5ae531695542990ba0bbb1fb,retrieval_k5,1945,1945,1.0,1.0,1.0,1.0,664,5,0.0001368
+5ae531695542990ba0bbb1fb,retrieval_k10,1945,1945,1.0,1.0,1.0,1.0,1290,5,0.00026199999999999997
+5ac2cb09554299657fa29066,always_think,Texas Longhorns,Texas Longhorns men's basketball team,0.0,0.5714285714285715,1.0,0.4,94,7,2.44e-05
+5ac2cb09554299657fa29066,retrieval_k3,Texas Longhorns,Texas Longhorns men's basketball team,0.0,0.5714285714285715,1.0,0.4,517,7,0.000109
+5ac2cb09554299657fa29066,retrieval_k5,Texas Longhorns men's basketball team,Texas Longhorns men's basketball team,1.0,1.0,1.0,1.0,682,10,0.0001444
+5ac2cb09554299657fa29066,retrieval_k10,Texas Longhorns men's basketball team,Texas Longhorns men's basketball team,1.0,1.0,1.0,1.0,1748,10,0.0003576
+5a82817555429954d2e2eb5a,always_think,Naked Killer,"""Naked Killer""",1.0,1.0,1.0,1.0,90,6,2.2800000000000002e-05
+5a82817555429954d2e2eb5a,retrieval_k3,Naked Killer,"""Naked Killer""",1.0,1.0,1.0,1.0,288,6,6.24e-05
+5a82817555429954d2e2eb5a,retrieval_k5,Naked Killer,"""Naked Killer""",1.0,1.0,1.0,1.0,681,6,0.000141
+5a82817555429954d2e2eb5a,retrieval_k10,Naked Killer,"""Naked Killer""",1.0,1.0,1.0,1.0,1421,6,0.000289
+5ae34b275542992e3233c371,always_think,Tony Award,Outstanding Lighting Design,0.0,0.0,0.0,0.0,90,11,2.68e-05
+5ae34b275542992e3233c371,retrieval_k3,Drama Desk Award for Outstanding Lighting Design,Outstanding Lighting Design,0.0,0.6,0.42857142857142855,1.0,373,10,8.260000000000002e-05
+5ae34b275542992e3233c371,retrieval_k5,Drama Desk Award for Outstanding Lighting Design,Outstanding Lighting Design,0.0,0.6,0.42857142857142855,1.0,459,10,9.980000000000001e-05
+5ae34b275542992e3233c371,retrieval_k10,Drama Desk Award for Outstanding Lighting Design,Outstanding Lighting Design,0.0,0.6,0.42857142857142855,1.0,895,10,0.000187
+5a74f5155542993748c89750,always_think,Colomac Mine,The Colomac Mine,1.0,1.0,1.0,1.0,94,6,2.36e-05
+5a74f5155542993748c89750,retrieval_k3,Colomac Mine,The Colomac Mine,1.0,1.0,1.0,1.0,532,6,0.0001112
+5a74f5155542993748c89750,retrieval_k5,Colomac Mine,The Colomac Mine,1.0,1.0,1.0,1.0,1065,6,0.0002178
+5a74f5155542993748c89750,retrieval_k10,Colomac Mine,The Colomac Mine,1.0,1.0,1.0,1.0,1685,6,0.0003418
+5add0f635542994ed6169c56,always_think,yes,yes,1.0,1.0,1.0,1.0,93,10,2.6600000000000003e-05
+5add0f635542994ed6169c56,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,415,4,8.62e-05
+5add0f635542994ed6169c56,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,570,4,0.0001172
+5add0f635542994ed6169c56,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,1130,4,0.0002292
+5ab4428c5542990594ba9bda,always_think,no,yes,0.0,0.0,0.0,0.0,88,10,2.56e-05
+5ab4428c5542990594ba9bda,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,550,4,0.0001132
+5ab4428c5542990594ba9bda,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,727,4,0.0001486
+5ab4428c5542990594ba9bda,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,1480,4,0.0002992
+5a721a7655429971e9dc9271,always_think,Candice Bergen,Christopher Rich,0.0,0.0,0.0,0.0,95,12,2.8600000000000004e-05
+5a721a7655429971e9dc9271,retrieval_k3,Christopher Rich,Christopher Rich,1.0,1.0,1.0,1.0,623,5,0.0001286
+5a721a7655429971e9dc9271,retrieval_k5,Christopher Rich,Christopher Rich,1.0,1.0,1.0,1.0,904,5,0.0001848
+5a721a7655429971e9dc9271,retrieval_k10,Christopher Rich,Christopher Rich,1.0,1.0,1.0,1.0,1749,5,0.0003538
+5ae532365542992663a4f150,always_think,2004,2015,0.0,0.0,0.0,0.0,89,5,2.18e-05
+5ae532365542992663a4f150,retrieval_k3,2015,2015,1.0,1.0,1.0,1.0,482,5,0.00010040000000000001
+5ae532365542992663a4f150,retrieval_k5,2015,2015,1.0,1.0,1.0,1.0,849,5,0.0001738
+5ae532365542992663a4f150,retrieval_k10,2015,2015,1.0,1.0,1.0,1.0,1440,5,0.000292
+5a72f1cf5542994cef4bc414,always_think,Gary Oldman,Gary Oldman,1.0,1.0,1.0,1.0,98,6,2.4400000000000004e-05
+5a72f1cf5542994cef4bc414,retrieval_k3,Gary Oldman,Gary Oldman,1.0,1.0,1.0,1.0,602,6,0.0001252
+5a72f1cf5542994cef4bc414,retrieval_k5,Gary Oldman,Gary Oldman,1.0,1.0,1.0,1.0,747,6,0.0001542
+5a72f1cf5542994cef4bc414,retrieval_k10,Gary Oldman,Gary Oldman,1.0,1.0,1.0,1.0,1236,6,0.000252
+5a749e1855429979e28829c3,always_think,Emilio Sánchez,Emilio Ángel Sánchez Vicario,0.0,0.6666666666666666,1.0,0.5,89,6,2.2600000000000004e-05
+5a749e1855429979e28829c3,retrieval_k3,Emilio Sánchez,Emilio Ángel Sánchez Vicario,0.0,0.6666666666666666,1.0,0.5,323,6,6.94e-05
+5a749e1855429979e28829c3,retrieval_k5,Emilio Sánchez,Emilio Ángel Sánchez Vicario,0.0,0.6666666666666666,1.0,0.5,480,6,0.0001008
+5a749e1855429979e28829c3,retrieval_k10,Emilio Sánchez,Emilio Ángel Sánchez Vicario,0.0,0.6666666666666666,1.0,0.5,979,6,0.00020060000000000002
+5a8b051255429971feec460e,always_think,Harry Reid,U.S. Senator Pat McCarran,0.0,0.0,0.0,0.0,107,11,3.0200000000000002e-05
+5a8b051255429971feec460e,retrieval_k3,Pat McCarran,U.S. Senator Pat McCarran,0.0,0.6666666666666666,1.0,0.5,500,7,0.0001056
+5a8b051255429971feec460e,retrieval_k5,Pat McCarran,U.S. Senator Pat McCarran,0.0,0.6666666666666666,1.0,0.5,693,7,0.00014419999999999998
+5a8b051255429971feec460e,retrieval_k10,Pat McCarran,U.S. Senator Pat McCarran,0.0,0.6666666666666666,1.0,0.5,1274,7,0.00026040000000000004
+5a7616755542992d0ec06028,always_think,Pascagoula,"Gulfport, Biloxi",0.0,0.0,0.0,0.0,87,7,2.3000000000000003e-05
+5a7616755542992d0ec06028,retrieval_k3,"Harrison County, Mississippi","Gulfport, Biloxi",0.0,0.0,0.0,0.0,367,8,7.980000000000002e-05
+5a7616755542992d0ec06028,retrieval_k5,Biloxi,"Gulfport, Biloxi",0.0,0.6666666666666666,1.0,0.5,504,5,0.00010480000000000001
+5a7616755542992d0ec06028,retrieval_k10,Biloxi,"Gulfport, Biloxi",0.0,0.6666666666666666,1.0,0.5,1383,5,0.0002806
+5ac0fd56554299012d1db679,always_think,Missouri,Missouri,1.0,1.0,1.0,1.0,92,5,2.2400000000000002e-05
+5ac0fd56554299012d1db679,retrieval_k3,noanswer,Missouri,0.0,0.0,0.0,0.0,468,5,9.760000000000001e-05
+5ac0fd56554299012d1db679,retrieval_k5,Missouri,Missouri,1.0,1.0,1.0,1.0,612,5,0.00012639999999999998
+5ac0fd56554299012d1db679,retrieval_k10,Missouri,Missouri,1.0,1.0,1.0,1.0,1245,5,0.00025299999999999997
+5adde73f5542992200553b94,always_think,Spider-Man,comic,0.0,0.0,0.0,0.0,88,5,2.16e-05
+5adde73f5542992200553b94,retrieval_k3,Spider-Man,comic,0.0,0.0,0.0,0.0,512,5,0.00010640000000000001
+5adde73f5542992200553b94,retrieval_k5,Spider-Man,comic,0.0,0.0,0.0,0.0,975,5,0.00019899999999999999
+5adde73f5542992200553b94,retrieval_k10,Spider-Man,comic,0.0,0.0,0.0,0.0,1776,5,0.00035920000000000006
+5ab506a05542990594ba9cd6,always_think,Scaevola,Sonerila,0.0,0.0,0.0,0.0,87,13,2.7800000000000005e-05
+5ab506a05542990594ba9cd6,retrieval_k3,Sonerila,Sonerila,1.0,1.0,1.0,1.0,272,6,5.920000000000001e-05
+5ab506a05542990594ba9cd6,retrieval_k5,Scaevola,Sonerila,0.0,0.0,0.0,0.0,496,7,0.0001048
+5ab506a05542990594ba9cd6,retrieval_k10,Scaevola,Sonerila,0.0,0.0,0.0,0.0,1058,7,0.00021720000000000002
+5a7f57a45542992097ad2f29,always_think,Venstre,"Liberal ""Venstre"" party",0.0,0.5,1.0,0.3333333333333333,96,5,2.32e-05
+5a7f57a45542992097ad2f29,retrieval_k3,Venstre,"Liberal ""Venstre"" party",0.0,0.5,1.0,0.3333333333333333,382,5,8.04e-05
+5a7f57a45542992097ad2f29,retrieval_k5,Venstre,"Liberal ""Venstre"" party",0.0,0.5,1.0,0.3333333333333333,615,5,0.000127
+5a7f57a45542992097ad2f29,retrieval_k10,Venstre,"Liberal ""Venstre"" party",0.0,0.5,1.0,0.3333333333333333,1216,5,0.00024720000000000005
+5a8dee2455429917b4a5bce1,always_think,Slumdog Millionaire,Pineapple Express,0.0,0.0,0.0,0.0,86,8,2.3599999999999998e-05
+5a8dee2455429917b4a5bce1,retrieval_k3,Milk,Pineapple Express,0.0,0.0,0.0,0.0,573,4,0.0001178
+5a8dee2455429917b4a5bce1,retrieval_k5,Milk,Pineapple Express,0.0,0.0,0.0,0.0,882,4,0.0001796
+5a8dee2455429917b4a5bce1,retrieval_k10,Milk,Pineapple Express,0.0,0.0,0.0,0.0,1823,4,0.00036780000000000005
+5a7cd7f055429909bec7683e,always_think,Bennington College,Juilliard School,0.0,0.0,0.0,0.0,106,12,3.08e-05
+5a7cd7f055429909bec7683e,retrieval_k3,Juilliard School,Juilliard School,1.0,1.0,1.0,1.0,557,7,0.00011700000000000001
+5a7cd7f055429909bec7683e,retrieval_k5,Juilliard School,Juilliard School,1.0,1.0,1.0,1.0,846,7,0.00017480000000000002
+5a7cd7f055429909bec7683e,retrieval_k10,Juilliard School,Juilliard School,1.0,1.0,1.0,1.0,1353,7,0.0002762
+5a7cb8bc554299452d57b9be,always_think,"25,000","27,000",0.0,0.0,0.0,0.0,90,12,2.76e-05
+5a7cb8bc554299452d57b9be,retrieval_k3,"27,000","27,000",1.0,1.0,1.0,1.0,441,6,9.3e-05
+5a7cb8bc554299452d57b9be,retrieval_k5,27000,"27,000",1.0,1.0,1.0,1.0,682,5,0.0001404
+5a7cb8bc554299452d57b9be,retrieval_k10,27000,"27,000",1.0,1.0,1.0,1.0,1272,5,0.0002584
+5ab9547755429970cfb8ea6c,always_think,89,87,0.0,0.0,0.0,0.0,93,4,2.18e-05
+5ab9547755429970cfb8ea6c,retrieval_k3,88,87,0.0,0.0,0.0,0.0,289,4,6.1000000000000005e-05
+5ab9547755429970cfb8ea6c,retrieval_k5,88,87,0.0,0.0,0.0,0.0,586,4,0.0001204
+5ab9547755429970cfb8ea6c,retrieval_k10,87,87,1.0,1.0,1.0,1.0,1428,4,0.0002888
+5a8cfa2e554299585d9e378b,always_think,modeling,professional footballer,0.0,0.0,0.0,0.0,100,11,2.8800000000000002e-05
+5a8cfa2e554299585d9e378b,retrieval_k3,noanswer,professional footballer,0.0,0.0,0.0,0.0,446,11,9.8e-05
+5a8cfa2e554299585d9e378b,retrieval_k5,Footballer,professional footballer,0.0,0.6666666666666666,1.0,0.5,557,11,0.00012020000000000001
+5a8cfa2e554299585d9e378b,retrieval_k10,professional footballer,professional footballer,1.0,1.0,1.0,1.0,959,6,0.0001966
+5ab67bd355429954757d32f2,always_think,New York Giants,New York Giants,1.0,1.0,1.0,1.0,106,6,2.6000000000000005e-05
+5ab67bd355429954757d32f2,retrieval_k3,New York Giants,New York Giants,1.0,1.0,1.0,1.0,654,6,0.00013560000000000002
+5ab67bd355429954757d32f2,retrieval_k5,New York Giants,New York Giants,1.0,1.0,1.0,1.0,964,6,0.00019760000000000003
+5ab67bd355429954757d32f2,retrieval_k10,New York Giants,New York Giants,1.0,1.0,1.0,1.0,1811,6,0.00036700000000000003
+5abecdf45542997719eab5d4,always_think,Polk County,Polk,0.0,0.6666666666666666,0.5,1.0,94,12,2.84e-05
+5abecdf45542997719eab5d4,retrieval_k3,Polk County,Polk,0.0,0.6666666666666666,0.5,1.0,564,6,0.00011760000000000001
+5abecdf45542997719eab5d4,retrieval_k5,Polk County,Polk,0.0,0.6666666666666666,0.5,1.0,806,6,0.00016600000000000002
+5abecdf45542997719eab5d4,retrieval_k10,Polk County,Polk,0.0,0.6666666666666666,0.5,1.0,1568,6,0.00031840000000000004
+5a7e37095542995ed0d166d5,always_think,Robert Z. Leonard,Sinclair Hill,0.0,0.0,0.0,0.0,87,13,2.7800000000000005e-05
+5a7e37095542995ed0d166d5,retrieval_k3,Robert Z. Leonard,Sinclair Hill,0.0,0.0,0.0,0.0,299,7,6.54e-05
+5a7e37095542995ed0d166d5,retrieval_k5,Robert Z. Leonard,Sinclair Hill,0.0,0.0,0.0,0.0,418,7,8.920000000000001e-05
+5a7e37095542995ed0d166d5,retrieval_k10,Robert Z. Leonard,Sinclair Hill,0.0,0.0,0.0,0.0,856,7,0.00017680000000000001
+5a8f18d555429918e830d189,always_think,Caistor,Caistor is a town,0.0,0.5,1.0,0.3333333333333333,94,5,2.28e-05
+5a8f18d555429918e830d189,retrieval_k3,Caistor,Caistor is a town,0.0,0.5,1.0,0.3333333333333333,391,11,8.7e-05
+5a8f18d555429918e830d189,retrieval_k5,Caistor,Caistor is a town,0.0,0.5,1.0,0.3333333333333333,602,5,0.0001244
+5a8f18d555429918e830d189,retrieval_k10,Caistor,Caistor is a town,0.0,0.5,1.0,0.3333333333333333,1053,5,0.0002146
+5a7b85ac5542997c3ec971ef,always_think,The Boxtrolls,Robot Overlords,0.0,0.0,0.0,0.0,87,14,2.8600000000000004e-05
+5a7b85ac5542997c3ec971ef,retrieval_k3,The Mighty Celt,Robot Overlords,0.0,0.0,0.0,0.0,412,6,8.72e-05
+5a7b85ac5542997c3ec971ef,retrieval_k5,Robot Overlords,Robot Overlords,1.0,1.0,1.0,1.0,549,6,0.00011460000000000001
+5a7b85ac5542997c3ec971ef,retrieval_k10,Robot Overlords,Robot Overlords,1.0,1.0,1.0,1.0,919,6,0.00018860000000000003
+5ae617285542996de7b71b4c,always_think,German,South African-born,0.0,0.0,0.0,0.0,94,10,2.68e-05
+5ae617285542996de7b71b4c,retrieval_k3,British,South African-born,0.0,0.0,0.0,0.0,455,4,9.42e-05
+5ae617285542996de7b71b4c,retrieval_k5,Canadian,South African-born,0.0,0.0,0.0,0.0,569,4,0.00011700000000000001
+5ae617285542996de7b71b4c,retrieval_k10,South African-born,South African-born,1.0,1.0,1.0,1.0,938,6,0.00019240000000000004
+5ae7247b5542992ae0d163c1,always_think,"November 10, 2017","November 10, 2017",1.0,1.0,1.0,1.0,94,16,3.16e-05
+5ae7247b5542992ae0d163c1,retrieval_k3,"November 10, 2017","November 10, 2017",1.0,1.0,1.0,1.0,462,10,0.00010040000000000001
+5ae7247b5542992ae0d163c1,retrieval_k5,"November 10, 2017","November 10, 2017",1.0,1.0,1.0,1.0,757,10,0.0001594
+5ae7247b5542992ae0d163c1,retrieval_k10,"November 10, 2017","November 10, 2017",1.0,1.0,1.0,1.0,1658,10,0.0003396
+5ae0ae4555429945ae959419,always_think,mermaid,A mermaid,1.0,1.0,1.0,1.0,108,5,2.56e-05
+5ae0ae4555429945ae959419,retrieval_k3,mermaid,A mermaid,1.0,1.0,1.0,1.0,454,5,9.480000000000001e-05
+5ae0ae4555429945ae959419,retrieval_k5,mermaid,A mermaid,1.0,1.0,1.0,1.0,607,5,0.0001254
+5ae0ae4555429945ae959419,retrieval_k10,mermaid,A mermaid,1.0,1.0,1.0,1.0,1192,5,0.00024239999999999998
+5ae306115542992decbdcdc4,always_think,"Hormel
+",Hormel Foods Corporation,0.0,0.5,1.0,0.3333333333333333,94,12,2.84e-05
+5ae306115542992decbdcdc4,retrieval_k3,Spam,Hormel Foods Corporation,0.0,0.0,0.0,0.0,430,4,8.92e-05
+5ae306115542992decbdcdc4,retrieval_k5,Spam,Hormel Foods Corporation,0.0,0.0,0.0,0.0,619,4,0.000127
+5ae306115542992decbdcdc4,retrieval_k10,Spam,Hormel Foods Corporation,0.0,0.0,0.0,0.0,1450,4,0.0002932
+5ade4fcc5542997c77adeded,always_think,Pim Fortuyn,"Wilhelmus Simon Petrus Fortuijn, known as Pim Fortuyn",0.0,0.4,1.0,0.25,112,14,3.3600000000000004e-05
+5ade4fcc5542997c77adeded,retrieval_k3,Pim Fortuyn,"Wilhelmus Simon Petrus Fortuijn, known as Pim Fortuyn",0.0,0.4,1.0,0.25,510,8,0.0001084
+5ade4fcc5542997c77adeded,retrieval_k5,Pim Fortuyn,"Wilhelmus Simon Petrus Fortuijn, known as Pim Fortuyn",0.0,0.4,1.0,0.25,678,8,0.00014199999999999998
+5ade4fcc5542997c77adeded,retrieval_k10,Pim Fortuyn,"Wilhelmus Simon Petrus Fortuijn, known as Pim Fortuyn",0.0,0.4,1.0,0.25,1443,8,0.000295
+5abdd08d5542991f6610604c,always_think,Guardians of the Galaxy Vol. 2,Guardians of the Galaxy Vol. 2,1.0,1.0,1.0,1.0,89,12,2.7400000000000002e-05
+5abdd08d5542991f6610604c,retrieval_k3,Guardians of the Galaxy Vol. 2,Guardians of the Galaxy Vol. 2,1.0,1.0,1.0,1.0,532,12,0.00011600000000000001
+5abdd08d5542991f6610604c,retrieval_k5,Guardians of the Galaxy Vol. 2,Guardians of the Galaxy Vol. 2,1.0,1.0,1.0,1.0,671,12,0.0001438
+5abdd08d5542991f6610604c,retrieval_k10,Guardians of the Galaxy Vol. 2,Guardians of the Galaxy Vol. 2,1.0,1.0,1.0,1.0,1455,12,0.00030060000000000004
+5a72abb95542992359bc3162,always_think,Smith!,Smith!,1.0,1.0,1.0,1.0,89,11,2.6600000000000003e-05
+5a72abb95542992359bc3162,retrieval_k3,Smith!,Smith!,1.0,1.0,1.0,1.0,530,5,0.00011
+5a72abb95542992359bc3162,retrieval_k5,Smith!,Smith!,1.0,1.0,1.0,1.0,764,5,0.0001568
+5a72abb95542992359bc3162,retrieval_k10,Smith!,Smith!,1.0,1.0,1.0,1.0,1530,11,0.0003148
+5a7f54665542992097ad2f1a,always_think,Isar and Würm,Bow River and the Elbow River,0.0,0.25,0.3333333333333333,0.2,96,14,3.0400000000000004e-05
+5a7f54665542992097ad2f1a,retrieval_k3,Danube and Inn,Bow River and the Elbow River,0.0,0.25,0.3333333333333333,0.2,456,13,0.0001016
+5a7f54665542992097ad2f1a,retrieval_k5,Spree and Havel,Bow River and the Elbow River,0.0,0.25,0.3333333333333333,0.2,637,8,0.0001338
+5a7f54665542992097ad2f1a,retrieval_k10,Bow River and the Elbow River,Bow River and the Elbow River,1.0,1.0,1.0,1.0,1245,10,0.00025699999999999996
+5ae0bc185542993d6555ec29,always_think,Terry Kiser,Ben Savage,0.0,0.0,0.0,0.0,86,13,2.76e-05
+5ae0bc185542993d6555ec29,retrieval_k3,noanswer,Ben Savage,0.0,0.0,0.0,0.0,341,5,7.22e-05
+5ae0bc185542993d6555ec29,retrieval_k5,Todd Bridges,Ben Savage,0.0,0.0,0.0,0.0,699,5,0.0001438
+5ae0bc185542993d6555ec29,retrieval_k10,Ben Savage,Ben Savage,1.0,1.0,1.0,1.0,1409,5,0.0002858
+5a864d9e5542994775f6073d,always_think,no,no,1.0,1.0,1.0,1.0,88,10,2.56e-05
+5a864d9e5542994775f6073d,retrieval_k3,no,no,1.0,1.0,1.0,1.0,341,4,7.14e-05
+5a864d9e5542994775f6073d,retrieval_k5,no,no,1.0,1.0,1.0,1.0,783,4,0.0001598
+5a864d9e5542994775f6073d,retrieval_k10,no,no,1.0,1.0,1.0,1.0,1245,4,0.0002522
+5ae5b25d5542990ba0bbb2bb,always_think,Christopher Guest,Christopher Haden-Guest,0.0,0.5,0.5,0.5,89,11,2.6600000000000003e-05
+5ae5b25d5542990ba0bbb2bb,retrieval_k3,Christopher Guest,Christopher Haden-Guest,0.0,0.5,0.5,0.5,520,5,0.000108
+5ae5b25d5542990ba0bbb2bb,retrieval_k5,Christopher Guest,Christopher Haden-Guest,0.0,0.5,0.5,0.5,717,5,0.0001474
+5ae5b25d5542990ba0bbb2bb,retrieval_k10,Christopher Guest,Christopher Haden-Guest,0.0,0.5,0.5,0.5,1409,5,0.0002858
+5ae5e62455429929b0807a07,always_think,Italian,Italian,1.0,1.0,1.0,1.0,91,4,2.14e-05
+5ae5e62455429929b0807a07,retrieval_k3,Italian,Italian,1.0,1.0,1.0,1.0,443,4,9.180000000000001e-05
+5ae5e62455429929b0807a07,retrieval_k5,Italian,Italian,1.0,1.0,1.0,1.0,591,4,0.0001214
+5ae5e62455429929b0807a07,retrieval_k10,Italian,Italian,1.0,1.0,1.0,1.0,1478,4,0.00029880000000000005
+5ae0120155429925eb1afbfb,always_think,Friendship,"My Boss, My Hero",0.0,0.0,0.0,0.0,92,11,2.7200000000000004e-05
+5ae0120155429925eb1afbfb,retrieval_k3,"My Boss, My Hero","My Boss, My Hero",1.0,1.0,1.0,1.0,315,8,6.94e-05
+5ae0120155429925eb1afbfb,retrieval_k5,"My Boss, My Hero","My Boss, My Hero",1.0,1.0,1.0,1.0,533,8,0.00011300000000000001
+5ae0120155429925eb1afbfb,retrieval_k10,"My Boss, My Hero","My Boss, My Hero",1.0,1.0,1.0,1.0,1105,8,0.0002274
+5abe87cb5542993f32c2a156,always_think,national lottery,state-franchised,0.0,0.0,0.0,0.0,86,5,2.1199999999999997e-05
+5abe87cb5542993f32c2a156,retrieval_k3,National Lottery,state-franchised,0.0,0.0,0.0,0.0,253,5,5.4600000000000006e-05
+5abe87cb5542993f32c2a156,retrieval_k5,National Lottery,state-franchised,0.0,0.0,0.0,0.0,471,5,9.82e-05
+5abe87cb5542993f32c2a156,retrieval_k10,National Lottery,state-franchised,0.0,0.0,0.0,0.0,982,5,0.0002004
+5ae2b770554299495565db0f,always_think,November,March and April,0.0,0.0,0.0,0.0,100,10,2.8000000000000003e-05
+5ae2b770554299495565db0f,retrieval_k3,March and April,March and April,1.0,1.0,1.0,1.0,233,6,5.14e-05
+5ae2b770554299495565db0f,retrieval_k5,March and April,March and April,1.0,1.0,1.0,1.0,507,12,0.00011100000000000001
+5ae2b770554299495565db0f,retrieval_k10,March,March and April,0.0,0.5,1.0,0.3333333333333333,1113,4,0.0002258
+5a7af2a455429931da12c998,always_think,West Palm Beach,Miami,0.0,0.0,0.0,0.0,100,12,2.96e-05
+5a7af2a455429931da12c998,retrieval_k3,West Palm Beach,Miami,0.0,0.0,0.0,0.0,562,6,0.0001172
+5a7af2a455429931da12c998,retrieval_k5,West Palm Beach,Miami,0.0,0.0,0.0,0.0,813,6,0.00016740000000000003
+5a7af2a455429931da12c998,retrieval_k10,West Palm Beach,Miami,0.0,0.0,0.0,0.0,1438,6,0.0002924
+5a7af23a55429931da12c994,always_think,The Suite Life of Zack & Cody,The Suite Life of Zack & Cody,1.0,1.0,1.0,1.0,89,16,3.0600000000000005e-05
+5a7af23a55429931da12c994,retrieval_k3,The Suite Life of Zack & Cody,The Suite Life of Zack & Cody,1.0,1.0,1.0,1.0,479,10,0.00010380000000000002
+5a7af23a55429931da12c994,retrieval_k5,The Suite Life of Zack & Cody,The Suite Life of Zack & Cody,1.0,1.0,1.0,1.0,863,10,0.00018060000000000003
+5a7af23a55429931da12c994,retrieval_k10,The Suite Life of Zack & Cody,The Suite Life of Zack & Cody,1.0,1.0,1.0,1.0,1677,10,0.0003434
+5ab8634e5542990e739ec8de,always_think,a positive value premium,The Vanguard Group,0.0,0.0,0.0,0.0,95,7,2.46e-05
+5ab8634e5542990e739ec8de,retrieval_k3,Fama and French's research is period dependent,The Vanguard Group,0.0,0.0,0.0,0.0,499,12,0.00010940000000000002
+5ab8634e5542990e739ec8de,retrieval_k5,John C. Bogle,The Vanguard Group,0.0,0.0,0.0,0.0,917,8,0.0001898
+5ab8634e5542990e739ec8de,retrieval_k10,John C. Bogle,The Vanguard Group,0.0,0.0,0.0,0.0,1752,8,0.00035680000000000005
+5a8836445542997e5c09a5a5,always_think,public,public,1.0,1.0,1.0,1.0,91,10,2.62e-05
+5a8836445542997e5c09a5a5,retrieval_k3,private,public,0.0,0.0,0.0,0.0,787,4,0.0001606
+5a8836445542997e5c09a5a5,retrieval_k5,private,public,0.0,0.0,0.0,0.0,1052,4,0.00021360000000000001
+5a8836445542997e5c09a5a5,retrieval_k10,private,public,0.0,0.0,0.0,0.0,2076,4,0.0004184000000000001
+5ae127c9554299422ee99612,always_think,Fayette County,Nelson County,0.0,0.5,0.5,0.5,82,12,2.6000000000000002e-05
+5ae127c9554299422ee99612,retrieval_k3,Bardstown,Nelson County,0.0,0.0,0.0,0.0,281,12,6.58e-05
+5ae127c9554299422ee99612,retrieval_k5,Nelson County,Nelson County,1.0,1.0,1.0,1.0,515,6,0.00010779999999999999
+5ae127c9554299422ee99612,retrieval_k10,Nelson County,Nelson County,1.0,1.0,1.0,1.0,1070,6,0.0002188
+5ac194db55429964131be23a,always_think,Lutheranism,Protestantism,0.0,0.0,0.0,0.0,96,13,2.96e-05
+5ac194db55429964131be23a,retrieval_k3,Lutheranism,Protestantism,0.0,0.0,0.0,0.0,896,7,0.00018480000000000002
+5ac194db55429964131be23a,retrieval_k5,Lutheranism,Protestantism,0.0,0.0,0.0,0.0,1114,7,0.00022840000000000002
+5ac194db55429964131be23a,retrieval_k10,Lutheranism,Protestantism,0.0,0.0,0.0,0.0,1952,7,0.0003960000000000001
+5ab8eabb5542991b5579f03d,always_think,AIG,Chrysler,0.0,0.0,0.0,0.0,95,11,2.78e-05
+5ab8eabb5542991b5579f03d,retrieval_k3,Home Depot,Chrysler,0.0,0.0,0.0,0.0,472,5,9.84e-05
+5ab8eabb5542991b5579f03d,retrieval_k5,The Home Depot,Chrysler,0.0,0.0,0.0,0.0,662,6,0.0001372
+5ab8eabb5542991b5579f03d,retrieval_k10,Chrysler,Chrysler,1.0,1.0,1.0,1.0,1109,6,0.00022660000000000003
+5ab234c65542993be8fa98c6,always_think,Luca Guadagnino,Luca Guadagnino,1.0,1.0,1.0,1.0,86,14,2.84e-05
+5ab234c65542993be8fa98c6,retrieval_k3,Mimi Leder,Luca Guadagnino,0.0,0.0,0.0,0.0,419,6,8.860000000000001e-05
+5ab234c65542993be8fa98c6,retrieval_k5,Mimi Leder,Luca Guadagnino,0.0,0.0,0.0,0.0,689,6,0.00014260000000000002
+5ab234c65542993be8fa98c6,retrieval_k10,Luca Guadagnino,Luca Guadagnino,1.0,1.0,1.0,1.0,1319,8,0.0002702
+5ae524415542992663a4f121,always_think,Calgary,"Helsinki, Finland",0.0,0.0,0.0,0.0,103,11,2.9400000000000003e-05
+5ae524415542992663a4f121,retrieval_k3,Helsinki,"Helsinki, Finland",0.0,0.6666666666666666,1.0,0.5,554,6,0.0001156
+5ae524415542992663a4f121,retrieval_k5,Helsinki,"Helsinki, Finland",0.0,0.6666666666666666,1.0,0.5,952,6,0.0001952
+5ae524415542992663a4f121,retrieval_k10,Helsinki,"Helsinki, Finland",0.0,0.6666666666666666,1.0,0.5,1668,6,0.00033840000000000004
+5a7e42df5542994959419954,always_think,Red Star Belgrade,Ghanaian national team,0.0,0.0,0.0,0.0,90,13,2.84e-05
+5a7e42df5542994959419954,retrieval_k3,Ghana,Ghanaian national team,0.0,0.0,0.0,0.0,587,5,0.00012140000000000001
+5a7e42df5542994959419954,retrieval_k5,Ghana's Asamoah Gyan,Ghanaian national team,0.0,0.0,0.0,0.0,800,11,0.0001688
+5a7e42df5542994959419954,retrieval_k10,Ghana's national team,Ghanaian national team,0.0,0.6666666666666666,0.6666666666666666,0.6666666666666666,1401,8,0.0002866
+5abffc0d5542990832d3a1e2,always_think,nuclear football,nuclear weapons,0.0,0.5,0.5,0.5,95,12,2.8600000000000004e-05
+5abffc0d5542990832d3a1e2,retrieval_k3,nuclear weapons,nuclear weapons,1.0,1.0,1.0,1.0,532,6,0.0001112
+5abffc0d5542990832d3a1e2,retrieval_k5,nuclear weapons,nuclear weapons,1.0,1.0,1.0,1.0,837,6,0.0001722
+5abffc0d5542990832d3a1e2,retrieval_k10,nuclear weapons,nuclear weapons,1.0,1.0,1.0,1.0,1645,6,0.0003338
+5ae6914755429908198fa627,always_think,September,January 2001,0.0,0.0,0.0,0.0,94,10,2.68e-05
+5ae6914755429908198fa627,retrieval_k3,November,January 2001,0.0,0.0,0.0,0.0,444,4,9.200000000000001e-05
+5ae6914755429908198fa627,retrieval_k5,July,January 2001,0.0,0.0,0.0,0.0,995,4,0.0002022
+5ae6914755429908198fa627,retrieval_k10,January,January 2001,0.0,0.6666666666666666,1.0,0.5,1462,4,0.0002956000000000001
+5ae78f3b554299540e5a5608,always_think,CBS,CBS,1.0,1.0,1.0,1.0,97,10,2.7400000000000002e-05
+5ae78f3b554299540e5a5608,retrieval_k3,The CW,CBS,0.0,0.0,0.0,0.0,483,5,0.0001006
+5ae78f3b554299540e5a5608,retrieval_k5,The CW,CBS,0.0,0.0,0.0,0.0,741,5,0.0001522
+5ae78f3b554299540e5a5608,retrieval_k10,CBS,CBS,1.0,1.0,1.0,1.0,1399,4,0.00028300000000000005
+5a8b46925542995d1e6f133c,always_think,1940,"August 11, 1946",0.0,0.0,0.0,0.0,84,11,2.5600000000000002e-05
+5a8b46925542995d1e6f133c,retrieval_k3,noanswer,"August 11, 1946",0.0,0.0,0.0,0.0,468,5,9.760000000000001e-05
+5a8b46925542995d1e6f133c,retrieval_k5,noanswer,"August 11, 1946",0.0,0.0,0.0,0.0,596,5,0.00012319999999999999
+5a8b46925542995d1e6f133c,retrieval_k10,"August 11, 1946","August 11, 1946",1.0,1.0,1.0,1.0,1307,10,0.0002694
+5ab4f7fc5542991779162d43,always_think,Oti Region,Volta,0.0,0.0,0.0,0.0,84,6,2.1600000000000003e-05
+5ab4f7fc5542991779162d43,retrieval_k3,Volta Region,Volta,0.0,0.6666666666666666,0.5,1.0,334,6,7.159999999999999e-05
+5ab4f7fc5542991779162d43,retrieval_k5,Volta Region,Volta,0.0,0.6666666666666666,0.5,1.0,436,6,9.2e-05
+5ab4f7fc5542991779162d43,retrieval_k10,Volta Region,Volta,0.0,0.6666666666666666,0.5,1.0,436,6,9.2e-05
+5abd13b655429924427fceea,always_think,Jack White,Jack White,1.0,1.0,1.0,1.0,107,11,3.0200000000000002e-05
+5abd13b655429924427fceea,retrieval_k3,Jack White,Jack White,1.0,1.0,1.0,1.0,524,5,0.00010880000000000002
+5abd13b655429924427fceea,retrieval_k5,Jack White,Jack White,1.0,1.0,1.0,1.0,779,11,0.00016460000000000002
+5abd13b655429924427fceea,retrieval_k10,Jack White,Jack White,1.0,1.0,1.0,1.0,1447,11,0.00029820000000000004
+5adf37a95542995ec70e8f97,always_think,1838,1838,1.0,1.0,1.0,1.0,107,5,2.54e-05
+5adf37a95542995ec70e8f97,retrieval_k3,1838,1838,1.0,1.0,1.0,1.0,674,5,0.0001388
+5adf37a95542995ec70e8f97,retrieval_k5,1838,1838,1.0,1.0,1.0,1.0,964,5,0.0001968
+5adf37a95542995ec70e8f97,retrieval_k10,1968,1838,0.0,0.0,0.0,0.0,1811,5,0.0003662
+5a78e86f55429974737f78fb,always_think,Emperor’s reigns,the long history of Japan,0.0,0.0,0.0,0.0,92,8,2.4800000000000003e-05
+5a78e86f55429974737f78fb,retrieval_k3,the long history of Japan and the Imperial dynasty,the long history of Japan,0.0,0.7272727272727273,0.5714285714285714,1.0,579,12,0.0001254
+5a78e86f55429974737f78fb,retrieval_k5,the long history of Japan and the Imperial dynasty,the long history of Japan,0.0,0.7272727272727273,0.5714285714285714,1.0,908,12,0.0001912
+5a78e86f55429974737f78fb,retrieval_k10,the long history of Japan and the Imperial dynasty,the long history of Japan,0.0,0.7272727272727273,0.5714285714285714,1.0,1554,12,0.00032040000000000004
+5a807ceb554299485f598616,always_think,Brian Trueman,Stephen John Coogan,0.0,0.0,0.0,0.0,91,12,2.7799999999999998e-05
+5a807ceb554299485f598616,retrieval_k3,Paul Morley,Stephen John Coogan,0.0,0.0,0.0,0.0,449,6,9.460000000000001e-05
+5a807ceb554299485f598616,retrieval_k5,Steve Coogan,Stephen John Coogan,0.0,0.4,0.5,0.3333333333333333,675,12,0.0001446
+5a807ceb554299485f598616,retrieval_k10,Steve Coogan,Stephen John Coogan,0.0,0.4,0.5,0.3333333333333333,1451,12,0.0002998
+5a8c493e554299653c1aa020,always_think,a sixpence from his ear,marker pen,0.0,0.0,0.0,0.0,86,16,2.9999999999999997e-05
+5a8c493e554299653c1aa020,retrieval_k3,noanswer,marker pen,0.0,0.0,0.0,0.0,420,5,8.8e-05
+5a8c493e554299653c1aa020,retrieval_k5,noanswer,marker pen,0.0,0.0,0.0,0.0,681,5,0.0001402
+5a8c493e554299653c1aa020,retrieval_k10,marker pen,marker pen,1.0,1.0,1.0,1.0,1261,5,0.0002562
+5a75404a55429916b01642be,always_think,Princeton University,Syracuse University,0.0,0.5,0.5,0.5,94,12,2.84e-05
+5a75404a55429916b01642be,retrieval_k3,Syracuse University,Syracuse University,1.0,1.0,1.0,1.0,497,7,0.000105
+5a75404a55429916b01642be,retrieval_k5,Syracuse University,Syracuse University,1.0,1.0,1.0,1.0,1049,7,0.0002154
+5a75404a55429916b01642be,retrieval_k10,Syracuse University,Syracuse University,1.0,1.0,1.0,1.0,2576,7,0.0005208000000000001
+5a81108855429926c1cdace2,always_think,24,world's 16th largest city,0.0,0.0,0.0,0.0,95,10,2.7e-05
+5a81108855429926c1cdace2,retrieval_k3,10th,world's 16th largest city,0.0,0.0,0.0,0.0,345,5,7.3e-05
+5a81108855429926c1cdace2,retrieval_k5,16th,world's 16th largest city,0.0,0.4,1.0,0.25,522,5,0.0001084
+5a81108855429926c1cdace2,retrieval_k10,16th,world's 16th largest city,0.0,0.4,1.0,0.25,1128,5,0.00022960000000000002
+5ae340a85542994393b9e668,always_think,Rio de Janeiro,Milan,0.0,0.0,0.0,0.0,85,12,2.6600000000000003e-05
+5ae340a85542994393b9e668,retrieval_k3,Benfica,Milan,0.0,0.0,0.0,0.0,322,5,6.840000000000001e-05
+5ae340a85542994393b9e668,retrieval_k5,Milan,Milan,1.0,1.0,1.0,1.0,505,5,0.000105
+5ae340a85542994393b9e668,retrieval_k10,Milan,Milan,1.0,1.0,1.0,1.0,1459,5,0.0002958
+5a8d0be85542994ba4e3dbb2,always_think,Baltimore City,Prince George's County,0.0,0.0,0.0,0.0,90,12,2.76e-05
+5a8d0be85542994ba4e3dbb2,retrieval_k3,Prince George's County,Prince George's County,1.0,1.0,1.0,1.0,567,7,0.000119
+5a8d0be85542994ba4e3dbb2,retrieval_k5,Prince George's County,Prince George's County,1.0,1.0,1.0,1.0,973,7,0.00020020000000000001
+5a8d0be85542994ba4e3dbb2,retrieval_k10,Prince George's County,Prince George's County,1.0,1.0,1.0,1.0,1984,7,0.0004024
+5add43335542995b365faae1,always_think,Dirty Reds,Mickey Mouse Cup,0.0,0.0,0.0,0.0,90,5,2.2e-05
+5add43335542995b365faae1,retrieval_k3,"derby
+",Mickey Mouse Cup,0.0,0.0,0.0,0.0,337,6,7.22e-05
+5add43335542995b365faae1,retrieval_k5,Mancunians,Mickey Mouse Cup,0.0,0.0,0.0,0.0,563,7,0.00011820000000000001
+5add43335542995b365faae1,retrieval_k10,Mickey Mouse Cup,Mickey Mouse Cup,1.0,1.0,1.0,1.0,1737,7,0.000353
+5ae4d8475542993aec5ec0e0,always_think,Verdi,Giuseppe Verdi,0.0,0.6666666666666666,1.0,0.5,97,11,2.82e-05
+5ae4d8475542993aec5ec0e0,retrieval_k3,Jeremy Sams,Giuseppe Verdi,0.0,0.0,0.0,0.0,834,5,0.0001708
+5ae4d8475542993aec5ec0e0,retrieval_k5,Giuseppe Verdi,Giuseppe Verdi,1.0,1.0,1.0,1.0,978,7,0.0002012
+5ae4d8475542993aec5ec0e0,retrieval_k10,Giuseppe Verdi,Giuseppe Verdi,1.0,1.0,1.0,1.0,1797,7,0.000365
+5ab5c263554299488d4d9a18,always_think,Latvia,Belarus,0.0,0.0,0.0,0.0,96,5,2.32e-05
+5ab5c263554299488d4d9a18,retrieval_k3,Latvia,Belarus,0.0,0.0,0.0,0.0,360,5,7.6e-05
+5ab5c263554299488d4d9a18,retrieval_k5,noanswer,Belarus,0.0,0.0,0.0,0.0,534,5,0.00011080000000000001
+5ab5c263554299488d4d9a18,retrieval_k10,Belarus,Belarus,1.0,1.0,1.0,1.0,875,5,0.000179
+5a74a26a55429979e28829d6,always_think,Béla Bartók,Béla Viktor János Bartók,0.0,0.6666666666666666,1.0,0.5,89,8,2.4200000000000002e-05
+5a74a26a55429979e28829d6,retrieval_k3,Béla Bartók,Béla Viktor János Bartók,0.0,0.6666666666666666,1.0,0.5,640,8,0.0001344
+5a74a26a55429979e28829d6,retrieval_k5,Béla Bartók,Béla Viktor János Bartók,0.0,0.6666666666666666,1.0,0.5,881,8,0.00018260000000000002
+5a74a26a55429979e28829d6,retrieval_k10,Béla Bartók,Béla Viktor János Bartók,0.0,0.6666666666666666,1.0,0.5,1705,8,0.0003474
+5a8d841955429941ae14dfe6,always_think,Zachary Booth,Eve Hewson,0.0,0.0,0.0,0.0,89,13,2.82e-05
+5a8d841955429941ae14dfe6,retrieval_k3,Eve Hewson,Eve Hewson,1.0,1.0,1.0,1.0,386,7,8.280000000000001e-05
+5a8d841955429941ae14dfe6,retrieval_k5,Eve Hewson,Eve Hewson,1.0,1.0,1.0,1.0,626,7,0.0001308
+5a8d841955429941ae14dfe6,retrieval_k10,Eve Hewson,Eve Hewson,1.0,1.0,1.0,1.0,1021,7,0.00020980000000000003
+5a809e9f5542996402f6a5b1,always_think,1988,1991,0.0,0.0,0.0,0.0,93,5,2.26e-05
+5a809e9f5542996402f6a5b1,retrieval_k3,1980,1991,0.0,0.0,0.0,0.0,463,11,0.00010140000000000001
+5a809e9f5542996402f6a5b1,retrieval_k5,1994,1991,0.0,0.0,0.0,0.0,642,5,0.0001324
+5a809e9f5542996402f6a5b1,retrieval_k10,1991,1991,1.0,1.0,1.0,1.0,1377,5,0.0002794
+5ac2d85e55429921a00ab06b,always_think,Pentagon,Pennsylvania,0.0,0.0,0.0,0.0,88,11,2.64e-05
+5ac2d85e55429921a00ab06b,retrieval_k3,"Shanksville, Pennsylvania",Pennsylvania,0.0,0.6666666666666666,0.5,1.0,728,8,0.00015199999999999998
+5ac2d85e55429921a00ab06b,retrieval_k5,"Washington, D.C.",Pennsylvania,0.0,0.0,0.0,0.0,1006,8,0.0002076
+5ac2d85e55429921a00ab06b,retrieval_k10,"Washington, D.C.",Pennsylvania,0.0,0.0,0.0,0.0,2023,8,0.000411
+5a8319b255429940e5e1a960,always_think,Dennis McCarthy,Danny Elfman,0.0,0.0,0.0,0.0,113,12,3.2200000000000003e-05
+5a8319b255429940e5e1a960,retrieval_k3,Danny Elfman,Danny Elfman,1.0,1.0,1.0,1.0,583,6,0.00012140000000000001
+5a8319b255429940e5e1a960,retrieval_k5,Danny Elfman,Danny Elfman,1.0,1.0,1.0,1.0,904,6,0.0001856
+5a8319b255429940e5e1a960,retrieval_k10,Danny Elfman,Danny Elfman,1.0,1.0,1.0,1.0,2297,6,0.00046420000000000006
+5a7aa0a55542990198eaf165,always_think,Jacques Feyder,Jacques Feyder,1.0,1.0,1.0,1.0,88,13,2.8000000000000003e-05
+5a7aa0a55542990198eaf165,retrieval_k3,Jacques Feyder,Jacques Feyder,1.0,1.0,1.0,1.0,406,7,8.680000000000001e-05
+5a7aa0a55542990198eaf165,retrieval_k5,Jacques Feyder,Jacques Feyder,1.0,1.0,1.0,1.0,559,7,0.00011740000000000001
+5a7aa0a55542990198eaf165,retrieval_k10,Jacques Feyder,Jacques Feyder,1.0,1.0,1.0,1.0,1290,7,0.0002636
+5ab9ddef5542994dbf019875,always_think,no,yes,0.0,0.0,0.0,0.0,88,10,2.56e-05
+5ab9ddef5542994dbf019875,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,472,4,9.76e-05
+5ab9ddef5542994dbf019875,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,564,4,0.00011600000000000001
+5ab9ddef5542994dbf019875,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,1154,4,0.000234
+5ae157ed5542990adbacf75d,always_think,2011,23 December 2014,0.0,0.0,0.0,0.0,100,11,2.8800000000000002e-05
+5ae157ed5542990adbacf75d,retrieval_k3,2011,23 December 2014,0.0,0.0,0.0,0.0,477,5,9.94e-05
+5ae157ed5542990adbacf75d,retrieval_k5,23 December 2014,23 December 2014,1.0,1.0,1.0,1.0,626,8,0.0001316
+5ae157ed5542990adbacf75d,retrieval_k10,23 December 2014,23 December 2014,1.0,1.0,1.0,1.0,1113,8,0.000229
+5a8555ea5542992a431d1b07,always_think,Belly of the Beast,The Big Lebowski,0.0,0.0,0.0,0.0,110,14,3.32e-05
+5a8555ea5542992a431d1b07,retrieval_k3,The Big Lebowski,The Big Lebowski,1.0,1.0,1.0,1.0,344,7,7.439999999999999e-05
+5a8555ea5542992a431d1b07,retrieval_k5,The Big Lebowski,The Big Lebowski,1.0,1.0,1.0,1.0,629,7,0.00013140000000000002
+5a8555ea5542992a431d1b07,retrieval_k10,The Big Lebowski,The Big Lebowski,1.0,1.0,1.0,1.0,1540,7,0.00031360000000000003
+5ae141a65542997b2ef7d18a,always_think,stick fighting,close range combat,0.0,0.0,0.0,0.0,89,5,2.18e-05
+5ae141a65542997b2ef7d18a,retrieval_k3,open-hand striking,close range combat,0.0,0.0,0.0,0.0,495,6,0.00010379999999999999
+5ae141a65542997b2ef7d18a,retrieval_k5,close range combat,close range combat,1.0,1.0,1.0,1.0,623,6,0.00012940000000000003
+5ae141a65542997b2ef7d18a,retrieval_k10,close range combat,close range combat,1.0,1.0,1.0,1.0,1665,6,0.0003378
+5ae4a1ef55429970de88d9e7,always_think,10 March 1978,2 March 1972,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,103,14,3.18e-05
+5ae4a1ef55429970de88d9e7,retrieval_k3,2 March 1972,2 March 1972,1.0,1.0,1.0,1.0,611,8,0.0001286
+5ae4a1ef55429970de88d9e7,retrieval_k5,1972,2 March 1972,0.0,0.5,1.0,0.3333333333333333,893,5,0.00018260000000000002
+5ae4a1ef55429970de88d9e7,retrieval_k10,2 March 1972,2 March 1972,1.0,1.0,1.0,1.0,1460,8,0.0002984
+5ab90e9755429934fafe6e51,always_think,yes,yes,1.0,1.0,1.0,1.0,86,4,2.0399999999999998e-05
+5ab90e9755429934fafe6e51,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,324,4,6.8e-05
+5ab90e9755429934fafe6e51,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,491,4,0.0001014
+5ab90e9755429934fafe6e51,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,877,4,0.0001786
+5a8e3ea95542995a26add48d,always_think,New York City,"Greenwich Village, New York City",0.0,0.7499999999999999,1.0,0.6,92,12,2.8000000000000003e-05
+5a8e3ea95542995a26add48d,retrieval_k3,New York City,"Greenwich Village, New York City",0.0,0.7499999999999999,1.0,0.6,416,6,8.8e-05
+5a8e3ea95542995a26add48d,retrieval_k5,Greenwich Village,"Greenwich Village, New York City",0.0,0.5714285714285715,1.0,0.4,583,6,0.00012140000000000001
+5a8e3ea95542995a26add48d,retrieval_k10,"Greenwich Village, New York City","Greenwich Village, New York City",1.0,1.0,1.0,1.0,1388,10,0.0002856
+5ac2f34455429921a00ab0b6,always_think,Cornell University,New York University School of Law,0.0,0.25,0.5,0.16666666666666666,87,12,2.7000000000000006e-05
+5ac2f34455429921a00ab0b6,retrieval_k3,New York University School of Law,New York University School of Law,1.0,1.0,1.0,1.0,386,9,8.44e-05
+5ac2f34455429921a00ab0b6,retrieval_k5,New York University School of Law,New York University School of Law,1.0,1.0,1.0,1.0,584,9,0.000124
+5ac2f34455429921a00ab0b6,retrieval_k10,New York University School of Law,New York University School of Law,1.0,1.0,1.0,1.0,1197,9,0.00024660000000000003
+5a7344e95542991f9a20c6ce,always_think,SexyBack,Rudebox,0.0,0.0,0.0,0.0,96,11,2.8000000000000003e-05
+5a7344e95542991f9a20c6ce,retrieval_k3,I'm Not Supposed to Love You Anymore,Rudebox,0.0,0.0,0.0,0.0,688,13,0.000148
+5a7344e95542991f9a20c6ce,retrieval_k5,Rudebox,Rudebox,1.0,1.0,1.0,1.0,1053,6,0.00021540000000000003
+5a7344e95542991f9a20c6ce,retrieval_k10,SexyBack,Rudebox,0.0,0.0,0.0,0.0,1973,5,0.0003986
+5a7b1c6b55429931da12c9ca,always_think,Ian Anderson,"John Douglas ""Johnny"" Edwards",0.0,0.0,0.0,0.0,90,11,2.68e-05
+5a7b1c6b55429931da12c9ca,retrieval_k3,Johnny Edwards,"John Douglas ""Johnny"" Edwards",0.0,0.6666666666666666,1.0,0.5,453,5,9.460000000000001e-05
+5a7b1c6b55429931da12c9ca,retrieval_k5,Johnny Edwards,"John Douglas ""Johnny"" Edwards",0.0,0.6666666666666666,1.0,0.5,713,5,0.00014659999999999999
+5a7b1c6b55429931da12c9ca,retrieval_k10,Johnny Edwards,"John Douglas ""Johnny"" Edwards",0.0,0.6666666666666666,1.0,0.5,1421,5,0.00028819999999999996
+5ab341f755429969a97a8114,always_think,2006,1989,0.0,0.0,0.0,0.0,104,11,2.96e-05
+5ab341f755429969a97a8114,retrieval_k3,1989,1989,1.0,1.0,1.0,1.0,714,5,0.0001468
+5ab341f755429969a97a8114,retrieval_k5,1989,1989,1.0,1.0,1.0,1.0,1012,5,0.0002064
+5ab341f755429969a97a8114,retrieval_k10,1989,1989,1.0,1.0,1.0,1.0,1747,5,0.0003534
+5a8b50475542997f31a41cd4,always_think,World Wushu Championships,world wushu tournament,0.0,0.6666666666666666,0.6666666666666666,0.6666666666666666,98,13,3.0000000000000004e-05
+5a8b50475542997f31a41cd4,retrieval_k3,Hong Kong Karate Tournament,world wushu tournament,0.0,0.28571428571428575,0.25,0.3333333333333333,382,7,8.2e-05
+5a8b50475542997f31a41cd4,retrieval_k5,world wushu tournament championship,world wushu tournament,0.0,0.8571428571428571,0.75,1.0,655,8,0.0001374
+5a8b50475542997f31a41cd4,retrieval_k10,world wushu tournament,world wushu tournament,1.0,1.0,1.0,1.0,1348,7,0.0002752000000000001
+5a8cddd1554299441c6b9f3a,always_think,Japan and the United States,Japan and Hong Kong,0.0,0.5,0.5,0.5,91,14,2.94e-05
+5a8cddd1554299441c6b9f3a,retrieval_k3,Japan and Hong Kong,Japan and Hong Kong,1.0,1.0,1.0,1.0,416,7,8.88e-05
+5a8cddd1554299441c6b9f3a,retrieval_k5,Hong Kong and Japan,Japan and Hong Kong,0.0,1.0,1.0,1.0,568,7,0.00011920000000000001
+5a8cddd1554299441c6b9f3a,retrieval_k10,Hong Kong and Japan,Japan and Hong Kong,0.0,1.0,1.0,1.0,982,7,0.000202
+5a88f7855542993b751ca8da,always_think,1987,1987,1.0,1.0,1.0,1.0,90,11,2.68e-05
+5a88f7855542993b751ca8da,retrieval_k3,1987,1987,1.0,1.0,1.0,1.0,513,5,0.00010660000000000002
+5a88f7855542993b751ca8da,retrieval_k5,1987,1987,1.0,1.0,1.0,1.0,760,5,0.000156
+5a88f7855542993b751ca8da,retrieval_k10,1987,1987,1.0,1.0,1.0,1.0,1507,5,0.0003054
+5ab90d2755429916710eb0f0,always_think,Jackson Publick,Christopher McCulloch,0.0,0.0,0.0,0.0,98,12,2.9200000000000005e-05
+5ab90d2755429916710eb0f0,retrieval_k3,Bruce Timm and Paul Dini,Christopher McCulloch,0.0,0.0,0.0,0.0,444,10,9.680000000000002e-05
+5ab90d2755429916710eb0f0,retrieval_k5,Bruce Timm and Paul Dini,Christopher McCulloch,0.0,0.0,0.0,0.0,764,10,0.0001608
+5ab90d2755429916710eb0f0,retrieval_k10,Christopher McCulloch,Christopher McCulloch,1.0,1.0,1.0,1.0,1812,8,0.0003688
+5a7300b85542994cef4bc41a,always_think,"an Indian space observatory
+",India's first dedicated multi-wavelength space observatory.,0.0,0.4444444444444444,0.6666666666666666,0.3333333333333333,90,9,2.5200000000000003e-05
+5a7300b85542994cef4bc41a,retrieval_k3,India's first dedicated multi-wavelength space observatory,India's first dedicated multi-wavelength space observatory.,1.0,1.0,1.0,1.0,414,13,9.32e-05
+5a7300b85542994cef4bc41a,retrieval_k5,India's first dedicated multi-wavelength space observatory,India's first dedicated multi-wavelength space observatory.,1.0,1.0,1.0,1.0,642,13,0.0001388
+5a7300b85542994cef4bc41a,retrieval_k10,India's first dedicated multi-wavelength space observatory,India's first dedicated multi-wavelength space observatory.,1.0,1.0,1.0,1.0,1194,13,0.0002492
+5ae7f56e5542993210983fd1,always_think,J. K. Rowling,J. K. Rowling,1.0,1.0,1.0,1.0,93,8,2.5e-05
+5ae7f56e5542993210983fd1,retrieval_k3,J. K. Rowling,J. K. Rowling,1.0,1.0,1.0,1.0,570,8,0.00012040000000000001
+5ae7f56e5542993210983fd1,retrieval_k5,J. K. Rowling,J. K. Rowling,1.0,1.0,1.0,1.0,821,8,0.0001706
+5ae7f56e5542993210983fd1,retrieval_k10,J. K. Rowling,J. K. Rowling,1.0,1.0,1.0,1.0,1830,8,0.0003724
+5a7562045542992db947364f,always_think,Saint Louis University,Saint Louis University,1.0,1.0,1.0,1.0,89,6,2.2600000000000004e-05
+5a7562045542992db947364f,retrieval_k3,Saint Louis University,Saint Louis University,1.0,1.0,1.0,1.0,589,6,0.00012260000000000003
+5a7562045542992db947364f,retrieval_k5,Saint Louis University,Saint Louis University,1.0,1.0,1.0,1.0,753,6,0.0001554
+5a7562045542992db947364f,retrieval_k10,"University of California, Berkeley",Saint Louis University,0.0,0.28571428571428575,0.25,0.3333333333333333,1530,8,0.0003124
+5adda7585542997dc790700c,always_think,New Zealand,"Edmonton, Alberta",0.0,0.0,0.0,0.0,92,11,2.7200000000000004e-05
+5adda7585542997dc790700c,retrieval_k3,"Edmonton, Alberta","Edmonton, Alberta",1.0,1.0,1.0,1.0,379,7,8.14e-05
+5adda7585542997dc790700c,retrieval_k5,"Edmonton, Alberta","Edmonton, Alberta",1.0,1.0,1.0,1.0,569,7,0.00011940000000000002
+5adda7585542997dc790700c,retrieval_k10,"Edmonton, Alberta","Edmonton, Alberta",1.0,1.0,1.0,1.0,1109,7,0.00022740000000000003
+5ab4314955429942dd415ecd,always_think,3652,4080,0.0,0.0,0.0,0.0,90,11,2.68e-05
+5ab4314955429942dd415ecd,retrieval_k3,4100 feet,4080,0.0,0.0,0.0,0.0,705,6,0.00014580000000000002
+5ab4314955429942dd415ecd,retrieval_k5,4080 ft,4080,0.0,0.6666666666666666,0.5,1.0,966,6,0.00019800000000000002
+5ab4314955429942dd415ecd,retrieval_k10,4080 ft,4080,0.0,0.6666666666666666,0.5,1.0,1676,6,0.0003400000000000001
+5a81a2705542990a1d231e30,always_think,"Wynantskill, New York",Hannaford,0.0,0.0,0.0,0.0,91,16,3.1e-05
+5a81a2705542990a1d231e30,retrieval_k3,"Wynantskill, New York",Hannaford,0.0,0.0,0.0,0.0,472,10,0.00010240000000000001
+5a81a2705542990a1d231e30,retrieval_k5,"Wynantskill, New York",Hannaford,0.0,0.0,0.0,0.0,786,10,0.00016520000000000003
+5a81a2705542990a1d231e30,retrieval_k10,"Wynantskill, New York",Hannaford,0.0,0.0,0.0,0.0,1607,10,0.00032940000000000004
+5ae291bb5542996483e649f6,always_think,1926–2013,between 1987 and 2010,0.0,0.0,0.0,0.0,107,14,3.2600000000000006e-05
+5ae291bb5542996483e649f6,retrieval_k3,1987 and 2010,between 1987 and 2010,0.0,0.8571428571428571,1.0,0.75,412,9,8.960000000000001e-05
+5ae291bb5542996483e649f6,retrieval_k5,1987 and 2010,between 1987 and 2010,0.0,0.8571428571428571,1.0,0.75,622,9,0.00013160000000000003
+5ae291bb5542996483e649f6,retrieval_k10,1987 and 2010,between 1987 and 2010,0.0,0.8571428571428571,1.0,0.75,1095,9,0.00022620000000000002
+5ab207f65542993be8fa98b8,always_think,New Zealand,Preston,0.0,0.0,0.0,0.0,87,11,2.6200000000000003e-05
+5ab207f65542993be8fa98b8,retrieval_k3,"Preston, Lancashire, UK",Preston,0.0,0.5,0.3333333333333333,1.0,345,9,7.62e-05
+5ab207f65542993be8fa98b8,retrieval_k5,"Preston, Lancashire, UK",Preston,0.0,0.5,0.3333333333333333,1.0,669,9,0.000141
+5ab207f65542993be8fa98b8,retrieval_k10,"Preston
+",Preston,1.0,1.0,1.0,1.0,1214,6,0.0002476
+5ae152a65542990adbacf74f,always_think,2010,"September 18, 2010",0.0,0.5,1.0,0.3333333333333333,94,11,2.76e-05
+5ae152a65542990adbacf74f,retrieval_k3,"September 18, 2010","September 18, 2010",1.0,1.0,1.0,1.0,426,10,9.32e-05
+5ae152a65542990adbacf74f,retrieval_k5,"September 18, 2010","September 18, 2010",1.0,1.0,1.0,1.0,746,10,0.00015720000000000003
+5ae152a65542990adbacf74f,retrieval_k10,"September 18, 2010","September 18, 2010",1.0,1.0,1.0,1.0,1360,10,0.00028
+5a739ef955429978a71e904b,always_think,Sunfest,OK Mozart,0.0,0.0,0.0,0.0,86,5,2.1199999999999997e-05
+5a739ef955429978a71e904b,retrieval_k3,OK Mozart Festival,OK Mozart,0.0,0.8,0.6666666666666666,1.0,356,6,7.6e-05
+5a739ef955429978a71e904b,retrieval_k5,OK Mozart Festival,OK Mozart,0.0,0.8,0.6666666666666666,1.0,529,6,0.0001106
+5a739ef955429978a71e904b,retrieval_k10,OK Mozart Festival,OK Mozart,0.0,0.8,0.6666666666666666,1.0,995,6,0.00020380000000000002
+5ab2b61d5542991669774065,always_think,Biggs Darklighter,Han Solo,0.0,0.0,0.0,0.0,96,13,2.96e-05
+5ab2b61d5542991669774065,retrieval_k3,Han Solo,Han Solo,1.0,1.0,1.0,1.0,447,5,9.340000000000001e-05
+5ab2b61d5542991669774065,retrieval_k5,Han Solo,Han Solo,1.0,1.0,1.0,1.0,829,5,0.0001698
+5ab2b61d5542991669774065,retrieval_k10,Han Solo,Han Solo,1.0,1.0,1.0,1.0,1819,5,0.0003678
+5a88fc4255429938390d4019,always_think,"July 31, 2018","September 25, 2017",0.0,0.0,0.0,0.0,107,16,3.4200000000000005e-05
+5a88fc4255429938390d4019,retrieval_k3,"September 25, 2017","September 25, 2017",1.0,1.0,1.0,1.0,429,10,9.380000000000002e-05
+5a88fc4255429938390d4019,retrieval_k5,"September 25, 2017","September 25, 2017",1.0,1.0,1.0,1.0,628,10,0.00013360000000000002
+5a88fc4255429938390d4019,retrieval_k10,"September 25, 2017","September 25, 2017",1.0,1.0,1.0,1.0,1367,10,0.0002814
+5ae2c416554299492dc91c67,always_think,Jaleel White,Jaleel Ahmad White,0.0,0.8,1.0,0.6666666666666666,85,7,2.26e-05
+5ae2c416554299492dc91c67,retrieval_k3,Jaleel White,Jaleel Ahmad White,0.0,0.8,1.0,0.6666666666666666,467,7,9.900000000000001e-05
+5ae2c416554299492dc91c67,retrieval_k5,Jaleel White,Jaleel Ahmad White,0.0,0.8,1.0,0.6666666666666666,750,7,0.0001556
+5ae2c416554299492dc91c67,retrieval_k10,Jaleel White,Jaleel Ahmad White,0.0,0.8,1.0,0.6666666666666666,1378,7,0.0002812
+5a7a51b95542990783324f0f,always_think,Liam Cunningham,Liam Cunningham,1.0,1.0,1.0,1.0,86,6,2.2e-05
+5a7a51b95542990783324f0f,retrieval_k3,Liam Cunningham,Liam Cunningham,1.0,1.0,1.0,1.0,668,6,0.0001384
+5a7a51b95542990783324f0f,retrieval_k5,Liam Cunningham,Liam Cunningham,1.0,1.0,1.0,1.0,857,6,0.00017620000000000003
+5a7a51b95542990783324f0f,retrieval_k10,Liam Cunningham,Liam Cunningham,1.0,1.0,1.0,1.0,1580,6,0.0003208
+5ae3006c55429928c423959f,always_think,"Saint Michael Parish, Barbados","Saint Michael, Barbados",0.0,0.8571428571428571,0.75,1.0,91,14,2.94e-05
+5ae3006c55429928c423959f,retrieval_k3,"Saint Michael, Barbados","Saint Michael, Barbados",1.0,1.0,1.0,1.0,630,7,0.0001316
+5ae3006c55429928c423959f,retrieval_k5,"Saint Michael, Barbados","Saint Michael, Barbados",1.0,1.0,1.0,1.0,1030,7,0.0002116
+5ae3006c55429928c423959f,retrieval_k10,"Saint Michael, Barbados","Saint Michael, Barbados",1.0,1.0,1.0,1.0,1775,7,0.0003606
+5a74122f55429929fddd83da,always_think,Love Drunk,Love Drunk,1.0,1.0,1.0,1.0,105,6,2.58e-05
+5a74122f55429929fddd83da,retrieval_k3,Love Drunk,Love Drunk,1.0,1.0,1.0,1.0,390,6,8.28e-05
+5a74122f55429929fddd83da,retrieval_k5,Love Drunk,Love Drunk,1.0,1.0,1.0,1.0,572,6,0.0001192
+5a74122f55429929fddd83da,retrieval_k10,Love Drunk,Love Drunk,1.0,1.0,1.0,1.0,944,6,0.00019360000000000002
+5a81711455429938b614233e,always_think,yes,yes,1.0,1.0,1.0,1.0,86,10,2.5199999999999996e-05
+5a81711455429938b614233e,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,372,4,7.76e-05
+5a81711455429938b614233e,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,684,4,0.00014000000000000001
+5a81711455429938b614233e,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,1353,4,0.00027380000000000004
+5ae1e4095542997283cd22bf,always_think,Ursus americanus,Ursus americanus,1.0,1.0,1.0,1.0,94,8,2.52e-05
+5ae1e4095542997283cd22bf,retrieval_k3,Ursus americanus,Ursus americanus,1.0,1.0,1.0,1.0,307,8,6.780000000000001e-05
+5ae1e4095542997283cd22bf,retrieval_k5,Ursus americanus,Ursus americanus,1.0,1.0,1.0,1.0,552,8,0.0001168
+5ae1e4095542997283cd22bf,retrieval_k10,Ursus americanus,Ursus americanus,1.0,1.0,1.0,1.0,1119,8,0.0002302
+5a8c6d4e5542996e8ac88aa6,always_think,J. Searle Dawley,James Searle Dawley,0.0,0.6666666666666666,0.6666666666666666,0.6666666666666666,96,16,3.2000000000000005e-05
+5a8c6d4e5542996e8ac88aa6,retrieval_k3,J. Searle Dawley,James Searle Dawley,0.0,0.6666666666666666,0.6666666666666666,0.6666666666666666,331,10,7.42e-05
+5a8c6d4e5542996e8ac88aa6,retrieval_k5,J. Searle Dawley,James Searle Dawley,0.0,0.6666666666666666,0.6666666666666666,0.6666666666666666,534,16,0.00011960000000000001
+5a8c6d4e5542996e8ac88aa6,retrieval_k10,J. Searle Dawley,James Searle Dawley,0.0,0.6666666666666666,0.6666666666666666,0.6666666666666666,924,10,0.00019280000000000002
+5abf11d45542997719eab660,always_think,United States,Canada,0.0,0.0,0.0,0.0,89,11,2.6600000000000003e-05
+5abf11d45542997719eab660,retrieval_k3,Canada,Canada,1.0,1.0,1.0,1.0,397,4,8.26e-05
+5abf11d45542997719eab660,retrieval_k5,Canada,Canada,1.0,1.0,1.0,1.0,602,4,0.0001236
+5abf11d45542997719eab660,retrieval_k10,Canada,Canada,1.0,1.0,1.0,1.0,1224,10,0.00025279999999999996
+5ac11201554299294b21908c,always_think,Macomb County,Oakland County,0.0,0.5,0.5,0.5,81,12,2.5800000000000004e-05
+5ac11201554299294b21908c,retrieval_k3,"Rochester Hills, Michigan",Oakland County,0.0,0.0,0.0,0.0,372,9,8.16e-05
+5ac11201554299294b21908c,retrieval_k5,"Rochester Hills, Michigan",Oakland County,0.0,0.0,0.0,0.0,647,9,0.0001366
+5ac11201554299294b21908c,retrieval_k10,Oakland County,Oakland County,1.0,1.0,1.0,1.0,1525,6,0.0003098
+5ade063d5542995b365fabcd,always_think,Major League Soccer,Major League Soccer,1.0,1.0,1.0,1.0,95,12,2.8600000000000004e-05
+5ade063d5542995b365fabcd,retrieval_k3,Major League Soccer,Major League Soccer,1.0,1.0,1.0,1.0,603,6,0.0001254
+5ade063d5542995b365fabcd,retrieval_k5,Major League Soccer,Major League Soccer,1.0,1.0,1.0,1.0,903,6,0.00018540000000000003
+5ade063d5542995b365fabcd,retrieval_k10,Major League Soccer,Major League Soccer,1.0,1.0,1.0,1.0,1592,6,0.00032320000000000005
+5ab3a83d5542992ade7c6e08,always_think,The Daily Stormer,The Daily Stormer,1.0,1.0,1.0,1.0,93,13,2.9e-05
+5ab3a83d5542992ade7c6e08,retrieval_k3,The Daily Stormer,The Daily Stormer,1.0,1.0,1.0,1.0,536,7,0.0001128
+5ab3a83d5542992ade7c6e08,retrieval_k5,The Daily Stormer,The Daily Stormer,1.0,1.0,1.0,1.0,825,7,0.0001706
+5ab3a83d5542992ade7c6e08,retrieval_k10,The Daily Stormer,The Daily Stormer,1.0,1.0,1.0,1.0,1444,7,0.0002944
+5a79b525554299029c4b5f67,always_think,Andean music,traditional music,0.0,0.5,0.5,0.5,94,12,2.84e-05
+5a79b525554299029c4b5f67,retrieval_k3,traditional music of the Andes,traditional music,0.0,0.6666666666666666,0.5,1.0,480,8,0.00010240000000000001
+5a79b525554299029c4b5f67,retrieval_k5,traditional music of the Andes,traditional music,0.0,0.6666666666666666,0.5,1.0,767,8,0.0001598
+5a79b525554299029c4b5f67,retrieval_k10,traditional music of pre-Hispanic and contemporary music of the Andes,traditional music,0.0,0.3636363636363636,0.2222222222222222,1.0,1508,16,0.0003144
+5a8b77705542995d1e6f13aa,always_think,The CW,Sirius XM Holdings,0.0,0.0,0.0,0.0,88,11,2.64e-05
+5a8b77705542995d1e6f13aa,retrieval_k3,Sirius XM,Sirius XM Holdings,0.0,0.8,1.0,0.6666666666666666,437,7,9.300000000000001e-05
+5a8b77705542995d1e6f13aa,retrieval_k5,Sirius XM,Sirius XM Holdings,0.0,0.8,1.0,0.6666666666666666,693,7,0.00014419999999999998
+5a8b77705542995d1e6f13aa,retrieval_k10,Sirius XM,Sirius XM Holdings,0.0,0.8,1.0,0.6666666666666666,1308,7,0.0002672
+5a8aeadc55429950cd6afbe0,always_think,"May 27, 2010","January 14, 2010",0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,93,16,3.1400000000000004e-05
+5a8aeadc55429950cd6afbe0,retrieval_k3,"January 14, 2010","January 14, 2010",1.0,1.0,1.0,1.0,315,10,7.1e-05
+5a8aeadc55429950cd6afbe0,retrieval_k5,"January 14, 2010","January 14, 2010",1.0,1.0,1.0,1.0,448,10,9.760000000000001e-05
+5a8aeadc55429950cd6afbe0,retrieval_k10,"January 14, 2010","January 14, 2010",1.0,1.0,1.0,1.0,895,10,0.000187
+5abd0296554299114383a1d1,always_think,1876,1876,1.0,1.0,1.0,1.0,99,11,2.86e-05
+5abd0296554299114383a1d1,retrieval_k3,1876,1876,1.0,1.0,1.0,1.0,607,5,0.0001254
+5abd0296554299114383a1d1,retrieval_k5,1876,1876,1.0,1.0,1.0,1.0,878,5,0.0001796
+5abd0296554299114383a1d1,retrieval_k10,1876,1876,1.0,1.0,1.0,1.0,1659,5,0.0003358
+5ae4d0ff55429913cc204511,always_think,The Smashing Pumpkins,Greek Fire,0.0,0.0,0.0,0.0,94,14,3e-05
+5ae4d0ff55429913cc204511,retrieval_k3,The Smashing Pumpkins,Greek Fire,0.0,0.0,0.0,0.0,538,14,0.00011880000000000001
+5ae4d0ff55429913cc204511,retrieval_k5,Greek Fire,Greek Fire,1.0,1.0,1.0,1.0,861,5,0.0001762
+5ae4d0ff55429913cc204511,retrieval_k10,Greek Fire,Greek Fire,1.0,1.0,1.0,1.0,1920,5,0.000388
+5ac07fff554299294b219006,always_think,tennis,tennis,1.0,1.0,1.0,1.0,87,5,2.1400000000000002e-05
+5ac07fff554299294b219006,retrieval_k3,tennis,tennis,1.0,1.0,1.0,1.0,296,5,6.32e-05
+5ac07fff554299294b219006,retrieval_k5,tennis,tennis,1.0,1.0,1.0,1.0,376,5,7.92e-05
+5ac07fff554299294b219006,retrieval_k10,tennis,tennis,1.0,1.0,1.0,1.0,919,5,0.0001878
+5ab741005542992aa3b8c800,always_think,Bobby Hurley,Robert Matthew Hurley,0.0,0.4,0.5,0.3333333333333333,91,7,2.38e-05
+5ab741005542992aa3b8c800,retrieval_k3,Bobby Hurley,Robert Matthew Hurley,0.0,0.4,0.5,0.3333333333333333,579,7,0.00012140000000000001
+5ab741005542992aa3b8c800,retrieval_k5,Bobby Hurley,Robert Matthew Hurley,0.0,0.4,0.5,0.3333333333333333,778,7,0.00016120000000000002
+5ab741005542992aa3b8c800,retrieval_k10,Bobby Hurley,Robert Matthew Hurley,0.0,0.4,0.5,0.3333333333333333,1643,7,0.0003342
+5abe4a365542993f32c2a0dc,always_think,120 երկրների,more than 120 countries,0.0,0.3333333333333333,0.5,0.25,107,11,3.0200000000000002e-05
+5abe4a365542993f32c2a0dc,retrieval_k3,120 countries,more than 120 countries,0.0,0.6666666666666666,1.0,0.5,441,5,9.22e-05
+5abe4a365542993f32c2a0dc,retrieval_k5,120 countries,more than 120 countries,0.0,0.6666666666666666,1.0,0.5,1457,5,0.0002954
+5abe4a365542993f32c2a0dc,retrieval_k10,120 countries,more than 120 countries,0.0,0.6666666666666666,1.0,0.5,2082,5,0.00042040000000000003
+5ab6cebd55429954757d3378,always_think,hunting,hunt,0.0,0.0,0.0,0.0,89,11,2.6600000000000003e-05
+5ab6cebd55429954757d3378,retrieval_k3,whaling,hunt,0.0,0.0,0.0,0.0,526,5,0.00010920000000000001
+5ab6cebd55429954757d3378,retrieval_k5,whaling,hunt,0.0,0.0,0.0,0.0,796,5,0.0001632
+5ab6cebd55429954757d3378,retrieval_k10,whaling,hunt,0.0,0.0,0.0,0.0,1481,11,0.000305
+5abc219655429959677d6a1d,always_think,Alan Moore's Supreme: The Story of the Year,"the Vertigo series ""Preacher""",0.0,0.0,0.0,0.0,86,19,3.24e-05
+5abc219655429959677d6a1d,retrieval_k3,Star Crossed,"the Vertigo series ""Preacher""",0.0,0.0,0.0,0.0,778,6,0.00016040000000000002
+5abc219655429959677d6a1d,retrieval_k5,Preacher,"the Vertigo series ""Preacher""",0.0,0.5,1.0,0.3333333333333333,973,5,0.0001986
+5abc219655429959677d6a1d,retrieval_k10,Preacher,"the Vertigo series ""Preacher""",0.0,0.5,1.0,0.3333333333333333,1822,5,0.0003684
+5ac546975542993e66e8229a,always_think,1844,1844,1.0,1.0,1.0,1.0,100,11,2.8800000000000002e-05
+5ac546975542993e66e8229a,retrieval_k3,1844,1844,1.0,1.0,1.0,1.0,496,5,0.0001032
+5ac546975542993e66e8229a,retrieval_k5,1844,1844,1.0,1.0,1.0,1.0,696,5,0.0001432
+5ac546975542993e66e8229a,retrieval_k10,1844,1844,1.0,1.0,1.0,1.0,1386,5,0.00028119999999999995
+5adf4da15542995534e8c780,always_think,democratic,Democratic,1.0,1.0,1.0,1.0,84,5,2.08e-05
+5adf4da15542995534e8c780,retrieval_k3,Democratic,Democratic,1.0,1.0,1.0,1.0,335,5,7.1e-05
+5adf4da15542995534e8c780,retrieval_k5,democratic,Democratic,1.0,1.0,1.0,1.0,470,5,9.8e-05
+5adf4da15542995534e8c780,retrieval_k10,democratic,Democratic,1.0,1.0,1.0,1.0,1151,5,0.0002342
+5a7f1d3c5542993067513639,always_think,TotalEnergies,Mercuria Energy Group Ltd,0.0,0.0,0.0,0.0,93,6,2.3400000000000003e-05
+5a7f1d3c5542993067513639,retrieval_k3,Mercuria Energy Group,Mercuria Energy Group Ltd,0.0,0.8571428571428571,1.0,0.75,615,7,0.0001286
+5a7f1d3c5542993067513639,retrieval_k5,Mercuria Energy Group Ltd,Mercuria Energy Group Ltd,1.0,1.0,1.0,1.0,1114,8,0.00022920000000000001
+5a7f1d3c5542993067513639,retrieval_k10,Mercuria Energy Group,Mercuria Energy Group Ltd,0.0,0.8571428571428571,1.0,0.75,1804,7,0.0003664
+5ae3c71f5542991a06ce9a22,always_think,"Mesopotamia
+",Mesopotamia,1.0,1.0,1.0,1.0,98,7,2.5200000000000003e-05
+5ae3c71f5542991a06ce9a22,retrieval_k3,Mesopotamia,Mesopotamia,1.0,1.0,1.0,1.0,440,6,9.279999999999999e-05
+5ae3c71f5542991a06ce9a22,retrieval_k5,"Mesopotamia, Argentina",Mesopotamia,0.0,0.6666666666666666,0.5,1.0,618,8,0.00013
+5ae3c71f5542991a06ce9a22,retrieval_k10,"Mesopotamia, Argentina",Mesopotamia,0.0,0.6666666666666666,0.5,1.0,1187,8,0.0002438
+5a7e32905542991319bc943b,always_think,curling,Curling,1.0,1.0,1.0,1.0,93,11,2.7400000000000002e-05
+5a7e32905542991319bc943b,retrieval_k3,curling,Curling,1.0,1.0,1.0,1.0,610,5,0.000126
+5a7e32905542991319bc943b,retrieval_k5,curling,Curling,1.0,1.0,1.0,1.0,980,5,0.00019999999999999998
+5a7e32905542991319bc943b,retrieval_k10,curling,Curling,1.0,1.0,1.0,1.0,1888,5,0.0003816
+5a75462d5542996c70cfaed3,always_think,Kwok Kin Pong,Edison Koon-hei Chen,0.0,0.0,0.0,0.0,86,7,2.28e-05
+5a75462d5542996c70cfaed3,retrieval_k3,Edison Chen,Edison Koon-hei Chen,0.0,0.8,1.0,0.6666666666666666,280,6,6.08e-05
+5a75462d5542996c70cfaed3,retrieval_k5,Edison Chen,Edison Koon-hei Chen,0.0,0.8,1.0,0.6666666666666666,486,6,0.000102
+5a75462d5542996c70cfaed3,retrieval_k10,Edison Chen,Edison Koon-hei Chen,0.0,0.8,1.0,0.6666666666666666,1032,6,0.0002112
+5a8effb55542997ba9cb317f,always_think,Tommy Hutchinson,Matt Lucas,0.0,0.0,0.0,0.0,87,7,2.3000000000000003e-05
+5a8effb55542997ba9cb317f,retrieval_k3,Matt Lucas,Matt Lucas,1.0,1.0,1.0,1.0,389,5,8.180000000000001e-05
+5a8effb55542997ba9cb317f,retrieval_k5,Matt Lucas,Matt Lucas,1.0,1.0,1.0,1.0,673,5,0.00013859999999999998
+5a8effb55542997ba9cb317f,retrieval_k10,Matt Lucas,Matt Lucas,1.0,1.0,1.0,1.0,1478,5,0.0002996
+5abec66b5542997ec76fd360,always_think,German aviators,A veteran World War I fighter pilot ace,0.0,0.0,0.0,0.0,88,12,2.7200000000000004e-05
+5abec66b5542997ec76fd360,retrieval_k3,Pour le Mérite,A veteran World War I fighter pilot ace,0.0,0.0,0.0,0.0,398,7,8.520000000000001e-05
+5abec66b5542997ec76fd360,retrieval_k5,Pour le Mérite,A veteran World War I fighter pilot ace,0.0,0.0,0.0,0.0,625,7,0.0001306
+5abec66b5542997ec76fd360,retrieval_k10,Pour le Mérite,A veteran World War I fighter pilot ace,0.0,0.0,0.0,0.0,1353,7,0.0002762
+5a9030ef5542995651fb50e4,always_think,ice hockey,American football,0.0,0.0,0.0,0.0,94,11,2.76e-05
+5a9030ef5542995651fb50e4,retrieval_k3,baseball,American football,0.0,0.0,0.0,0.0,489,5,0.00010180000000000001
+5a9030ef5542995651fb50e4,retrieval_k5,American football,American football,1.0,1.0,1.0,1.0,676,5,0.0001392
+5a9030ef5542995651fb50e4,retrieval_k10,American football,American football,1.0,1.0,1.0,1.0,1341,5,0.0002722
+5a762cf0554299109176e6a4,always_think,Bertalan Farkas,Bertalan Farkas,1.0,1.0,1.0,1.0,88,15,2.96e-05
+5a762cf0554299109176e6a4,retrieval_k3,Bertalan Farkas,Bertalan Farkas,1.0,1.0,1.0,1.0,399,9,8.700000000000001e-05
+5a762cf0554299109176e6a4,retrieval_k5,Bertalan Farkas,Bertalan Farkas,1.0,1.0,1.0,1.0,805,9,0.00016820000000000002
+5a762cf0554299109176e6a4,retrieval_k10,Bertalan Farkas,Bertalan Farkas,1.0,1.0,1.0,1.0,1546,9,0.00031640000000000005
+5ade1c9e55429939a52fe822,always_think,Haiti,Saint-Domingue,0.0,0.0,0.0,0.0,116,5,2.72e-05
+5ade1c9e55429939a52fe822,retrieval_k3,Saint-Domingue,Saint-Domingue,1.0,1.0,1.0,1.0,531,7,0.00011180000000000001
+5ade1c9e55429939a52fe822,retrieval_k5,Saint-Domingue,Saint-Domingue,1.0,1.0,1.0,1.0,847,7,0.000175
+5ade1c9e55429939a52fe822,retrieval_k10,Saint-Domingue,Saint-Domingue,1.0,1.0,1.0,1.0,1553,7,0.0003162
+5abb1e1b5542992ccd8e7f19,always_think,Nobel Prize in Literature,Nobel Prize in Literature,1.0,1.0,1.0,1.0,91,8,2.4599999999999998e-05
+5abb1e1b5542992ccd8e7f19,retrieval_k3,Nobel Prize,Nobel Prize in Literature,0.0,0.6666666666666666,1.0,0.5,456,6,9.6e-05
+5abb1e1b5542992ccd8e7f19,retrieval_k5,Nobel Prize,Nobel Prize in Literature,0.0,0.6666666666666666,1.0,0.5,627,6,0.00013020000000000002
+5abb1e1b5542992ccd8e7f19,retrieval_k10,Nobel Prize,Nobel Prize in Literature,0.0,0.6666666666666666,1.0,0.5,1393,6,0.0002834
+5a791ce955429974737f798e,always_think,Queensland,Queensland,1.0,1.0,1.0,1.0,97,11,2.82e-05
+5a791ce955429974737f798e,retrieval_k3,Queensland,Queensland,1.0,1.0,1.0,1.0,489,5,0.00010180000000000001
+5a791ce955429974737f798e,retrieval_k5,Queensland,Queensland,1.0,1.0,1.0,1.0,644,5,0.0001328
+5a791ce955429974737f798e,retrieval_k10,Queensland,Queensland,1.0,1.0,1.0,1.0,1530,5,0.00031
+5ae67dba55429908198fa5f0,always_think,"1,028,301","48,982",0.0,0.0,0.0,0.0,95,14,3.0200000000000002e-05
+5ae67dba55429908198fa5f0,retrieval_k3,"48,982","48,982",1.0,1.0,1.0,1.0,481,6,0.000101
+5ae67dba55429908198fa5f0,retrieval_k5,"48,982","48,982",1.0,1.0,1.0,1.0,755,6,0.00015580000000000002
+5ae67dba55429908198fa5f0,retrieval_k10,"48,982","48,982",1.0,1.0,1.0,1.0,1318,6,0.0002684
+5a7ef6b35542994959419a94,always_think,Emilia-Romagna,Emilia-Romagna Region,0.0,0.6666666666666666,1.0,0.5,84,8,2.32e-05
+5a7ef6b35542994959419a94,retrieval_k3,Emilia-Romagna,Emilia-Romagna Region,0.0,0.6666666666666666,1.0,0.5,256,8,5.7600000000000004e-05
+5a7ef6b35542994959419a94,retrieval_k5,Bologna,Emilia-Romagna Region,0.0,0.0,0.0,0.0,483,5,0.0001006
+5a7ef6b35542994959419a94,retrieval_k10,Emilia-Romagna,Emilia-Romagna Region,0.0,0.6666666666666666,1.0,0.5,1132,8,0.0002328
+5ae5e8dc554299546bf82fbe,always_think,Kwame Ture,Hakim Abdullah Jamal,0.0,0.0,0.0,0.0,100,13,3.04e-05
+5ae5e8dc554299546bf82fbe,retrieval_k3,Hakim Abdullah Jamal,Hakim Abdullah Jamal,1.0,1.0,1.0,1.0,576,8,0.00012160000000000001
+5ae5e8dc554299546bf82fbe,retrieval_k5,Hakim Abdullah Jamal,Hakim Abdullah Jamal,1.0,1.0,1.0,1.0,976,8,0.00020160000000000002
+5ae5e8dc554299546bf82fbe,retrieval_k10,Hakim Abdullah Jamal,Hakim Abdullah Jamal,1.0,1.0,1.0,1.0,1588,8,0.000324
+5a89bbb05542992e4fca83a3,always_think,Amy Poehler,Nick Offerman,0.0,0.0,0.0,0.0,83,12,2.62e-05
+5a89bbb05542992e4fca83a3,retrieval_k3,Nick Offerman,Nick Offerman,1.0,1.0,1.0,1.0,407,6,8.62e-05
+5a89bbb05542992e4fca83a3,retrieval_k5,Nick Offerman,Nick Offerman,1.0,1.0,1.0,1.0,615,6,0.00012780000000000002
+5a89bbb05542992e4fca83a3,retrieval_k10,Nick Offerman,Nick Offerman,1.0,1.0,1.0,1.0,1407,6,0.0002862
+5adcf8155542990d50227d6a,always_think,Janis Joplin,Maria Brink,0.0,0.0,0.0,0.0,110,14,3.32e-05
+5adcf8155542990d50227d6a,retrieval_k3,Maria Brink,Maria Brink,1.0,1.0,1.0,1.0,442,5,9.240000000000001e-05
+5adcf8155542990d50227d6a,retrieval_k5,Maria Brink,Maria Brink,1.0,1.0,1.0,1.0,617,5,0.0001274
+5adcf8155542990d50227d6a,retrieval_k10,Maria Brink,Maria Brink,1.0,1.0,1.0,1.0,1384,5,0.0002808
+5a74feb75542996c70cfae6d,always_think,Ali Qushji,Ali Qushji,1.0,1.0,1.0,1.0,100,7,2.5600000000000002e-05
+5a74feb75542996c70cfae6d,retrieval_k3,Ali Qushji,Ali Qushji,1.0,1.0,1.0,1.0,654,7,0.0001364
+5a74feb75542996c70cfae6d,retrieval_k5,Ali Qushji,Ali Qushji,1.0,1.0,1.0,1.0,999,7,0.0002054
+5a74feb75542996c70cfae6d,retrieval_k10,Ali Qushji,Ali Qushji,1.0,1.0,1.0,1.0,1662,7,0.0003380000000000001
+5ae32e125542991a06ce9946,always_think,101177,"35,124",0.0,0.0,0.0,0.0,96,11,2.8000000000000003e-05
+5ae32e125542991a06ce9946,retrieval_k3,273,"35,124",0.0,0.0,0.0,0.0,377,10,8.340000000000001e-05
+5ae32e125542991a06ce9946,retrieval_k5,35124,"35,124",1.0,1.0,1.0,1.0,599,5,0.0001238
+5ae32e125542991a06ce9946,retrieval_k10,35124,"35,124",1.0,1.0,1.0,1.0,1420,5,0.000288
+5a8242c155429940e5e1a81d,always_think,London,Germany,0.0,0.0,0.0,0.0,85,10,2.4999999999999998e-05
+5a8242c155429940e5e1a81d,retrieval_k3,Chicago,Germany,0.0,0.0,0.0,0.0,585,4,0.0001202
+5a8242c155429940e5e1a81d,retrieval_k5,Chicago,Germany,0.0,0.0,0.0,0.0,964,4,0.00019600000000000002
+5a8242c155429940e5e1a81d,retrieval_k10,Germany,Germany,1.0,1.0,1.0,1.0,1504,4,0.000304
+5ab2acbc55429929539467d2,always_think,Midway Atoll,Laysan,0.0,0.0,0.0,0.0,89,13,2.82e-05
+5ab2acbc55429929539467d2,retrieval_k3,Laysan,Laysan,1.0,1.0,1.0,1.0,447,5,9.340000000000001e-05
+5ab2acbc55429929539467d2,retrieval_k5,Laysan,Laysan,1.0,1.0,1.0,1.0,744,5,0.0001528
+5ab2acbc55429929539467d2,retrieval_k10,Laysan,Laysan,1.0,1.0,1.0,1.0,1432,5,0.0002904
+5abd7d0c55429924427fd010,always_think,musicology,Musicology,1.0,1.0,1.0,1.0,92,11,2.7200000000000004e-05
+5abd7d0c55429924427fd010,retrieval_k3,scholarly analysis and research-based study of music,Musicology,0.0,0.0,0.0,0.0,498,13,0.00011
+5abd7d0c55429924427fd010,retrieval_k5,musicology,Musicology,1.0,1.0,1.0,1.0,731,11,0.00015500000000000003
+5abd7d0c55429924427fd010,retrieval_k10,musicological analysis,Musicology,0.0,0.0,0.0,0.0,1806,6,0.00036600000000000006
+5ae6860e5542991bbc976112,always_think,developed the idea of conservation of energy,"commentary on Isaac Newton's book ""Principia""",0.0,0.0,0.0,0.0,95,11,2.78e-05
+5ae6860e5542991bbc976112,retrieval_k3,translation of Isaac Newton's Principia,"commentary on Isaac Newton's book ""Principia""",0.0,0.5454545454545454,0.6,0.5,401,10,8.82e-05
+5ae6860e5542991bbc976112,retrieval_k5,translation of Isaac Newton's Principia and her commentary on it,"commentary on Isaac Newton's book ""Principia""",0.0,0.625,0.5,0.8333333333333334,656,15,0.0001432
+5ae6860e5542991bbc976112,retrieval_k10,additional conservation law for total energy,"commentary on Isaac Newton's book ""Principia""",0.0,0.0,0.0,0.0,1331,9,0.0002734
+5a849cc95542997175ce1efa,always_think,Southwick,Boston,0.0,0.0,0.0,0.0,99,11,2.86e-05
+5a849cc95542997175ce1efa,retrieval_k3,Boston,Boston,1.0,1.0,1.0,1.0,460,4,9.52e-05
+5a849cc95542997175ce1efa,retrieval_k5,Boston,Boston,1.0,1.0,1.0,1.0,715,4,0.0001462
+5a849cc95542997175ce1efa,retrieval_k10,Boston,Boston,1.0,1.0,1.0,1.0,1211,4,0.0002454
+5ac1a04e5542991316484b63,always_think,no,no,1.0,1.0,1.0,1.0,83,10,2.46e-05
+5ac1a04e5542991316484b63,retrieval_k3,no,no,1.0,1.0,1.0,1.0,296,4,6.24e-05
+5ac1a04e5542991316484b63,retrieval_k5,no,no,1.0,1.0,1.0,1.0,517,4,0.0001066
+5ac1a04e5542991316484b63,retrieval_k10,no,no,1.0,1.0,1.0,1.0,1037,4,0.0002106
+5ade7a435542997c77adee3a,always_think,House of Windsor,Mountbatten family,0.0,0.0,0.0,0.0,109,6,2.6600000000000003e-05
+5ade7a435542997c77adee3a,retrieval_k3,Mountbatten family,Mountbatten family,1.0,1.0,1.0,1.0,466,7,9.88e-05
+5ade7a435542997c77adee3a,retrieval_k5,Mountbatten family,Mountbatten family,1.0,1.0,1.0,1.0,749,7,0.0001554
+5ade7a435542997c77adee3a,retrieval_k10,Mountbatten family,Mountbatten family,1.0,1.0,1.0,1.0,1501,7,0.00030579999999999995
+5a865e8a55429960ec39b67a,always_think,no,yes,0.0,0.0,0.0,0.0,92,10,2.6400000000000005e-05
+5a865e8a55429960ec39b67a,retrieval_k3,no,yes,0.0,0.0,0.0,0.0,607,4,0.00012460000000000002
+5a865e8a55429960ec39b67a,retrieval_k5,no,yes,0.0,0.0,0.0,0.0,751,4,0.00015340000000000002
+5a865e8a55429960ec39b67a,retrieval_k10,no,yes,0.0,0.0,0.0,0.0,1565,4,0.00031620000000000004
+5adc0e0355429944faac2404,always_think,Sonic Mania,Sonic Mania,1.0,1.0,1.0,1.0,87,6,2.2200000000000004e-05
+5adc0e0355429944faac2404,retrieval_k3,Sonic Mania,Sonic Mania,1.0,1.0,1.0,1.0,326,6,7e-05
+5adc0e0355429944faac2404,retrieval_k5,Sonic Mania,Sonic Mania,1.0,1.0,1.0,1.0,689,6,0.00014260000000000002
+5adc0e0355429944faac2404,retrieval_k10,Sonic Mania,Sonic Mania,1.0,1.0,1.0,1.0,1364,6,0.0002776
+5a80ecea55429938b6142254,always_think,Reply 1988,Queen In-hyun's Man,0.0,0.0,0.0,0.0,96,13,2.96e-05
+5a80ecea55429938b6142254,retrieval_k3,My Fair Lady,Queen In-hyun's Man,0.0,0.0,0.0,0.0,380,6,8.08e-05
+5a80ecea55429938b6142254,retrieval_k5,Queen In-hyun's Man,Queen In-hyun's Man,1.0,1.0,1.0,1.0,884,9,0.00018400000000000003
+5a80ecea55429938b6142254,retrieval_k10,Queen In-hyun's Man,Queen In-hyun's Man,1.0,1.0,1.0,1.0,1703,9,0.00034780000000000005
+5ae7cea355429952e35ea9c1,always_think,Easy to tackle?,Netflix,0.0,0.0,0.0,0.0,105,13,3.14e-05
+5ae7cea355429952e35ea9c1,retrieval_k3,Travelers,Netflix,0.0,0.0,0.0,0.0,690,5,0.00014199999999999998
+5ae7cea355429952e35ea9c1,retrieval_k5,Easy,Netflix,0.0,0.0,0.0,0.0,901,4,0.0001834
+5ae7cea355429952e35ea9c1,retrieval_k10,Easy,Netflix,0.0,0.0,0.0,0.0,1752,4,0.0003536000000000001
+5a77a44d5542997042120aba,always_think,Lynbrook,Baldwin,0.0,0.0,0.0,0.0,104,12,3.04e-05
+5a77a44d5542997042120aba,retrieval_k3,Baldwin,Baldwin,1.0,1.0,1.0,1.0,463,12,0.00010220000000000002
+5a77a44d5542997042120aba,retrieval_k5,Salisbury,Baldwin,0.0,0.0,0.0,0.0,588,6,0.00012240000000000002
+5a77a44d5542997042120aba,retrieval_k10,Baldwin,Baldwin,1.0,1.0,1.0,1.0,1053,6,0.00021540000000000003
+5a775f8a5542994aec3b72ba,always_think,Taylor Swift,Taylor Swift,1.0,1.0,1.0,1.0,113,11,3.1400000000000004e-05
+5a775f8a5542994aec3b72ba,retrieval_k3,Taylor Swift,Taylor Swift,1.0,1.0,1.0,1.0,693,5,0.00014259999999999997
+5a775f8a5542994aec3b72ba,retrieval_k5,Taylor Swift,Taylor Swift,1.0,1.0,1.0,1.0,999,5,0.0002038
+5a775f8a5542994aec3b72ba,retrieval_k10,Taylor Swift,Taylor Swift,1.0,1.0,1.0,1.0,2189,5,0.0004418
+5a80870d5542992bc0c4a752,always_think,Sage Steele,Matthew Ward Winer,0.0,0.0,0.0,0.0,94,12,2.84e-05
+5a80870d5542992bc0c4a752,retrieval_k3,Stephen A. Smith,Matthew Ward Winer,0.0,0.0,0.0,0.0,574,7,0.00012040000000000001
+5a80870d5542992bc0c4a752,retrieval_k5,Matt Winer,Matthew Ward Winer,0.0,0.4,0.5,0.3333333333333333,820,6,0.0001688
+5a80870d5542992bc0c4a752,retrieval_k10,Matt Winer,Matthew Ward Winer,0.0,0.4,0.5,0.3333333333333333,1642,6,0.0003332
+5ae4d7fc5542990ba0bbb16f,always_think,yes,yes,1.0,1.0,1.0,1.0,88,4,2.08e-05
+5ae4d7fc5542990ba0bbb16f,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,368,4,7.680000000000001e-05
+5ae4d7fc5542990ba0bbb16f,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,578,4,0.0001188
+5ae4d7fc5542990ba0bbb16f,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,1282,4,0.0002596000000000001
+5abe765a55429976d4830b1f,always_think,Amélie Mauresmo,Amélie Simone Mauresmo,0.0,0.8,1.0,0.6666666666666666,93,9,2.5800000000000004e-05
+5abe765a55429976d4830b1f,retrieval_k3,Amélie Mauresmo,Amélie Simone Mauresmo,0.0,0.8,1.0,0.6666666666666666,434,9,9.400000000000001e-05
+5abe765a55429976d4830b1f,retrieval_k5,Amélie Mauresmo,Amélie Simone Mauresmo,0.0,0.8,1.0,0.6666666666666666,610,9,0.0001292
+5abe765a55429976d4830b1f,retrieval_k10,Amélie Mauresmo,Amélie Simone Mauresmo,0.0,0.8,1.0,0.6666666666666666,1364,9,0.00028000000000000003
+5a84f5195542994c784dda9d,always_think,Irwin Stelzer,Israeli Ambassador,0.0,0.0,0.0,0.0,96,13,2.96e-05
+5a84f5195542994c784dda9d,retrieval_k3,noanswer,Israeli Ambassador,0.0,0.0,0.0,0.0,336,5,7.120000000000001e-05
+5a84f5195542994c784dda9d,retrieval_k5,Israeli Ambassador to the United States,Israeli Ambassador,0.0,0.5714285714285715,0.4,1.0,674,10,0.00014280000000000003
+5a84f5195542994c784dda9d,retrieval_k10,Israeli Ambassador to the United States,Israeli Ambassador,0.0,0.5714285714285715,0.4,1.0,1323,10,0.0002726
+5ab431e65542991751b4d6e2,always_think,1848,"February 14, 1859",0.0,0.0,0.0,0.0,100,11,2.8800000000000002e-05
+5ab431e65542991751b4d6e2,retrieval_k3,"February 14, 1859","February 14, 1859",1.0,1.0,1.0,1.0,464,10,0.00010080000000000001
+5ab431e65542991751b4d6e2,retrieval_k5,"February 14, 1859","February 14, 1859",1.0,1.0,1.0,1.0,675,10,0.000143
+5ab431e65542991751b4d6e2,retrieval_k10,1859,"February 14, 1859",0.0,0.5,1.0,0.3333333333333333,1125,5,0.00022899999999999998
+5ae71f06554299572ea54708,always_think,Ferdinand Magellan,Ferdinand Magellan,1.0,1.0,1.0,1.0,104,8,2.72e-05
+5ae71f06554299572ea54708,retrieval_k3,Ferdinand Magellan,Ferdinand Magellan,1.0,1.0,1.0,1.0,494,8,0.00010520000000000002
+5ae71f06554299572ea54708,retrieval_k5,Ferdinand Magellan,Ferdinand Magellan,1.0,1.0,1.0,1.0,812,8,0.0001688
+5ae71f06554299572ea54708,retrieval_k10,Ferdinand Magellan,Ferdinand Magellan,1.0,1.0,1.0,1.0,1532,8,0.0003128
+5abdce1b5542993062266cfe,always_think,Hennepin County,Hennepin County,1.0,1.0,1.0,1.0,83,7,2.22e-05
+5abdce1b5542993062266cfe,retrieval_k3,Hennepin County,Hennepin County,1.0,1.0,1.0,1.0,554,7,0.00011640000000000001
+5abdce1b5542993062266cfe,retrieval_k5,Hennepin County,Hennepin County,1.0,1.0,1.0,1.0,927,7,0.000191
+5abdce1b5542993062266cfe,retrieval_k10,Hennepin County,Hennepin County,1.0,1.0,1.0,1.0,2058,7,0.00041720000000000006
+5a8c5eca554299240d9c213d,always_think,"Macy's, Nordstrom, and Sears","three Macy's stores, Sears, Nordstrom, Bloomingdale's, and Saks Fifth Avenue",0.0,0.5714285714285715,1.0,0.4,96,18,3.3600000000000004e-05
+5a8c5eca554299240d9c213d,retrieval_k3,"Macy's, Sears, Nordstrom, Bloomingdale's, and Saks Fifth Avenue","three Macy's stores, Sears, Nordstrom, Bloomingdale's, and Saks Fifth Avenue",0.0,0.888888888888889,1.0,0.8,669,21,0.0001506
+5a8c5eca554299240d9c213d,retrieval_k5,"Macy's, Sears, Nordstrom, Bloomingdale's, and Saks Fifth Avenue","three Macy's stores, Sears, Nordstrom, Bloomingdale's, and Saks Fifth Avenue",0.0,0.888888888888889,1.0,0.8,1084,21,0.0002336
+5a8c5eca554299240d9c213d,retrieval_k10,"Macy's, Sears, Nordstrom, Bloomingdale's, and Saks Fifth Avenue","three Macy's stores, Sears, Nordstrom, Bloomingdale's, and Saks Fifth Avenue",0.0,0.888888888888889,1.0,0.8,2016,21,0.00042
+5a8c8f24554299653c1aa0ba,always_think,World War II,World War II,1.0,1.0,1.0,1.0,112,6,2.7200000000000004e-05
+5a8c8f24554299653c1aa0ba,retrieval_k3,World War II,World War II,1.0,1.0,1.0,1.0,766,6,0.00015800000000000002
+5a8c8f24554299653c1aa0ba,retrieval_k5,World War II,World War II,1.0,1.0,1.0,1.0,1010,6,0.0002068
+5a8c8f24554299653c1aa0ba,retrieval_k10,World War II,World War II,1.0,1.0,1.0,1.0,2098,6,0.0004244
+5ab972485542996be20204f6,always_think,1767,1790,0.0,0.0,0.0,0.0,95,11,2.78e-05
+5ab972485542996be20204f6,retrieval_k3,1790,1790,1.0,1.0,1.0,1.0,613,5,0.0001266
+5ab972485542996be20204f6,retrieval_k5,1790,1790,1.0,1.0,1.0,1.0,827,5,0.0001694
+5ab972485542996be20204f6,retrieval_k10,1790,1790,1.0,1.0,1.0,1.0,1587,5,0.0003214
+5a778a8e5542992a6e59deca,always_think,William Fichtner,William Fichtner,1.0,1.0,1.0,1.0,123,13,3.5000000000000004e-05
+5a778a8e5542992a6e59deca,retrieval_k3,William Fichtner,William Fichtner,1.0,1.0,1.0,1.0,431,13,9.66e-05
+5a778a8e5542992a6e59deca,retrieval_k5,William Fichtner,William Fichtner,1.0,1.0,1.0,1.0,758,7,0.0001572
+5a778a8e5542992a6e59deca,retrieval_k10,William Fichtner,William Fichtner,1.0,1.0,1.0,1.0,1764,7,0.00035840000000000004
+5ab285d1554299449642c8dd,always_think,United States,United States,1.0,1.0,1.0,1.0,87,11,2.6200000000000003e-05
+5ab285d1554299449642c8dd,retrieval_k3,yes,United States,0.0,0.0,0.0,0.0,340,4,7.12e-05
+5ab285d1554299449642c8dd,retrieval_k5,United States,United States,1.0,1.0,1.0,1.0,518,5,0.00010760000000000001
+5ab285d1554299449642c8dd,retrieval_k10,United States,United States,1.0,1.0,1.0,1.0,1186,5,0.0002412
+5a78e49855429974737f78f3,always_think,5000,560,0.0,0.0,0.0,0.0,103,11,2.9400000000000003e-05
+5a78e49855429974737f78f3,retrieval_k3,560,560,1.0,1.0,1.0,1.0,447,4,9.26e-05
+5a78e49855429974737f78f3,retrieval_k5,560,560,1.0,1.0,1.0,1.0,617,4,0.00012660000000000001
+5a78e49855429974737f78f3,retrieval_k10,about 560,560,0.0,0.6666666666666666,0.5,1.0,1242,6,0.00025320000000000003
+5a72b3335542994cef4bc3dc,always_think,The Irish Parliamentary Party,The Home Rule League,0.0,0.0,0.0,0.0,85,7,2.26e-05
+5a72b3335542994cef4bc3dc,retrieval_k3,Home Rule League,The Home Rule League,1.0,1.0,1.0,1.0,348,6,7.44e-05
+5a72b3335542994cef4bc3dc,retrieval_k5,Home Rule League,The Home Rule League,1.0,1.0,1.0,1.0,511,6,0.000107
+5a72b3335542994cef4bc3dc,retrieval_k10,Home Rule League,The Home Rule League,1.0,1.0,1.0,1.0,1172,6,0.00023920000000000001
+5a82bc7455429940e5e1a926,always_think,The Pelican Brief,"""Red Rock West""",0.0,0.0,0.0,0.0,102,13,3.08e-05
+5a82bc7455429940e5e1a926,retrieval_k3,Red Rock West,"""Red Rock West""",1.0,1.0,1.0,1.0,509,12,0.00011140000000000001
+5a82bc7455429940e5e1a926,retrieval_k5,Red Rock West,"""Red Rock West""",1.0,1.0,1.0,1.0,694,12,0.0001484
+5a82bc7455429940e5e1a926,retrieval_k10,Red Rock West,"""Red Rock West""",1.0,1.0,1.0,1.0,1078,6,0.00022040000000000002
+5a77b0395542997042120ae1,always_think,William Hurt,Jessica Lange,0.0,0.0,0.0,0.0,90,5,2.2e-05
+5a77b0395542997042120ae1,retrieval_k3,Jessica Lange,Jessica Lange,1.0,1.0,1.0,1.0,325,5,6.9e-05
+5a77b0395542997042120ae1,retrieval_k5,Jessica Lange,Jessica Lange,1.0,1.0,1.0,1.0,807,5,0.00016539999999999998
+5a77b0395542997042120ae1,retrieval_k10,Jessica Lange,Jessica Lange,1.0,1.0,1.0,1.0,1185,5,0.00024099999999999998
+5a90b6985542990a984936c2,always_think,The Glass Menagerie,"""The Royal Family""",0.0,0.0,0.0,0.0,95,13,2.9400000000000003e-05
+5a90b6985542990a984936c2,retrieval_k3,The Shape of Things,"""The Royal Family""",0.0,0.0,0.0,0.0,416,13,9.36e-05
+5a90b6985542990a984936c2,retrieval_k5,The Royal Family,"""The Royal Family""",1.0,1.0,1.0,1.0,710,6,0.00014680000000000002
+5a90b6985542990a984936c2,retrieval_k10,The Royal Family,"""The Royal Family""",1.0,1.0,1.0,1.0,1612,6,0.00032720000000000004
+5a8a833855429970aeb702fe,always_think,3004,"2,664",0.0,0.0,0.0,0.0,93,11,2.7400000000000002e-05
+5a8a833855429970aeb702fe,retrieval_k3,4409,"2,664",0.0,0.0,0.0,0.0,522,5,0.0001084
+5a8a833855429970aeb702fe,retrieval_k5,noanswer,"2,664",0.0,0.0,0.0,0.0,750,5,0.00015399999999999998
+5a8a833855429970aeb702fe,retrieval_k10,2664,"2,664",1.0,1.0,1.0,1.0,1481,5,0.0003002
+5a7fd95d5542992e7d278dc5,always_think,Golden Globe Award for Best Actor – Miniseries or Television Film,Golden Globe,0.0,0.3076923076923077,0.18181818181818182,1.0,93,16,3.1400000000000004e-05
+5a7fd95d5542992e7d278dc5,retrieval_k3,Golden Globe nomination,Golden Globe,0.0,0.8,0.6666666666666666,1.0,440,6,9.279999999999999e-05
+5a7fd95d5542992e7d278dc5,retrieval_k5,Golden Globe nomination,Golden Globe,0.0,0.8,0.6666666666666666,1.0,671,6,0.00013900000000000002
+5a7fd95d5542992e7d278dc5,retrieval_k10,Golden Globe nomination,Golden Globe,0.0,0.8,0.6666666666666666,1.0,1196,6,0.00024400000000000002
+5ab1e36d554299449642c7f9,always_think,yes,yes,1.0,1.0,1.0,1.0,84,4,2e-05
+5ab1e36d554299449642c7f9,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,301,4,6.34e-05
+5ab1e36d554299449642c7f9,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,446,4,9.24e-05
+5ab1e36d554299449642c7f9,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,1102,4,0.00022360000000000001
+5adfff0755429925eb1afbce,always_think,"Las Vegas
+","Rachel, Nevada",0.0,0.0,0.0,0.0,83,6,2.1400000000000002e-05
+5adfff0755429925eb1afbce,retrieval_k3,"Rachel, Nevada","Rachel, Nevada",1.0,1.0,1.0,1.0,371,6,7.9e-05
+5adfff0755429925eb1afbce,retrieval_k5,"Rachel, Nevada","Rachel, Nevada",1.0,1.0,1.0,1.0,642,6,0.0001332
+5adfff0755429925eb1afbce,retrieval_k10,"Rachel, Nevada","Rachel, Nevada",1.0,1.0,1.0,1.0,3506,6,0.000706
+5ab5e024554299494045f097,always_think,yes,yes,1.0,1.0,1.0,1.0,86,4,2.0399999999999998e-05
+5ab5e024554299494045f097,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,436,4,9.04e-05
+5ab5e024554299494045f097,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,811,4,0.0001654
+5ab5e024554299494045f097,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,1658,4,0.00033480000000000006
+5abfa2255542993fe9a41e18,always_think,no,no,1.0,1.0,1.0,1.0,83,4,1.98e-05
+5abfa2255542993fe9a41e18,retrieval_k3,no,no,1.0,1.0,1.0,1.0,342,4,7.16e-05
+5abfa2255542993fe9a41e18,retrieval_k5,no,no,1.0,1.0,1.0,1.0,481,4,9.94e-05
+5abfa2255542993fe9a41e18,retrieval_k10,no,no,1.0,1.0,1.0,1.0,1059,4,0.000215
+5a810506554299260e20a202,always_think,"May 15, 1985","January 4, 1976",0.0,0.0,0.0,0.0,89,16,3.0600000000000005e-05
+5a810506554299260e20a202,retrieval_k3,"January 4, 1976","January 4, 1976",1.0,1.0,1.0,1.0,373,10,8.260000000000002e-05
+5a810506554299260e20a202,retrieval_k5,"January 4, 1976","January 4, 1976",1.0,1.0,1.0,1.0,529,10,0.00011380000000000001
+5a810506554299260e20a202,retrieval_k10,"January 4, 1976","January 4, 1976",1.0,1.0,1.0,1.0,1356,10,0.00027919999999999996
+5a71231a5542994082a3e5c4,always_think,peach,peach,1.0,1.0,1.0,1.0,93,5,2.26e-05
+5a71231a5542994082a3e5c4,retrieval_k3,peach,peach,1.0,1.0,1.0,1.0,308,5,6.560000000000001e-05
+5a71231a5542994082a3e5c4,retrieval_k5,peach,peach,1.0,1.0,1.0,1.0,573,5,0.00011860000000000001
+5a71231a5542994082a3e5c4,retrieval_k10,peach,peach,1.0,1.0,1.0,1.0,1274,5,0.0002588
+5a71717d5542994082a3e834,always_think,Jeff Bennett,Larry Richard Drake,0.0,0.0,0.0,0.0,93,11,2.7400000000000002e-05
+5a71717d5542994082a3e834,retrieval_k3,Jeff Bennett,Larry Richard Drake,0.0,0.0,0.0,0.0,356,5,7.520000000000001e-05
+5a71717d5542994082a3e834,retrieval_k5,Larry Drake,Larry Richard Drake,0.0,0.8,1.0,0.6666666666666666,491,5,0.0001022
+5a71717d5542994082a3e834,retrieval_k10,Larry Drake,Larry Richard Drake,0.0,0.8,1.0,0.6666666666666666,1554,5,0.0003148
+5ab707d65542991d32223761,always_think,18th congressional district,Pennsylvania's 18th congressional district,0.0,0.8571428571428571,1.0,0.75,87,13,2.7800000000000005e-05
+5ab707d65542991d32223761,retrieval_k3,Pennsylvania's 18th congressional district,Pennsylvania's 18th congressional district,1.0,1.0,1.0,1.0,494,11,0.00010760000000000001
+5ab707d65542991d32223761,retrieval_k5,Pennsylvania's 18th congressional district,Pennsylvania's 18th congressional district,1.0,1.0,1.0,1.0,1006,11,0.00021
+5ab707d65542991d32223761,retrieval_k10,Pennsylvania's 18th congressional district,Pennsylvania's 18th congressional district,1.0,1.0,1.0,1.0,1459,11,0.0003006
+5a74adb455429916b01641c6,always_think,The Ladder,The Ladder,1.0,1.0,1.0,1.0,86,11,2.6e-05
+5a74adb455429916b01641c6,retrieval_k3,The Ladder,The Ladder,1.0,1.0,1.0,1.0,652,5,0.0001344
+5a74adb455429916b01641c6,retrieval_k5,The Ladder,The Ladder,1.0,1.0,1.0,1.0,950,5,0.000194
+5a74adb455429916b01641c6,retrieval_k10,The Ladder,The Ladder,1.0,1.0,1.0,1.0,1990,5,0.000402
+5abe34095542993f32c2a088,always_think,1994 to 2001,1874 until 1994,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,104,15,3.28e-05
+5abe34095542993f32c2a088,retrieval_k3,1874 until 1994,1874 until 1994,1.0,1.0,1.0,1.0,357,9,7.86e-05
+5abe34095542993f32c2a088,retrieval_k5,1874 until 1994,1874 until 1994,1.0,1.0,1.0,1.0,529,9,0.00011300000000000001
+5abe34095542993f32c2a088,retrieval_k10,1874 until 1994,1874 until 1994,1.0,1.0,1.0,1.0,869,9,0.00018100000000000004
+5ab28c89554299340b525513,always_think,SS-Obergruppenführer,Reichsführer-SS,0.0,0.0,0.0,0.0,89,14,2.9000000000000004e-05
+5ab28c89554299340b525513,retrieval_k3,Reichsführer-SS,Reichsführer-SS,1.0,1.0,1.0,1.0,463,9,9.980000000000001e-05
+5ab28c89554299340b525513,retrieval_k5,Reichsführer-SS,Reichsführer-SS,1.0,1.0,1.0,1.0,600,9,0.0001272
+5ab28c89554299340b525513,retrieval_k10,Reichsführer-SS,Reichsführer-SS,1.0,1.0,1.0,1.0,1047,9,0.0002166
+5ab626d555429953192ad279,always_think,"Augusta, Georgia",lower Manhattan,0.0,0.0,0.0,0.0,97,13,2.98e-05
+5ab626d555429953192ad279,retrieval_k3,"Newark, New Jersey",lower Manhattan,0.0,0.0,0.0,0.0,735,8,0.0001534
+5ab626d555429953192ad279,retrieval_k5,"Rocky Mount, North Carolina",lower Manhattan,0.0,0.0,0.0,0.0,1028,9,0.00021280000000000002
+5ab626d555429953192ad279,retrieval_k10,lower Manhattan,lower Manhattan,1.0,1.0,1.0,1.0,1858,5,0.0003756
+5ab3589455429976abd1bc93,always_think,upside down,combination of a loop and a roll,0.0,0.0,0.0,0.0,92,12,2.8000000000000003e-05
+5ab3589455429976abd1bc93,retrieval_k3,full rotation,combination of a loop and a roll,0.0,0.0,0.0,0.0,339,5,7.18e-05
+5ab3589455429976abd1bc93,retrieval_k5,combination of a loop and a roll,combination of a loop and a roll,1.0,1.0,1.0,1.0,704,11,0.0001496
+5ab3589455429976abd1bc93,retrieval_k10,combination of a loop and a roll,combination of a loop and a roll,1.0,1.0,1.0,1.0,1305,11,0.0002698
+5a7cc59c55429909bec767fb,always_think,130 miles,15,0.0,0.0,0.0,0.0,94,11,2.76e-05
+5a7cc59c55429909bec767fb,retrieval_k3,15 mi,15,0.0,0.6666666666666666,0.5,1.0,421,5,8.82e-05
+5a7cc59c55429909bec767fb,retrieval_k5,15 mi,15,0.0,0.6666666666666666,0.5,1.0,758,5,0.0001556
+5a7cc59c55429909bec767fb,retrieval_k10,15 mi,15,0.0,0.6666666666666666,0.5,1.0,2290,5,0.000462
+5ab827a555429934fafe6cf5,always_think,ski jumping events,70 m and 90 m,0.0,0.0,0.0,0.0,99,12,2.9400000000000003e-05
+5ab827a555429934fafe6cf5,retrieval_k3,70 m and 90 m events,70 m and 90 m,0.0,0.9090909090909091,0.8333333333333334,1.0,483,10,0.00010460000000000001
+5ab827a555429934fafe6cf5,retrieval_k5,70 m and 90 m events,70 m and 90 m,0.0,0.9090909090909091,0.8333333333333334,1.0,783,10,0.00016460000000000002
+5ab827a555429934fafe6cf5,retrieval_k10,70 m and 90 m events,70 m and 90 m,0.0,0.9090909090909091,0.8333333333333334,1.0,1526,10,0.00031319999999999997
+5a8af1e255429950cd6afc28,always_think,Alex Greenwood,Trent Alexander-Arnold,0.0,0.0,0.0,0.0,100,11,2.8800000000000002e-05
+5a8af1e255429950cd6afc28,retrieval_k3,Trent Alexander-Arnold,Trent Alexander-Arnold,1.0,1.0,1.0,1.0,574,9,0.00012200000000000001
+5a8af1e255429950cd6afc28,retrieval_k5,Trent Alexander-Arnold,Trent Alexander-Arnold,1.0,1.0,1.0,1.0,712,9,0.00014960000000000003
+5a8af1e255429950cd6afc28,retrieval_k10,Trent Alexander-Arnold,Trent Alexander-Arnold,1.0,1.0,1.0,1.0,1141,9,0.00023540000000000003
+5ac11ee45542997d64295a7d,always_think,Flying Padre,Flying Padre,1.0,1.0,1.0,1.0,87,5,2.1400000000000002e-05
+5ac11ee45542997d64295a7d,retrieval_k3,Flying Padre,Flying Padre,1.0,1.0,1.0,1.0,279,5,5.9800000000000003e-05
+5ac11ee45542997d64295a7d,retrieval_k5,Flying Padre,Flying Padre,1.0,1.0,1.0,1.0,483,5,0.0001006
+5ac11ee45542997d64295a7d,retrieval_k10,Flying Padre,Flying Padre,1.0,1.0,1.0,1.0,1115,5,0.000227
+5ae520315542993aec5ec152,always_think,Taylor Swift,Taylor Swift,1.0,1.0,1.0,1.0,95,5,2.3e-05
+5ae520315542993aec5ec152,retrieval_k3,Taylor Swift,Taylor Swift,1.0,1.0,1.0,1.0,508,5,0.0001056
+5ae520315542993aec5ec152,retrieval_k5,Taylor Swift,Taylor Swift,1.0,1.0,1.0,1.0,802,5,0.00016439999999999998
+5ae520315542993aec5ec152,retrieval_k10,Taylor Swift,Taylor Swift,1.0,1.0,1.0,1.0,1811,5,0.0003662
+5a8f68795542992414482ab5,always_think,Lay Zhang,Do Kyung-soo,0.0,0.0,0.0,0.0,96,5,2.32e-05
+5a8f68795542992414482ab5,retrieval_k3,Do Kyung-soo,Do Kyung-soo,1.0,1.0,1.0,1.0,408,8,8.800000000000001e-05
+5a8f68795542992414482ab5,retrieval_k5,D.O.,Do Kyung-soo,0.0,0.6666666666666666,1.0,0.5,738,6,0.0001524
+5a8f68795542992414482ab5,retrieval_k10,Do Kyung-soo,Do Kyung-soo,1.0,1.0,1.0,1.0,1257,8,0.0002578
+5ae37e525542992e3233c42d,always_think,86 AD to 161 AD,24 January 76 – 10 July 138,0.0,0.0,0.0,0.0,93,9,2.5800000000000004e-05
+5ae37e525542992e3233c42d,retrieval_k3,138 to 161,24 January 76 – 10 July 138,0.0,0.2,0.3333333333333333,0.14285714285714285,439,7,9.340000000000001e-05
+5ae37e525542992e3233c42d,retrieval_k5,24 January 76 – 10 July 138,24 January 76 – 10 July 138,1.0,1.0,1.0,1.0,711,13,0.00015260000000000002
+5ae37e525542992e3233c42d,retrieval_k10,24 January 76 – 10 July 138,24 January 76 – 10 July 138,1.0,1.0,1.0,1.0,1658,13,0.000342
+5ab849d955429916710eb017,always_think,7 October 1918,11 November 1918,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,92,14,2.9600000000000005e-05
+5ab849d955429916710eb017,retrieval_k3,10 October 1918,11 November 1918,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,359,14,8.3e-05
+5ab849d955429916710eb017,retrieval_k5,11 November 1918,11 November 1918,1.0,1.0,1.0,1.0,575,8,0.00012140000000000001
+5ab849d955429916710eb017,retrieval_k10,11 November 1918,11 November 1918,1.0,1.0,1.0,1.0,1282,8,0.00026280000000000005
+5ade51515542992fa25da745,always_think,after his flight to Scotland,report Hess's illegal May 1941 flight to Scotland,0.0,0.4615384615384615,0.6,0.375,85,8,2.34e-05
+5ade51515542992fa25da745,retrieval_k3,flew solo to Scotland to negotiate peace with the United Kingdom,report Hess's illegal May 1941 flight to Scotland,0.0,0.22222222222222224,0.2,0.25,449,15,0.00010180000000000001
+5ade51515542992fa25da745,retrieval_k5,flew solo to Scotland to negotiate peace with the United Kingdom,report Hess's illegal May 1941 flight to Scotland,0.0,0.22222222222222224,0.2,0.25,680,15,0.000148
+5ade51515542992fa25da745,retrieval_k10,flew solo to Scotland in an attempt to negotiate peace with the United Kingdom,report Hess's illegal May 1941 flight to Scotland,0.0,0.2,0.16666666666666666,0.25,1392,18,0.00029280000000000007
+5ade02d05542997545bbbe0d,always_think,United States Army,U.S. Army,0.0,0.4,0.3333333333333333,0.5,100,12,2.96e-05
+5ade02d05542997545bbbe0d,retrieval_k3,Army,U.S. Army,0.0,0.6666666666666666,1.0,0.5,421,10,9.22e-05
+5ade02d05542997545bbbe0d,retrieval_k5,United States Army,U.S. Army,0.0,0.4,0.3333333333333333,0.5,809,6,0.0001666
+5ade02d05542997545bbbe0d,retrieval_k10,United States Air Force,U.S. Army,0.0,0.0,0.0,0.0,1780,7,0.0003616
+5ac41850554299194317390b,always_think,At the Gates,Dissection,0.0,0.0,0.0,0.0,92,12,2.8000000000000003e-05
+5ac41850554299194317390b,retrieval_k3,Dissection,Dissection,1.0,1.0,1.0,1.0,470,5,9.8e-05
+5ac41850554299194317390b,retrieval_k5,Dissection,Dissection,1.0,1.0,1.0,1.0,563,5,0.00011660000000000002
+5ac41850554299194317390b,retrieval_k10,Dissection,Dissection,1.0,1.0,1.0,1.0,1577,5,0.0003194
+5a727e1b5542991f9a20c497,always_think,A Place in This World,Shake It Off,0.0,0.0,0.0,0.0,99,14,3.1e-05
+5a727e1b5542991f9a20c497,retrieval_k3,Our Song,Shake It Off,0.0,0.0,0.0,0.0,703,5,0.0001446
+5a727e1b5542991f9a20c497,retrieval_k5,Our Song,Shake It Off,0.0,0.0,0.0,0.0,1049,5,0.0002138
+5a727e1b5542991f9a20c497,retrieval_k10,Shake It Off,Shake It Off,1.0,1.0,1.0,1.0,1800,6,0.00036480000000000003
+5a8d9de2554299068b959d62,always_think,mathematician,mathematician,1.0,1.0,1.0,1.0,92,13,2.8800000000000002e-05
+5a8d9de2554299068b959d62,retrieval_k3,mathematician,mathematician,1.0,1.0,1.0,1.0,458,7,9.72e-05
+5a8d9de2554299068b959d62,retrieval_k5,mathematician,mathematician,1.0,1.0,1.0,1.0,659,7,0.0001374
+5a8d9de2554299068b959d62,retrieval_k10,mathematician,mathematician,1.0,1.0,1.0,1.0,1390,7,0.00028359999999999995
+5a827ce155429940e5e1a8d7,always_think,Billie Jean King,Billie Jean King,1.0,1.0,1.0,1.0,90,7,2.36e-05
+5a827ce155429940e5e1a8d7,retrieval_k3,Billie Jean King,Billie Jean King,1.0,1.0,1.0,1.0,430,7,9.16e-05
+5a827ce155429940e5e1a8d7,retrieval_k5,Billie Jean King,Billie Jean King,1.0,1.0,1.0,1.0,665,7,0.0001386
+5a827ce155429940e5e1a8d7,retrieval_k10,Billie Jean King,Billie Jean King,1.0,1.0,1.0,1.0,1489,7,0.0003034
+5ae5415055429908b63265b7,always_think,downtown New Rochelle,Downtown,0.0,0.5,0.3333333333333333,1.0,92,13,2.8800000000000002e-05
+5ae5415055429908b63265b7,retrieval_k3,Downtown section,Downtown,0.0,0.6666666666666666,0.5,1.0,473,6,9.94e-05
+5ae5415055429908b63265b7,retrieval_k5,Downtown section,Downtown,0.0,0.6666666666666666,0.5,1.0,669,6,0.0001386
+5ae5415055429908b63265b7,retrieval_k10,Downtown section,Downtown,0.0,0.6666666666666666,0.5,1.0,1385,6,0.0002818
+5ab5ec0a5542997d4ad1f250,always_think,171,650 locations,0.0,0.0,0.0,0.0,92,10,2.6400000000000005e-05
+5ab5ec0a5542997d4ad1f250,retrieval_k3,650,650 locations,0.0,0.6666666666666666,1.0,0.5,366,4,7.64e-05
+5ab5ec0a5542997d4ad1f250,retrieval_k5,650,650 locations,0.0,0.6666666666666666,1.0,0.5,566,4,0.0001164
+5ab5ec0a5542997d4ad1f250,retrieval_k10,650,650 locations,0.0,0.6666666666666666,1.0,0.5,1267,4,0.0002566
+5ae20427554299234fd04397,always_think,Suffolk County,Suffolk,0.0,0.6666666666666666,0.5,1.0,93,13,2.9e-05
+5ae20427554299234fd04397,retrieval_k3,Suffolk County,Suffolk,0.0,0.6666666666666666,0.5,1.0,505,7,0.0001066
+5ae20427554299234fd04397,retrieval_k5,Suffolk County,Suffolk,0.0,0.6666666666666666,0.5,1.0,715,7,0.0001486
+5ae20427554299234fd04397,retrieval_k10,Suffolk County,Suffolk,0.0,0.6666666666666666,0.5,1.0,1552,7,0.000316
+5adcd7325542994d58a2f6f6,always_think,1959,2013,0.0,0.0,0.0,0.0,95,11,2.78e-05
+5adcd7325542994d58a2f6f6,retrieval_k3,2013,2013,1.0,1.0,1.0,1.0,367,5,7.740000000000001e-05
+5adcd7325542994d58a2f6f6,retrieval_k5,2013,2013,1.0,1.0,1.0,1.0,519,5,0.00010780000000000002
+5adcd7325542994d58a2f6f6,retrieval_k10,2013,2013,1.0,1.0,1.0,1.0,907,5,0.0001854
+5abace6b5542996cc5e49e99,always_think,Che Guevara,Che Guevara,1.0,1.0,1.0,1.0,95,12,2.8600000000000004e-05
+5abace6b5542996cc5e49e99,retrieval_k3,Che Guevara,Che Guevara,1.0,1.0,1.0,1.0,487,6,0.0001022
+5abace6b5542996cc5e49e99,retrieval_k5,Che Guevara,Che Guevara,1.0,1.0,1.0,1.0,866,6,0.00017800000000000002
+5abace6b5542996cc5e49e99,retrieval_k10,Che Guevara,Che Guevara,1.0,1.0,1.0,1.0,1609,6,0.0003266
+5ab64cfa55429953192ad2b7,always_think,Ellen Glasgow,N. Scott Momaday,0.0,0.0,0.0,0.0,85,12,2.6600000000000003e-05
+5ab64cfa55429953192ad2b7,retrieval_k3,N. Scott Momaday,N. Scott Momaday,1.0,1.0,1.0,1.0,385,8,8.340000000000001e-05
+5ab64cfa55429953192ad2b7,retrieval_k5,N. Scott Momaday,N. Scott Momaday,1.0,1.0,1.0,1.0,535,8,0.0001134
+5ab64cfa55429953192ad2b7,retrieval_k10,N. Scott Momaday,N. Scott Momaday,1.0,1.0,1.0,1.0,1123,8,0.000231
+5ae4bb1255429913cc2044e7,always_think,yes,yes,1.0,1.0,1.0,1.0,87,10,2.54e-05
+5ae4bb1255429913cc2044e7,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,370,4,7.719999999999999e-05
+5ae4bb1255429913cc2044e7,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,722,4,0.0001476
+5ae4bb1255429913cc2044e7,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,1546,4,0.00031240000000000006
+5abe2b0155429976d4830a83,always_think,1914,26–30 August 1914,0.0,0.5,1.0,0.3333333333333333,101,5,2.4200000000000002e-05
+5abe2b0155429976d4830a83,retrieval_k3,26–30 August 1914,26–30 August 1914,1.0,1.0,1.0,1.0,684,10,0.00014480000000000002
+5abe2b0155429976d4830a83,retrieval_k5,1914,26–30 August 1914,0.0,0.5,1.0,0.3333333333333333,1089,5,0.0002218
+5abe2b0155429976d4830a83,retrieval_k10,26–30 August 1914,26–30 August 1914,1.0,1.0,1.0,1.0,1779,10,0.0003638
+5ae0d52e554299603e418469,always_think,Nicole Conn,Douglas Jackson,0.0,0.0,0.0,0.0,105,11,2.98e-05
+5ae0d52e554299603e418469,retrieval_k3,Bojesse Christopher and Scott Leet,Douglas Jackson,0.0,0.0,0.0,0.0,1047,17,0.000223
+5ae0d52e554299603e418469,retrieval_k5,Mick Garris,Douglas Jackson,0.0,0.0,0.0,0.0,1243,7,0.0002542
+5ae0d52e554299603e418469,retrieval_k10,Douglas Jackson,Douglas Jackson,1.0,1.0,1.0,1.0,1985,5,0.000401
+5abc9fb055429959677d6ac9,always_think,Russian,Danish,0.0,0.0,0.0,0.0,94,10,2.68e-05
+5abc9fb055429959677d6ac9,retrieval_k3,English,Danish,0.0,0.0,0.0,0.0,462,4,9.56e-05
+5abc9fb055429959677d6ac9,retrieval_k5,English,Danish,0.0,0.0,0.0,0.0,602,4,0.0001236
+5abc9fb055429959677d6ac9,retrieval_k10,Danish,Danish,1.0,1.0,1.0,1.0,1010,5,0.000206
+5ac083b0554299294b21900d,always_think,punch and cocktail,cocktail,0.0,0.5,0.3333333333333333,1.0,89,13,2.82e-05
+5ac083b0554299294b21900d,retrieval_k3,cocktail,cocktail,1.0,1.0,1.0,1.0,271,5,5.8200000000000005e-05
+5ac083b0554299294b21900d,retrieval_k5,cocktail,cocktail,1.0,1.0,1.0,1.0,442,5,9.240000000000001e-05
+5ac083b0554299294b21900d,retrieval_k10,cocktail,cocktail,1.0,1.0,1.0,1.0,859,5,0.0001758
+5a8b3e985542995d1e6f131c,always_think,"Atlanta, Georgia","It is based in Sandy Springs, Georgia",0.0,0.22222222222222224,0.5,0.14285714285714285,87,6,2.2200000000000004e-05
+5a8b3e985542995d1e6f131c,retrieval_k3,"Sandy Springs, Georgia","It is based in Sandy Springs, Georgia",0.0,0.6,1.0,0.42857142857142855,428,8,9.200000000000001e-05
+5a8b3e985542995d1e6f131c,retrieval_k5,"Sandy Springs, Georgia","It is based in Sandy Springs, Georgia",0.0,0.6,1.0,0.42857142857142855,547,8,0.00011580000000000001
+5a8b3e985542995d1e6f131c,retrieval_k10,"Sandy Springs, Georgia","It is based in Sandy Springs, Georgia",0.0,0.6,1.0,0.42857142857142855,1559,8,0.0003182
+5a75f0ea5542994ccc91866c,always_think,A41 road,The A41,0.0,0.6666666666666666,0.5,1.0,84,6,2.1600000000000003e-05
+5a75f0ea5542994ccc91866c,retrieval_k3,A41 road,The A41,0.0,0.6666666666666666,0.5,1.0,550,6,0.0001148
+5a75f0ea5542994ccc91866c,retrieval_k5,A5117 road,The A41,0.0,0.0,0.0,0.0,829,7,0.00017140000000000002
+5a75f0ea5542994ccc91866c,retrieval_k10,A5117 road,The A41,0.0,0.0,0.0,0.0,1330,7,0.0002716
+5a7c6b6655429935c91b519a,always_think,selectboard,town meeting legislative body,0.0,0.0,0.0,0.0,89,11,2.6600000000000003e-05
+5a7c6b6655429935c91b519a,retrieval_k3,town meeting,town meeting legislative body,0.0,0.6666666666666666,1.0,0.5,307,5,6.54e-05
+5a7c6b6655429935c91b519a,retrieval_k5,town meeting form of government,town meeting legislative body,0.0,0.4444444444444445,0.4,0.5,522,8,0.00011080000000000001
+5a7c6b6655429935c91b519a,retrieval_k10,town meeting,town meeting legislative body,0.0,0.6666666666666666,1.0,0.5,1283,5,0.0002606
+5ab295eb554299194fa93412,always_think,yes,no,0.0,0.0,0.0,0.0,87,4,2.0600000000000003e-05
+5ab295eb554299194fa93412,retrieval_k3,yes,no,0.0,0.0,0.0,0.0,313,4,6.58e-05
+5ab295eb554299194fa93412,retrieval_k5,yes,no,0.0,0.0,0.0,0.0,567,4,0.0001166
+5ab295eb554299194fa93412,retrieval_k10,no,no,1.0,1.0,1.0,1.0,1471,4,0.0002974
+5a7137dc5542994082a3e68a,always_think,Most Valuable Player Award,The National Basketball Association's Rookie of the Year,0.0,0.0,0.0,0.0,93,13,2.9e-05
+5a7137dc5542994082a3e68a,retrieval_k3,NBA Rookie of the Year Award,The National Basketball Association's Rookie of the Year,0.0,0.5454545454545454,0.6,0.5,446,9,9.64e-05
+5a7137dc5542994082a3e68a,retrieval_k5,NBA Rookie of the Year Award,The National Basketball Association's Rookie of the Year,0.0,0.5454545454545454,0.6,0.5,544,9,0.00011600000000000001
+5a7137dc5542994082a3e68a,retrieval_k10,NBA Rookie of the Year Award,The National Basketball Association's Rookie of the Year,0.0,0.5454545454545454,0.6,0.5,918,9,0.00019080000000000003
+5a82d71555429966c78a6a94,always_think,yes,yes,1.0,1.0,1.0,1.0,89,10,2.5800000000000004e-05
+5a82d71555429966c78a6a94,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,365,4,7.62e-05
+5a82d71555429966c78a6a94,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,702,4,0.0001436
+5a82d71555429966c78a6a94,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,1494,4,0.000302
+5abb7ea4554299642a094a96,always_think,2004,1968,0.0,0.0,0.0,0.0,89,11,2.6600000000000003e-05
+5abb7ea4554299642a094a96,retrieval_k3,1968 and 2009,1968,0.0,0.5,0.3333333333333333,1.0,439,9,9.5e-05
+5abb7ea4554299642a094a96,retrieval_k5,2009,1968,0.0,0.0,0.0,0.0,700,5,0.00014399999999999998
+5abb7ea4554299642a094a96,retrieval_k10,1968,1968,1.0,1.0,1.0,1.0,1433,5,0.0002906
+5a7f00b455429930675135f1,always_think,Alan Passaro,Alan Passaro,1.0,1.0,1.0,1.0,98,12,2.9200000000000005e-05
+5a7f00b455429930675135f1,retrieval_k3,Alan Passaro,Alan Passaro,1.0,1.0,1.0,1.0,391,6,8.3e-05
+5a7f00b455429930675135f1,retrieval_k5,Alan Passaro,Alan Passaro,1.0,1.0,1.0,1.0,705,6,0.00014580000000000002
+5a7f00b455429930675135f1,retrieval_k10,Alan Passaro,Alan Passaro,1.0,1.0,1.0,1.0,1283,6,0.0002614
+5ae153915542990adbacf752,always_think,Billy Idol,William Michael Albert Broad,0.0,0.0,0.0,0.0,90,5,2.2e-05
+5ae153915542990adbacf752,retrieval_k3,William Michael Albert Broad,William Michael Albert Broad,1.0,1.0,1.0,1.0,425,7,9.06e-05
+5ae153915542990adbacf752,retrieval_k5,William Michael Albert Broad,William Michael Albert Broad,1.0,1.0,1.0,1.0,704,7,0.0001464
+5ae153915542990adbacf752,retrieval_k10,William Michael Albert Broad,William Michael Albert Broad,1.0,1.0,1.0,1.0,1315,7,0.0002686
+5a7bf3da5542996dd594b869,always_think,1 August 2016,"September 5, 2017",0.0,0.0,0.0,0.0,101,14,3.1400000000000004e-05
+5a7bf3da5542996dd594b869,retrieval_k3,"September 5, 2017","September 5, 2017",1.0,1.0,1.0,1.0,546,10,0.0001172
+5a7bf3da5542996dd594b869,retrieval_k5,"September 5, 2017","September 5, 2017",1.0,1.0,1.0,1.0,897,10,0.0001874
+5a7bf3da5542996dd594b869,retrieval_k10,"September 5, 2017","September 5, 2017",1.0,1.0,1.0,1.0,1667,10,0.0003414
+5abb4b4a5542993f40c73aea,always_think,"University of California, Berkeley",University of California,0.0,0.8571428571428571,0.75,1.0,94,14,3e-05
+5abb4b4a5542993f40c73aea,retrieval_k3,University of California,University of California,1.0,1.0,1.0,1.0,380,6,8.08e-05
+5abb4b4a5542993f40c73aea,retrieval_k5,University of California,University of California,1.0,1.0,1.0,1.0,606,6,0.000126
+5abb4b4a5542993f40c73aea,retrieval_k10,University of California,University of California,1.0,1.0,1.0,1.0,1536,6,0.00031200000000000005
+5ae1f2f3554299234fd0435a,always_think,yes,yes,1.0,1.0,1.0,1.0,86,4,2.0399999999999998e-05
+5ae1f2f3554299234fd0435a,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,530,4,0.0001092
+5ae1f2f3554299234fd0435a,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,831,4,0.00016940000000000002
+5ae1f2f3554299234fd0435a,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,1658,4,0.00033480000000000006
+5a8f0796554299458435d528,always_think,Eielson Air Force Base,Eielson Air Force Base,1.0,1.0,1.0,1.0,101,9,2.7400000000000002e-05
+5a8f0796554299458435d528,retrieval_k3,Eielson Air Force Base,Eielson Air Force Base,1.0,1.0,1.0,1.0,362,9,7.960000000000001e-05
+5a8f0796554299458435d528,retrieval_k5,Eielson Air Force Base,Eielson Air Force Base,1.0,1.0,1.0,1.0,640,9,0.0001352
+5a8f0796554299458435d528,retrieval_k10,Eielson Air Force Base,Eielson Air Force Base,1.0,1.0,1.0,1.0,1379,9,0.00028300000000000005
+5ae81b895542997ec272770c,always_think,1831,1876,0.0,0.0,0.0,0.0,91,11,2.7e-05
+5ae81b895542997ec272770c,retrieval_k3,1917,1876,0.0,0.0,0.0,0.0,516,11,0.000112
+5ae81b895542997ec272770c,retrieval_k5,1907,1876,0.0,0.0,0.0,0.0,797,5,0.0001634
+5ae81b895542997ec272770c,retrieval_k10,1917,1876,0.0,0.0,0.0,0.0,1591,5,0.0003222
+5ae0f6f5554299422ee99583,always_think,Warner Bros. Records,Warner Bros,0.0,0.8,0.6666666666666666,1.0,96,14,3.0400000000000004e-05
+5ae0f6f5554299422ee99583,retrieval_k3,Warner Bros. Records,Warner Bros,0.0,0.8,0.6666666666666666,1.0,682,8,0.0001428
+5ae0f6f5554299422ee99583,retrieval_k5,Warner Bros. Records,Warner Bros,0.0,0.8,0.6666666666666666,1.0,969,8,0.00020020000000000001
+5ae0f6f5554299422ee99583,retrieval_k10,Warner Bros. Records,Warner Bros,0.0,0.8,0.6666666666666666,1.0,1332,8,0.0002728
+5a7c6d98554299683c1c6304,always_think,Agent Carter,Agent Carter,1.0,1.0,1.0,1.0,94,5,2.28e-05
+5a7c6d98554299683c1c6304,retrieval_k3,Agent Carter,Agent Carter,1.0,1.0,1.0,1.0,451,5,9.42e-05
+5a7c6d98554299683c1c6304,retrieval_k5,Agent Carter,Agent Carter,1.0,1.0,1.0,1.0,696,5,0.0001432
+5a7c6d98554299683c1c6304,retrieval_k10,Agent Carter,Agent Carter,1.0,1.0,1.0,1.0,1283,5,0.0002606
+5a83de04554299334474609f,always_think,circus sound,as loud and dirty as possible,0.0,0.0,0.0,0.0,115,12,3.26e-05
+5a83de04554299334474609f,retrieval_k3,noanswer,as loud and dirty as possible,0.0,0.0,0.0,0.0,557,5,0.00011540000000000001
+5a83de04554299334474609f,retrieval_k5,as loud and dirty as possible,as loud and dirty as possible,1.0,1.0,1.0,1.0,803,9,0.00016780000000000004
+5a83de04554299334474609f,retrieval_k10,loud and dirty as possible,as loud and dirty as possible,0.0,0.9090909090909091,1.0,0.8333333333333334,1476,9,0.0003024
+5ab29c24554299449642c932,always_think,yes,yes,1.0,1.0,1.0,1.0,86,4,2.0399999999999998e-05
+5ab29c24554299449642c932,retrieval_k3,yes,yes,1.0,1.0,1.0,1.0,375,4,7.819999999999999e-05
+5ab29c24554299449642c932,retrieval_k5,yes,yes,1.0,1.0,1.0,1.0,646,4,0.00013240000000000002
+5ab29c24554299449642c932,retrieval_k10,yes,yes,1.0,1.0,1.0,1.0,1413,4,0.00028580000000000006
+5ae20c245542997283cd2367,always_think,Persia and Arabia,South Asia and the Middle East,0.0,0.25,0.3333333333333333,0.2,85,13,2.7400000000000002e-05
+5ae20c245542997283cd2367,retrieval_k3,South Asia and the Middle East,South Asia and the Middle East,1.0,1.0,1.0,1.0,386,9,8.44e-05
+5ae20c245542997283cd2367,retrieval_k5,South Asia and the Middle East,South Asia and the Middle East,1.0,1.0,1.0,1.0,600,9,0.0001272
+5ae20c245542997283cd2367,retrieval_k10,South Asia and the Middle East,South Asia and the Middle East,1.0,1.0,1.0,1.0,1212,9,0.0002496
+5ac4efa85542991943173a04,always_think,Tamiami Canal,Genesee River,0.0,0.0,0.0,0.0,92,13,2.8800000000000002e-05
+5ac4efa85542991943173a04,retrieval_k3,Genesee River,Genesee River,1.0,1.0,1.0,1.0,317,7,6.900000000000001e-05
+5ac4efa85542991943173a04,retrieval_k5,Genesee River,Genesee River,1.0,1.0,1.0,1.0,548,7,0.00011520000000000001
+5ac4efa85542991943173a04,retrieval_k10,Genesee River,Genesee River,1.0,1.0,1.0,1.0,1618,7,0.0003292
+5ac385f8554299741d48a279,always_think,J. Massey Rhind,Alfred Preis,0.0,0.0,0.0,0.0,89,15,2.9800000000000003e-05
+5ac385f8554299741d48a279,retrieval_k3,Alfred Preis,Alfred Preis,1.0,1.0,1.0,1.0,413,6,8.74e-05
+5ac385f8554299741d48a279,retrieval_k5,Alfred Preis,Alfred Preis,1.0,1.0,1.0,1.0,671,6,0.00013900000000000002
+5ac385f8554299741d48a279,retrieval_k10,Alfred Preis,Alfred Preis,1.0,1.0,1.0,1.0,1387,6,0.00028220000000000003
+5ab4355555429942dd415ee3,always_think,Dream Story,"""Traumnovelle"" (""Dream Story"")",0.0,0.8,1.0,0.6666666666666666,91,5,2.2199999999999998e-05
+5ab4355555429942dd415ee3,retrieval_k3,Traumnovelle,"""Traumnovelle"" (""Dream Story"")",0.0,0.5,1.0,0.3333333333333333,501,7,0.0001058
+5ab4355555429942dd415ee3,retrieval_k5,Traumnovelle,"""Traumnovelle"" (""Dream Story"")",0.0,0.5,1.0,0.3333333333333333,790,7,0.0001636
+5ab4355555429942dd415ee3,retrieval_k10,Traumnovelle,"""Traumnovelle"" (""Dream Story"")",0.0,0.5,1.0,0.3333333333333333,1330,7,0.0002716
+5add23d05542994734353871,always_think,livestock guarding,to guard,0.0,0.0,0.0,0.0,91,12,2.7799999999999998e-05
+5add23d05542994734353871,retrieval_k3,livestock guardian dogs,to guard,0.0,0.0,0.0,0.0,573,7,0.00012020000000000001
+5add23d05542994734353871,retrieval_k5,livestock guardian dog and farm dog,to guard,0.0,0.0,0.0,0.0,780,10,0.000164
+5add23d05542994734353871,retrieval_k10,"livestock guardians and drovers; farm dogs keeping barns free of rats and acting as home guards, livestock guardians, and drovers",to guard,0.0,0.0,0.0,0.0,1709,29,0.00036500000000000004
+5ab99a215542996be202056a,always_think,Perthshire,"Aberdeenshire, Scotland",0.0,0.0,0.0,0.0,90,12,2.76e-05
+5ab99a215542996be202056a,retrieval_k3,Aberdeenshire,"Aberdeenshire, Scotland",0.0,0.6666666666666666,1.0,0.5,630,13,0.0001364
+5ab99a215542996be202056a,retrieval_k5,Aberdeenshire,"Aberdeenshire, Scotland",0.0,0.6666666666666666,1.0,0.5,863,7,0.00017820000000000002
+5ab99a215542996be202056a,retrieval_k10,"Fyvie, Aberdeenshire","Aberdeenshire, Scotland",0.0,0.5,0.5,0.5,1709,10,0.0003498
+5add15d15542994ed6169c70,always_think,Allied powers,The Allies of World War I,0.0,0.0,0.0,0.0,91,12,2.7799999999999998e-05
+5add15d15542994ed6169c70,retrieval_k3,Allies of World War I,The Allies of World War I,1.0,1.0,1.0,1.0,274,9,6.2e-05
+5add15d15542994ed6169c70,retrieval_k5,Entente Powers,The Allies of World War I,0.0,0.0,0.0,0.0,588,6,0.00012240000000000002
+5add15d15542994ed6169c70,retrieval_k10,Allied powers,The Allies of World War I,0.0,0.0,0.0,0.0,1288,6,0.00026240000000000004
+5ae5d82f554299546bf82f9a,always_think,2,3,0.0,0.0,0.0,0.0,95,10,2.7e-05
+5ae5d82f554299546bf82f9a,retrieval_k3,three,3,0.0,0.0,0.0,0.0,475,4,9.82e-05
+5ae5d82f554299546bf82f9a,retrieval_k5,three,3,0.0,0.0,0.0,0.0,770,4,0.0001572
+5ae5d82f554299546bf82f9a,retrieval_k10,three,3,0.0,0.0,0.0,0.0,1968,4,0.00039680000000000005
+5ab29b07554299194fa93440,always_think,Sykesville,"Columbia, Maryland",0.0,0.0,0.0,0.0,87,6,2.2200000000000004e-05
+5ab29b07554299194fa93440,retrieval_k3,Columbia,"Columbia, Maryland",0.0,0.6666666666666666,1.0,0.5,737,5,0.0001514
+5ab29b07554299194fa93440,retrieval_k5,Columbia,"Columbia, Maryland",0.0,0.6666666666666666,1.0,0.5,960,5,0.000196
+5ab29b07554299194fa93440,retrieval_k10,Columbia,"Columbia, Maryland",0.0,0.6666666666666666,1.0,0.5,2227,5,0.00044940000000000003
+5a88bedb554299206df2b35a,always_think,River Thames,Thames,0.0,0.6666666666666666,0.5,1.0,85,5,2.1e-05
+5a88bedb554299206df2b35a,retrieval_k3,River Thames,Thames,0.0,0.6666666666666666,0.5,1.0,346,5,7.32e-05
+5a88bedb554299206df2b35a,retrieval_k5,River Thames,Thames,0.0,0.6666666666666666,0.5,1.0,686,5,0.00014120000000000002
+5a88bedb554299206df2b35a,retrieval_k10,River Thames,Thames,0.0,0.6666666666666666,0.5,1.0,1249,5,0.0002538
+5abfd3ba5542994516f4550a,always_think,Slobodan Živojinović,Ross Case,0.0,0.0,0.0,0.0,99,16,3.26e-05
+5abfd3ba5542994516f4550a,retrieval_k3,Ross Case,Ross Case,1.0,1.0,1.0,1.0,451,5,9.42e-05
+5abfd3ba5542994516f4550a,retrieval_k5,Ross Case,Ross Case,1.0,1.0,1.0,1.0,581,5,0.00012020000000000001
+5abfd3ba5542994516f4550a,retrieval_k10,Ross Case,Ross Case,1.0,1.0,1.0,1.0,1082,5,0.0002204
+5a728b1c5542992359bc30e0,always_think,Jonghyun,Jonghyun,1.0,1.0,1.0,1.0,90,7,2.36e-05
+5a728b1c5542992359bc30e0,retrieval_k3,Key,Jonghyun,0.0,0.0,0.0,0.0,721,10,0.0001522
+5a728b1c5542992359bc30e0,retrieval_k5,Jonghyun,Jonghyun,1.0,1.0,1.0,1.0,950,7,0.0001956
+5a728b1c5542992359bc30e0,retrieval_k10,Jonghyun,Jonghyun,1.0,1.0,1.0,1.0,1694,7,0.0003444
+5a806aca5542996402f6a503,always_think,Gremlins,Orc characters,0.0,0.0,0.0,0.0,96,6,2.4000000000000004e-05
+5a806aca5542996402f6a503,retrieval_k3,Orc characters,Orc characters,1.0,1.0,1.0,1.0,319,6,6.86e-05
+5a806aca5542996402f6a503,retrieval_k5,Orc characters,Orc characters,1.0,1.0,1.0,1.0,408,6,8.64e-05
+5a806aca5542996402f6a503,retrieval_k10,Orc characters,Orc characters,1.0,1.0,1.0,1.0,772,6,0.00015920000000000002
+5ae4bbf05542995ad6573e32,always_think,People v. Turner,People v. Turner,1.0,1.0,1.0,1.0,93,13,2.9e-05
+5ae4bbf05542995ad6573e32,retrieval_k3,People v. Turner,People v. Turner,1.0,1.0,1.0,1.0,510,7,0.0001076
+5ae4bbf05542995ad6573e32,retrieval_k5,People v. Turner,People v. Turner,1.0,1.0,1.0,1.0,687,7,0.000143
+5ae4bbf05542995ad6573e32,retrieval_k10,People v. Turner,People v. Turner,1.0,1.0,1.0,1.0,1353,7,0.0002762
+5a8638945542994775f6072d,always_think,yes,no,0.0,0.0,0.0,0.0,86,4,2.0399999999999998e-05
+5a8638945542994775f6072d,retrieval_k3,no,no,1.0,1.0,1.0,1.0,484,4,0.0001
+5a8638945542994775f6072d,retrieval_k5,no,no,1.0,1.0,1.0,1.0,792,10,0.0001664
+5a8638945542994775f6072d,retrieval_k10,no,no,1.0,1.0,1.0,1.0,1564,4,0.00031600000000000004
+5ab3bcc55542992ade7c6e66,always_think,2002 United States Senate election in Minnesota,2002,0.0,0.25,0.14285714285714285,1.0,92,11,2.7200000000000004e-05
+5ab3bcc55542992ade7c6e66,retrieval_k3,"United States Senate election in Minnesota, 2002",2002,0.0,0.25,0.14285714285714285,1.0,463,13,0.00010300000000000001
+5ab3bcc55542992ade7c6e66,retrieval_k5,"United States Senate election in Minnesota, 2002",2002,0.0,0.25,0.14285714285714285,1.0,710,13,0.00015240000000000002
+5ab3bcc55542992ade7c6e66,retrieval_k10,"United States Senate election in Minnesota, 2002",2002,0.0,0.25,0.14285714285714285,1.0,1437,13,0.00029780000000000003
+5ab7b0775542992aa3b8c83e,always_think,Belfast,"Belfast, Northern Ireland",0.0,0.5,1.0,0.3333333333333333,86,12,2.68e-05
+5ab7b0775542992aa3b8c83e,retrieval_k3,Belfast,"Belfast, Northern Ireland",0.0,0.5,1.0,0.3333333333333333,381,6,8.1e-05
+5ab7b0775542992aa3b8c83e,retrieval_k5,Belfast,"Belfast, Northern Ireland",0.0,0.5,1.0,0.3333333333333333,535,6,0.0001118
+5ab7b0775542992aa3b8c83e,retrieval_k10,Belfast,"Belfast, Northern Ireland",0.0,0.5,1.0,0.3333333333333333,1001,6,0.00020500000000000002
+5abd68b45542993062266c77,always_think,competed in the 1936 Berlin Olympics,Olympic distance runner,0.0,0.0,0.0,0.0,86,18,3.1599999999999996e-05
+5abd68b45542993062266c77,retrieval_k3,Olympic distance runner,Olympic distance runner,1.0,1.0,1.0,1.0,401,7,8.58e-05
+5abd68b45542993062266c77,retrieval_k5,distance runner,Olympic distance runner,0.0,0.8,1.0,0.6666666666666666,906,5,0.0001852
+5abd68b45542993062266c77,retrieval_k10,distance runner,Olympic distance runner,0.0,0.8,1.0,0.6666666666666666,2001,5,0.0004042
+5ac2a399554299218029dada,always_think,John G. Kemeny,Kathleen O'Brien,0.0,0.0,0.0,0.0,92,15,3.0400000000000004e-05
+5ac2a399554299218029dada,retrieval_k3,Kathleen O'Brien,Kathleen O'Brien,1.0,1.0,1.0,1.0,392,7,8.400000000000001e-05
+5ac2a399554299218029dada,retrieval_k5,Kathleen O'Brien,Kathleen O'Brien,1.0,1.0,1.0,1.0,634,7,0.00013240000000000002
+5ac2a399554299218029dada,retrieval_k10,Kathleen O'Brien,Kathleen O'Brien,1.0,1.0,1.0,1.0,1306,7,0.0002668
+5a8f2fed55429918e830d1c7,always_think,rock and roll,rock and roll,1.0,1.0,1.0,1.0,92,6,2.3200000000000005e-05
+5a8f2fed55429918e830d1c7,retrieval_k3,rock and roll,rock and roll,1.0,1.0,1.0,1.0,539,6,0.0001126
+5a8f2fed55429918e830d1c7,retrieval_k5,rock and roll,rock and roll,1.0,1.0,1.0,1.0,778,6,0.00016040000000000002
+5a8f2fed55429918e830d1c7,retrieval_k10,rock and roll,rock and roll,1.0,1.0,1.0,1.0,1263,6,0.0002574
+5a80abb65542996402f6a5df,always_think,Western Athletic Conference,Mountain West Conference,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,98,6,2.4400000000000004e-05
+5a80abb65542996402f6a5df,retrieval_k3,Mountain West Conference,Mountain West Conference,1.0,1.0,1.0,1.0,410,6,8.68e-05
+5a80abb65542996402f6a5df,retrieval_k5,Mountain West Conference,Mountain West Conference,1.0,1.0,1.0,1.0,615,6,0.00012780000000000002
+5a80abb65542996402f6a5df,retrieval_k10,Mountain West Conference,Mountain West Conference,1.0,1.0,1.0,1.0,1225,6,0.0002498
+5a7fc8d05542992e7d278d86,always_think,John A. Chapman,"Lieutenant Colonel Iceal E. ""Gene"" Hambleton",0.0,0.0,0.0,0.0,101,13,3.0600000000000005e-05
+5a7fc8d05542992e7d278d86,retrieval_k3,Iceal Hambleton,"Lieutenant Colonel Iceal E. ""Gene"" Hambleton",0.0,0.5,1.0,0.3333333333333333,605,8,0.0001274
+5a7fc8d05542992e7d278d86,retrieval_k5,Iceal Hambleton,"Lieutenant Colonel Iceal E. ""Gene"" Hambleton",0.0,0.5,1.0,0.3333333333333333,1018,8,0.00021
+5a7fc8d05542992e7d278d86,retrieval_k10,Iceal Hambleton,"Lieutenant Colonel Iceal E. ""Gene"" Hambleton",0.0,0.5,1.0,0.3333333333333333,1532,8,0.0003128
+5a8f45ca5542997ba9cb320e,always_think,documentary films,documentary,0.0,0.6666666666666666,0.5,1.0,89,12,2.7400000000000002e-05
+5a8f45ca5542997ba9cb320e,retrieval_k3,documentary film,documentary,0.0,0.6666666666666666,0.5,1.0,385,6,8.18e-05
+5a8f45ca5542997ba9cb320e,retrieval_k5,documentary film,documentary,0.0,0.6666666666666666,0.5,1.0,725,6,0.0001498
+5a8f45ca5542997ba9cb320e,retrieval_k10,documentary film,documentary,0.0,0.6666666666666666,0.5,1.0,1515,6,0.0003078
+5a87aa135542996e4f3088b8,always_think,Australian,British,0.0,0.0,0.0,0.0,92,10,2.6400000000000005e-05
+5a87aa135542996e4f3088b8,retrieval_k3,British,British,1.0,1.0,1.0,1.0,518,4,0.00010680000000000001
+5a87aa135542996e4f3088b8,retrieval_k5,British,British,1.0,1.0,1.0,1.0,685,4,0.0001402
+5a87aa135542996e4f3088b8,retrieval_k10,British,British,1.0,1.0,1.0,1.0,1535,4,0.0003102
+5ab29346554299545a2cf997,always_think,KXII-TV,KXII,0.0,0.0,0.0,0.0,86,13,2.76e-05
+5ab29346554299545a2cf997,retrieval_k3,KXII,KXII,1.0,1.0,1.0,1.0,316,12,7.280000000000001e-05
+5ab29346554299545a2cf997,retrieval_k5,noanswer,KXII,0.0,0.0,0.0,0.0,492,5,0.00010240000000000001
+5ab29346554299545a2cf997,retrieval_k10,KXII,KXII,1.0,1.0,1.0,1.0,1110,6,0.0002268
+5ae789615542997ec2727695,always_think,Martha Coolidge,Martha Coolidge,1.0,1.0,1.0,1.0,89,13,2.82e-05
+5ae789615542997ec2727695,retrieval_k3,Martha Coolidge,Martha Coolidge,1.0,1.0,1.0,1.0,404,7,8.640000000000001e-05
+5ae789615542997ec2727695,retrieval_k5,Martha Coolidge,Martha Coolidge,1.0,1.0,1.0,1.0,639,7,0.00013340000000000002
+5ae789615542997ec2727695,retrieval_k10,Martha Coolidge,Martha Coolidge,1.0,1.0,1.0,1.0,1169,7,0.00023940000000000002

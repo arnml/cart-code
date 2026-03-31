@@ -56,9 +56,14 @@ py -m pip install uv
 uv sync
 ```
 
+### Download dataset
+```bash
+uv run python -m experiments.download_dataset
+```
+
 ### Baselines
 ```bash
-uv run python -m experiments.run_baseline <MODEL_NAME> <SAMPLE_SIZE>
+uv run python -m experiments.run_baseline <MODEL_NAME> <SAMPLE_SIZE> [max_workers]
 ```
 
 ### Analise baselines
@@ -78,4 +83,10 @@ uv run python -m experiments.plot_baseline_em_percentage
 
 ### Run adaptive_k
 ```bash
-uv run python -m experiments.run_adaptive_k <MODEL_NAME> <SAMPLE_SIZE>```
+uv run python -m experiments.run_adaptive_k <MODEL_NAME> <SAMPLE_SIZE> [max_workers]
+```
+
+### Analyse adaptive_k
+```bash
+uv run python -m experiments.analyse_adaptive_k <MODEL_NAME> <SAMPLE_SIZE>
+```
