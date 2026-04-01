@@ -125,3 +125,11 @@ uv run python -m experiments.run_noise_gate_ablation <MODEL_NAME> <SAMPLE_SIZE> 
 uv run python -m experiments.analyse_ablation_noise_gate <MODEL_NAME>
 ```
 
+This reads both `experiments/results/cart/results_noise_gate_<MODEL_NAME>.csv`
+and `experiments/results/cart/results_ablation_noise_gate_<MODEL_NAME>.csv`
+and writes `experiments/results/cart/analysis_ablation_noise_gate_<MODEL_NAME>.md`
+with two tables:
+
+- F1 by Jaccard threshold vs similarity threshold
+- Total tokens (mean) by Jaccard threshold vs similarity threshold
+
