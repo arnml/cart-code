@@ -16,7 +16,6 @@
 \usepackage{algpseudocode}
 \usepackage{graphicx}
 \usepackage{xspace}
-\usepackage{subcaption}
 \usepackage{pgfplots}
 \usepackage{tikz}
 \usepackage{hyperref}
@@ -29,11 +28,8 @@
 %
 \begin{document}
 %
-\title{CART: Cost-Penalized Adaptive Routing for Test-Time Retrieval}
-%
-%\titlerunning{Abbreviated paper title}
-% If the paper title is too long for the running head, you can set
-% an abbreviated paper title here
+\title{Cost-Aware Test-Time Retrieval Control for RAG}
+\titlerunning{Test-Time Retrieval Control for RAG}
 %
 \author{First Author\inst{1}\orcidID{0000-1111-2222-3333} \and
 Second Author\inst{2,3}\orcidID{1111-2222-3333-4444} \and
@@ -53,58 +49,67 @@ ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-Retrieval-augmented generation (RAG) is commonly implemented as a fixed top-$k$ pipeline, retrieving the highest-ranked passages and passing them to the generator~\cite{klesel2025rag,zhao2026aigcsurvey,yu2024rankrag,lee2025setr,verma2026reflectiverag}. Although effective, fixed-$k$ retrieval has two important drawbacks: larger $k$ increases token-processing and generation costs, and it can expose the model to noisy or weakly relevant context~\cite{wang2024bestpractices,li2025bestpractices}. These costs are especially important in retrieval-intensive workloads, where small per-query overheads accumulate into substantial system-level expense. In the HotpotQA distractor setting, however, larger fixed retrieval budgets remain strong quality baselines: across all tested models, F1 improves monotonically from no retrieval to $k=10$. For GPT-5.4-mini, mean total tokens increase from 103.5 to 1452.5 ($14.0\times$) while F1 rises from 0.387 to 0.792; for Claude Haiku 4.5, tokens increase from 132.7 to 1639.8 ($12.4\times$) while F1 rises from 0.367 to 0.779. Thus, in this benchmark, the systems problem is not that larger $k$ is harmful on average, but that strong fixed-$k$ policies are expensive.
+Retrieval-augmented generation (RAG) is commonly implemented as a fixed top-$k$ pipeline. On HotpotQA distractor, larger fixed retrieval budgets are strong quality baselines but expensive. For GPT-5.4-mini, mean total tokens rise from 103.5 with no retrieval to 1452.5 at $k=10$ while F1 rises from 0.387 to 0.792, making the stronger setting nearly $14\times$ more expensive in token budget. Anthropic and OpenAI models show the same pattern. In this benchmark, the main systems problem is therefore not that larger $k$ hurts on average, but that strong fixed-retrieval policies are costly.
 
-A natural alternative is Adaptive-$k$~\cite{taguchi2025adaptivek}, which aims to reduce cost by selecting only the most relevant passages. However, in our evaluation on GPT-5.4-mini, Adaptive-$k$ selects a compact mean $k^*=3.02$ yet achieves only 0.627 F1, underperforming fixed $k=3$, $k=5$, and $k=10$. We hypothesize that this occurs because HotpotQA distractor paragraphs are deliberately semantically similar, so naive similarity-gap truncation cannot reliably isolate the true supporting evidence.
+A natural alternative is Adaptive-$k$~\cite{taguchi2025adaptivek}, which selects a query-specific cutoff from similarity-score gaps. However, on GPT-5.4-mini it selects a compact mean $k^*=3.02$ yet achieves only 0.627 F1, underperforming fixed $k=3$, $k=5$, and $k=10$. We therefore study a simple noise-aware filtering stage that first removes paragraphs below a cosine-similarity threshold and then suppresses redundant paragraphs with a Jaccard-based overlap check. In a matched GPT-5.4-mini evaluation on 400 examples, the main noise-gate sweep yields F1 values of 0.774, 0.751, and 0.613 at cosine thresholds $\tau \in \{0.2, 0.3, 0.5\}$, with mean total tokens of 1317.5, 1063.8, and 403.9, respectively. The medium threshold reduces total tokens by 26.8\% relative to \texttt{retrieval\_k10} while incurring only a 0.023 absolute F1 drop relative to the best lenient noise-gate setting. A Jaccard-threshold ablation over $\rho \in \{0.50, 0.55, 0.65\}$ shows best F1 0.782 at $(\rho,\tau)=(0.50,0.2)$ with mean total tokens 1308.0, confirming the same overall quality--cost pattern.
 
-These findings motivate CART (Cost-Penalized Adaptive Routing for Test-Time Retrieval), a training-free controller that decides whether to retrieve, when retrieval is worth its token cost, and what context to keep. CART combines adaptive-$k$ selection via similarity gaps~\cite{taguchi2025adaptivek}, a UCB-Cost routing policy extending UCB1~\cite{auer2002ucb1}, and a noise-filtering gate. Our goal is to approach the answer quality of strong fixed-$k$ baselines, especially $k=10$, while using substantially fewer tokens. Code is available at \url{https://github.com/arnml/cart-code}.
+These findings motivate a training-free cost-aware adaptive routing controller for test-time retrieval. The proposed method combines adaptive-$k$ context selection, a UCB-Cost routing policy, and a noise-filtering gate to decide whether retrieval is worth its token cost and what retrieved context to keep. Our goal is to approach the quality of strong fixed-$k$ baselines, especially $k=10$, while using substantially fewer tokens. Code is available at \url{https://github.com/arnml/cart-code}.
 
-\keywords{Retrieval-Augmented Generation \and Test-time Compute \and Adaptive Routing \and Bandits \and Token Cost}
+\keywords{Retrieval-Augmented Generation \and Test-time Compute \and Adaptive Routing \and Noise Filtering \and Token Cost}
 \end{abstract}
 
 \section{Introduction}
 
 Retrieval-augmented generation (RAG) is a standard approach for improving large language model (LLM) performance on knowledge-intensive tasks~\cite{lewis2020rag}. In many deployed and benchmarked RAG systems, retrieval is still implemented as a fixed top-$k$ policy that appends the same number of documents to every query~\cite{klesel2025rag,zhao2026aigcsurvey,yu2024rankrag,lee2025setr,verma2026reflectiverag}. This design is straightforward, but it assumes that all queries benefit from the same retrieval budget. In practice, that assumption is often too rigid: some queries can be answered from parametric knowledge alone, some require external evidence, and increasing $k$ increases the token budget substantially.
 
+Prior work has shown that larger retrieval budgets can introduce irrelevant or redundant context, which may hurt generation quality in some settings~\cite{asai2024selfrag,verma2026reflectiverag,lee2025setr,yu2024rankrag}. In our HotpotQA distractor experiments, however, average F1 increases with larger fixed $k$ across the evaluated models. Thus, in our setting, the main issue is not that larger $k$ is harmful on average, but that strong fixed-retrieval policies are costly and query-inefficient.
+
 This issue becomes sharper on multi-hop question answering. We evaluate on HotpotQA~\cite{yang2018hotpotqa}, a benchmark designed to require reasoning across multiple pieces of evidence. In the distractor setting used here, each example contains exactly 10 paragraphs: 2 contain the supporting facts and 8 are distractors. This makes the dataset especially useful for studying both retrieval utility and retrieval difficulty. In our updated baselines, average F1 rises steadily as more retrieved paragraphs are provided. That upward trend is visible in the F1-vs.-$k$ plot and suggests that, for this dataset and these models, larger context budgets are often usable. A plausible reason is that the paragraphs are short relative to modern context windows. However, the systems cost is still substantial: for GPT-5.4-mini, mean total tokens increase from 103.5 in \texttt{always\_think} to 1452.5 in \texttt{retrieval\_k10}, roughly a 14$\times$ increase.
 
-We take fixed $k=10$ as a strong quality upper baseline and ask whether a smarter controller can recover similar answer quality with far fewer tokens. A natural candidate is Adaptive-$k$~\cite{taguchi2025adaptivek}, which selects a query-specific cutoff from similarity-score gaps. Intuitively, this should be an efficient way to keep only the most relevant paragraphs. Yet our results show that Adaptive-$k$ alone does not solve the problem in this benchmark. On GPT-5.4-mini it selects a compact mean $k^*=3.02$, but with F1 0.627 it underperforms even fixed \texttt{retrieval\_k3} (0.651). This suggests that the hard part is not only \emph{how many} paragraphs to keep, but also \emph{whether} retrieval is needed at all and \emph{which} retrieved paragraphs are genuinely useful when distractors are semantically similar.
+We therefore take fixed $k=10$ as a strong quality upper baseline and ask whether a smarter controller can recover similar answer quality with far fewer tokens. A natural candidate is Adaptive-$k$~\cite{taguchi2025adaptivek}, which selects a query-specific cutoff from similarity-score gaps. Intuitively, this should be an efficient way to keep only the most relevant paragraphs. Yet our results show that Adaptive-$k$ alone does not solve the problem in this benchmark. On GPT-5.4-mini it selects a compact mean $k^*=3.02$, but with F1 0.627 it underperforms even fixed \texttt{retrieval\_k3} (0.651). This suggests that the hard part is not only \emph{how many} paragraphs to keep, but also \emph{which} retrieved paragraphs are genuinely useful when distractors are semantically similar.
 
-We address this problem with CART (\textbf{C}ost-\textbf{P}enalized \textbf{A}daptive \textbf{R}outing for \textbf{T}est-time Retrieval), a training-free controller that decides, at inference time, whether to retrieve and how much context to pass to the model. CART combines three ideas: (i) adaptive-$k$ context selection based on inter-document similarity gaps~\cite{taguchi2025adaptivek}, (ii) a UCB-Cost routing policy that extends UCB1~\cite{auer2002ucb1} with an explicit token-cost penalty, and (iii) a noise-filtering gate that suppresses low-value or redundant context before generation.
+This motivates a second question: can simple noise-aware filtering improve the quality--cost frontier before full routing? We study a lightweight noise gate that first keeps only paragraphs whose cosine similarity to the question exceeds a threshold and then removes redundant paragraphs using a Jaccard-overlap threshold. On GPT-5.4-mini over a matched random sample of $n=400$ examples, the updated noise-gate study shows that this filtering is useful but still involves a clear tradeoff: lenient cosine thresholds preserve the most answer quality, while strict cosine thresholds sharply reduce the token budget. At the same time, the medium threshold emerges as a particularly strong efficiency operating point, remaining close to the best lenient setting in F1 while reducing total tokens substantially relative to full retrieval. A separate Jaccard-threshold ablation shows only mild sensitivity around the best lenient setting, which suggests that explicit redundancy handling matters but does not by itself eliminate the quality--cost tension.
 
-Our experiments focus primarily on OpenAI models, where comparisons are cleaner and provider-specific confounds are reduced. Anthropic models are included as auxiliary reference baselines. Across these baselines, we observe three consistent patterns: retrieval is useful, fixed $k=10$ is a strong but expensive baseline, and Adaptive-$k$ alone does not yet match the strongest fixed baselines. Together, these patterns motivate adaptive, cost-aware, and noise-aware retrieval control at inference time.
+We address the broader problem with a training-free controller that decides, at inference time, whether to retrieve and how much context to pass to the model. The proposed method combines three ideas: (i) adaptive-$k$ context selection based on inter-document similarity gaps~\cite{taguchi2025adaptivek}, (ii) a UCB-Cost routing policy that extends UCB1~\cite{auer2002ucb1} with an explicit token-cost penalty, and (iii) a noise-filtering gate that suppresses low-value or redundant context before generation.
+
+Our experiments focus primarily on OpenAI models, where comparisons are cleaner and provider-specific confounds are reduced. Anthropic models are included as auxiliary reference baselines. Across these baselines and updated ablations, we observe four consistent patterns: retrieval is useful, fixed $k=10$ is a strong but expensive baseline, Adaptive-$k$ alone does not yet match the strongest fixed baselines, and simple noise-aware filtering improves the quality--token frontier but does not yet deliver large quality-preserving savings. Together, these patterns motivate adaptive, cost-aware, and noise-aware retrieval control at inference time.
 
 Our contributions are:
 \begin{enumerate}
     \item We formulate retrieval control as a training-free inference-time routing problem under a quality--cost tradeoff.
     \item We provide updated baseline evidence on HotpotQA showing that fixed $k=10$ is a strong quality baseline but requires roughly 12$\times$--15$\times$ more tokens than no retrieval.
-    \item We provide a partial Adaptive-$k$ ablation showing that similarity-gap truncation alone does not match the strongest fixed baselines in this distractor setting.
-    \item We introduce CART as a controller for deciding whether to retrieve, when retrieval is worth the added token cost, and what retrieved context to preserve.
+    \item We provide an Adaptive-$k$ ablation showing that similarity-gap truncation alone does not match the strongest fixed baselines in this distractor setting.
+    \item We provide matched-sample noise-gate evidence showing that simple relevance-and-redundancy filtering improves the quality--token frontier, together with a Jaccard-threshold ablation of the redundancy gate.
+    \item We introduce a training-free controller for deciding whether to retrieve, when retrieval is worth the added token cost, and what retrieved context to preserve.
 \end{enumerate}
 
 \section{Related Work}
 
 \subsection{Fixed-Budget Retrieval in RAG}
 
-Foundational RAG systems use a fixed top-$k$ retriever~\cite{lewis2020rag}, and recent journal treatments still describe plain or vanilla RAG in exactly these terms. Klesel and Wittmann~\cite{klesel2025rag} summarize plain RAG as retrieving the most relevant chunks or documents, most commonly by selecting the top $k$ hits. Zhao et al.~\cite{zhao2026aigcsurvey} likewise review RAG as top-$k$ similarity retrieval followed by augmentation and generation. Recent peer-reviewed RAG papers continue to position fixed top-$k$ as the default point of comparison: RankRAG~\cite{yu2024rankrag} notes that LLMs typically use top-$k$ contexts from a retriever, SetR~\cite{lee2025setr} critiques existing approaches that rerank top-$k$ passages, and ReflectiveRAG~\cite{verma2026reflectiverag} explicitly contrasts its method with current fixed top-$k$ retrieval pipelines.
+Foundational RAG systems use a fixed top-$k$ retriever~\cite{lewis2020rag}, and recent journal treatments still describe plain or vanilla RAG in exactly these terms. Klesel and Wittmann~\cite{klesel2025rag} summarize plain RAG as retrieving the most relevant chunks or documents, most commonly by selecting the top $k$ hits. Zhao et al.~\cite{zhao2026aigcsurvey} likewise review RAG as top-$k$ similarity retrieval followed by augmentation and generation. Recent peer-reviewed RAG papers continue to position fixed top-$k$ as the default point of comparison: RankRAG~\cite{yu2024rankrag} notes that LLMs typically consume top-$k$ contexts from a retriever, SetR~\cite{lee2025setr} critiques existing approaches that rerank top-$k$ passages, and ReflectiveRAG~\cite{verma2026reflectiverag} explicitly contrasts its method with current fixed top-$k$ retrieval pipelines.
 
-\subsection{Adaptive Retrieval with Training}
+\subsection{Adaptive Retrieval Decisions}
 
-Several methods adapt retrieval behavior through training. Self-RAG~\cite{asai2024selfrag} learns retrieval control through reflection tokens. DRAGIN~\cite{su2024dragin} dynamically triggers retrieval based on real-time information needs. DioR~\cite{guo2025dior}, RetrievalQA~\cite{zhang2024retrievalqa}, and RA-RAG~\cite{hwang2025rarag} all explore learned or additional retrieval adaptation mechanisms. These approaches demonstrate the value of adaptive retrieval, but they require additional training, specialized learned components, or both.
+Several methods adapt retrieval behavior through training or learned control. Self-RAG~\cite{asai2024selfrag} explicitly argues that indiscriminate fixed retrieval can be unnecessary or harmful, and learns retrieval control through reflection tokens. DRAGIN~\cite{su2024dragin} dynamically triggers retrieval based on real-time information needs during generation. RetrievalQA~\cite{zhang2024retrievalqa} frames adaptive retrieval as deciding the necessity of retrieval and reports that calibration-based strategies can be sensitive to threshold choice. DioR~\cite{guo2025dior} and RA-RAG~\cite{hwang2025rarag} likewise explore learned or additional retrieval adaptation mechanisms. These approaches demonstrate the value of adaptivity, but they require additional training, specialized learned components, or both.
 
-\subsection{Training-Free Adaptive Context Selection}
+\subsection{Context Selection Beyond Individual Relevance}
 
-Among training-free methods, Adaptive-k~\cite{taguchi2025adaptivek} is most closely related to our setting. It selects the number of retrieved documents on a per-query basis using similarity-score gaps, showing that useful context can often be compact. However, Adaptive-k assumes that retrieval has already been invoked. Our problem is broader: we study whether to retrieve, when retrieval is worth its cost, and how much context to retain under an explicit token-budget objective.
+Among training-free methods, Adaptive-$k$~\cite{taguchi2025adaptivek} is most closely related to our setting. It selects the number of retrieved documents on a per-query basis using similarity-score gaps, showing that useful context can often be compact. However, Adaptive-$k$ assumes that retrieval has already been invoked and ranks documents primarily through individual relevance signals.
 
-\subsection{Retrieval, Reasoning, and Test-Time Compute}
+Recent work argues that this view is incomplete. SetR~\cite{lee2025setr} proposes selecting passages as a \emph{set} that collectively satisfies the query's information requirements rather than reranking only by individual relevance. This idea is especially relevant to HotpotQA distractor, where the two supporting paragraphs may correspond to different reasoning hops and therefore may be complementary rather than individually dominant. RankRAG~\cite{yu2024rankrag} further argues that context ranking should be tied to downstream usefulness for generation rather than treated as a separate pre-processing stage. In our setting, these works motivate looking beyond simple cutoff rules.
 
-Other work studies tighter integration between retrieval and reasoning. IRCoT interleaves retrieval with chain-of-thought reasoning for multi-step QA~\cite{trivedi2023interleave}, while ReAct couples reasoning traces with actions such as search or environment interaction~\cite{yao2023react}. In parallel, a growing literature on adaptive test-time compute studies how much reasoning compute to allocate at inference time~\cite{snell2025ttc}. CART is complementary to this line of work: rather than controlling reasoning depth alone, it controls evidence acquisition cost.
+Our noise-filtering component is also related in spirit to Maximum Marginal Relevance (MMR)~\cite{goldstein1998mmr}, which balances query relevance with novelty so that selected items are both relevant and non-redundant. We use a simpler two-stage approximation of this principle: cosine similarity to estimate relevance to the query, followed by a Jaccard-style redundancy check among kept paragraphs.
+
+\subsection{Noise, Redundancy, and Test-Time Compute}
+
+ReflectiveRAG~\cite{verma2026reflectiverag} is directly relevant to our setting because it studies how irrelevant or redundant passages can degrade retrieval-augmented generation. This is especially important in HotpotQA distractor, where many distractor paragraphs are topically related but still unhelpful. More broadly, work on retrieval-and-reasoning integration such as IRCoT~\cite{trivedi2023interleave} and ReAct~\cite{yao2023react} shows that retrieval can be coupled tightly with inference-time reasoning. In parallel, a growing literature on adaptive test-time compute studies how much computation to allocate at inference time~\cite{snell2025ttc}. The proposed controller is complementary to this line of work: rather than controlling reasoning depth alone, it controls evidence acquisition and evidence retention cost.
 
 \subsection{Benchmark Validity and Contamination}
 
 Open-domain QA benchmarks may overlap with model training data~\cite{li2024c2leva,yi2026membership}. We therefore avoid interpreting stronger no-retrieval performance as definitive evidence that a model robustly ``knows'' the answer. Broader pretraining exposure or contamination may contribute to parametric-only performance. However, our main empirical point does not depend on distinguishing these causes: even newer models with stronger no-retrieval baselines continue to benefit from retrieval on HotpotQA.
 
-\section{CART: Training-Free Test-Time Controller}
+\section{Training-Free Cost-Aware Retrieval Controller}
 
 \subsection{Problem Setup}
 
@@ -114,21 +119,21 @@ A = \{\texttt{think}, \texttt{retrieve}\}.
 \]
 The \texttt{think} action answers directly from parametric knowledge. The \texttt{retrieve} action first retrieves candidate documents, then answers using filtered context.
 
-\subsection{Adaptive-$K$ Selection}
+\subsection{Adaptive-$k$ Selection}
 
-CART begins with a broad retrieval step that returns the top-$N$ candidates for a query, where $N=10$ in our current setup. Let the similarity scores of the retrieved documents be
+The controller begins with a broad retrieval step that returns the top-$N$ candidates for a query, where $N=10$ in our current setup. Let the similarity scores of the retrieved documents be
 \[
 s_1 \ge s_2 \ge \cdots \ge s_N.
 \]
-Following Adaptive-k~\cite{taguchi2025adaptivek}, CART selects a query-specific cut point using the largest adjacent gap:
+Following Adaptive-$k$~\cite{taguchi2025adaptivek}, the controller selects a query-specific cut point using the largest adjacent gap:
 \begin{equation}
 k^* = \arg\max_{1 \le i < N} \left(s_i - s_{i+1}\right).
 \end{equation}
-Intuitively, this selects the compact cluster of highly relevant documents and avoids blindly passing the full retrieved list to the generator. In the current benchmark, however, distractor paragraphs are often semantically similar enough that similarity-gap selection alone may not recover the true supporting evidence, which is exactly why Adaptive-$k$ is only one component of CART rather than the entire method.
+Intuitively, this selects the compact cluster of highly relevant documents and avoids blindly passing the full retrieved list to the generator. In the current benchmark, however, distractor paragraphs are often semantically similar enough that similarity-gap selection alone may not recover the true supporting evidence, which is exactly why Adaptive-$k$ is only one component of the proposed method rather than the entire method.
 
 \subsection{UCB-Cost Policy}
 
-CART treats routing as a lightweight bandit problem. For each action $a \in A$, we maintain an estimated utility $\hat{Q}(a)$ and a visit count $n_a$. We then score actions using
+The controller treats routing as a lightweight bandit problem. For each action $a \in A$, we maintain an estimated utility $\hat{Q}(a)$ and a visit count $n_a$. We then score actions using
 \begin{equation}
 \mathrm{score}(a) = \hat{Q}(a) + \beta \sqrt{\frac{\ln N_t}{n_a + 1}} - \lambda \, c(a),
 \end{equation}
@@ -138,27 +143,41 @@ In our setting, \texttt{think} is cheaper than \texttt{retrieve}, but retrieval 
 
 \subsection{Noise Gate}
 
-After adaptive-$k$ selection, CART applies a simple noise gate before generation. The gate removes:
-\begin{enumerate}
-    \item documents whose query similarity is below a minimum threshold, and
-    \item documents that are highly redundant with already selected context.
-\end{enumerate}
-This component is motivated directly by the HotpotQA distractor setting. Because 8 of the 10 context paragraphs are intentionally irrelevant yet often still topically related, passing more retrieved text is not guaranteed to provide only useful evidence. The noise gate is meant to preserve high-value context while reducing distractor spillover into the generation stage.
+After adaptive-$k$ selection, the controller applies a simple noise gate before generation. The gate works in two stages.
+
+First, it measures how semantically related each paragraph is to the query using cosine similarity between their embeddings. Let $e_q$ be the embedding of the query and $e_i$ the embedding of paragraph $d_i$. We compute
+\begin{equation}
+\mathrm{cos}(q, d_i) =
+\frac{e_q \cdot e_i}{\|e_q\| \, \|e_i\|}.
+\end{equation}
+Paragraphs with cosine similarity below a threshold $\tau$ are removed. In our experiments, we study three cosine settings: a lenient threshold ($\tau=0.2$), a medium threshold ($\tau=0.3$), and a strict threshold ($\tau=0.5$).
+
+Second, among the paragraphs that survive the cosine filter, we remove redundancy using Jaccard overlap. If $A$ and $B$ are the word sets of two paragraphs, their Jaccard similarity is
+\begin{equation}
+J(A,B) = \frac{|A \cap B|}{|A \cup B|}.
+\end{equation}
+Let $\rho$ denote the redundancy threshold. A candidate paragraph is kept only if its overlap with the already retained context stays below that threshold:
+\begin{equation}
+\max_{d_j \in R_{\mathrm{keep}}} J(d_i, d_j) \le \rho.
+\end{equation}
+Otherwise, it is discarded as redundant. In the current ablation, we study $\rho \in \{0.50, 0.55, 0.65\}$, where $\rho=0.65$ is the current default setting used in the main threshold sweep.
+
+This design targets two complementary objectives in context filtering: retaining query-relevant evidence and suppressing redundant context. Cosine similarity is used as a relevance signal between the query and each paragraph, whereas Jaccard overlap is used to detect redundancy among retained paragraphs. Both are important in the HotpotQA distractor setting, where distractor paragraphs are often sufficiently related to the query to pass a relevance-based filter, yet frequently add little new information. The noise gate is therefore intended to preserve informative evidence while reducing duplicated or low-utility context before generation. Conceptually, this mechanism is related to MMR-style relevance-plus-novelty selection~\cite{goldstein1998mmr}, but is substantially simpler to apply in a training-free setting.
 
 \subsection{Pseudocode}
 
-Algorithm~\ref{alg:cart} summarizes the full procedure.
+Algorithm~\ref{alg:controller} summarizes the full procedure.
 
 \begin{algorithm}[t]
-\caption{CART inference}
-\label{alg:cart}
+\caption{Cost-aware adaptive routing inference}
+\label{alg:controller}
 \begin{algorithmic}[1]
-\Require Query $q$, model $m$, retrieval pool $D$, pool size $N$
+\Require Query $q$, model $m$, retrieval pool $D$, pool size $N$, cosine threshold $\tau$, Jaccard threshold $\rho$
 \State Retrieve top-$N$ candidate documents $C = \{d_1,\dots,d_N\}$ for $q$
 \State Compute similarity scores $s_1 \ge \cdots \ge s_N$
 \State Select $k^*$ using the largest-gap rule
 \State Keep top-$k^*$ documents: $R \leftarrow \{d_1,\dots,d_{k^*}\}$
-\State Apply noise filtering to $R$
+\State Apply noise filtering with thresholds $\tau$ and $\rho$ to $R$
 \State Compute $\mathrm{score}(\texttt{think})$ and $\mathrm{score}(\texttt{retrieve})$
 \If{$\mathrm{score}(\texttt{retrieve}) > \mathrm{score}(\texttt{think})$ and $R \neq \emptyset$}
     \State Answer using retrieved context $R$
@@ -228,11 +247,11 @@ We report:
     \item \textbf{Cost}: average cost per example in USD
 \end{itemize}
 
-Our main paper emphasis is on F1, token usage, and cost. We no longer report derived token-efficiency or cost-efficiency metrics, since the central practical question is whether CART can approach strong fixed-baseline quality with a substantially smaller token budget.
+Our main paper emphasis is on F1, token usage, and cost. We no longer report derived token-efficiency or cost-efficiency metrics, since the central practical question is whether the proposed controller can approach strong fixed-baseline quality with a substantially smaller token budget.
 
 \subsection{Baselines}
 
-We compare CART against four fixed policies:
+We compare the proposed controller against four fixed policies:
 \begin{itemize}
     \item \textbf{always\_think}: no retrieval, answer directly
     \item \textbf{retrieval\_k3}: retrieve top 3 paragraphs
@@ -253,38 +272,46 @@ Our main experiments focus on two OpenAI models:
     \item \texttt{gpt-4o-mini}
     \item \texttt{gpt-5.4-mini}
 \end{itemize}
-We use these as the primary setting for CART because within-provider comparisons reduce confounds related to tokenization, pricing, and provider-specific prompting behavior.
+We use these as the primary setting for the proposed controller because within-provider comparisons reduce confounds related to tokenization, pricing, and provider-specific prompting behavior.
 
 For the updated OpenAI baselines, we evaluate a random sample of $n=400$ HotpotQA distractor validation examples. The \texttt{gpt-4o-mini} retrieval runs completed on 399 examples, while the remaining OpenAI runs completed on the full 400; all table values are averages over completed examples. As auxiliary reference baselines, we also report Claude Haiku 4.5 on $n=400$ examples and Claude Sonnet 4.6 on $n=50$ examples. We retain the smaller Sonnet run as a preliminary reference point and treat it more cautiously than the larger OpenAI and Haiku runs.
 
-For the fixed baselines, retrieval is performed over the 10 paragraphs provided by each HotpotQA distractor example. CART uses the same retrieval pool and differs only in how it selects context and routes between actions. We also report a partial Adaptive-$k$ evaluation on \texttt{gpt-5.4-mini} over $n=400$ examples, isolating the context-selection component before adding routing and noise filtering.
+For the fixed baselines, retrieval is performed over the 10 paragraphs provided by each HotpotQA distractor example. The proposed method uses the same retrieval pool and differs only in how it selects context and routes between actions. We also report two matched-sample ablations on \texttt{gpt-5.4-mini} over $n=400$ examples: a partial Adaptive-$k$ evaluation that isolates the context-selection component before adding routing and noise filtering, and a noise-gate evaluation that varies both the cosine relevance threshold and the Jaccard redundancy threshold.
+
+We evaluate all noise-gate variants on the same random sample of 400 examples to reduce comparison noise and make the quality--cost tradeoff interpretable at the per-setting level. We use 400 because it is large enough to stabilize average F1, EM, and token estimates relative to small pilot studies while remaining computationally practical for matched ablations. This does not by itself establish statistical equivalence across close settings, but it does provide a more reliable basis for comparing operating points than a much smaller pilot sample.
+
+\subsection{Noise-Gate Settings}
+
+In addition to the fixed-$k$ baselines and the partial Adaptive-$k$ evaluation, we report a matched-sample noise-gate study on \texttt{gpt-5.4-mini} over $n=400$ HotpotQA distractor validation examples. The goal of this study is to map the current quality--token operating points of simple relevance-and-redundancy filtering and to test the sensitivity of the redundancy threshold itself.
+
+The gate has two hyperparameters. The first is the cosine-similarity threshold $\tau$, which controls query relevance. We evaluate three cosine settings:
+\begin{itemize}
+    \item \textbf{lenient}: $\tau = 0.2$
+    \item \textbf{medium}: $\tau = 0.3$
+    \item \textbf{strict}: $\tau = 0.5$
+\end{itemize}
+
+The second is the Jaccard redundancy threshold $\rho$, which controls how much lexical overlap is tolerated among kept paragraphs. We evaluate three settings:
+\begin{itemize}
+    \item $\rho = 0.50$
+    \item $\rho = 0.55$
+    \item $\rho = 0.65$
+\end{itemize}
+
+All noise-gate runs use the same two-stage gate described in Section~3.4: cosine similarity for query relevance followed by a Jaccard-based redundancy filter among the kept paragraphs. We report the main cosine-threshold sweep using the current default setting $\rho=0.65$, and then a focused ablation over $\rho$ to measure the stability of the filtering behavior around the best operating points.
 
 \section{Results and Analysis}
 
 \subsection{Main Results (vs.\ Baselines)}
 
-\begin{figure}
+\begin{figure}[t]
     \centering
-
-    \begin{subfigure}{\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{images/baseline_f1_vs_k.pdf}
-        \caption{F1 vs k points}
-    \end{subfigure}
-
-    \vspace{0.5em}
-
-    \begin{subfigure}{\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{images/baseline_em_percentage_vs_k.pdf}
-        \caption{EM percentage vs k}
-    \end{subfigure}
-
-    \caption{Baseline results}
-    \label{fig:baselinesparse}
+    \includegraphics[width=\linewidth]{images/baseline_f1_vs_k.pdf}
+    \caption{Baseline F1 across retrieval budgets. Average F1 increases with larger retrieval budgets across all evaluated models, making fixed $k=10$ a strong quality reference baseline.}
+    \label{fig:baseline_f1_vs_k}
 \end{figure}
 
-Table~\ref{tab:openai_baselines} reports the main baseline comparison for the two OpenAI models. Retrieval improves F1 substantially for both models, and the average trend rises steadily with larger $k$: GPT-4o-mini goes from 0.305 in \texttt{always\_think} to 0.707 at \texttt{retrieval\_k10}, while GPT-5.4-mini goes from 0.387 to 0.792. The quality gains are large, but so is the token cost. For GPT-5.4-mini, mean total tokens rise from 103.5 to 1452.5; for GPT-4o-mini, they rise from 96.9 to 1450.7. This makes \texttt{retrieval\_k10} a strong quality baseline but also an expensive one, which is exactly the frontier CART aims to improve.
+Table~\ref{tab:openai_baselines} reports the main baseline comparison for the two OpenAI models. Figure~\ref{fig:baseline_f1_vs_k} shows that retrieval improves F1 substantially for both models, and that the average trend rises steadily with larger $k$. GPT-4o-mini goes from 0.305 in \texttt{always\_think} to 0.707 at \texttt{retrieval\_k10}, while GPT-5.4-mini goes from 0.387 to 0.792. The quality gains are large, but so is the token cost. For GPT-5.4-mini, mean total tokens rise from 103.5 to 1452.5; for GPT-4o-mini, they rise from 96.9 to 1450.7. This makes \texttt{retrieval\_k10} a strong quality baseline but also an expensive one, which is exactly the frontier the proposed controller aims to improve.
 
 \begin{table*}[t]
 \centering
@@ -336,20 +363,20 @@ Model & Method & Input & Output & Total & Cost (USD) & EM & F1 & Prec. & Recall 
 \end{tabular}
 \end{table*}
 
-Table~\ref{tab:k10_summary} summarizes the main systems pattern across providers. In every tested model, moving from \texttt{always\_think} to \texttt{retrieval\_k10} produces a large F1 gain, but it also multiplies total token usage by roughly 12$\times$--15$\times$. This is the key motivation for CART: the target is not merely to beat no retrieval, but to approach the quality of \texttt{retrieval\_k10} while spending substantially fewer tokens.
+Table~\ref{tab:k10_summary} summarizes the main systems pattern across providers. In every tested model, moving from \texttt{always\_think} to \texttt{retrieval\_k10} produces a large F1 gain, but it also multiplies total token usage by roughly 12$\times$--15$\times$. This is the key motivation for the proposed controller: the target is not merely to beat no retrieval, but to approach the quality of \texttt{retrieval\_k10} while spending substantially fewer tokens.
 
 \begin{table*}[t]
 \centering
 \caption{Quality gain and token expansion from \texttt{always\_think} to \texttt{retrieval\_k10}.}
 \label{tab:k10_summary}
-\begin{tabular}{llrrrrrr}
+\begin{tabular}{l|l|r|r|r|r|r|r}
 \toprule
-Provider & Model & always\_think F1 & k10 F1 & F1 Gain & always\_think Tokens & k10 Tokens & Token Multiplier \\
+Model & always\_think F1 & k10 F1 & F1 Gain & always\_think Tokens & k10 Tokens & Token Multiplier \\
 \midrule
-OpenAI & GPT-4o-mini      & 0.305 & 0.707 & +0.402 & 96.9  & 1450.7 & 14.97$\times$ \\
-OpenAI & GPT-5.4-mini     & 0.387 & 0.792 & +0.405 & 103.5 & 1452.5 & 14.03$\times$ \\
-Anthropic & Claude Haiku 4.5  & 0.367 & 0.779 & +0.412 & 132.7 & 1639.8 & 12.36$\times$ \\
-Anthropic & Claude Sonnet 4.6 & 0.441 & 0.784 & +0.343 & 132.1 & 1612.0 & 12.20$\times$ \\
+GPT-4o-mini      & 0.305 & 0.707 & +0.402 & 96.9  & 1450.7 & 14.97$\times$ \\
+GPT-5.4-mini     & 0.387 & 0.792 & +0.405 & 103.5 & 1452.5 & 14.03$\times$ \\
+Claude Haiku 4.5  & 0.367 & 0.779 & +0.412 & 132.7 & 1639.8 & 12.36$\times$ \\
+Claude Sonnet 4.6 & 0.441 & 0.784 & +0.343 & 132.1 & 1612.0 & 12.20$\times$ \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -364,13 +391,61 @@ Cost is still useful to report because it is easy to read and compare, but token
 
 The updated results suggest a shift in emphasis. Average performance no longer argues strongly for a smaller global fixed $k$; instead, it shows that fixed $k=10$ is a strong upper baseline. But a global $k=10$ policy still spends the full retrieval budget on every example, including questions that may be answerable without retrieval or with much less context. This is where adaptivity remains important. The problem is not to find one universally best small $k$, but to allocate retrieval only when it is useful and to keep only the parts of retrieved context that actually contribute to answering.
 
-This is also why query-level control matters more than model-level averages. Even if $k=10$ wins on average, that does not imply every query needs ten paragraphs. CART is intended to learn exactly this distinction: whether to retrieve, when retrieval is worth the extra budget, and what subset of retrieved context should survive to generation.
+This is also why query-level control matters more than model-level averages. Even if $k=10$ wins on average, that does not imply every query needs ten paragraphs. The proposed controller is intended to learn exactly this distinction: whether to retrieve, when retrieval is worth the extra budget, and what subset of retrieved context should survive to generation.
 
-\subsection{Ablation Study}
+\subsection{Selection and Noise-Filtering Ablations}
 
-We currently have a partial ablation for Adaptive-$k$ alone on \texttt{gpt-5.4-mini}. Table~\ref{tab:adaptivek_partial} shows that the method selects compact contexts, with mean $k^*=3.02$ and median $k^*=2$. On its face, this seems promising: it uses 483.1 mean total tokens, far below fixed \texttt{retrieval\_k10} at 1452.5. However, its F1 is only 0.627, which is below fixed \texttt{retrieval\_k3} (0.651), \texttt{retrieval\_k5} (0.716), and \texttt{retrieval\_k10} (0.792). In other words, naive Adaptive-$k$ is efficient in token count but not yet competitive in answer quality.
+We report two matched-sample ablations on \texttt{gpt-5.4-mini}, both over $n=400$ examples: Adaptive-$k$ alone, and the noise gate with threshold sweeps. Together, these ablations help separate two distinct questions: whether compact context selection is sufficient by itself, and whether explicit relevance-and-redundancy filtering can improve the quality--token frontier.
 
-This result is important for the paper. Adaptive-$k$ looks like the natural answer to the token problem, but in this benchmark it is not enough. A plausible explanation is that the distractor paragraphs are deliberately built to sound relevant, so simple embedding similarity and gap-based truncation do not reliably identify the true supporting evidence. This is exactly the gap CART is designed to address by combining context selection with routing and noise filtering.
+Table~\ref{tab:adaptivek_partial} shows that Adaptive-$k$ selects compact contexts, with mean $k^*=3.02$ and median $k^*=2$. On its face, this seems promising: it uses 483.1 mean total tokens, far below fixed \texttt{retrieval\_k10} at 1452.5. However, its F1 is only 0.627, which is below fixed \texttt{retrieval\_k3} (0.651), \texttt{retrieval\_k5} (0.716), and \texttt{retrieval\_k10} (0.792). In other words, naive Adaptive-$k$ is efficient in token count but not yet competitive in answer quality.
+
+This result is important for the paper. Adaptive-$k$ looks like the natural answer to the token problem, but in this benchmark it is not enough. A plausible explanation is that the distractor paragraphs are deliberately built to sound relevant, so simple embedding similarity and gap-based truncation do not reliably identify the true supporting evidence.
+
+We therefore study whether a simple noise-aware filter can do better. Table~\ref{tab:noise_gate_thresholds} reports the main cosine-threshold sweep on \texttt{gpt-5.4-mini} using the default Jaccard threshold $\rho=0.65$. The lenient setting ($\tau=0.2$) achieves the highest F1 in this sweep, reaching 0.774 with EM 0.620, while the strict setting ($\tau=0.5$) yields the strongest token savings, reducing mean total tokens to 403.9. The matched-sample evaluation on 400 examples shows that the medium threshold offers a strong efficiency operating point: it reduces total tokens by 26.8\% relative to \texttt{retrieval\_k10}, while incurring only a modest absolute F1 drop of 0.023 compared with the best lenient noise-gate setting. Output tokens remain nearly constant across thresholds, so the savings come almost entirely from reducing input context rather than shortening model outputs.
+
+Table~\ref{tab:noise_gate_jaccard_ablation} then ablates the Jaccard redundancy threshold $\rho$ using both F1 and mean total tokens. The best score in this ablation is F1 0.782 at $(\rho,\tau)=(0.50,0.2)$, with the corresponding $\rho=0.55$ setting nearly tied at 0.781 and the current default $\rho=0.65$ at 0.774. At $\tau=0.3$ and especially at $\tau=0.5$, looser redundancy thresholds perform slightly worse in both F1 and total tokens. The main conclusion is therefore not that one single $\rho$ value is dramatically superior in all cases, but that the overall quality--cost shape is stable: lenient cosine filtering preserves the most answer quality, while stricter cosine filtering maximizes token savings, and somewhat stricter redundancy filtering modestly improves both quality and efficiency.
+
+Taken together, these results suggest that relevance-and-redundancy filtering is more promising than naive similarity-gap truncation alone. At the same time, the current quality-preserving operating point remains relatively close to the token cost of full retrieval. This is why we view the noise gate as a useful component rather than a complete solution: it improves the frontier, but additional routing or set-selection mechanisms are still likely necessary for larger quality-preserving savings.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Noise-gate evaluation on \texttt{gpt-5.4-mini} using the default Jaccard threshold $\rho=0.65$ (HotpotQA distractor validation, $n=400$).}
+\label{tab:noise_gate_thresholds}
+\begin{tabular}{lrrr}
+\toprule
+Metric & Lenient (0.2) & Medium (0.3) & Strict (0.5) \\
+\midrule
+Count & 400 & 400 & 400 \\
+EM & 0.620 & 0.598 & 0.480 \\
+F1 & 0.774 & 0.751 & 0.613 \\
+Precision & 0.809 & 0.784 & 0.644 \\
+Recall & 0.782 & 0.762 & 0.620 \\
+Input Tokens (mean) & 1310.9 & 1057.1 & 396.8 \\
+Output Tokens (mean) & 6.6 & 6.7 & 7.1 \\
+Total Tokens (mean) & 1317.5 & 1063.8 & 403.9 \\
+Cost (mean, USD) & 2.67e-04 & 2.17e-04 & 8.50e-05 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\caption{Noise-gate Jaccard-threshold ablation on \texttt{gpt-5.4-mini}. Rows vary the Jaccard redundancy threshold $\rho$ and columns vary the cosine threshold $\tau$. All values are averaged across the same matched sample of $n=400$ examples.}
+\label{tab:noise_gate_jaccard_ablation}
+\begin{tabular}{lrrrrrr}
+\toprule
+& \multicolumn{3}{c}{F1} & \multicolumn{3}{c}{Total Tokens (mean)} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+Jaccard $\rho$ & 0.2 & 0.3 & 0.5 & 0.2 & 0.3 & 0.5 \\
+\midrule
+0.50 & 0.782 & 0.759 & 0.626 & 1308.0 & 1055.6 & 401.6 \\
+0.55 & 0.781 & 0.748 & 0.602 & 1309.6 & 1057.3 & 401.8 \\
+0.65 & 0.774 & 0.751 & 0.613 & 1317.5 & 1063.8 & 403.9 \\
+\bottomrule
+\end{tabular}
+\end{table*}
 
 \begin{table}[t]
 \centering
@@ -396,21 +471,34 @@ Stdev $k^*$ & 2.51 \\
 \end{tabular}
 \end{table}
 
+
 \section{Discussion}
 
 Our updated baselines support three practical conclusions. First, retrieval remains a major lever for multi-hop QA performance. Across all tested models, moving from \texttt{always\_think} to \texttt{retrieval\_k10} yields a large F1 gain.
 
 Second, the current HotpotQA distractor results suggest that average performance often improves with more retrieved context. This likely reflects a combination of short paragraph lengths and modern long-context models. We therefore should not frame the benchmark as showing that larger $k$ is broadly harmful. Instead, we should frame it as showing that fixed $k=10$ is a strong but expensive baseline.
 
-Third, the partial Adaptive-$k$ ablation shows why the problem is not solved by naive semantic truncation. Although Adaptive-$k$ chooses compact contexts, it loses too much answer quality in the current setting. This suggests that semantically similar distractors make ``retrieve the top few by embedding signal'' an incomplete solution. In other words, the hard problem is not just how many paragraphs to keep, but whether retrieval is needed at all, when it is worth paying for, and what retrieved evidence is actually useful.
+Third, the matched-sample ablations clarify why the problem is not solved by naive semantic truncation alone. Adaptive-$k$ selects compact contexts, but loses too much answer quality in the current setting. A simple noise gate performs better as an operating-point mechanism: lenient filtering preserves substantially more F1, while strict filtering offers a much smaller token budget. This suggests that semantically similar distractors make ``retrieve the top few by embedding signal'' an incomplete solution, and that explicit redundancy handling is important.
 
-We deliberately focus CART on OpenAI models in the main experiments. This design choice keeps the central analysis cleaner and reduces cross-provider confounds such as pricing, tokenization, and provider-specific prompting behavior. Anthropic results remain useful as auxiliary evidence that the broader retrieval pattern is not unique to one provider.
+Although the lenient threshold achieves the highest F1, the medium threshold is an attractive operating point because it remains close in answer quality while reducing token usage by 26.8\% relative to full retrieval. On a matched 400-example evaluation, this suggests that moderate filtering may offer a favorable efficiency--quality tradeoff, though formal statistical equivalence would require a paired significance test.
 
-We note several limitations. HotpotQA is not contamination-free, so retrieval gains should not be interpreted as a clean decomposition between knowledge and memorization. Our current results are also limited to single-turn QA, fixed baseline policies, and a partial Adaptive-$k$ ablation rather than the full CART controller. Future work should test whether the same patterns hold in multi-turn agent settings and on contamination-resistant benchmarks.
+At the same time, the present noise-gate results also show the limitation of a simple filter. The quality-preserving lenient setting reduces tokens only modestly relative to full \texttt{retrieval\_k10}, while the strict setting gives up nontrivial F1. In other words, noise filtering appears to work, but it does not yet fully solve the cost problem. This is an important part of the paper's research story: the next step is not to discard the noise gate, but to combine it with one or more additional mechanisms, such as better set-aware selection, stronger routing, or more explicit multi-hop evidence coverage.
+
+The expanded Jaccard ablation also sharpens the interpretation of the method. Around the best lenient operating point, moving from $\rho=0.50$ to $\rho=0.55$ changes F1 only from 0.782 to 0.781, so the redundancy threshold is not the dominant source of variation there. However, the default $\rho=0.65$ is somewhat worse in both F1 and tokens across all three cosine thresholds. This suggests that redundancy control matters most as a supporting mechanism: a slightly stricter Jaccard threshold can improve filtering quality, but the cosine threshold remains the dominant control knob for the overall quality--cost frontier.
+
+We deliberately focus the proposed controller on OpenAI models in the main experiments. This design choice keeps the central analysis cleaner and reduces cross-provider confounds such as pricing, tokenization, and provider-specific prompting behavior. Anthropic results remain useful as auxiliary evidence that the broader retrieval pattern is not unique to one provider.
+
+The updated evaluation scale also improves the paper's internal comparisons. The main baselines, Adaptive-$k$, and noise-gate study now all use $n=400$ examples, so the threshold comparisons are better aligned with the main results than before. More importantly, the matched 400-example setup makes close operating-point comparisons more interpretable than a much smaller pilot would. Even so, close differences between neighboring settings should still be interpreted cautiously: for example, the gap between F1 0.782 and 0.781 is too small to over-interpret, whereas the broader gap between the lenient and strict cosine settings is large enough to support a stable qualitative conclusion.
+
+We note several additional limitations. HotpotQA is not contamination-free, so retrieval gains should not be interpreted as a clean decomposition between knowledge and memorization. Our current results are also limited to single-turn QA, fixed baseline policies, a partial Adaptive-$k$ ablation, and a matched-sample noise-gate study rather than the full controller. Future work should test whether the same patterns hold in multi-turn agent settings, on contamination-resistant benchmarks, and under full end-to-end routing evaluations.
 
 \section{Conclusion}
 
-Our updated HotpotQA distractor baselines show that fixed \texttt{retrieval\_k10} is a strong quality baseline across all tested models, but it requires roughly 12$\times$--15$\times$ more tokens than no retrieval. A partial Adaptive-$k$ evaluation on GPT-5.4-mini selects compact contexts and uses far fewer tokens than $k=10$, but it does not match the quality of the strongest fixed baselines. This motivates the full CART design: not just adaptive truncation, but a controller for deciding whether to retrieve, when retrieval is worth the token cost, and what retrieved context should be preserved. The next step is to test whether the full controller can approach the quality of fixed $k=10$ while operating with a substantially smaller token budget.
+Our updated HotpotQA distractor baselines show that fixed \texttt{retrieval\_k10} is a strong quality baseline across all tested models, but it requires roughly 12$\times$--15$\times$ more tokens than no retrieval. A partial Adaptive-$k$ evaluation on GPT-5.4-mini selects compact contexts and uses far fewer tokens than $k=10$, but it does not match the quality of the strongest fixed baselines.
+
+We also report a matched-sample noise-gate study over $n=400$ examples showing that simple relevance-and-redundancy filtering improves the quality--token frontier. In the main threshold sweep, a lenient cosine threshold preserves the strongest answer quality, while a strict threshold greatly reduces token usage. The medium threshold provides a strong efficiency operating point, reducing total tokens by 26.8\% relative to \texttt{retrieval\_k10} while losing only 0.023 absolute F1 relative to the best lenient noise-gate setting. An expanded Jaccard-threshold ablation shows that somewhat stricter redundancy filtering can modestly improve both F1 and token usage, although the broad operating-point structure remains the same.
+
+These findings motivate the full design of the proposed controller: not just adaptive truncation, but a method for deciding whether to retrieve, when retrieval is worth the token cost, and what retrieved context should be preserved. The next step is to test whether combining routing with stronger noise-aware or set-aware context selection can approach the quality of fixed $k=10$ while operating with a substantially smaller token budget.
 
 \begin{thebibliography}{99}
 
@@ -418,8 +506,6 @@ Our updated HotpotQA distractor baselines show that fixed \texttt{retrieval\_k10
 Asai, A., Wu, Z., Wang, Y., Sil, A., Hajishirzi, H.:
 Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection.
 In: \emph{International Conference on Learning Representations (ICLR)} (2024)
-% \url{https://openreview.net/forum?id=jbNjgmE0OP}
-% \url{https://arxiv.org/abs/2310.11511}
 
 \bibitem{auer2002ucb1}
 Auer, P., Cesa-Bianchi, N., Fischer, P.:
@@ -430,27 +516,21 @@ Finite-time Analysis of the Multiarmed Bandit Problem.
 Guo, H., Zhu, J., Di, S., Shi, W., Chen, Z., Xu, J.:
 DioR: Adaptive Cognitive Detection and Contextual Retrieval Optimization for Dynamic Retrieval-Augmented Generation.
 In: \emph{Proceedings of ACL} (2025)
-% \url{https://aclanthology.org/2025.acl-long.148/}
-% \url{https://arxiv.org/abs/2504.10198}
 
 \bibitem{hwang2025rarag}
 Hwang, J., Park, J., Park, H., Kim, D., Park, S., Ok, J.:
 Retrieval-Augmented Generation with Estimation of Source Reliability.
 In: \emph{Proceedings of EMNLP}, pp.~34279--34303 (2025)
-% \url{https://aclanthology.org/2025.emnlp-main.1738/}
 
 \bibitem{klesel2025rag}
 Klesel, M., Wittmann, H.~F.:
 Retrieval-Augmented Generation (RAG).
 \emph{Business \& Information Systems Engineering} \textbf{67}, 551--561 (2025)
-% \url{https://link.springer.com/article/10.1007/s12599-025-00945-3}
 
 \bibitem{lee2025setr}
 Lee, D., Jo, Y., Park, H., Lee, M.:
 Shifting from Ranking to Set Selection for Retrieval Augmented Generation.
 In: \emph{Proceedings of ACL}, pp.~17606--17619 (2025)
-% \url{https://aclanthology.org/2025.acl-long.861/}
-% \url{https://arxiv.org/abs/2507.06838}
 
 \bibitem{lewis2020rag}
 Lewis, P., Perez, E., Piktus, A., et al.:
@@ -461,52 +541,41 @@ In: \emph{Advances in Neural Information Processing Systems (NeurIPS)} (2020)
 Li, Y., et al.:
 C$^2$LEVA: Toward Comprehensive and Contamination-Free Language Model Evaluation.
 \emph{arXiv preprint} (2024)
-% \url{https://arxiv.org/abs/2412.04947}
 
 \bibitem{li2025bestpractices}
 Li, S., Stenzel, L., Eickhoff, C., Bahrainian, S.~A.:
 Enhancing Retrieval-Augmented Generation: A Study of Best Practices.
 In: \emph{Proceedings of COLING}, pp.~6705--6717 (2025)
-% \url{https://aclanthology.org/2025.coling-main.449/}
 
 \bibitem{snell2025ttc}
 Snell, C., Lee, J., Xu, K., Kumar, A.:
 Scaling LLM Test-Time Compute Optimally Can be More Effective than Scaling Parameters for Reasoning.
 In: \emph{International Conference on Learning Representations (ICLR)} (2025)
-% \url{https://iclr.cc/virtual/2025/oral/31924}
-% \url{https://arxiv.org/abs/2408.03314}
 
 \bibitem{su2024dragin}
 Su, W., Tang, Y., Ai, Q., Wu, Z., Liu, Y.:
 DRAGIN: Dynamic Retrieval Augmented Generation Based on Real-Time Information Needs.
 In: \emph{Proceedings of ACL} (2024)
-% \url{https://aclanthology.org/2024.acl-long.702/}
 
 \bibitem{taguchi2025adaptivek}
 Taguchi, C., Maekawa, S., Bhutani, N.:
 Efficient Context Selection for Long-Context QA: No Tuning, No Iteration, Just Adaptive-k.
 In: \emph{Proceedings of EMNLP}, pp.~20105--20130 (2025)
-% \url{https://aclanthology.org/2025.emnlp-main.1017/}
-% \url{https://arxiv.org/abs/2506.08479}
 
 \bibitem{trivedi2023interleave}
 Trivedi, H., Balasubramanian, N., Khot, T., Sabharwal, A.:
 Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions.
 In: \emph{Proceedings of ACL}, pp.~10014--10037 (2023)
-% \url{https://aclanthology.org/2023.acl-long.557/}
-% \url{https://arxiv.org/abs/2212.10509}
 
 \bibitem{verma2026reflectiverag}
 Verma, A., Gupta, S., Pillai, S., Sircar, P., Gupta, D.:
 ReflectiveRAG: Rethinking Adaptivity in Retrieval-Augmented Generation.
 In: \emph{Proceedings of EACL, Industry Track} (2026)
-% \url{https://aclanthology.org/2026.eacl-industry.27/}
 
 \bibitem{wang2024bestpractices}
 Wang, X., Wang, Z., Gao, X., et al.:
 Searching for Best Practices in Retrieval-Augmented Generation.
 In: \emph{Proceedings of EMNLP}, pp.~17716--17736 (2024)
-% \url{https://aclanthology.org/2024.emnlp-main.981/}
 
 \bibitem{yang2018hotpotqa}
 Yang, Z., Qi, P., Zhang, S., Bengio, Y., Cohen, W.~W., Salakhutdinov, R., Manning, C.~D.:
@@ -517,42 +586,37 @@ In: \emph{Proceedings of EMNLP} (2018)
 Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., Cao, Y.:
 ReAct: Synergizing Reasoning and Acting in Language Models.
 In: \emph{International Conference on Learning Representations (ICLR)} (2023)
-% \url{https://react-lm.github.io/}
-% \url{https://arxiv.org/abs/2210.03629}
 
 \bibitem{yi2026membership}
 Yi, J., Li, Y.:
 Membership Inference on LLMs in the Wild.
 \emph{arXiv preprint} (2026)
-% \url{https://arxiv.org/abs/2601.11314}
 
 \bibitem{yu2024rankrag}
 Yu, Y., Ping, W., Liu, Z., Wang, B., You, J., Zhang, C., Shoeybi, M., Catanzaro, B.:
 RankRAG: Unifying Context Ranking with Retrieval-Augmented Generation in LLMs.
 In: \emph{Advances in Neural Information Processing Systems (NeurIPS)} (2024)
-% \url{https://arxiv.org/abs/2407.02485}
 
 \bibitem{zhang2024retrievalqa}
 Zhang, Z., Fang, M., Chen, L.:
 RetrievalQA: Assessing Adaptive Retrieval-Augmented Generation for Short-form Open-Domain Question Answering.
 In: \emph{Findings of ACL}, pp.~6963--6975 (2024)
-% \url{https://aclanthology.org/2024.findings-acl.415/}
-% \url{https://arxiv.org/abs/2402.16457}
 
 \bibitem{zhao2026aigcsurvey}
 Zhao, P., Zhang, H., Yu, Q., Wang, Z., Geng, Y., Fu, F., Yang, L., Zhang, W., Jiang, J., Cui, B.:
 Retrieval-Augmented Generation for AI-Generated Content: A Survey.
 \emph{Data Science and Engineering} \textbf{11}, 1--29 (2026)
-% \url{https://link.springer.com/article/10.1007/s41019-025-00335-5}
-% \url{https://arxiv.org/abs/2402.19473}
 
 \bibitem{jiang2016adaptive}
 Jiang, J., Allan, J.:
 Adaptive Effort for Search Evaluation Metrics.
 In: Ferro, N., et al. (eds.) \emph{Advances in Information Retrieval (ECIR 2016)}.
 Lecture Notes in Computer Science, vol.~9626. Springer, Cham (2016)
-% \url{https://doi.org/10.1007/978-3-319-30671-1_14}
-% \url{https://ciir-publications.cs.umass.edu/getpdf.php?id=1201}
+
+\bibitem{goldstein1998mmr}
+Goldstein, J., Carbonell, J.:
+Summarization: (1) Using MMR for Diversity-Based Reranking and (2) Evaluating Summaries.
+In: \emph{TIPSTER TEXT PROGRAM PHASE III: Proceedings of a Workshop}, pp.~181--195 (1998)
 
 \end{thebibliography}
 \end{document}
