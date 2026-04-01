@@ -1,4 +1,4 @@
-# CART: Cost-Penalized Adaptive Routing for Test-Time Retrieval
+# Cost-Aware Test-Time Retrieval Control for RAG
 
 ## Problem
 Current RAG agents apply a fixed retrieval budget (top-k documents) to every query. The problem is that this is often wasteful and sometimes unnecessary.
@@ -114,3 +114,14 @@ uv run python -m experiments.analyse_noise_gate <MODEL_NAME>
 This reads `experiments/results/cart/results_noise_gate_<MODEL_NAME>.csv`
 and writes `experiments/results/cart/analysis_noise_gate_<MODEL_NAME>.md`
 with one metric table whose columns are the thresholds.
+
+### Run noise_gate ablation
+```bash
+uv run python -m experiments.run_noise_gate_ablation <MODEL_NAME> <SAMPLE_SIZE> [max_workers]
+```
+
+### Analyse noise_gate ablation
+```bash
+uv run python -m experiments.analyse_ablation_noise_gate <MODEL_NAME>
+```
+
