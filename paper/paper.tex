@@ -52,11 +52,11 @@ ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-Retrieval-augmented generation (RAG) commonly uses fixed top-$k$ retrieval despite its token cost. On HotpotQA distractor, fixed $k=10$ retrieval achieves strong F1 (0.792 on GPT-5.4-mini) but requires $\sim$14$\times$ more tokens than no retrieval (1452.5 vs 103.5 tokens). We systematically study five test-time context-compression strategies on this benchmark: fixed baselines ($k$=3, 5, 10), Adaptive-$k$ similarity-gap truncation, UCB1-TUNED rank-based bandit learning, LinUCB contextual bandit with lexical features, and a proposed noise-gate method combining cosine-similarity and Jaccard-overlap filtering.
+Retrieval-augmented generation (RAG) commonly relies on fixed top-$k$ retrieval, which is simple but token-intensive. On HotpotQA distractor, fixed $k=10$ retrieval achieves strong F1 (0.792 on GPT-5.4-mini) while using about $14\times$ more tokens than no retrieval (1452.5 vs 103.5). We study five test-time context-compression strategies on this benchmark: fixed baselines ($k$=3, 5, 10), Adaptive-$k$ similarity-gap truncation, UCB1-TUNED rank-based bandit learning, LinUCB contextual bandit with lexical features, and a noise-gate method combining cosine-similarity and Jaccard-overlap filtering.
 
-On a matched sample of 400 HotpotQA distractor validation examples with GPT-5.4-mini, the noise gate with cosine threshold $\tau=0.3$ achieves F1=0.764 while reducing total tokens by 26.7\% relative to $k=10$ (1065.3 vs 1452.5 tokens), remaining within $\pm$0.05 F1 of the baseline. In contrast, Adaptive-$k$ selects only $k^*=3.02$ documents on average but reaches only F1=0.627; UCB1-TUNED at $k=5$ (F1=0.704) appears competitive with fixed $k=5$ (0.716) but silently falls back to BM25 ranking on 83.8\% of queries; and LinUCB at $k=5$ (F1=0.620) cannot distinguish semantically deceptive distractors using lexical features alone.
+On a matched sample of 400 HotpotQA distractor validation examples with GPT-5.4-mini, the noise gate at cosine threshold $\tau=0.3$ offers the best quality-cost tradeoff: F1=0.764 with 26.7\% fewer tokens than $k=10$ (1065.3 vs 1452.5), while staying within $\pm$0.05 F1 of the baseline. Adaptive-$k$ produces compact contexts ($k^*=3.02$ on average) but reaches F1=0.627; UCB1-TUNED at $k=5$ reaches F1=0.704 yet falls back to BM25 ranking on 83.8\% of queries; and LinUCB at $k=5$ reaches F1=0.620, showing that lexical features alone are not enough for this benchmark.
 
-We demonstrate that the structural properties of distractor-heavy multi-hop QA (sparse and position-independent gold-document distribution, high-dimensional title non-stationarity, and semantic indistinguishability of distractors) make learned approaches fundamentally unsuitable for this problem class. Embedding-based threshold filtering is the minimal sufficient approach, achieving Pareto optimality at the quality--cost frontier.
+These results are explained by three structural properties of distractor-heavy multi-hop QA: near position-independent gold-document rates, high title non-stationarity between training and inference, and semantic closeness between distractors and true evidence. In this setting, embedding-based threshold filtering is a strong and interpretable test-time controller that achieves the best Pareto point on the quality--cost frontier.
 
 \keywords{Retrieval-Augmented Generation \and Test-time Compression \and Context Filtering \and Noise Gating}
 \end{abstract}
@@ -220,13 +220,12 @@ Among the compression strategies, Noise-Gate at $\tau{=}0.3$ achieves the best q
 
 The learned strategies fail to match even the fixed $k{=}5$ baseline at equal budget. UCB1-TUNED at $k{=}5$ reaches F1~0.704 with 723 tokens, superficially close to fixed $k{=}5$ (0.716, 732 tokens), but this similarity is misleading: 83.8\% of validation titles are unseen in training, so UCB1 falls back to BM25 ranking on the vast majority of queries. Its apparent competitiveness reflects BM25 performance, not learned selection. LinUCB at $k{=}5$ performs worse still (F1~0.620, 686 tokens), confirming that lexical features alone cannot distinguish distractors from supporting facts. Adaptive-$k$ selects compact contexts (mean $k^*{=}3.02$, 483 tokens) but its F1~0.627 falls below fixed $k{=}5$.
 
-%% NOTE: Figure 1 (F1 vs Tokens Pareto scatter) to be placed here once generated.
-%% \begin{figure}[t]
-%%     \centering
-%%     \includegraphics[width=\linewidth]{images/pareto_f1_vs_tokens.pdf}
-%%     \caption{F1 vs.\ mean total tokens for all strategies. The Pareto frontier (dashed) shows that Noise-Gate $\tau{=}0.3$ is the knee of the curve: it offers the largest token savings within the $\pm 0.05$ F1 tolerance band (shaded).}
-%%     \label{fig:pareto}
-%% \end{figure}
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{images/pareto_f1_vs_tokens.pdf}
+    \caption{F1 vs.\ mean total tokens for all strategies. The Pareto frontier (dashed) shows that Noise-Gate $\tau{=}0.3$ is the knee of the curve: it offers the largest token savings within the $\pm 0.05$ F1 tolerance band (shaded).}
+    \label{fig:pareto}
+\end{figure}
 
 \begin{table*}[t]
 \centering
@@ -277,7 +276,12 @@ $\tau$ & F1 & EM & Tokens & Savings & In range? \\
 
 The sweep reveals a smooth monotonic tradeoff: as $\tau$ increases, both F1 and token usage decrease. The lenient setting ($\tau{=}0.2$) preserves the most quality (F1~0.779) but saves only 9.3\% of tokens. The intermediate settings $\tau{=}0.25$ and $\tau{=}0.30$ achieve nearly identical F1 (0.765 and 0.764), but $\tau{=}0.30$ uses 142 fewer tokens per query, confirming it as the knee of the Pareto curve. At $\tau{=}0.35$, F1 drops to 0.726, outside the $\pm 0.05$ tolerance, while $\tau{=}0.5$ achieves dramatic savings ($-$72.2\%) at the cost of substantial quality loss (F1~0.619). Output tokens remain nearly constant across thresholds ($\approx$6.7), confirming that savings come entirely from reduced input context.
 
-%% NOTE: Figure 2 (τ ablation line chart, dual y-axis F1 and Tokens) to be placed here once generated.
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{images/noise_gate_tau_ablation.pdf}
+    \caption{Noise-gate $\tau$ ablation on \texttt{gpt-5.4-mini} at fixed $\rho=0.65$. The left axis shows F1 and the right axis shows mean total tokens. $\tau=0.3$ is the recommended knee of the curve.}
+    \label{fig:tau_ablation}
+\end{figure}
 
 \subsection{Jaccard Redundancy Ablation}
 \label{subsec:rho_ablation}
@@ -322,6 +326,13 @@ We explored whether a bandit reranker could learn which retrieved items are hist
 
 \paragraph{Rank positions carry no signal.}
 In the full training split ($n=90{,}447$), the gold rate across rank positions is nearly uniform: rank 0 contains a supporting fact 20.45\% of the time, rank 9 contains one 19.60\% of the time, and intermediate ranks fall inside this narrow band. There is therefore no persistent ``good rank'' to exploit. A UCB1 reranker operating over rank positions reduces to exploration noise plus an additive constant, because BM25's ordering over HotpotQA distractor paragraphs does not encode supporting-fact containment.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{images/rank_position_gold_frequency.pdf}
+    \caption{Gold-support frequency by BM25 rank position on the HotpotQA distractor training split. The near-uniform distribution indicates that rank position is not predictive of supporting-fact presence.}
+    \label{fig:rank_frequency}
+\end{figure}
 
 \paragraph{Title identity is non-stationary across queries.}
 A more refined variant treats paragraph titles as arms. Table~\ref{tab:ucb1_title_coldstart} reports the cold-start behavior of this variant on \texttt{gpt-5.4-mini} with matched samples of $n=400$ per $k$. At $k=5$, $83.8\%$ of validation queries touch titles that were never observed during training. For those queries the learned reward estimates $\hat Q(\text{title})$ are undefined and the reranker silently falls back to BM25, precisely the policy it was meant to improve. At $k=2$ and $k=3$, cold-start rates are $61.5\%$ and $75.2\%$ respectively: still a large majority of queries for which no learned signal exists.
