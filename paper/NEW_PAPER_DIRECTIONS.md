@@ -244,10 +244,10 @@ Expected results based on current trend:
 |---|---|---|
 | 1–2 ✅| Write Section 6 (Analysis — Why Learned Methods Fail) | Most novel content done |
 | 3–4 ✅| Write Sections 1–3 (Intro, Related Work, Formulation) | Paper skeleton complete |
-| 5–6 | Assemble Section 5 (Experiments) from results docs | Tables and baselines done |
-| 6 | *Optional:* Run τ={0.25, 0.35} experiments | Richer ablation |
-| 7 | Write Sections 4, 7, 8 (Methods, Discussion, Conclusion) | Full draft |
-| 8–9 | Format in Springer LNAI LaTeX (Overleaf) | Camera-ready structure |
+| 5–6 ✅| Assemble Section 5 (Experiments) from results docs | Tables and baselines done |
+| 6 ✅| *Optional:* Run τ={0.25, 0.35} experiments | Richer ablation |
+| 7 ✅| Write Sections 4, 7, 8 (Methods, Discussion, Conclusion) | Full draft |
+| 8–9 ✅| Format in Springer LNAI LaTeX (Overleaf) | Camera-ready structure |
 | 9 | Create all figures (scatter, line, bar charts) | Visuals done |
 | 10 | Anonymize: remove all self-references and institution names | Double-anon compliant |
 | 11 | Final proofread, page count check, submit via JEMS3 | **SUBMITTED** |
