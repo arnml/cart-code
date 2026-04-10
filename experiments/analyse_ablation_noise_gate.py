@@ -123,7 +123,13 @@ def _render_table(
 ) -> list[str]:
     """Render one Jaccard-vs-threshold table."""
     jaccard_values = sorted(aggregated.keys())
-    threshold_values = sorted({threshold for row in aggregated.values() for threshold in row})
+    threshold_sets = [set(row.keys()) for row in aggregated.values() if row]
+    if not threshold_sets:
+        raise ValueError("No threshold values available to render ablation table")
+
+    # Keep only thresholds present for every Jaccard setting so the ablation
+    # table stays rectangular when the base sweep includes extra tau values.
+    threshold_values = sorted(set.intersection(*threshold_sets))
 
     header_cells = ["Jaccard \\ Threshold"] + [f"{threshold:g}" for threshold in threshold_values]
     lines = [

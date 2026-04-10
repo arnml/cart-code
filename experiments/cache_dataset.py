@@ -1,9 +1,8 @@
 """Local HotpotQA snapshot loader.
 
-Only the HotpotQA distractor validation split is used by the experiments, so
-this module is intentionally small. It reads the Arrow snapshot saved by
-``experiments.download_dataset`` and returns plain Python dictionaries for the
-callers that expect them.
+The HotpotQA distractor train and validation splits are used by the experiments.
+This module reads Arrow snapshots saved by ``experiments.download_dataset`` and
+returns plain Python dictionaries for the callers that expect them.
 """
 
 from __future__ import annotations
@@ -14,16 +13,20 @@ from typing import Optional
 
 DATASET_NAME = "hotpot_qa"
 SUBSET = "distractor"
-SPLIT = "validation"
-SNAPSHOT_DIR = Path(__file__).parent / "cache" / DATASET_NAME / SUBSET / SPLIT
+ALLOWED_SPLITS = ("train", "validation")
 
 
 def _validate_config(dataset_name: str, subset: str, split: str) -> None:
-    """Ensure the caller is requesting the local dataset snapshot we ship."""
-    if (dataset_name, subset, split) != (DATASET_NAME, SUBSET, SPLIT):
+    """Ensure the caller is requesting a supported local dataset snapshot."""
+    if dataset_name != DATASET_NAME:
+        raise NotImplementedError(f"Only {DATASET_NAME} is supported.")
+    if subset != SUBSET:
+        raise NotImplementedError(f"Only {SUBSET} is supported.")
+    if split not in ALLOWED_SPLITS:
         raise NotImplementedError(
-            "This repository only ships a local snapshot for "
-            f"{DATASET_NAME}/{SUBSET}/{SPLIT}."
+            f"Only {ALLOWED_SPLITS} splits are supported. "
+            f"Run `uv run python -m experiments.download_dataset --split {split}` "
+            f"to download the {split} split first."
         )
 
 
@@ -45,15 +48,15 @@ def load_dataset_cached(
     n_rows: Optional[int] = None,
     force_reload: bool = False,
 ) -> list[dict]:
-    """Load the local HotpotQA snapshot and return an optional sample.
+    """Load a local HotpotQA snapshot and return an optional sample.
 
     The dataset is expected to exist at:
-    ``experiments/cache/hotpot_qa/distractor/validation``.
+    ``experiments/cache/hotpot_qa/distractor/{split}``.
 
     Args:
         dataset_name: Dataset name. Only ``hotpot_qa`` is supported.
         subset: Dataset subset. Only ``distractor`` is supported.
-        split: Dataset split. Only ``validation`` is supported.
+        split: Dataset split. ``train`` or ``validation`` are supported.
         n_rows: Optional limit on the number of rows to return.
         force_reload: Retained for compatibility with the old API. The loader is
             local-only, so this flag has no effect.
@@ -65,14 +68,15 @@ def load_dataset_cached(
 
     _validate_config(dataset_name, subset, split)
 
-    if not SNAPSHOT_DIR.exists():
+    snapshot_dir = Path(__file__).parent / "cache" / dataset_name / subset / split
+    if not snapshot_dir.exists():
         raise FileNotFoundError(
             "Local dataset snapshot not found at "
-            f"{SNAPSHOT_DIR}. Run `uv run python -m experiments.download_dataset` "
+            f"{snapshot_dir}. Run `uv run python -m experiments.download_dataset --split {split}` "
             "first."
         )
 
     from datasets import load_from_disk
 
-    ds = load_from_disk(SNAPSHOT_DIR)
+    ds = load_from_disk(snapshot_dir)
     return _sample_rows(ds, n_rows)

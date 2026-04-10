@@ -32,13 +32,15 @@ So the paper’s central move is:
 > Treat retrieval as a cost-aware routing problem, not as a fixed top-𝑘 k preprocessing step.
 
 ## The Contribution
-CART is a **training-free test-time controller** with three components:
-1. **Adaptive-K selection**: find k* via largest similarity score gap (Taguchi et al. EMNLP 2025)
-2. **UCB-Cost policy**: bandit action selector extended with explicit cost penalty (novel term)
-3. **Noise gate**: filter low-similarity and redundant documents before generation
+A **training-free test-time controller** that **automatically discovers the model-appropriate strategy** without configuration, adapting routing as model capability changes.
 
-CART **automatically discovers the model-appropriate strategy** without
-configuration, adapting routing as model capability changes.
+## Project context
+We evaluate on HotpotQA using the distractor subset and the validation split. 
+- The baseline analysis shows that the bigger the k the better the F1
+- We want to save token, so we are seeking a strategy with similar F1 as top-k (k=10) but with less tokens.
+- The adaptive-k would sound a good idea to save tokens but we got poor F1 results
+- The noise gate got similar F1 with 26% less tokens
+- The UCB1-TUNED reranker learns title utility from training data and selects top-k titles at inference time
 
 ## Run project
 ### Create and activate venv
@@ -102,7 +104,7 @@ uv run python -m experiments.run_noise_gate <MODEL_NAME> <SAMPLE_SIZE> [max_work
 ```
 
 This runs the noise-gate ablation with similarity thresholds
-`0.2`, `0.3`, and `0.5`, and writes
+`0.2`, `0.25`, `0.3`, `0.35`, and `0.5`, and writes
 `experiments/results/cart/results_noise_gate_<MODEL_NAME>.csv` with the
 `threshold` column alongside the per-sample metrics.
 
@@ -132,4 +134,23 @@ with two tables:
 
 - F1 by Jaccard threshold vs similarity threshold
 - Total tokens (mean) by Jaccard threshold vs similarity threshold
+
+### Train UCB1-TUNED reranker
+```bash
+uv run python -m experiments.train_ucb1_tuned
+```
+
+### Run UCB1-TUNED reranker
+```bash
+uv run python -m experiments.run_ucb1_tuned <MODEL_NAME> <SAMPLE_SIZE> [max_workers]
+```
+
+Tests k ∈ {2, 3, 5}, writes `experiments/results/ucb1/ucb1_<MODEL_NAME>.csv`.
+
+### Analyse UCB1-TUNED reranker
+```bash
+uv run python -m experiments.analyse_ucb1 <MODEL_NAME>
+```
+
+Analyzes results by k value, cold-start statistics, and overall metrics.
 

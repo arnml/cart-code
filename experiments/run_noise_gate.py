@@ -36,7 +36,7 @@ RESULTS_DIR = Path(__file__).parent / "results" / "cart"
 RESULTS_DIR.mkdir(exist_ok=True, parents=True)
 
 DEFAULT_MAX_WORKERS = 20
-NOISE_GATE_SIM_THRESHOLDS = (0.2, 0.3, 0.5)
+NOISE_GATE_SIM_THRESHOLDS = (0.2, 0.25, 0.3, 0.35, 0.5)
 NOISE_GATE_REDUNDANCY_THRESHOLD = 0.65
 NOISE_GATE_METHOD = "noise_gate"
 

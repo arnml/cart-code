@@ -45,3 +45,7 @@ Thumbs.db
 .env
 .env.*
 *.env
+
+# Large datasets and cache
+experiments/cache/
+*.arrow
