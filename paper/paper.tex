@@ -81,30 +81,6 @@ Our contributions are:
 
 \section{Related Work}
 
-This work sits at the intersection of four research areas. Table~\ref{tab:related_positioning} summarizes the positioning.
-
-\begin{table}[t]
-\small
-\begin{tabular}{>{\raggedright\arraybackslash}p{2.5cm}
-                >{\raggedright\arraybackslash}p{4.5cm}
-                >{\raggedright\arraybackslash}p{4cm}}
-\toprule
-\multicolumn{1}{c}{\textbf{Area}} &
-\multicolumn{1}{c}{\textbf{Representative Works}} &
-\multicolumn{1}{c}{\textbf{How We Differ}} \\
-\midrule
-\textbf{Fixed-Budget RAG} & Lewis et al. (RAG), Klesel \& Wittmann, Zhao et al. & We study compression of a fixed retrieved pool, not pipeline design \\
-\midrule
-\textbf{Adaptive Retrieval} & Self-RAG, DioR, DRAGIN & We filter \emph{what was retrieved}, not decide \emph{whether to retrieve} \\
-\midrule
-\textbf{Context Noise Compression} & SetR, ReflectiveRAG, Adaptive-$k$ & We use threshold-based filtering; others use set-level or gap-based selection \\
-\midrule
-\textbf{Bandit/RL for IR} & UCB, Thompson Sampling, contextual bandits & We show bandits fundamentally fail on this problem class and explain why \\
-\bottomrule
-\end{tabular}
-\label{tab:related_positioning}
-\end{table}
-
 \paragraph{Fixed-budget retrieval.}
 Foundational RAG systems retrieve the top-$k$ documents by relevance~\cite{lewis2020rag}. Fixed $k$ remains the dominant approach in deployed systems~\cite{klesel2025rag}. Our work takes fixed $k=10$ retrieval as the quality baseline and asks how to retain its quality at lower token cost.
 
@@ -115,7 +91,7 @@ Self-RAG~\cite{asai2024selfrag}, DioR~\cite{guo2025dior}, and DRAGIN~\cite{su202
 Recent work addresses context quality by selecting subsets of retrieved documents. Adaptive-$k$~\cite{taguchi2025adaptivek} selects documents by similarity-score gaps; we evaluate it as a representative of gap-based strategies. SetR~\cite{lee2025setr} and RankRAG~\cite{yu2024rankrag} select context as a set using complementarity and downstream usefulness. ReflectiveRAG~\cite{verma2026reflectiverag} shows that irrelevant or redundant context can hurt quality. Our noise-gate component is conceptually related to Maximum Marginal Relevance~\cite{goldstein1998mmr}, which trades off relevance and diversity, but uses a simpler two-stage design: cosine similarity for relevance, Jaccard overlap for redundancy.
 
 \paragraph{Bandits and learning-to-rank.}
-Bandit algorithms (UCB, Thompson Sampling, contextual bandits with LinUCB) have been applied to retrieval, ranking, and exploration-exploitation problems broadly. We test whether UCB1-TUNED and LinUCB can learn useful context-selection signals on HotpotQA distractor, finding they cannot due to structural properties of the benchmark. This is a contribution in itself: we identify and explain failure modes in a concrete setting.
+Bandit algorithms (UCB, Thompson Sampling, and contextual bandit methods such as LinUCB) have been applied to retrieval, ranking, and exploration-exploitation problems broadly~\cite{auer2002ucb1,thompson1933,chu2011linucb}. We test whether UCB1-TUNED and a LinUCB-style contextual bandit can learn useful context-selection signals on HotpotQA distractor, finding they cannot due to structural properties of the benchmark. We characterize those failure modes in a concrete setting.
 
 \section{Problem Formulation}
 
@@ -454,6 +430,16 @@ In: \emph{International Conference on Learning Representations (ICLR)} (2024)
 Auer, P., Cesa-Bianchi, N., Fischer, P.:
 Finite-time Analysis of the Multiarmed Bandit Problem.
 \emph{Machine Learning} \textbf{47}(2--3), 235--256 (2002)
+
+\bibitem{thompson1933}
+Thompson, W.~R.:
+On the Likelihood that One Unknown Probability Exceeds Another in View of the Evidence of Two Samples.
+\emph{Biometrika} \textbf{25}(3--4), 285--294 (1933)
+
+\bibitem{chu2011linucb}
+Chu, W., Li, L., Reyzin, L., Schapire, R.~E.:
+Contextual Bandits with Linear Payoff Functions.
+In: \emph{Proceedings of the Fourteenth International Conference on Artificial Intelligence and Statistics (AISTATS)}, pp.~208--214 (2011)
 
 \bibitem{guo2025dior}
 Guo, H., Zhu, J., Di, S., Shi, W., Chen, Z., Xu, J.:
