@@ -91,7 +91,7 @@ Self-RAG~\cite{asai2024selfrag}, DioR~\cite{guo2025dior}, and DRAGIN~\cite{su202
 Recent work addresses context quality by selecting subsets of retrieved documents. Adaptive-$k$~\cite{taguchi2025adaptivek} selects documents by similarity-score gaps; we evaluate it as a representative of gap-based strategies. SetR~\cite{lee2025setr} and RankRAG~\cite{yu2024rankrag} select context as a set using complementarity and downstream usefulness. ReflectiveRAG~\cite{verma2026reflectiverag} shows that irrelevant or redundant context can hurt quality. Our noise-gate component is conceptually related to Maximum Marginal Relevance~\cite{goldstein1998mmr}, which trades off relevance and diversity, but uses a simpler two-stage design: cosine similarity for relevance, Jaccard overlap for redundancy.
 
 \paragraph{Bandits and learning-to-rank.}
-Bandit algorithms (UCB, Thompson Sampling, and contextual bandit methods such as LinUCB) have been applied to retrieval, ranking, and exploration-exploitation problems broadly~\cite{auer2002ucb1,thompson1933,chu2011linucb}. We test whether UCB1-TUNED and a LinUCB-style contextual bandit can learn useful context-selection signals on HotpotQA distractor, finding they cannot due to structural properties of the benchmark. We characterize those failure modes in a concrete setting.
+Bandit algorithms (UCB, Thompson Sampling, and contextual bandit methods such as LinUCB) are classical methods from online decision-making, ranking, and contextual recommendation, rather than RAG-specific retrieval controllers~\cite{auer2002ucb1,thompson1933,chu2011linucb}. We test whether UCB1-TUNED and a LinUCB-style contextual bandit can transfer to context-selection on HotpotQA distractor, finding that they do not under this benchmark's structure. We characterize those failure modes in a concrete setting.
 
 \section{Problem Formulation}
 
@@ -105,7 +105,7 @@ where $C(q, S)$ is the total token cost of the model call, computed as input tok
 
 \section{Methods}
 
-We explore the design space of test-time context compression via five strategies, spanning learned and threshold-based approaches along two axes: question-level vs.\ section-level control, and training-free vs.\ training-required methods.
+We study test-time context compression through five strategies, spanning fixed baselines, learned rerankers, and a training-free threshold filter. The methods differ along two axes: question-level vs.\ section-level control, and training-free vs.\ training-required selection.
 
 \subsection{Baselines}
 
@@ -118,15 +118,15 @@ We explore the design space of test-time context compression via five strategies
 
 \subsection{Adaptive-$k$ (Similarity-Gap Truncation)}
 
-Given retrieved documents with similarity scores $s_1 \ge s_2 \ge \cdots \ge s_{10}$, Adaptive-$k$~\cite{taguchi2025adaptivek} selects a cut point via the largest adjacent gap:
+Given retrieved documents with similarity scores $s_1 \ge s_2 \ge \cdots \ge s_{10}$, Adaptive-$k$~\cite{taguchi2025adaptivek} selects the cut point of maximum adjacent separation:
 \begin{equation}
 k^* = \arg\max_{1 \le i < 10} (s_i - s_{i+1}).
 \end{equation}
-This selects a compact cluster of high-confidence documents. However, in HotpotQA distractor, distractors are drawn to be topically adjacent to the gold evidence, causing their embedding scores to closely match true supporting facts. The largest gap often falls within a cluster of similar distractors rather than cleanly separating signal from noise.
+The method assumes that a large embedding-similarity gap separates relevant context from noise. On HotpotQA distractor, distractors are intentionally topically close to the gold evidence, so the largest gap often falls inside a cluster of distractors rather than at the boundary between evidence and noise.
 
 \subsection{UCB1-TUNED (Rank-Based Bandit)}
 
-We test whether a bandit algorithm can learn which rank positions are historically valuable. Using Welford online statistics over the full training split ($n=90,447$ HotpotQA distractor examples), we track mean reward and variance for each rank position (0--9). Binary reward is assigned: 1.0 if the paragraph at that rank contains a supporting fact, else 0.0. At inference, each position is scored via standard UCB1-TUNED:
+We model rank positions as arms and estimate their utility from the full training split ($n=90{,}447$ HotpotQA distractor examples). For each rank position ($0$--$9$), we maintain the empirical mean reward and variance using Welford's online algorithm. The reward is binary: 1.0 if the paragraph at that rank contains a supporting fact, and 0.0 otherwise. At inference, each position is scored by UCB1-TUNED:
 \[
 \mathrm{score}(\text{rank}) = \mu_{\text{rank}} + \sqrt{\frac{\ln T}{n_{\text{rank}}} \cdot \min(0.25, \sigma_{\text{rank}}^2)}.
 \]
@@ -134,24 +134,65 @@ The reranker then selects the top-$k$ positions by this score.
 
 \subsection{LinUCB (Contextual Bandit with Lexical Features)}
 
-This variant learns per-document reward estimates using ridge regression with three lexical features: (1) token overlap between question and section, (2) title-in-question fraction, and (3) section token length. A UCB bonus is added for exploration. Unlike rank-based UCB, this approach attempts to learn document-level utility directly.
+This variant models each question--document pair with a three-dimensional feature vector
+\[
+x(q, d) = [f_1, f_2, f_3]^\top,
+\]
+where $f_1$ is the fraction of title words appearing in the question, $f_2$ is the normalized question length, and $f_3$ is the normalized section length. Given the training observations $\{(x_t, r_t)\}_{t=1}^T$, with binary reward $r_t \in \{0,1\}$, we estimate
+\[
+\hat{\theta} = A^{-1} b,
+\qquad
+A = I + \sum_{t=1}^T x_t x_t^\top,
+\qquad
+b = \sum_{t=1}^T r_t x_t.
+\]
+At inference, each candidate is scored by the usual LinUCB rule
+\[
+p(q, d) = \hat{\theta}^\top x(q, d) + \alpha \sqrt{x(q, d)^\top A^{-1} x(q, d)},
+\]
+and the top-$k$ documents are selected by this score. Unlike rank-based UCB, this formulation attempts to learn document-level utility directly from lexical and length-based features.
 
 \subsection{Noise-Gate (Two-Stage Embedding Filter)}
 \label{sec:methods_noisegate}
 
-This method applies two complementary filters at inference time with no training.
+Our proposed method is a two-stage, training-free gate that operates directly on the fixed HotpotQA candidate pool. It is the main mechanism studied in this paper.
+Algorithm~\ref{alg:noisegate} summarizes the procedure.
+
+Given a question $q$ and retrieved paragraphs $D = (d_1, \ldots, d_{10})$, the gate first scores each paragraph by cosine similarity to the question embedding and retains only those above a threshold $\tau$.
 
 \textbf{Stage 1 (Cosine filter):} Remove paragraphs whose cosine similarity to the question falls below threshold $\tau$:
 \begin{equation}
 \mathrm{cos}(q, d_i) = \frac{e_q \cdot e_i}{\|e_q\| \, \|e_i\|} \ge \tau.
 \end{equation}
 
-\textbf{Stage 2 (Jaccard filter):} Among paragraphs surviving Stage 1, remove those whose word-overlap with already-kept paragraphs exceeds threshold $\rho$:
+\textbf{Stage 2 (Jaccard filter):} Among paragraphs surviving Stage 1, remove those whose word-overlap with any already-kept paragraph exceeds threshold $\rho$:
 \begin{equation}
 \max_{d_j \in \text{kept}} \frac{|d_i \cap d_j|}{|d_i \cup d_j|} \le \rho.
 \end{equation}
 
-We evaluate $\tau \in \{0.2, 0.25, 0.3, 0.35, 0.5\}$ and $\rho \in \{0.50, 0.55, 0.65\}$. Embeddings are computed using multi-qa-MiniLM-L6-cos-v1 (dimension 384, pre-trained on diverse QA corpora).
+This two-stage rule is simple, interpretable, and designed to preserve semantically useful context while removing redundant paragraphs. We evaluate $\tau \in \{0.2, 0.25, 0.3, 0.35, 0.5\}$ and $\rho \in \{0.50, 0.55, 0.65\}$. Embeddings are computed using \texttt{multi-qa-MiniLM-L6-cos-v1} (384 dimensions, pre-trained on QA corpora).
+
+\begin{algorithm}[t]
+\caption{Noise-Gate context selection.}
+\label{alg:noisegate}
+\begin{algorithmic}[1]
+\Require Question $q$, paragraph pool $D = (d_1, \ldots, d_{10})$, thresholds $\tau$ and $\rho$
+\State Compute embedding $e_q$ for $q$
+\State Compute embedding $e_i$ for each $d_i \in D$
+\State Rank paragraphs by cosine similarity $\cos(e_q, e_i)$ in descending order
+\State $S \leftarrow [\,]$
+\For{each paragraph $d_i$ in ranked order}
+    \If{$\cos(e_q, e_i) < \tau$}
+        \State \textbf{continue}
+    \EndIf
+    \If{$\max_{d_j \in S} \mathrm{Jaccard}(d_i, d_j) > \rho$}
+        \State \textbf{continue}
+    \EndIf
+    \State append $d_i$ to $S$
+\EndFor
+\State \Return $S$
+\end{algorithmic}
+\end{algorithm}
 
 \section{Experiments}
 \label{sec:experiments}
