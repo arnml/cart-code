@@ -95,15 +95,13 @@ Bandit algorithms (UCB, Thompson Sampling, and contextual bandit methods such as
 
 \section{Problem Formulation}
 
-Given a question $q$ and a fixed pool of retrieved documents $D = \{d_1, d_2, \ldots, d_{10}\}$ (obtained via BM25 or similar), we seek a subset $S^* \subseteq D$ that maximizes answer quality while minimizing token cost. Formally,
+Let $q$ be a question and let $D = (d_1, d_2, \ldots, d_{10})$ denote the fixed HotpotQA distractor context for that question: two gold paragraphs and eight distractor paragraphs, ordered as provided by the benchmark. A context-selection strategy returns an ordered subsequence $S \preceq D$ to be concatenated with $q$ and passed to the reader model. We do not control retrieval itself; the candidate pool is fixed, and the only decision is which paragraphs to retain.
+
+Let $\hat{a} = g(q, S)$ be the generated answer and let $a^*$ be the reference answer. We evaluate quality with the standard HotpotQA normalized token-level F1 and exact match metrics, as implemented in our evaluation code. To trade off quality against inference cost, we define
 \[
-S^* = \arg\max_{S \subseteq D} \left[ F_1(\text{answer} \mid q, S) - \lambda \cdot |{\text{tokens}(S)}| \right],
+J(S) = F_1(\hat{a}, a^*) - \lambda \, C(q, S),
 \]
-where $F_1$ is the token-level F1 score against the gold answer, $|{\text{tokens}(S)}|$ is the total input tokens required to encode $q$ and $S$, and $\lambda$ is a cost weight.
-
-This formulation scopes the problem: we do not control whether to retrieve (that decision is fixed as ``retrieve the top 10''), nor do we control the retrieval algorithm itself (BM25 order is fixed). We only control what subset $S$ of the retrieved documents to pass to the model.
-
-We report three metrics: token-level F1 score (primary), exact match (EM, secondary), and mean total tokens per question (cost metric).
+where $C(q, S)$ is the total token cost of the model call, computed as input tokens plus output tokens, and $\lambda > 0$ is a cost weight. In the experiments we report token-level F1 as the primary quality metric, exact match as a secondary metric, and mean total tokens per question as the cost metric.
 
 \section{Methods}
 
