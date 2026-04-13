@@ -1,0 +1,41 @@
+question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,output_tokens,cost_usd
+2hop__67660_81007,always_think,Robin Scherbatsky,Tracy McConnell,0.0,0.0,0.0,0.0,86,8,2.3599999999999998e-05
+2hop__67660_81007,retrieval_k3,The Mother,Tracy McConnell,1.0,1.0,1.0,1.0,363,5,7.66e-05
+2hop__67660_81007,retrieval_k5,The Mother,Tracy McConnell,1.0,1.0,1.0,1.0,585,5,0.000121
+2hop__67660_81007,retrieval_k10,The Mother,Tracy McConnell,1.0,1.0,1.0,1.0,1042,5,0.00021239999999999999
+2hop__92051_827343,always_think,Natalie Wood,Lana Wood,0.0,0.5,0.5,0.5,91,12,2.7799999999999998e-05
+2hop__92051_827343,retrieval_k3,Morgan Wilson,Lana Wood,0.0,0.0,0.0,0.0,392,5,8.240000000000001e-05
+2hop__92051_827343,retrieval_k5,noanswer,Lana Wood,0.0,0.0,0.0,0.0,627,5,0.0001294
+2hop__92051_827343,retrieval_k10,Mara Wilson,Lana Wood,0.0,0.0,0.0,0.0,1398,6,0.00028440000000000003
+2hop__144150_82341,always_think,North Florida,in Northern Florida,0.0,0.5,0.5,0.5,85,11,2.58e-05
+2hop__144150_82341,retrieval_k3,"Ocala, Florida",in Northern Florida,0.0,0.5,0.5,0.5,290,7,6.36e-05
+2hop__144150_82341,retrieval_k5,Central Florida,in Northern Florida,0.0,0.5,0.5,0.5,524,5,0.00010880000000000002
+2hop__144150_82341,retrieval_k10,Central Florida,in Northern Florida,0.0,0.5,0.5,0.5,966,5,0.0001972
+2hop__83938_5666,always_think,Boris Yeltsin,Yeltsin,0.0,0.6666666666666666,0.5,1.0,89,14,2.9000000000000004e-05
+2hop__83938_5666,retrieval_k3,Boris Yeltsin,Yeltsin,0.0,0.6666666666666666,0.5,1.0,445,8,9.54e-05
+2hop__83938_5666,retrieval_k5,Vladimir Lenin,Yeltsin,0.0,0.0,0.0,0.0,784,6,0.00016160000000000002
+2hop__83938_5666,retrieval_k10,Boris Yeltsin,Yeltsin,0.0,0.6666666666666666,0.5,1.0,1312,8,0.00026880000000000003
+2hop__167577_31122,always_think,18th century,18th,1.0,1.0,1.0,1.0,91,12,2.7799999999999998e-05
+2hop__167577_31122,retrieval_k3,18th century,18th,1.0,1.0,1.0,1.0,696,6,0.00014400000000000003
+2hop__167577_31122,retrieval_k5,17th century,18th,0.0,0.5,0.5,0.5,1249,6,0.0002546
+2hop__167577_31122,retrieval_k10,17th century,18th,0.0,0.5,0.5,0.5,2077,6,0.0004202
+2hop__9238_9237,always_think,2012,September 2012,1.0,1.0,1.0,1.0,89,11,2.6600000000000003e-05
+2hop__9238_9237,retrieval_k3,September 2012,September 2012,1.0,1.0,1.0,1.0,369,7,7.939999999999999e-05
+2hop__9238_9237,retrieval_k5,September 2012,September 2012,1.0,1.0,1.0,1.0,497,13,0.0001098
+2hop__9238_9237,retrieval_k10,September 2012,September 2012,1.0,1.0,1.0,1.0,1042,7,0.000214
+2hop__107905_110222,always_think,31 May 1819,10 June 1819,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,88,14,2.8800000000000002e-05
+2hop__107905_110222,retrieval_k3,10 June 1819,10 June 1819,1.0,1.0,1.0,1.0,432,8,9.28e-05
+2hop__107905_110222,retrieval_k5,10 June 1819,10 June 1819,1.0,1.0,1.0,1.0,619,8,0.0001302
+2hop__107905_110222,retrieval_k10,10 June 1819,10 June 1819,1.0,1.0,1.0,1.0,1175,8,0.00024139999999999999
+2hop__145203_34088,always_think,Arizona State Fairgrounds Raceway,Tucson Raceway Park,0.0,0.3333333333333333,0.25,0.5,85,14,2.82e-05
+2hop__145203_34088,retrieval_k3,Tucson Raceway Park,Tucson Raceway Park,1.0,1.0,1.0,1.0,388,8,8.400000000000001e-05
+2hop__145203_34088,retrieval_k5,Tucson Raceway Park,Tucson Raceway Park,1.0,1.0,1.0,1.0,570,8,0.00012040000000000001
+2hop__145203_34088,retrieval_k10,Tucson Raceway Park,Tucson Raceway Park,1.0,1.0,1.0,1.0,1162,8,0.0002388
+2hop__498061_88622,always_think,George Tenet,ADM Michael S. Rogers,0.0,0.0,0.0,0.0,83,12,2.62e-05
+2hop__498061_88622,retrieval_k3,noanswer,ADM Michael S. Rogers,0.0,0.0,0.0,0.0,475,5,9.900000000000001e-05
+2hop__498061_88622,retrieval_k5,noanswer,ADM Michael S. Rogers,0.0,0.0,0.0,0.0,689,5,0.0001418
+2hop__498061_88622,retrieval_k10,noanswer,ADM Michael S. Rogers,0.0,0.0,0.0,0.0,1684,5,0.0003408
+3hop1__33845_42197_18397,always_think,China,the Politburo,0.0,0.0,0.0,0.0,104,10,2.8800000000000002e-05
+3hop1__33845_42197_18397,retrieval_k3,Politburo,the Politburo,1.0,1.0,1.0,1.0,646,6,0.00013400000000000003
+3hop1__33845_42197_18397,retrieval_k5,Politburo,the Politburo,1.0,1.0,1.0,1.0,1268,12,0.00026320000000000006
+3hop1__33845_42197_18397,retrieval_k10,Taiwan Strait,the Politburo,0.0,0.0,0.0,0.0,2190,6,0.00044280000000000003

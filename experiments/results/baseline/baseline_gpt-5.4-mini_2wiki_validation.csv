@@ -1,0 +1,41 @@
+question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,output_tokens,cost_usd
+91edc89c0bdc11eba7f7acde48001122,always_think,Les Films Du Losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,85,14,2.82e-05
+91edc89c0bdc11eba7f7acde48001122,retrieval_k3,Les Films du Losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,479,8,0.00010220000000000002
+91edc89c0bdc11eba7f7acde48001122,retrieval_k5,Les films du losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,820,8,0.0001704
+91edc89c0bdc11eba7f7acde48001122,retrieval_k10,Les films du losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,1389,8,0.0002842
+cd80e22a08d711ebbd9aac1f6bf848b6,always_think,no,yes,0.0,0.0,0.0,0.0,94,10,2.68e-05
+cd80e22a08d711ebbd9aac1f6bf848b6,retrieval_k3,no,yes,0.0,0.0,0.0,0.0,201,4,4.3400000000000005e-05
+cd80e22a08d711ebbd9aac1f6bf848b6,retrieval_k5,no,yes,0.0,0.0,0.0,0.0,328,4,6.88e-05
+cd80e22a08d711ebbd9aac1f6bf848b6,retrieval_k10,no,yes,0.0,0.0,0.0,0.0,513,4,0.00010580000000000001
+ab94845c0baf11ebab90acde48001122,always_think,Theodoric I,Theuderic I,0.0,0.5,0.5,0.5,82,13,2.68e-05
+ab94845c0baf11ebab90acde48001122,retrieval_k3,Theuderich I,Theuderic I,0.0,0.5,0.5,0.5,367,7,7.900000000000001e-05
+ab94845c0baf11ebab90acde48001122,retrieval_k5,Wacho,Theuderic I,0.0,0.0,0.0,0.0,834,5,0.0001708
+ab94845c0baf11ebab90acde48001122,retrieval_k10,Theuderich I,Theuderic I,0.0,0.5,0.5,0.5,1126,7,0.00023080000000000003
+d347b6500bdb11eba7f7acde48001122,always_think,South Korea,Austria,0.0,0.0,0.0,0.0,85,11,2.58e-05
+d347b6500bdb11eba7f7acde48001122,retrieval_k3,West Germany,Austria,0.0,0.0,0.0,0.0,251,5,5.42e-05
+d347b6500bdb11eba7f7acde48001122,retrieval_k5,West German,Austria,0.0,0.0,0.0,0.0,316,5,6.720000000000001e-05
+d347b6500bdb11eba7f7acde48001122,retrieval_k10,Germany,Austria,0.0,0.0,0.0,0.0,605,4,0.0001242
+672e556408de11ebbd9eac1f6bf848b6,always_think,Friedrich Paschen,Friedrich Paschen,1.0,1.0,1.0,1.0,85,14,2.82e-05
+672e556408de11ebbd9eac1f6bf848b6,retrieval_k3,Ernst Bessey,Friedrich Paschen,0.0,0.0,0.0,0.0,679,8,0.00014220000000000001
+672e556408de11ebbd9eac1f6bf848b6,retrieval_k5,Ernst Bessey,Friedrich Paschen,0.0,0.0,0.0,0.0,783,8,0.000163
+672e556408de11ebbd9eac1f6bf848b6,retrieval_k10,Ernst Bessey,Friedrich Paschen,0.0,0.0,0.0,0.0,1032,8,0.0002128
+396b04e7089911ebbd77ac1f6bf848b6,always_think,Blood Of The Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,90,14,2.92e-05
+396b04e7089911ebbd77ac1f6bf848b6,retrieval_k3,Blood of the Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,267,8,5.9800000000000003e-05
+396b04e7089911ebbd77ac1f6bf848b6,retrieval_k5,Blood of the Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,347,14,8.060000000000001e-05
+396b04e7089911ebbd77ac1f6bf848b6,retrieval_k10,Blood of the Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,534,8,0.00011320000000000001
+f6e8ecc80bae11ebab90acde48001122,always_think,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,86,14,2.84e-05
+f6e8ecc80bae11ebab90acde48001122,retrieval_k3,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,805,8,0.0001674
+f6e8ecc80bae11ebab90acde48001122,retrieval_k5,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,964,8,0.00019920000000000002
+f6e8ecc80bae11ebab90acde48001122,retrieval_k10,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,1447,8,0.00029580000000000003
+390da94e08a411ebbd7cac1f6bf848b6,always_think,The Life And Loves Of Tschaikovsky,Dokuz Dağın Efesi,0.0,0.0,0.0,0.0,97,18,3.38e-05
+390da94e08a411ebbd7cac1f6bf848b6,retrieval_k3,The Life and Loves of Tschaikovsky,Dokuz Dağın Efesi,0.0,0.0,0.0,0.0,413,18,9.7e-05
+390da94e08a411ebbd7cac1f6bf848b6,retrieval_k5,The Life and Loves of Tschaikovsky,Dokuz Dağın Efesi,0.0,0.0,0.0,0.0,533,12,0.0001162
+390da94e08a411ebbd7cac1f6bf848b6,retrieval_k10,The Life and Loves of Tschaikovsky,Dokuz Dağın Efesi,0.0,0.0,0.0,0.0,907,12,0.000191
+01b2d6ae0bdd11eba7f7acde48001122,always_think,1121-01-01,1027,0.0,0.0,0.0,0.0,86,15,2.9199999999999998e-05
+01b2d6ae0bdd11eba7f7acde48001122,retrieval_k3,unknown,1027,0.0,0.0,0.0,0.0,392,4,8.16e-05
+01b2d6ae0bdd11eba7f7acde48001122,retrieval_k5,"Albert III, Count of Namur",1027,0.0,0.0,0.0,0.0,495,10,0.000107
+01b2d6ae0bdd11eba7f7acde48001122,retrieval_k10,1027,1027,1.0,1.0,1.0,1.0,998,5,0.00020360000000000002
+21eb30140bde11eba7f7acde48001122,always_think,University of Southern California,Mount Holyoke College,0.0,0.0,0.0,0.0,89,13,2.82e-05
+21eb30140bde11eba7f7acde48001122,retrieval_k3,Temple University,Mount Holyoke College,0.0,0.0,0.0,0.0,419,5,8.780000000000002e-05
+21eb30140bde11eba7f7acde48001122,retrieval_k5,Temple University,Mount Holyoke College,0.0,0.0,0.0,0.0,457,5,9.54e-05
+21eb30140bde11eba7f7acde48001122,retrieval_k10,Temple University,Mount Holyoke College,0.0,0.0,0.0,0.0,735,5,0.00015099999999999998

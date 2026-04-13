@@ -68,6 +68,31 @@ uv run python -m experiments.download_dataset
 uv run python -m experiments.run_baseline <MODEL_NAME> <SAMPLE_SIZE> [max_workers]
 ```
 
+### 2Wiki baseline
+```bash
+uv run python -m experiments.2wiki.run_baseline <SAMPLE_SIZE> [max_workers]
+```
+
+### 2Wiki analysis
+```bash
+uv run python -m experiments.2wiki.analyse_baseline <MODEL_NAME>
+```
+
+### MuSiQue-Ans baseline
+```bash
+uv run python -m experiments.musique_ans.run_baseline <SAMPLE_SIZE> [max_workers]
+```
+
+### MuSiQue-Ans analysis
+```bash
+uv run python -m experiments.musique_ans.analyse_baseline <MODEL_NAME>
+```
+
+Both scripts use the cached validation split by default and write their CSVs
+under their own dataset folders:
+- `experiments/2wiki/results/baseline/`
+- `experiments/musique_ans/results/baseline/`
+
 ### Analyse baselines
 ```bash
 uv run python -m experiments.analyse_baseline <MODEL_NAME>
