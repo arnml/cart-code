@@ -2,22 +2,22 @@ question_id,method,threshold,answer_pred,answer_gt,em,f1,precision,recall,input_
 91edc89c0bdc11eba7f7acde48001122,noise_gate,0.2,Les films du losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,1317,8,0.00026980000000000005
 91edc89c0bdc11eba7f7acde48001122,noise_gate,0.25,Les films du losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,1084,8,0.0002232
 91edc89c0bdc11eba7f7acde48001122,noise_gate,0.3,Les films du losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,1084,8,0.0002232
-91edc89c0bdc11eba7f7acde48001122,noise_gate,0.35,Les Films du Losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,553,8,0.00011700000000000001
+91edc89c0bdc11eba7f7acde48001122,noise_gate,0.35,Les Films du losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,553,8,0.00011700000000000001
 91edc89c0bdc11eba7f7acde48001122,noise_gate,0.5,Les films du losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,169,8,4.02e-05
 cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.2,no,yes,0.0,0.0,0.0,0.0,478,4,9.88e-05
-cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.25,no,yes,0.0,0.0,0.0,0.0,427,4,8.86e-05
-cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.3,no,yes,0.0,0.0,0.0,0.0,201,10,4.82e-05
-cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.35,no,yes,0.0,0.0,0.0,0.0,182,10,4.4399999999999995e-05
-cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.5,yes,yes,1.0,1.0,1.0,1.0,182,4,3.96e-05
-ab94845c0baf11ebab90acde48001122,noise_gate,0.2,Theudebert I,Theuderic I,0.0,0.5,0.5,0.5,1059,7,0.0002174
-ab94845c0baf11ebab90acde48001122,noise_gate,0.25,Theudebert I,Theuderic I,0.0,0.5,0.5,0.5,943,7,0.00019420000000000003
+cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.25,yes,yes,1.0,1.0,1.0,1.0,427,4,8.86e-05
+cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.3,no,yes,0.0,0.0,0.0,0.0,201,4,4.3400000000000005e-05
+cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.35,no,yes,0.0,0.0,0.0,0.0,182,4,3.96e-05
+cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.5,no,yes,0.0,0.0,0.0,0.0,182,4,3.96e-05
+ab94845c0baf11ebab90acde48001122,noise_gate,0.2,Theuderic I,Theuderic I,1.0,1.0,1.0,1.0,1059,7,0.0002174
+ab94845c0baf11ebab90acde48001122,noise_gate,0.25,Theuderic I,Theuderic I,1.0,1.0,1.0,1.0,943,7,0.00019420000000000003
 ab94845c0baf11ebab90acde48001122,noise_gate,0.3,Wacho,Theuderic I,0.0,0.0,0.0,0.0,834,5,0.0001708
-ab94845c0baf11ebab90acde48001122,noise_gate,0.35,Theudebert I,Theuderic I,0.0,0.5,0.5,0.5,319,7,6.94e-05
+ab94845c0baf11ebab90acde48001122,noise_gate,0.35,Theuderich I,Theuderic I,0.0,0.5,0.5,0.5,319,7,6.94e-05
 ab94845c0baf11ebab90acde48001122,noise_gate,0.5,Theuderich I,Theuderic I,0.0,0.5,0.5,0.5,282,7,6.200000000000002e-05
-d347b6500bdb11eba7f7acde48001122,noise_gate,0.2,Germany,Austria,0.0,0.0,0.0,0.0,497,4,0.0001026
-d347b6500bdb11eba7f7acde48001122,noise_gate,0.25,West German,Austria,0.0,0.0,0.0,0.0,497,5,0.0001034
-d347b6500bdb11eba7f7acde48001122,noise_gate,0.3,West Germany,Austria,0.0,0.0,0.0,0.0,316,5,6.720000000000001e-05
-d347b6500bdb11eba7f7acde48001122,noise_gate,0.35,West German,Austria,0.0,0.0,0.0,0.0,251,5,5.42e-05
+d347b6500bdb11eba7f7acde48001122,noise_gate,0.2,West Germany,Austria,0.0,0.0,0.0,0.0,497,5,0.0001034
+d347b6500bdb11eba7f7acde48001122,noise_gate,0.25,Germany,Austria,0.0,0.0,0.0,0.0,497,4,0.0001026
+d347b6500bdb11eba7f7acde48001122,noise_gate,0.3,West German,Austria,0.0,0.0,0.0,0.0,316,5,6.720000000000001e-05
+d347b6500bdb11eba7f7acde48001122,noise_gate,0.35,West Germany,Austria,0.0,0.0,0.0,0.0,251,5,5.42e-05
 d347b6500bdb11eba7f7acde48001122,noise_gate,0.5,West Germany,Austria,0.0,0.0,0.0,0.0,192,5,4.240000000000001e-05
 672e556408de11ebbd9eac1f6bf848b6,noise_gate,0.2,Ernst Bessey,Friedrich Paschen,0.0,0.0,0.0,0.0,809,8,0.0001682
 672e556408de11ebbd9eac1f6bf848b6,noise_gate,0.25,Ernst Bessey,Friedrich Paschen,0.0,0.0,0.0,0.0,727,8,0.0001518
@@ -25,27 +25,487 @@ d347b6500bdb11eba7f7acde48001122,noise_gate,0.5,West Germany,Austria,0.0,0.0,0.0
 672e556408de11ebbd9eac1f6bf848b6,noise_gate,0.35,Ernst Bessey,Friedrich Paschen,0.0,0.0,0.0,0.0,679,8,0.00014220000000000001
 672e556408de11ebbd9eac1f6bf848b6,noise_gate,0.5,Ernst Bessey,Friedrich Paschen,0.0,0.0,0.0,0.0,577,8,0.0001218
 396b04e7089911ebbd77ac1f6bf848b6,noise_gate,0.2,Blood of the Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,286,8,6.36e-05
-396b04e7089911ebbd77ac1f6bf848b6,noise_gate,0.25,Blood of the Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,239,8,5.42e-05
-396b04e7089911ebbd77ac1f6bf848b6,noise_gate,0.3,Blood Of The Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,239,14,5.9000000000000004e-05
-396b04e7089911ebbd77ac1f6bf848b6,noise_gate,0.35,Blood Of The Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,239,14,5.9000000000000004e-05
+396b04e7089911ebbd77ac1f6bf848b6,noise_gate,0.25,Blood Of The Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,239,14,5.9000000000000004e-05
+396b04e7089911ebbd77ac1f6bf848b6,noise_gate,0.3,Blood of the Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,239,8,5.42e-05
+396b04e7089911ebbd77ac1f6bf848b6,noise_gate,0.35,Blood Of The Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,239,8,5.42e-05
 396b04e7089911ebbd77ac1f6bf848b6,noise_gate,0.5,Blood of the Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,239,14,5.9000000000000004e-05
 f6e8ecc80bae11ebab90acde48001122,noise_gate,0.2,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,1447,8,0.00029580000000000003
 f6e8ecc80bae11ebab90acde48001122,noise_gate,0.25,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,1314,8,0.0002692
 f6e8ecc80bae11ebab90acde48001122,noise_gate,0.3,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,1255,8,0.00025739999999999997
 f6e8ecc80bae11ebab90acde48001122,noise_gate,0.35,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,1255,8,0.00025739999999999997
 f6e8ecc80bae11ebab90acde48001122,noise_gate,0.5,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,1255,8,0.00025739999999999997
-390da94e08a411ebbd7cac1f6bf848b6,noise_gate,0.2,Dokuz Dağın Efesi,Dokuz Dağın Efesi,1.0,1.0,1.0,1.0,579,9,0.000123
-390da94e08a411ebbd7cac1f6bf848b6,noise_gate,0.25,noanswer,Dokuz Dağın Efesi,0.0,0.0,0.0,0.0,533,5,0.0001106
+390da94e08a411ebbd7cac1f6bf848b6,noise_gate,0.2,noanswer,Dokuz Dağın Efesi,0.0,0.0,0.0,0.0,579,5,0.00011980000000000001
+390da94e08a411ebbd7cac1f6bf848b6,noise_gate,0.25,The Life and Loves of Tschaikovsky,Dokuz Dağın Efesi,0.0,0.0,0.0,0.0,533,12,0.0001162
 390da94e08a411ebbd7cac1f6bf848b6,noise_gate,0.3,Dokuz Dağın Efesi,Dokuz Dağın Efesi,1.0,1.0,1.0,1.0,533,9,0.0001138
 390da94e08a411ebbd7cac1f6bf848b6,noise_gate,0.35,The Life and Loves of Tschaikovsky,Dokuz Dağın Efesi,0.0,0.0,0.0,0.0,482,12,0.00010600000000000002
-390da94e08a411ebbd7cac1f6bf848b6,noise_gate,0.5,Dokuz Dağın Efesi,Dokuz Dağın Efesi,1.0,1.0,1.0,1.0,258,15,6.36e-05
+390da94e08a411ebbd7cac1f6bf848b6,noise_gate,0.5,The Life and Loves of Tschaikovsky,Dokuz Dağın Efesi,0.0,0.0,0.0,0.0,258,18,6.6e-05
 01b2d6ae0bdd11eba7f7acde48001122,noise_gate,0.2,1027,1027,1.0,1.0,1.0,1.0,635,5,0.00013099999999999999
 01b2d6ae0bdd11eba7f7acde48001122,noise_gate,0.25,1027,1027,1.0,1.0,1.0,1.0,604,5,0.0001248
 01b2d6ae0bdd11eba7f7acde48001122,noise_gate,0.3,1027,1027,1.0,1.0,1.0,1.0,551,5,0.00011420000000000001
 01b2d6ae0bdd11eba7f7acde48001122,noise_gate,0.35,1027,1027,1.0,1.0,1.0,1.0,551,5,0.00011420000000000001
-01b2d6ae0bdd11eba7f7acde48001122,noise_gate,0.5,noanswer,1027,0.0,0.0,0.0,0.0,392,5,8.240000000000001e-05
+01b2d6ae0bdd11eba7f7acde48001122,noise_gate,0.5,1121,1027,0.0,0.0,0.0,0.0,392,5,8.240000000000001e-05
 21eb30140bde11eba7f7acde48001122,noise_gate,0.2,Temple University,Mount Holyoke College,0.0,0.0,0.0,0.0,624,5,0.00012880000000000001
 21eb30140bde11eba7f7acde48001122,noise_gate,0.25,Temple University,Mount Holyoke College,0.0,0.0,0.0,0.0,581,5,0.00012020000000000001
 21eb30140bde11eba7f7acde48001122,noise_gate,0.3,Temple University,Mount Holyoke College,0.0,0.0,0.0,0.0,485,5,0.000101
 21eb30140bde11eba7f7acde48001122,noise_gate,0.35,Temple University,Mount Holyoke College,0.0,0.0,0.0,0.0,371,5,7.82e-05
-21eb30140bde11eba7f7acde48001122,noise_gate,0.5,University of Michigan,Mount Holyoke College,0.0,0.0,0.0,0.0,274,12,6.440000000000001e-05
+21eb30140bde11eba7f7acde48001122,noise_gate,0.5,University of Texas at Austin,Mount Holyoke College,0.0,0.0,0.0,0.0,274,14,6.6e-05
+8c6ba65608e511ebbda4ac1f6bf848b6,noise_gate,0.2,Bir Türk'e Gönül Verdim,Bir Türk'E Gönül Verdim,1.0,1.0,1.0,1.0,462,11,0.00010120000000000001
+8c6ba65608e511ebbda4ac1f6bf848b6,noise_gate,0.25,Bir Türk'e Gönül Verdim,Bir Türk'E Gönül Verdim,1.0,1.0,1.0,1.0,411,11,9.1e-05
+8c6ba65608e511ebbda4ac1f6bf848b6,noise_gate,0.3,Bir Türk'e Gönül Verdim,Bir Türk'E Gönül Verdim,1.0,1.0,1.0,1.0,364,11,8.159999999999999e-05
+8c6ba65608e511ebbda4ac1f6bf848b6,noise_gate,0.35,Brutti di notte,Bir Türk'E Gönül Verdim,0.0,0.0,0.0,0.0,364,13,8.319999999999999e-05
+8c6ba65608e511ebbda4ac1f6bf848b6,noise_gate,0.5,Brutti Di Notte,Bir Türk'E Gönül Verdim,0.0,0.0,0.0,0.0,154,14,4.2000000000000004e-05
+435eb4480baf11ebab90acde48001122,noise_gate,0.2,Mstislav I of Kiev,Vladimir II Monomakh,0.0,0.0,0.0,0.0,1530,9,0.0003132
+435eb4480baf11ebab90acde48001122,noise_gate,0.25,Vladimir II Monomakh,Vladimir II Monomakh,1.0,1.0,1.0,1.0,1449,9,0.000297
+435eb4480baf11ebab90acde48001122,noise_gate,0.3,Vladimir II Monomakh,Vladimir II Monomakh,1.0,1.0,1.0,1.0,1410,9,0.00028920000000000004
+435eb4480baf11ebab90acde48001122,noise_gate,0.35,Mstislav I of Kiev,Vladimir II Monomakh,0.0,0.0,0.0,0.0,1331,9,0.0002734
+435eb4480baf11ebab90acde48001122,noise_gate,0.5,Vladimir II Monomakh,Vladimir II Monomakh,1.0,1.0,1.0,1.0,1071,9,0.00022140000000000004
+2cc66d74089011ebbd72ac1f6bf848b6,noise_gate,0.2,Life Hits,Life Hits,1.0,1.0,1.0,1.0,372,5,7.840000000000001e-05
+2cc66d74089011ebbd72ac1f6bf848b6,noise_gate,0.25,Life Hits,Life Hits,1.0,1.0,1.0,1.0,292,5,6.24e-05
+2cc66d74089011ebbd72ac1f6bf848b6,noise_gate,0.3,Life Hits,Life Hits,1.0,1.0,1.0,1.0,205,5,4.5e-05
+2cc66d74089011ebbd72ac1f6bf848b6,noise_gate,0.35,Life Hits,Life Hits,1.0,1.0,1.0,1.0,205,5,4.5e-05
+2cc66d74089011ebbd72ac1f6bf848b6,noise_gate,0.5,Life Hits,Life Hits,1.0,1.0,1.0,1.0,205,5,4.5e-05
+95f1b1b6087511ebbd67ac1f6bf848b6,noise_gate,0.2,A Night's Adventure,Insaciable,0.0,0.0,0.0,0.0,565,13,0.0001234
+95f1b1b6087511ebbd67ac1f6bf848b6,noise_gate,0.25,Insaciable,Insaciable,1.0,1.0,1.0,1.0,375,6,7.979999999999999e-05
+95f1b1b6087511ebbd67ac1f6bf848b6,noise_gate,0.3,Insaciable,Insaciable,1.0,1.0,1.0,1.0,252,12,6.000000000000001e-05
+95f1b1b6087511ebbd67ac1f6bf848b6,noise_gate,0.35,Insaciable,Insaciable,1.0,1.0,1.0,1.0,252,12,6.000000000000001e-05
+95f1b1b6087511ebbd67ac1f6bf848b6,noise_gate,0.5,Insaciable,Insaciable,1.0,1.0,1.0,1.0,252,12,6.000000000000001e-05
+fcc41df80bda11eba7f7acde48001122,noise_gate,0.2,"Calgary, Alberta",Calgary,0.0,0.6666666666666666,0.5,1.0,751,7,0.00015580000000000002
+fcc41df80bda11eba7f7acde48001122,noise_gate,0.25,"Calgary, Alberta",Calgary,0.0,0.6666666666666666,0.5,1.0,632,7,0.000132
+fcc41df80bda11eba7f7acde48001122,noise_gate,0.3,noanswer,Calgary,0.0,0.0,0.0,0.0,409,5,8.580000000000001e-05
+fcc41df80bda11eba7f7acde48001122,noise_gate,0.35,noanswer,Calgary,0.0,0.0,0.0,0.0,340,5,7.2e-05
+fcc41df80bda11eba7f7acde48001122,noise_gate,0.5,"Saint Boniface, Manitoba",Calgary,0.0,0.0,0.0,0.0,88,14,2.8800000000000002e-05
+eec1dcfb08b911ebbd88ac1f6bf848b6,noise_gate,0.2,Battle of Memories,Battle Of Memories,1.0,1.0,1.0,1.0,487,6,0.0001022
+eec1dcfb08b911ebbd88ac1f6bf848b6,noise_gate,0.25,Battle of Memories,Battle Of Memories,1.0,1.0,1.0,1.0,459,6,9.66e-05
+eec1dcfb08b911ebbd88ac1f6bf848b6,noise_gate,0.3,Leste Chen,Battle Of Memories,0.0,0.0,0.0,0.0,306,6,6.599999999999999e-05
+eec1dcfb08b911ebbd88ac1f6bf848b6,noise_gate,0.35,Leste Chen,Battle Of Memories,0.0,0.0,0.0,0.0,306,12,7.08e-05
+eec1dcfb08b911ebbd88ac1f6bf848b6,noise_gate,0.5,Battle Of Memories,Battle Of Memories,1.0,1.0,1.0,1.0,167,12,4.3e-05
+d64d24180bd911eba7f7acde48001122,noise_gate,0.2,"Weston-super-Mare, Somerset","Weston-super-Mare, Somerset",1.0,1.0,1.0,1.0,588,10,0.00012560000000000002
+d64d24180bd911eba7f7acde48001122,noise_gate,0.25,"Weston-super-Mare, Somerset","Weston-super-Mare, Somerset",1.0,1.0,1.0,1.0,470,10,0.000102
+d64d24180bd911eba7f7acde48001122,noise_gate,0.3,"Weston-super-Mare, Somerset","Weston-super-Mare, Somerset",1.0,1.0,1.0,1.0,316,10,7.120000000000001e-05
+d64d24180bd911eba7f7acde48001122,noise_gate,0.35,noanswer,"Weston-super-Mare, Somerset",0.0,0.0,0.0,0.0,184,5,4.080000000000001e-05
+d64d24180bd911eba7f7acde48001122,noise_gate,0.5,Weston-super-Mare,"Weston-super-Mare, Somerset",0.0,0.6666666666666666,1.0,0.5,146,14,4.0400000000000006e-05
+5d18eb8408e311ebbda4ac1f6bf848b6,noise_gate,0.2,Hanuman Patal Vijay,Hanuman Patal Vijay,1.0,1.0,1.0,1.0,1155,8,0.0002374
+5d18eb8408e311ebbda4ac1f6bf848b6,noise_gate,0.25,Young and Dangerous: The Prequel,Hanuman Patal Vijay,0.0,0.0,0.0,0.0,1155,10,0.000239
+5d18eb8408e311ebbda4ac1f6bf848b6,noise_gate,0.3,Hanuman Patal Vijay,Hanuman Patal Vijay,1.0,1.0,1.0,1.0,1155,8,0.0002374
+5d18eb8408e311ebbda4ac1f6bf848b6,noise_gate,0.35,Hanuman Patal Vijay,Hanuman Patal Vijay,1.0,1.0,1.0,1.0,970,8,0.0002004
+5d18eb8408e311ebbda4ac1f6bf848b6,noise_gate,0.5,Hanuman Patal Vijay,Hanuman Patal Vijay,1.0,1.0,1.0,1.0,587,8,0.0001238
+8b16280408ce11ebbd94ac1f6bf848b6,noise_gate,0.2,no,yes,0.0,0.0,0.0,0.0,860,4,0.0001752
+8b16280408ce11ebbd94ac1f6bf848b6,noise_gate,0.25,no,yes,0.0,0.0,0.0,0.0,860,4,0.0001752
+8b16280408ce11ebbd94ac1f6bf848b6,noise_gate,0.3,no,yes,0.0,0.0,0.0,0.0,725,4,0.0001482
+8b16280408ce11ebbd94ac1f6bf848b6,noise_gate,0.35,no,yes,0.0,0.0,0.0,0.0,611,4,0.0001254
+8b16280408ce11ebbd94ac1f6bf848b6,noise_gate,0.5,yes,yes,1.0,1.0,1.0,1.0,144,10,3.68e-05
+8dfa054a0bda11eba7f7acde48001122,noise_gate,0.2,28 November 1993,28 November 1993,1.0,1.0,1.0,1.0,728,8,0.00015199999999999998
+8dfa054a0bda11eba7f7acde48001122,noise_gate,0.25,28 November 1993,28 November 1993,1.0,1.0,1.0,1.0,728,8,0.00015199999999999998
+8dfa054a0bda11eba7f7acde48001122,noise_gate,0.3,28 November 1993,28 November 1993,1.0,1.0,1.0,1.0,728,8,0.00015199999999999998
+8dfa054a0bda11eba7f7acde48001122,noise_gate,0.35,28 November 1993,28 November 1993,1.0,1.0,1.0,1.0,546,8,0.0001156
+8dfa054a0bda11eba7f7acde48001122,noise_gate,0.5,28 November 1993,28 November 1993,1.0,1.0,1.0,1.0,449,8,9.620000000000002e-05
+a7f5782a0bdb11eba7f7acde48001122,noise_gate,0.2,United States,Dearborn,0.0,0.0,0.0,0.0,1003,5,0.0002046
+a7f5782a0bdb11eba7f7acde48001122,noise_gate,0.25,"Geelong, Victoria",Dearborn,0.0,0.0,0.0,0.0,908,7,0.00018720000000000002
+a7f5782a0bdb11eba7f7acde48001122,noise_gate,0.3,"Geelong, Victoria",Dearborn,0.0,0.0,0.0,0.0,908,7,0.00018720000000000002
+a7f5782a0bdb11eba7f7acde48001122,noise_gate,0.35,"Geelong, Victoria",Dearborn,0.0,0.0,0.0,0.0,908,7,0.00018720000000000002
+a7f5782a0bdb11eba7f7acde48001122,noise_gate,0.5,"Dearborn, Michigan",Dearborn,0.0,0.6666666666666666,0.5,1.0,567,7,0.000119
+9f500386089111ebbd73ac1f6bf848b6,noise_gate,0.2,Rolling in Money,Rolling In Money,1.0,1.0,1.0,1.0,515,6,0.00010779999999999999
+9f500386089111ebbd73ac1f6bf848b6,noise_gate,0.25,Rolling in Money,Rolling In Money,1.0,1.0,1.0,1.0,477,6,0.0001002
+9f500386089111ebbd73ac1f6bf848b6,noise_gate,0.3,Rolling in Money,Rolling In Money,1.0,1.0,1.0,1.0,385,6,8.18e-05
+9f500386089111ebbd73ac1f6bf848b6,noise_gate,0.35,Rolling in Money,Rolling In Money,1.0,1.0,1.0,1.0,217,6,4.8200000000000006e-05
+9f500386089111ebbd73ac1f6bf848b6,noise_gate,0.5,Rolling in Money,Rolling In Money,1.0,1.0,1.0,1.0,217,6,4.8200000000000006e-05
+95561eb008e111ebbda2ac1f6bf848b6,noise_gate,0.2,Best of the Best 3: No Turning Back,Best Of The Best 3: No Turning Back,1.0,1.0,1.0,1.0,1021,13,0.00021460000000000004
+95561eb008e111ebbda2ac1f6bf848b6,noise_gate,0.25,Best of the Best 3: No Turning Back,Best Of The Best 3: No Turning Back,1.0,1.0,1.0,1.0,944,13,0.00019920000000000002
+95561eb008e111ebbda2ac1f6bf848b6,noise_gate,0.3,Best of the Best 3: No Turning Back,Best Of The Best 3: No Turning Back,1.0,1.0,1.0,1.0,837,13,0.0001778
+95561eb008e111ebbda2ac1f6bf848b6,noise_gate,0.35,Best of the Best 3: No Turning Back,Best Of The Best 3: No Turning Back,1.0,1.0,1.0,1.0,786,13,0.00016760000000000004
+95561eb008e111ebbda2ac1f6bf848b6,noise_gate,0.5,Best of the Best 3: No Turning Back,Best Of The Best 3: No Turning Back,1.0,1.0,1.0,1.0,245,13,5.94e-05
+f8819f3308a011ebbd78ac1f6bf848b6,noise_gate,0.2,The Death Kiss,Her Luck In London,0.0,0.0,0.0,0.0,901,6,0.00018500000000000002
+f8819f3308a011ebbd78ac1f6bf848b6,noise_gate,0.25,The Death Kiss,Her Luck In London,0.0,0.0,0.0,0.0,778,6,0.00016040000000000002
+f8819f3308a011ebbd78ac1f6bf848b6,noise_gate,0.3,The Death Kiss,Her Luck In London,0.0,0.0,0.0,0.0,375,6,7.979999999999999e-05
+f8819f3308a011ebbd78ac1f6bf848b6,noise_gate,0.35,The Death Kiss,Her Luck In London,0.0,0.0,0.0,0.0,375,6,7.979999999999999e-05
+f8819f3308a011ebbd78ac1f6bf848b6,noise_gate,0.5,The Death Kiss,Her Luck In London,0.0,0.0,0.0,0.0,286,12,6.68e-05
+22a62e140bde11eba7f7acde48001122,noise_gate,0.2,23 October 1378,23 October 1378,1.0,1.0,1.0,1.0,1263,8,0.000259
+22a62e140bde11eba7f7acde48001122,noise_gate,0.25,1378,23 October 1378,0.0,0.5,1.0,0.3333333333333333,1263,5,0.0002566
+22a62e140bde11eba7f7acde48001122,noise_gate,0.3,23 October 1378,23 October 1378,1.0,1.0,1.0,1.0,1263,8,0.000259
+22a62e140bde11eba7f7acde48001122,noise_gate,0.35,1378,23 October 1378,0.0,0.5,1.0,0.3333333333333333,1263,5,0.0002566
+22a62e140bde11eba7f7acde48001122,noise_gate,0.5,23 October 1378,23 October 1378,1.0,1.0,1.0,1.0,1194,8,0.0002452
+f64d2f04086111ebbd5dac1f6bf848b6,noise_gate,0.2,Hell to Pay,Darwin'S Nightmare,0.0,0.0,0.0,0.0,950,6,0.00019480000000000002
+f64d2f04086111ebbd5dac1f6bf848b6,noise_gate,0.25,"Hell to Pay
+",Darwin'S Nightmare,0.0,0.0,0.0,0.0,869,7,0.00017940000000000002
+f64d2f04086111ebbd5dac1f6bf848b6,noise_gate,0.3,Hell to Pay (2014 film),Darwin'S Nightmare,0.0,0.0,0.0,0.0,817,11,0.0001722
+f64d2f04086111ebbd5dac1f6bf848b6,noise_gate,0.35,Darwin's Nightmare,Darwin'S Nightmare,1.0,1.0,1.0,1.0,734,7,0.00015240000000000002
+f64d2f04086111ebbd5dac1f6bf848b6,noise_gate,0.5,Darwin's Nightmare,Darwin'S Nightmare,1.0,1.0,1.0,1.0,250,13,6.0400000000000004e-05
+fec1cc4a087911ebbd67ac1f6bf848b6,noise_gate,0.2,Así en el cielo como en la tierra,Así En El Cielo Como En La Tierra,1.0,1.0,1.0,1.0,1816,11,0.00037200000000000004
+fec1cc4a087911ebbd67ac1f6bf848b6,noise_gate,0.25,Así en el cielo como en la tierra,Así En El Cielo Como En La Tierra,1.0,1.0,1.0,1.0,1398,11,0.0002884
+fec1cc4a087911ebbd67ac1f6bf848b6,noise_gate,0.3,Así en el cielo como en la tierra,Así En El Cielo Como En La Tierra,1.0,1.0,1.0,1.0,468,11,0.00010240000000000001
+fec1cc4a087911ebbd67ac1f6bf848b6,noise_gate,0.35,Así en el cielo como en la tierra,Así En El Cielo Como En La Tierra,1.0,1.0,1.0,1.0,468,17,0.00010720000000000002
+fec1cc4a087911ebbd67ac1f6bf848b6,noise_gate,0.5,Así En El Cielo Como En La Tierra,Así En El Cielo Como En La Tierra,1.0,1.0,1.0,1.0,323,18,7.900000000000001e-05
+0729da3c0bde11eba7f7acde48001122,noise_gate,0.2,23 August 1478,23 August 1478,1.0,1.0,1.0,1.0,1154,8,0.0002372
+0729da3c0bde11eba7f7acde48001122,noise_gate,0.25,23 August 1478,23 August 1478,1.0,1.0,1.0,1.0,1154,8,0.0002372
+0729da3c0bde11eba7f7acde48001122,noise_gate,0.3,23 August 1478,23 August 1478,1.0,1.0,1.0,1.0,1154,8,0.0002372
+0729da3c0bde11eba7f7acde48001122,noise_gate,0.35,23 August 1478,23 August 1478,1.0,1.0,1.0,1.0,1067,8,0.0002198
+0729da3c0bde11eba7f7acde48001122,noise_gate,0.5,23 August 1478,23 August 1478,1.0,1.0,1.0,1.0,563,8,0.00011900000000000002
+65a915cc0bda11eba7f7acde48001122,noise_gate,0.2,Hungary,Hungarian,0.0,0.0,0.0,0.0,1912,5,0.0003864
+65a915cc0bda11eba7f7acde48001122,noise_gate,0.25,Hungary,Hungarian,0.0,0.0,0.0,0.0,1912,5,0.0003864
+65a915cc0bda11eba7f7acde48001122,noise_gate,0.3,noanswer,Hungarian,0.0,0.0,0.0,0.0,1593,5,0.00032260000000000004
+65a915cc0bda11eba7f7acde48001122,noise_gate,0.35,Transylvania,Hungarian,0.0,0.0,0.0,0.0,1521,5,0.00030819999999999996
+65a915cc0bda11eba7f7acde48001122,noise_gate,0.5,Transylvania,Hungarian,0.0,0.0,0.0,0.0,1093,5,0.00022260000000000002
+77dc576a0bdd11eba7f7acde48001122,noise_gate,0.2,England,London,0.0,0.0,0.0,0.0,557,4,0.00011460000000000001
+77dc576a0bdd11eba7f7acde48001122,noise_gate,0.25,England,London,0.0,0.0,0.0,0.0,557,4,0.00011460000000000001
+77dc576a0bdd11eba7f7acde48001122,noise_gate,0.3,England,London,0.0,0.0,0.0,0.0,393,4,8.180000000000001e-05
+77dc576a0bdd11eba7f7acde48001122,noise_gate,0.35,England,London,0.0,0.0,0.0,0.0,244,4,5.200000000000001e-05
+77dc576a0bdd11eba7f7acde48001122,noise_gate,0.5,New York City,London,0.0,0.0,0.0,0.0,170,12,4.36e-05
+d18d25fa084f11ebbd56ac1f6bf848b6,noise_gate,0.2,Twisted Mistress,Twisted Mistress,1.0,1.0,1.0,1.0,1108,6,0.00022640000000000003
+d18d25fa084f11ebbd56ac1f6bf848b6,noise_gate,0.25,Twisted Mistress,Twisted Mistress,1.0,1.0,1.0,1.0,1021,6,0.00020900000000000004
+d18d25fa084f11ebbd56ac1f6bf848b6,noise_gate,0.3,Twisted Mistress,Twisted Mistress,1.0,1.0,1.0,1.0,748,6,0.0001544
+d18d25fa084f11ebbd56ac1f6bf848b6,noise_gate,0.35,Twisted Mistress,Twisted Mistress,1.0,1.0,1.0,1.0,485,6,0.0001018
+d18d25fa084f11ebbd56ac1f6bf848b6,noise_gate,0.5,Köpekler Adası,Twisted Mistress,0.0,0.0,0.0,0.0,90,15,3e-05
+1a3535d20bdd11eba7f7acde48001122,noise_gate,0.2,1958 Filmfare Award for Best Music Director,Filmfare Award,0.0,0.4444444444444445,0.2857142857142857,1.0,1284,12,0.0002664
+1a3535d20bdd11eba7f7acde48001122,noise_gate,0.25,Filmfare Award for Best Music Director,Filmfare Award,0.0,0.5,0.3333333333333333,1.0,1254,10,0.0002588
+1a3535d20bdd11eba7f7acde48001122,noise_gate,0.3,1958 Filmfare Award for Best Music Director,Filmfare Award,0.0,0.4444444444444445,0.2857142857142857,1.0,1157,12,0.000241
+1a3535d20bdd11eba7f7acde48001122,noise_gate,0.35,1958 Filmfare Award for Best Music Director,Filmfare Award,0.0,0.4444444444444445,0.2857142857142857,1.0,1133,12,0.00023620000000000002
+1a3535d20bdd11eba7f7acde48001122,noise_gate,0.5,Padma Bhushan,Filmfare Award,0.0,0.0,0.0,0.0,269,7,5.940000000000001e-05
+cab3205608d411ebbd98ac1f6bf848b6,noise_gate,0.2,Der Wixxer,Der Wixxer,1.0,1.0,1.0,1.0,1143,6,0.00023340000000000004
+cab3205608d411ebbd98ac1f6bf848b6,noise_gate,0.25,Der Wixxer,Der Wixxer,1.0,1.0,1.0,1.0,1048,6,0.00021440000000000003
+cab3205608d411ebbd98ac1f6bf848b6,noise_gate,0.3,Der Wixxer,Der Wixxer,1.0,1.0,1.0,1.0,511,6,0.000107
+cab3205608d411ebbd98ac1f6bf848b6,noise_gate,0.35,Der Wixxer,Der Wixxer,1.0,1.0,1.0,1.0,495,6,0.00010379999999999999
+cab3205608d411ebbd98ac1f6bf848b6,noise_gate,0.5,Der Wixxer,Der Wixxer,1.0,1.0,1.0,1.0,394,6,8.360000000000001e-05
+06df84220bda11eba7f7acde48001122,noise_gate,0.2,Weferlingen,Weferlingen,1.0,1.0,1.0,1.0,1313,6,0.00026740000000000005
+06df84220bda11eba7f7acde48001122,noise_gate,0.25,Weferlingen,Weferlingen,1.0,1.0,1.0,1.0,1313,6,0.00026740000000000005
+06df84220bda11eba7f7acde48001122,noise_gate,0.3,Weferlingen,Weferlingen,1.0,1.0,1.0,1.0,1313,6,0.00026740000000000005
+06df84220bda11eba7f7acde48001122,noise_gate,0.35,Weferlingen,Weferlingen,1.0,1.0,1.0,1.0,1313,6,0.00026740000000000005
+06df84220bda11eba7f7acde48001122,noise_gate,0.5,Weferlingen,Weferlingen,1.0,1.0,1.0,1.0,1313,6,0.00026740000000000005
+36ecf33a0bde11eba7f7acde48001122,noise_gate,0.2,"UCLA School of Theater, Film and Television","UCLA School of Theater, Film and Television",1.0,1.0,1.0,1.0,529,12,0.00011540000000000001
+36ecf33a0bde11eba7f7acde48001122,noise_gate,0.25,"UCLA School of Theater, Film and Television","UCLA School of Theater, Film and Television",1.0,1.0,1.0,1.0,486,12,0.00010680000000000001
+36ecf33a0bde11eba7f7acde48001122,noise_gate,0.3,"UCLA School of Theater, Film and Television","UCLA School of Theater, Film and Television",1.0,1.0,1.0,1.0,337,12,7.700000000000001e-05
+36ecf33a0bde11eba7f7acde48001122,noise_gate,0.35,"UCLA School of Theater, Film and Television","UCLA School of Theater, Film and Television",1.0,1.0,1.0,1.0,253,12,6.0200000000000006e-05
+36ecf33a0bde11eba7f7acde48001122,noise_gate,0.5,Los Angeles City College,"UCLA School of Theater, Film and Television",0.0,0.0,0.0,0.0,146,13,3.96e-05
+c2ccbd23087811ebbd67ac1f6bf848b6,noise_gate,0.2,no,no,1.0,1.0,1.0,1.0,444,4,9.200000000000001e-05
+c2ccbd23087811ebbd67ac1f6bf848b6,noise_gate,0.25,no,no,1.0,1.0,1.0,1.0,359,4,7.5e-05
+c2ccbd23087811ebbd67ac1f6bf848b6,noise_gate,0.3,no,no,1.0,1.0,1.0,1.0,226,4,4.8400000000000004e-05
+c2ccbd23087811ebbd67ac1f6bf848b6,noise_gate,0.35,no,no,1.0,1.0,1.0,1.0,195,4,4.22e-05
+c2ccbd23087811ebbd67ac1f6bf848b6,noise_gate,0.5,no,no,1.0,1.0,1.0,1.0,195,4,4.22e-05
+ce9cda1608a111ebbd79ac1f6bf848b6,noise_gate,0.2,Vindhyarani,Vindhyarani,1.0,1.0,1.0,1.0,1022,6,0.00020920000000000002
+ce9cda1608a111ebbd79ac1f6bf848b6,noise_gate,0.25,Vindhyarani,Vindhyarani,1.0,1.0,1.0,1.0,997,6,0.0002042
+ce9cda1608a111ebbd79ac1f6bf848b6,noise_gate,0.3,Vindhyarani,Vindhyarani,1.0,1.0,1.0,1.0,997,6,0.0002042
+ce9cda1608a111ebbd79ac1f6bf848b6,noise_gate,0.35,Vindhyarani,Vindhyarani,1.0,1.0,1.0,1.0,933,6,0.00019140000000000004
+ce9cda1608a111ebbd79ac1f6bf848b6,noise_gate,0.5,Vindhyarani,Vindhyarani,1.0,1.0,1.0,1.0,526,6,0.00011
+c4bdfbea08c911ebbd92ac1f6bf848b6,noise_gate,0.2,Ausaf Ali,Ausaf Ali,1.0,1.0,1.0,1.0,515,6,0.00010779999999999999
+c4bdfbea08c911ebbd92ac1f6bf848b6,noise_gate,0.25,Ausaf Ali,Ausaf Ali,1.0,1.0,1.0,1.0,487,6,0.0001022
+c4bdfbea08c911ebbd92ac1f6bf848b6,noise_gate,0.3,Ausaf Ali,Ausaf Ali,1.0,1.0,1.0,1.0,449,6,9.460000000000001e-05
+c4bdfbea08c911ebbd92ac1f6bf848b6,noise_gate,0.35,Ausaf Ali,Ausaf Ali,1.0,1.0,1.0,1.0,393,6,8.340000000000001e-05
+c4bdfbea08c911ebbd92ac1f6bf848b6,noise_gate,0.5,Ausaf Ali,Ausaf Ali,1.0,1.0,1.0,1.0,82,12,2.6000000000000002e-05
+500cf3b40bda11eba7f7acde48001122,noise_gate,0.2,Torre Annunziata,Torre Annunziata,1.0,1.0,1.0,1.0,1216,8,0.00024960000000000005
+500cf3b40bda11eba7f7acde48001122,noise_gate,0.25,Torre Annunziata,Torre Annunziata,1.0,1.0,1.0,1.0,1196,8,0.0002456
+500cf3b40bda11eba7f7acde48001122,noise_gate,0.3,Torre Annunziata,Torre Annunziata,1.0,1.0,1.0,1.0,1196,8,0.0002456
+500cf3b40bda11eba7f7acde48001122,noise_gate,0.35,Torre Annunziata,Torre Annunziata,1.0,1.0,1.0,1.0,1088,8,0.00022400000000000002
+500cf3b40bda11eba7f7acde48001122,noise_gate,0.5,Torre Annunziata,Torre Annunziata,1.0,1.0,1.0,1.0,325,8,7.14e-05
+f0441dea0bd911eba7f7acde48001122,noise_gate,0.2,"Luxembourg
+",Luxembourgish,0.0,0.0,0.0,0.0,1283,7,0.0002622
+f0441dea0bd911eba7f7acde48001122,noise_gate,0.25,"Luxembourgish
+",Luxembourgish,1.0,1.0,1.0,1.0,1166,8,0.00023960000000000002
+f0441dea0bd911eba7f7acde48001122,noise_gate,0.3,Luxembourg,Luxembourgish,0.0,0.0,0.0,0.0,940,6,0.0001928
+f0441dea0bd911eba7f7acde48001122,noise_gate,0.35,Luxembourg,Luxembourgish,0.0,0.0,0.0,0.0,896,6,0.00018400000000000003
+f0441dea0bd911eba7f7acde48001122,noise_gate,0.5,"Kovno, Russian Empire",Luxembourgish,0.0,0.0,0.0,0.0,718,8,0.00015
+afc5b57c0bdd11eba7f7acde48001122,noise_gate,0.2,noanswer,United States,0.0,0.0,0.0,0.0,814,5,0.0001668
+afc5b57c0bdd11eba7f7acde48001122,noise_gate,0.25,Standing Rock Indian Reservation,United States,0.0,0.0,0.0,0.0,735,13,0.0001574
+afc5b57c0bdd11eba7f7acde48001122,noise_gate,0.3,Standing Rock Indian Reservation,United States,0.0,0.0,0.0,0.0,735,7,0.0001526
+afc5b57c0bdd11eba7f7acde48001122,noise_gate,0.35,Fort Buford,United States,0.0,0.0,0.0,0.0,257,6,5.6200000000000004e-05
+afc5b57c0bdd11eba7f7acde48001122,noise_gate,0.5,Fort Buford,United States,0.0,0.0,0.0,0.0,220,6,4.88e-05
+e66957060baf11ebab90acde48001122,noise_gate,0.2,"Karl Alexander, 5th Prince of Thurn and Taxis","Karl Alexander, 5th Prince of Thurn and Taxis",1.0,1.0,1.0,1.0,1070,16,0.0002268
+e66957060baf11ebab90acde48001122,noise_gate,0.25,"Karl Alexander, 5th Prince of Thurn and Taxis","Karl Alexander, 5th Prince of Thurn and Taxis",1.0,1.0,1.0,1.0,994,22,0.0002164
+e66957060baf11ebab90acde48001122,noise_gate,0.3,Karl Alexander Fürst von Thurn und Taxis,"Karl Alexander, 5th Prince of Thurn and Taxis",0.0,0.5333333333333333,0.5714285714285714,0.5,800,13,0.00017040000000000002
+e66957060baf11ebab90acde48001122,noise_gate,0.35,Karl Alexander Fürst von Thurn und Taxis,"Karl Alexander, 5th Prince of Thurn and Taxis",0.0,0.5333333333333333,0.5714285714285714,0.5,590,13,0.0001284
+e66957060baf11ebab90acde48001122,noise_gate,0.5,Karl Alexander Fürst von Thurn und Taxis,"Karl Alexander, 5th Prince of Thurn and Taxis",0.0,0.5333333333333333,0.5714285714285714,0.5,433,13,9.7e-05
+e1d2c3a708af11ebbd83ac1f6bf848b6,noise_gate,0.2,Outlaw King,Outlaw King,1.0,1.0,1.0,1.0,721,6,0.00014900000000000002
+e1d2c3a708af11ebbd83ac1f6bf848b6,noise_gate,0.25,Outlaw King,Outlaw King,1.0,1.0,1.0,1.0,656,6,0.00013600000000000003
+e1d2c3a708af11ebbd83ac1f6bf848b6,noise_gate,0.3,Outlaw King,Outlaw King,1.0,1.0,1.0,1.0,656,6,0.00013600000000000003
+e1d2c3a708af11ebbd83ac1f6bf848b6,noise_gate,0.35,Outlaw King,Outlaw King,1.0,1.0,1.0,1.0,527,6,0.0001102
+e1d2c3a708af11ebbd83ac1f6bf848b6,noise_gate,0.5,Outlaw King,Outlaw King,1.0,1.0,1.0,1.0,315,6,6.78e-05
+2e2fabfc095e11ebbdafac1f6bf848b6,noise_gate,0.2,Scandal at the Girls' School,Scandal At The Girls' School,1.0,1.0,1.0,1.0,704,10,0.0001488
+2e2fabfc095e11ebbdafac1f6bf848b6,noise_gate,0.25,Scandal at the Girls' School,Scandal At The Girls' School,1.0,1.0,1.0,1.0,621,10,0.00013220000000000001
+2e2fabfc095e11ebbdafac1f6bf848b6,noise_gate,0.3,Scandal at the Girls' School,Scandal At The Girls' School,1.0,1.0,1.0,1.0,595,10,0.000127
+2e2fabfc095e11ebbdafac1f6bf848b6,noise_gate,0.35,Scandal at the Girls' School,Scandal At The Girls' School,1.0,1.0,1.0,1.0,405,10,8.900000000000001e-05
+2e2fabfc095e11ebbdafac1f6bf848b6,noise_gate,0.5,One Dangerous Night,Scandal At The Girls' School,0.0,0.0,0.0,0.0,179,12,4.5400000000000006e-05
+0d4b4cfc0bde11eba7f7acde48001122,noise_gate,0.2,United States,American,0.0,0.0,0.0,0.0,760,5,0.000156
+0d4b4cfc0bde11eba7f7acde48001122,noise_gate,0.25,United States,American,0.0,0.0,0.0,0.0,170,5,3.8e-05
+0d4b4cfc0bde11eba7f7acde48001122,noise_gate,0.3,United States,American,0.0,0.0,0.0,0.0,170,5,3.8e-05
+0d4b4cfc0bde11eba7f7acde48001122,noise_gate,0.35,United States,American,0.0,0.0,0.0,0.0,170,5,3.8e-05
+0d4b4cfc0bde11eba7f7acde48001122,noise_gate,0.5,Belgium,American,0.0,0.0,0.0,0.0,82,11,2.5200000000000003e-05
+16915f740bdc11eba7f7acde48001122,noise_gate,0.2,Le Plessis-Bouchard,Le Plessis-Bouchard,1.0,1.0,1.0,1.0,445,10,9.7e-05
+16915f740bdc11eba7f7acde48001122,noise_gate,0.25,Le Plessis-Bouchard,Le Plessis-Bouchard,1.0,1.0,1.0,1.0,407,10,8.94e-05
+16915f740bdc11eba7f7acde48001122,noise_gate,0.3,noanswer,Le Plessis-Bouchard,0.0,0.0,0.0,0.0,348,11,7.840000000000001e-05
+16915f740bdc11eba7f7acde48001122,noise_gate,0.35,noanswer,Le Plessis-Bouchard,0.0,0.0,0.0,0.0,348,11,7.840000000000001e-05
+16915f740bdc11eba7f7acde48001122,noise_gate,0.5,Rome,Le Plessis-Bouchard,0.0,0.0,0.0,0.0,194,10,4.68e-05
+7cb81afc0bd911eba7f7acde48001122,noise_gate,0.2,"Glen Cove, Long Island, New York",New York,0.0,0.5,0.3333333333333333,1.0,1036,18,0.00022160000000000002
+7cb81afc0bd911eba7f7acde48001122,noise_gate,0.25,"Glen Cove, Long Island, New York",New York,0.0,0.5,0.3333333333333333,1.0,1017,12,0.000213
+7cb81afc0bd911eba7f7acde48001122,noise_gate,0.3,"Glen Cove, Long Island, New York",New York,0.0,0.5,0.3333333333333333,1.0,940,12,0.00019759999999999998
+7cb81afc0bd911eba7f7acde48001122,noise_gate,0.35,"Glen Cove, Long Island, New York",New York,0.0,0.5,0.3333333333333333,1.0,871,12,0.0001838
+7cb81afc0bd911eba7f7acde48001122,noise_gate,0.5,"Chicago, Illinois",New York,0.0,0.0,0.0,0.0,452,6,9.52e-05
+ff2926840bd911eba7f7acde48001122,noise_gate,0.2,Yuen Siu-tien,Yuen Siu-tien,1.0,1.0,1.0,1.0,1034,9,0.00021400000000000002
+ff2926840bd911eba7f7acde48001122,noise_gate,0.25,Yuen Siu-tien,Yuen Siu-tien,1.0,1.0,1.0,1.0,996,9,0.00020640000000000003
+ff2926840bd911eba7f7acde48001122,noise_gate,0.3,Yuen Siu-tien,Yuen Siu-tien,1.0,1.0,1.0,1.0,355,9,7.82e-05
+ff2926840bd911eba7f7acde48001122,noise_gate,0.35,Yuen Siu-tien,Yuen Siu-tien,1.0,1.0,1.0,1.0,295,9,6.62e-05
+ff2926840bd911eba7f7acde48001122,noise_gate,0.5,Yuen Siu-tien,Yuen Siu-tien,1.0,1.0,1.0,1.0,199,9,4.7000000000000004e-05
+bf3aacfc086211ebbd5dac1f6bf848b6,noise_gate,0.2,Land and Freedom,Land And Freedom,1.0,1.0,1.0,1.0,775,6,0.0001598
+bf3aacfc086211ebbd5dac1f6bf848b6,noise_gate,0.25,Land and Freedom,Land And Freedom,1.0,1.0,1.0,1.0,535,6,0.0001118
+bf3aacfc086211ebbd5dac1f6bf848b6,noise_gate,0.3,Land and Freedom,Land And Freedom,1.0,1.0,1.0,1.0,506,6,0.000106
+bf3aacfc086211ebbd5dac1f6bf848b6,noise_gate,0.35,Land and Freedom,Land And Freedom,1.0,1.0,1.0,1.0,270,6,5.88e-05
+bf3aacfc086211ebbd5dac1f6bf848b6,noise_gate,0.5,Land and Freedom,Land And Freedom,1.0,1.0,1.0,1.0,270,6,5.88e-05
+08292515088411ebbd6dac1f6bf848b6,noise_gate,0.2,Sampathige Savaal,Sampathige Savaal,1.0,1.0,1.0,1.0,1098,10,0.00022760000000000003
+08292515088411ebbd6dac1f6bf848b6,noise_gate,0.25,Sampathige Savaal,Sampathige Savaal,1.0,1.0,1.0,1.0,821,10,0.0001722
+08292515088411ebbd6dac1f6bf848b6,noise_gate,0.3,Sampathige Savaal,Sampathige Savaal,1.0,1.0,1.0,1.0,487,10,0.00010540000000000001
+08292515088411ebbd6dac1f6bf848b6,noise_gate,0.35,Sampathige Savaal,Sampathige Savaal,1.0,1.0,1.0,1.0,487,10,0.00010540000000000001
+08292515088411ebbd6dac1f6bf848b6,noise_gate,0.5,Sampathige Savaal,Sampathige Savaal,1.0,1.0,1.0,1.0,367,10,8.140000000000001e-05
+dfe5c5e8088211ebbd6dac1f6bf848b6,noise_gate,0.2,Richard Cawley,Richard Cawley,1.0,1.0,1.0,1.0,851,7,0.00017580000000000002
+dfe5c5e8088211ebbd6dac1f6bf848b6,noise_gate,0.25,Richard Cawley,Richard Cawley,1.0,1.0,1.0,1.0,815,7,0.0001686
+dfe5c5e8088211ebbd6dac1f6bf848b6,noise_gate,0.3,Richard Cawley,Richard Cawley,1.0,1.0,1.0,1.0,756,7,0.00015680000000000002
+dfe5c5e8088211ebbd6dac1f6bf848b6,noise_gate,0.35,Richard Cawley,Richard Cawley,1.0,1.0,1.0,1.0,756,7,0.00015680000000000002
+dfe5c5e8088211ebbd6dac1f6bf848b6,noise_gate,0.5,Richard Cawley,Richard Cawley,1.0,1.0,1.0,1.0,636,7,0.0001328
+7b3f24c80bdd11eba7f7acde48001122,noise_gate,0.2,"New York, New York",New York,0.0,0.6666666666666666,0.5,1.0,646,8,0.00013560000000000002
+7b3f24c80bdd11eba7f7acde48001122,noise_gate,0.25,New York City,New York,0.0,0.8,0.6666666666666666,1.0,646,6,0.00013400000000000003
+7b3f24c80bdd11eba7f7acde48001122,noise_gate,0.3,"New York, New York",New York,0.0,0.6666666666666666,0.5,1.0,490,8,0.0001044
+7b3f24c80bdd11eba7f7acde48001122,noise_gate,0.35,New York City,New York,0.0,0.8,0.6666666666666666,1.0,404,6,8.560000000000001e-05
+7b3f24c80bdd11eba7f7acde48001122,noise_gate,0.5,"Sarasota, Florida",New York,0.0,0.0,0.0,0.0,168,14,4.4800000000000005e-05
+c6339a040bdd11eba7f7acde48001122,noise_gate,0.2,"Melbourne, Australia",Melbourne,0.0,0.6666666666666666,0.5,1.0,659,7,0.0001374
+c6339a040bdd11eba7f7acde48001122,noise_gate,0.25,Australia,Melbourne,0.0,0.0,0.0,0.0,659,4,0.000135
+c6339a040bdd11eba7f7acde48001122,noise_gate,0.3,Australia,Melbourne,0.0,0.0,0.0,0.0,543,4,0.00011180000000000001
+c6339a040bdd11eba7f7acde48001122,noise_gate,0.35,noanswer,Melbourne,0.0,0.0,0.0,0.0,524,5,0.00010880000000000002
+c6339a040bdd11eba7f7acde48001122,noise_gate,0.5,"Nairobi, Kenya",Melbourne,0.0,0.0,0.0,0.0,393,7,8.420000000000001e-05
+9bdc27880bda11eba7f7acde48001122,noise_gate,0.2,"Lodi, New Jersey","Lodi, New Jersey",1.0,1.0,1.0,1.0,573,8,0.00012100000000000001
+9bdc27880bda11eba7f7acde48001122,noise_gate,0.25,"Lodi, New Jersey","Lodi, New Jersey",1.0,1.0,1.0,1.0,411,8,8.860000000000001e-05
+9bdc27880bda11eba7f7acde48001122,noise_gate,0.3,"Lodi, New Jersey","Lodi, New Jersey",1.0,1.0,1.0,1.0,411,8,8.860000000000001e-05
+9bdc27880bda11eba7f7acde48001122,noise_gate,0.35,"Lodi, New Jersey","Lodi, New Jersey",1.0,1.0,1.0,1.0,411,8,8.860000000000001e-05
+9bdc27880bda11eba7f7acde48001122,noise_gate,0.5,"Lodi, New Jersey","Lodi, New Jersey",1.0,1.0,1.0,1.0,217,8,4.9800000000000004e-05
+95fc33400bd911eba7f7acde48001122,noise_gate,0.2,French,French,1.0,1.0,1.0,1.0,1430,4,0.00028920000000000004
+95fc33400bd911eba7f7acde48001122,noise_gate,0.25,French,French,1.0,1.0,1.0,1.0,1430,4,0.00028920000000000004
+95fc33400bd911eba7f7acde48001122,noise_gate,0.3,French,French,1.0,1.0,1.0,1.0,1168,4,0.0002368
+95fc33400bd911eba7f7acde48001122,noise_gate,0.35,"French
+",French,1.0,1.0,1.0,1.0,1028,5,0.0002096
+95fc33400bd911eba7f7acde48001122,noise_gate,0.5,"French
+",French,1.0,1.0,1.0,1.0,490,5,0.000102
+680863e20bdd11eba7f7acde48001122,noise_gate,0.2,"Gräfelfing, Bavaria",Gräfelfing,0.0,0.6666666666666666,0.5,1.0,408,16,9.44e-05
+680863e20bdd11eba7f7acde48001122,noise_gate,0.25,"Gräfelfing, Bavaria",Gräfelfing,0.0,0.6666666666666666,0.5,1.0,310,10,7.000000000000001e-05
+680863e20bdd11eba7f7acde48001122,noise_gate,0.3,Austria,Gräfelfing,0.0,0.0,0.0,0.0,188,11,4.64e-05
+680863e20bdd11eba7f7acde48001122,noise_gate,0.35,West Germany,Gräfelfing,0.0,0.0,0.0,0.0,169,11,4.2600000000000005e-05
+680863e20bdd11eba7f7acde48001122,noise_gate,0.5,West Germany,Gräfelfing,0.0,0.0,0.0,0.0,169,11,4.2600000000000005e-05
+1c5985f60bde11eba7f7acde48001122,noise_gate,0.2,4 October 1872,4 October 1872,1.0,1.0,1.0,1.0,1632,8,0.0003328
+1c5985f60bde11eba7f7acde48001122,noise_gate,0.25,4 October 1872,4 October 1872,1.0,1.0,1.0,1.0,1632,8,0.0003328
+1c5985f60bde11eba7f7acde48001122,noise_gate,0.3,4 October 1872,4 October 1872,1.0,1.0,1.0,1.0,1579,8,0.0003222
+1c5985f60bde11eba7f7acde48001122,noise_gate,0.35,4 October 1872,4 October 1872,1.0,1.0,1.0,1.0,1546,8,0.00031560000000000003
+1c5985f60bde11eba7f7acde48001122,noise_gate,0.5,4 October 1872,4 October 1872,1.0,1.0,1.0,1.0,1449,8,0.0002962
+6034a51a093811ebbdaeac1f6bf848b6,noise_gate,0.2,no,yes,0.0,0.0,0.0,0.0,669,4,0.000137
+6034a51a093811ebbdaeac1f6bf848b6,noise_gate,0.25,no,yes,0.0,0.0,0.0,0.0,613,4,0.0001258
+6034a51a093811ebbdaeac1f6bf848b6,noise_gate,0.3,no,yes,0.0,0.0,0.0,0.0,587,4,0.0001206
+6034a51a093811ebbdaeac1f6bf848b6,noise_gate,0.35,yes,yes,1.0,1.0,1.0,1.0,448,4,9.28e-05
+6034a51a093811ebbdaeac1f6bf848b6,noise_gate,0.5,yes,yes,1.0,1.0,1.0,1.0,391,4,8.14e-05
+01245b60088411ebbd6dac1f6bf848b6,noise_gate,0.2,"Occhio, malocchio, prezzemolo e finocchio","Occhio, Malocchio, Prezzemolo E Finocchio",1.0,1.0,1.0,1.0,1058,18,0.00022600000000000002
+01245b60088411ebbd6dac1f6bf848b6,noise_gate,0.25,"Occhio, malocchio, prezzemolo e finocchio","Occhio, Malocchio, Prezzemolo E Finocchio",1.0,1.0,1.0,1.0,957,18,0.00020580000000000002
+01245b60088411ebbd6dac1f6bf848b6,noise_gate,0.3,"Occhio, malocchio, prezzemolo e finocchio","Occhio, Malocchio, Prezzemolo E Finocchio",1.0,1.0,1.0,1.0,957,18,0.00020580000000000002
+01245b60088411ebbd6dac1f6bf848b6,noise_gate,0.35,"Occhio, malocchio, prezzemolo e finocchio","Occhio, Malocchio, Prezzemolo E Finocchio",1.0,1.0,1.0,1.0,763,18,0.000167
+01245b60088411ebbd6dac1f6bf848b6,noise_gate,0.5,"Occhio, malocchio, prezzemolo e finocchio","Occhio, Malocchio, Prezzemolo E Finocchio",1.0,1.0,1.0,1.0,763,24,0.0001718
+6392cf220bde11eba7f7acde48001122,noise_gate,0.2,Flora,Flora,1.0,1.0,1.0,1.0,554,5,0.00011480000000000001
+6392cf220bde11eba7f7acde48001122,noise_gate,0.25,Flora,Flora,1.0,1.0,1.0,1.0,468,5,9.760000000000001e-05
+6392cf220bde11eba7f7acde48001122,noise_gate,0.3,Flora,Flora,1.0,1.0,1.0,1.0,468,5,9.760000000000001e-05
+6392cf220bde11eba7f7acde48001122,noise_gate,0.35,Flora,Flora,1.0,1.0,1.0,1.0,468,5,9.760000000000001e-05
+6392cf220bde11eba7f7acde48001122,noise_gate,0.5,Flora,Flora,1.0,1.0,1.0,1.0,468,5,9.760000000000001e-05
+21906d320bde11eba7f7acde48001122,noise_gate,0.2,Kauvery Hospital in Chennai,kauvery hospital,0.0,0.6666666666666666,0.5,1.0,731,9,0.00015340000000000004
+21906d320bde11eba7f7acde48001122,noise_gate,0.25,Kauvery Hospital in Chennai,kauvery hospital,0.0,0.6666666666666666,0.5,1.0,512,9,0.00010960000000000001
+21906d320bde11eba7f7acde48001122,noise_gate,0.3,Kauvery Hospital in Chennai,kauvery hospital,0.0,0.6666666666666666,0.5,1.0,512,9,0.00010960000000000001
+21906d320bde11eba7f7acde48001122,noise_gate,0.35,Kauvery Hospital in Chennai,kauvery hospital,0.0,0.6666666666666666,0.5,1.0,424,9,9.200000000000001e-05
+21906d320bde11eba7f7acde48001122,noise_gate,0.5,Chennai,kauvery hospital,0.0,0.0,0.0,0.0,212,5,4.640000000000001e-05
+474ea44a0bb011ebab90acde48001122,noise_gate,0.2,"Gerald FitzGerald, 3rd Earl of Desmond","James FitzGerald, 6th Earl of Desmond",0.0,0.6666666666666666,0.6666666666666666,0.6666666666666666,1586,16,0.00033000000000000005
+474ea44a0bb011ebab90acde48001122,noise_gate,0.25,"Gerald FitzGerald, 3rd Earl of Desmond","James FitzGerald, 6th Earl of Desmond",0.0,0.6666666666666666,0.6666666666666666,0.6666666666666666,1586,16,0.00033000000000000005
+474ea44a0bb011ebab90acde48001122,noise_gate,0.3,"Gerald FitzGerald, 3rd Earl of Desmond","James FitzGerald, 6th Earl of Desmond",0.0,0.6666666666666666,0.6666666666666666,0.6666666666666666,1586,16,0.00033000000000000005
+474ea44a0bb011ebab90acde48001122,noise_gate,0.35,"Gerald FitzGerald, 6th Earl of Desmond","James FitzGerald, 6th Earl of Desmond",0.0,0.8333333333333334,0.8333333333333334,0.8333333333333334,1586,16,0.00033000000000000005
+474ea44a0bb011ebab90acde48001122,noise_gate,0.5,"Gerald FitzGerald, 3rd Earl of Desmond","James FitzGerald, 6th Earl of Desmond",0.0,0.6666666666666666,0.6666666666666666,0.6666666666666666,1586,16,0.00033000000000000005
+063270da08af11ebbd83ac1f6bf848b6,noise_gate,0.2,Attack of Life: The Bang Tango Movie,Attack Of Life: The Bang Tango Movie,1.0,1.0,1.0,1.0,1567,11,0.0003222
+063270da08af11ebbd83ac1f6bf848b6,noise_gate,0.25,Attack of Life: The Bang Tango Movie,Attack Of Life: The Bang Tango Movie,1.0,1.0,1.0,1.0,1567,11,0.0003222
+063270da08af11ebbd83ac1f6bf848b6,noise_gate,0.3,Attack of Life: The Bang Tango Movie,Attack Of Life: The Bang Tango Movie,1.0,1.0,1.0,1.0,1499,11,0.0003086
+063270da08af11ebbd83ac1f6bf848b6,noise_gate,0.35,King Kong (2005 film),Attack Of Life: The Bang Tango Movie,0.0,0.0,0.0,0.0,1325,10,0.00027299999999999997
+063270da08af11ebbd83ac1f6bf848b6,noise_gate,0.5,King Kong (2005 film),Attack Of Life: The Bang Tango Movie,0.0,0.0,0.0,0.0,852,10,0.0001784
+dcfe2a500bd911eba7f7acde48001122,noise_gate,0.2,Nuremberg,Nuremberg,1.0,1.0,1.0,1.0,1116,6,0.000228
+dcfe2a500bd911eba7f7acde48001122,noise_gate,0.25,"Nuremberg
+",Nuremberg,1.0,1.0,1.0,1.0,524,7,0.00011040000000000001
+dcfe2a500bd911eba7f7acde48001122,noise_gate,0.3,"Nuremberg
+",Nuremberg,1.0,1.0,1.0,1.0,524,7,0.00011040000000000001
+dcfe2a500bd911eba7f7acde48001122,noise_gate,0.35,"Nuremberg
+",Nuremberg,1.0,1.0,1.0,1.0,410,7,8.76e-05
+dcfe2a500bd911eba7f7acde48001122,noise_gate,0.5,"Nuremberg
+",Nuremberg,1.0,1.0,1.0,1.0,146,7,3.4800000000000006e-05
+16a549d40bb011ebab90acde48001122,noise_gate,0.2,"Charles, Duke of Vendôme",Francis,0.0,0.0,0.0,0.0,805,9,0.00016820000000000002
+16a549d40bb011ebab90acde48001122,noise_gate,0.25,"Charles, Duke of Vendôme",Francis,0.0,0.0,0.0,0.0,805,9,0.00016820000000000002
+16a549d40bb011ebab90acde48001122,noise_gate,0.3,"Charles, Duke of Vendôme",Francis,0.0,0.0,0.0,0.0,805,9,0.00016820000000000002
+16a549d40bb011ebab90acde48001122,noise_gate,0.35,"Charles, Duke of Vendôme",Francis,0.0,0.0,0.0,0.0,805,9,0.00016820000000000002
+16a549d40bb011ebab90acde48001122,noise_gate,0.5,"Charles, Duke of Vendôme",Francis,0.0,0.0,0.0,0.0,612,9,0.0001296
+8cdd86760baf11ebab90acde48001122,noise_gate,0.2,Toirdelbach Ua Briain,Tadc mac Briain,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,1263,10,0.0002606
+8cdd86760baf11ebab90acde48001122,noise_gate,0.25,Toirdelbach Ua Briain,Tadc mac Briain,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,1068,10,0.00022160000000000002
+8cdd86760baf11ebab90acde48001122,noise_gate,0.3,Toirdelbach Ua Briain,Tadc mac Briain,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,1029,10,0.00021380000000000002
+8cdd86760baf11ebab90acde48001122,noise_gate,0.35,Toirdelbach Ua Briain,Tadc mac Briain,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,1029,10,0.00021380000000000002
+8cdd86760baf11ebab90acde48001122,noise_gate,0.5,Toirdelbach Ua Briain,Tadc mac Briain,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,1029,10,0.00021380000000000002
+a00f22640bdb11eba7f7acde48001122,noise_gate,0.2,California Institute of the Arts,California Institute of the Arts,1.0,1.0,1.0,1.0,705,8,0.0001474
+a00f22640bdb11eba7f7acde48001122,noise_gate,0.25,California Institute of the Arts,California Institute of the Arts,1.0,1.0,1.0,1.0,587,8,0.0001238
+a00f22640bdb11eba7f7acde48001122,noise_gate,0.3,noanswer,California Institute of the Arts,0.0,0.0,0.0,0.0,332,5,7.04e-05
+a00f22640bdb11eba7f7acde48001122,noise_gate,0.35,NYU Film School,California Institute of the Arts,0.0,0.0,0.0,0.0,202,7,4.600000000000001e-05
+a00f22640bdb11eba7f7acde48001122,noise_gate,0.5,Bard College,California Institute of the Arts,0.0,0.0,0.0,0.0,202,6,4.520000000000001e-05
+4ca173ac0bdb11eba7f7acde48001122,noise_gate,0.2,"Concepción, Chile",Concepción,0.0,0.6666666666666666,0.5,1.0,532,7,0.00011200000000000001
+4ca173ac0bdb11eba7f7acde48001122,noise_gate,0.25,"Concepción, Chile",Concepción,0.0,0.6666666666666666,0.5,1.0,369,7,7.939999999999999e-05
+4ca173ac0bdb11eba7f7acde48001122,noise_gate,0.3,noanswer,Concepción,0.0,0.0,0.0,0.0,211,5,4.6200000000000005e-05
+4ca173ac0bdb11eba7f7acde48001122,noise_gate,0.35,Buenos Aires,Concepción,0.0,0.0,0.0,0.0,137,5,3.1400000000000004e-05
+4ca173ac0bdb11eba7f7acde48001122,noise_gate,0.5,Chile,Concepción,0.0,0.0,0.0,0.0,137,4,3.0600000000000005e-05
+3bb9590e0bb011ebab90acde48001122,noise_gate,0.2,Toghon Temür,Khutughtu Khan,0.0,0.0,0.0,0.0,1380,8,0.0002824
+3bb9590e0bb011ebab90acde48001122,noise_gate,0.25,Toghon Temür,Khutughtu Khan,0.0,0.0,0.0,0.0,1341,8,0.0002746
+3bb9590e0bb011ebab90acde48001122,noise_gate,0.3,Toghon Temür,Khutughtu Khan,0.0,0.0,0.0,0.0,1293,8,0.000265
+3bb9590e0bb011ebab90acde48001122,noise_gate,0.35,Kusala,Khutughtu Khan,0.0,0.0,0.0,0.0,1254,6,0.00025560000000000003
+3bb9590e0bb011ebab90acde48001122,noise_gate,0.5,Toghon Temür,Khutughtu Khan,0.0,0.0,0.0,0.0,670,8,0.0001404
+a638412a0bdb11eba7f7acde48001122,noise_gate,0.2,"Film and Television Institute of India, Pune",Film and Television Institute of India,0.0,0.923076923076923,0.8571428571428571,1.0,695,11,0.0001478
+a638412a0bdb11eba7f7acde48001122,noise_gate,0.25,"Film and Television Institute of India, Pune",Film and Television Institute of India,0.0,0.923076923076923,0.8571428571428571,1.0,584,11,0.00012560000000000002
+a638412a0bdb11eba7f7acde48001122,noise_gate,0.3,"Film and Television Institute of India, Pune",Film and Television Institute of India,0.0,0.923076923076923,0.8571428571428571,1.0,466,17,0.00010680000000000001
+a638412a0bdb11eba7f7acde48001122,noise_gate,0.35,noanswer,Film and Television Institute of India,0.0,0.0,0.0,0.0,287,5,6.14e-05
+a638412a0bdb11eba7f7acde48001122,noise_gate,0.5,Delhi University,Film and Television Institute of India,0.0,0.0,0.0,0.0,249,11,5.86e-05
+f4a616ac0bae11ebab90acde48001122,noise_gate,0.2,"Adelaide, Countess of Soissons","Adelaide, Countess of Soissons",1.0,1.0,1.0,1.0,1578,11,0.0003244
+f4a616ac0bae11ebab90acde48001122,noise_gate,0.25,"Adelaide, Countess of Soissons","Adelaide, Countess of Soissons",1.0,1.0,1.0,1.0,1578,11,0.0003244
+f4a616ac0bae11ebab90acde48001122,noise_gate,0.3,"Adelaide, Countess of Soissons","Adelaide, Countess of Soissons",1.0,1.0,1.0,1.0,1578,11,0.0003244
+f4a616ac0bae11ebab90acde48001122,noise_gate,0.35,"Adelaide, Countess of Soissons","Adelaide, Countess of Soissons",1.0,1.0,1.0,1.0,1578,11,0.0003244
+f4a616ac0bae11ebab90acde48001122,noise_gate,0.5,"Adelaide, Countess of Soissons","Adelaide, Countess of Soissons",1.0,1.0,1.0,1.0,1479,11,0.00030460000000000003
+1222be100baf11ebab90acde48001122,noise_gate,0.2,Emine Hatun,Emine Hatun,1.0,1.0,1.0,1.0,763,7,0.0001582
+1222be100baf11ebab90acde48001122,noise_gate,0.25,Emine Hatun,Emine Hatun,1.0,1.0,1.0,1.0,599,7,0.0001254
+1222be100baf11ebab90acde48001122,noise_gate,0.3,Emine Hatun,Emine Hatun,1.0,1.0,1.0,1.0,360,7,7.76e-05
+1222be100baf11ebab90acde48001122,noise_gate,0.35,Emine Hatun,Emine Hatun,1.0,1.0,1.0,1.0,257,7,5.7e-05
+1222be100baf11ebab90acde48001122,noise_gate,0.5,Murad I's daughter-in-law,Emine Hatun,0.0,0.0,0.0,0.0,138,10,3.56e-05
+080aff1c0bde11eba7f7acde48001122,noise_gate,0.2,noanswer,Westminster,0.0,0.0,0.0,0.0,1788,5,0.0003616
+080aff1c0bde11eba7f7acde48001122,noise_gate,0.25,Normandy,Westminster,0.0,0.0,0.0,0.0,1764,5,0.0003568
+080aff1c0bde11eba7f7acde48001122,noise_gate,0.3,England,Westminster,0.0,0.0,0.0,0.0,1764,4,0.00035600000000000003
+080aff1c0bde11eba7f7acde48001122,noise_gate,0.35,normandy,Westminster,0.0,0.0,0.0,0.0,1764,5,0.0003568
+080aff1c0bde11eba7f7acde48001122,noise_gate,0.5,noanswer,Westminster,0.0,0.0,0.0,0.0,723,5,0.00014859999999999998
+1c0f99380bdd11eba7f7acde48001122,noise_gate,0.2,Australia,"Buffalo, New York",0.0,0.0,0.0,0.0,890,4,0.00018119999999999999
+1c0f99380bdd11eba7f7acde48001122,noise_gate,0.25,noanswer,"Buffalo, New York",0.0,0.0,0.0,0.0,772,11,0.0001632
+1c0f99380bdd11eba7f7acde48001122,noise_gate,0.3,noanswer,"Buffalo, New York",0.0,0.0,0.0,0.0,772,11,0.0001632
+1c0f99380bdd11eba7f7acde48001122,noise_gate,0.35,noanswer,"Buffalo, New York",0.0,0.0,0.0,0.0,709,5,0.0001458
+1c0f99380bdd11eba7f7acde48001122,noise_gate,0.5,noanswer,"Buffalo, New York",0.0,0.0,0.0,0.0,629,11,0.00013460000000000002
+04f1ab4808c611ebbd90ac1f6bf848b6,noise_gate,0.2,Ek Haseena Thi Ek Deewana Tha,Ek Haseena Thi Ek Deewana Tha,1.0,1.0,1.0,1.0,642,13,0.0001388
+04f1ab4808c611ebbd90ac1f6bf848b6,noise_gate,0.25,Ek Haseena Thi Ek Deewana Tha,Ek Haseena Thi Ek Deewana Tha,1.0,1.0,1.0,1.0,617,13,0.00013380000000000003
+04f1ab4808c611ebbd90ac1f6bf848b6,noise_gate,0.3,Ek Haseena Thi Ek Deewana Tha,Ek Haseena Thi Ek Deewana Tha,1.0,1.0,1.0,1.0,592,13,0.00012880000000000001
+04f1ab4808c611ebbd90ac1f6bf848b6,noise_gate,0.35,Ek Haseena Thi Ek Deewana Tha,Ek Haseena Thi Ek Deewana Tha,1.0,1.0,1.0,1.0,592,13,0.00012880000000000001
+04f1ab4808c611ebbd90ac1f6bf848b6,noise_gate,0.5,Ek Haseena Thi Ek Deewana Tha,Ek Haseena Thi Ek Deewana Tha,1.0,1.0,1.0,1.0,175,19,5.02e-05
+38056cd40bde11eba7f7acde48001122,noise_gate,0.2,21 March 1858,21 March 1858,1.0,1.0,1.0,1.0,879,8,0.0001822
+38056cd40bde11eba7f7acde48001122,noise_gate,0.25,21 March 1858,21 March 1858,1.0,1.0,1.0,1.0,826,8,0.0001716
+38056cd40bde11eba7f7acde48001122,noise_gate,0.3,1858,21 March 1858,0.0,0.5,1.0,0.3333333333333333,826,5,0.0001692
+38056cd40bde11eba7f7acde48001122,noise_gate,0.35,1858,21 March 1858,0.0,0.5,1.0,0.3333333333333333,791,5,0.0001622
+38056cd40bde11eba7f7acde48001122,noise_gate,0.5,1858,21 March 1858,0.0,0.5,1.0,0.3333333333333333,574,5,0.00011880000000000001
+4925ce16086c11ebbd61ac1f6bf848b6,noise_gate,0.2,no,yes,0.0,0.0,0.0,0.0,835,4,0.0001702
+4925ce16086c11ebbd61ac1f6bf848b6,noise_gate,0.25,no,yes,0.0,0.0,0.0,0.0,805,4,0.0001642
+4925ce16086c11ebbd61ac1f6bf848b6,noise_gate,0.3,no,yes,0.0,0.0,0.0,0.0,774,4,0.00015800000000000002
+4925ce16086c11ebbd61ac1f6bf848b6,noise_gate,0.35,no,yes,0.0,0.0,0.0,0.0,774,4,0.00015800000000000002
+4925ce16086c11ebbd61ac1f6bf848b6,noise_gate,0.5,no,yes,0.0,0.0,0.0,0.0,650,4,0.00013319999999999999
+3e5580c00bb011ebab90acde48001122,noise_gate,0.2,Thomas-Jacques Taschereau,Thomas-Jacques Taschereau,1.0,1.0,1.0,1.0,1009,11,0.0002106
+3e5580c00bb011ebab90acde48001122,noise_gate,0.25,Thomas-Jacques Taschereau,Thomas-Jacques Taschereau,1.0,1.0,1.0,1.0,950,11,0.0001988
+3e5580c00bb011ebab90acde48001122,noise_gate,0.3,Thomas-Jacques Taschereau,Thomas-Jacques Taschereau,1.0,1.0,1.0,1.0,872,11,0.0001832
+3e5580c00bb011ebab90acde48001122,noise_gate,0.35,Thomas-Jacques Taschereau,Thomas-Jacques Taschereau,1.0,1.0,1.0,1.0,822,11,0.0001732
+3e5580c00bb011ebab90acde48001122,noise_gate,0.5,Gabriel-Elzéar Taschereau,Thomas-Jacques Taschereau,0.0,0.5,0.5,0.5,733,12,0.00015619999999999997
+f66aecd208bc11ebbd89ac1f6bf848b6,noise_gate,0.2,no,yes,0.0,0.0,0.0,0.0,885,4,0.0001802
+f66aecd208bc11ebbd89ac1f6bf848b6,noise_gate,0.25,no,yes,0.0,0.0,0.0,0.0,807,4,0.0001646
+f66aecd208bc11ebbd89ac1f6bf848b6,noise_gate,0.3,no,yes,0.0,0.0,0.0,0.0,701,4,0.00014340000000000002
+f66aecd208bc11ebbd89ac1f6bf848b6,noise_gate,0.35,no,yes,0.0,0.0,0.0,0.0,247,10,5.7400000000000006e-05
+f66aecd208bc11ebbd89ac1f6bf848b6,noise_gate,0.5,yes,yes,1.0,1.0,1.0,1.0,153,10,3.8599999999999996e-05
+6a667eb40bdb11eba7f7acde48001122,noise_gate,0.2,Eva Funck,Eva Funck,1.0,1.0,1.0,1.0,522,6,0.0001092
+6a667eb40bdb11eba7f7acde48001122,noise_gate,0.25,Eva Funck,Eva Funck,1.0,1.0,1.0,1.0,443,12,9.820000000000002e-05
+6a667eb40bdb11eba7f7acde48001122,noise_gate,0.3,Eva Funck,Eva Funck,1.0,1.0,1.0,1.0,333,6,7.14e-05
+6a667eb40bdb11eba7f7acde48001122,noise_gate,0.35,Eva Funck,Eva Funck,1.0,1.0,1.0,1.0,333,6,7.14e-05
+6a667eb40bdb11eba7f7acde48001122,noise_gate,0.5,Mats Wesslén,Eva Funck,0.0,0.0,0.0,0.0,237,15,5.940000000000001e-05
+c8edf21008d811ebbd9cac1f6bf848b6,noise_gate,0.2,no,yes,0.0,0.0,0.0,0.0,823,4,0.0001678
+c8edf21008d811ebbd9cac1f6bf848b6,noise_gate,0.25,no,yes,0.0,0.0,0.0,0.0,532,4,0.00010960000000000001
+c8edf21008d811ebbd9cac1f6bf848b6,noise_gate,0.3,no,yes,0.0,0.0,0.0,0.0,353,4,7.38e-05
+c8edf21008d811ebbd9cac1f6bf848b6,noise_gate,0.35,no,yes,0.0,0.0,0.0,0.0,273,4,5.78e-05
+c8edf21008d811ebbd9cac1f6bf848b6,noise_gate,0.5,no,yes,0.0,0.0,0.0,0.0,164,10,4.08e-05
+bbc587ba0bda11eba7f7acde48001122,noise_gate,0.2,Kelheim,Kelheim,1.0,1.0,1.0,1.0,1361,5,0.0002762
+bbc587ba0bda11eba7f7acde48001122,noise_gate,0.25,Kelheim,Kelheim,1.0,1.0,1.0,1.0,1361,5,0.0002762
+bbc587ba0bda11eba7f7acde48001122,noise_gate,0.3,Kelheim,Kelheim,1.0,1.0,1.0,1.0,1361,5,0.0002762
+bbc587ba0bda11eba7f7acde48001122,noise_gate,0.35,Kelheim,Kelheim,1.0,1.0,1.0,1.0,1361,5,0.0002762
+bbc587ba0bda11eba7f7acde48001122,noise_gate,0.5,Bavaria,Kelheim,0.0,0.0,0.0,0.0,1153,6,0.00023540000000000003
+6b0a2728087811ebbd67ac1f6bf848b6,noise_gate,0.2,Lalengzama Vangchhia,Lalengzama Vangchhia,1.0,1.0,1.0,1.0,526,12,0.00011480000000000001
+6b0a2728087811ebbd67ac1f6bf848b6,noise_gate,0.25,Lalengzama Vangchhia,Lalengzama Vangchhia,1.0,1.0,1.0,1.0,297,12,6.900000000000001e-05
+6b0a2728087811ebbd67ac1f6bf848b6,noise_gate,0.3,Lalengzama Vangchhia,Lalengzama Vangchhia,1.0,1.0,1.0,1.0,254,12,6.0400000000000004e-05
+6b0a2728087811ebbd67ac1f6bf848b6,noise_gate,0.35,Lalengzama Vangchhia,Lalengzama Vangchhia,1.0,1.0,1.0,1.0,208,12,5.1200000000000004e-05
+6b0a2728087811ebbd67ac1f6bf848b6,noise_gate,0.5,Lalengzama Vangchhia,Lalengzama Vangchhia,1.0,1.0,1.0,1.0,208,12,5.1200000000000004e-05
+f7c2a5380bdd11eba7f7acde48001122,noise_gate,0.2,Westminster Abbey,London,0.0,0.0,0.0,0.0,726,6,0.00015000000000000001
+f7c2a5380bdd11eba7f7acde48001122,noise_gate,0.25,Westminster Abbey,London,0.0,0.0,0.0,0.0,709,12,0.0001514
+f7c2a5380bdd11eba7f7acde48001122,noise_gate,0.3,Westminster Abbey,London,0.0,0.0,0.0,0.0,709,6,0.0001466
+f7c2a5380bdd11eba7f7acde48001122,noise_gate,0.35,Westminster Abbey,London,0.0,0.0,0.0,0.0,709,6,0.0001466
+f7c2a5380bdd11eba7f7acde48001122,noise_gate,0.5,"Dublin
+",London,0.0,0.0,0.0,0.0,440,6,9.279999999999999e-05
+c664947c086f11ebbd62ac1f6bf848b6,noise_gate,0.2,A Sound of Trumpets,A Sound Of Trumpets,1.0,1.0,1.0,1.0,329,8,7.22e-05
+c664947c086f11ebbd62ac1f6bf848b6,noise_gate,0.25,A Sound of Trumpets,A Sound Of Trumpets,1.0,1.0,1.0,1.0,193,14,4.9800000000000004e-05
+c664947c086f11ebbd62ac1f6bf848b6,noise_gate,0.3,A Sound of Trumpets,A Sound Of Trumpets,1.0,1.0,1.0,1.0,193,14,4.9800000000000004e-05
+c664947c086f11ebbd62ac1f6bf848b6,noise_gate,0.35,A Sound of Trumpets,A Sound Of Trumpets,1.0,1.0,1.0,1.0,193,14,4.9800000000000004e-05
+c664947c086f11ebbd62ac1f6bf848b6,noise_gate,0.5,A Social Celebrity,A Sound Of Trumpets,0.0,0.0,0.0,0.0,123,12,3.4200000000000005e-05
+20d63fe60bdb11eba7f7acde48001122,noise_gate,0.2,1890,7 December 1894,0.0,0.0,0.0,0.0,1345,5,0.00027299999999999997
+20d63fe60bdb11eba7f7acde48001122,noise_gate,0.25,7 December 1894,7 December 1894,1.0,1.0,1.0,1.0,1292,8,0.00026480000000000004
+20d63fe60bdb11eba7f7acde48001122,noise_gate,0.3,7 December 1894,7 December 1894,1.0,1.0,1.0,1.0,1253,8,0.000257
+20d63fe60bdb11eba7f7acde48001122,noise_gate,0.35,7 December 1894,7 December 1894,1.0,1.0,1.0,1.0,1191,8,0.00024460000000000004
+20d63fe60bdb11eba7f7acde48001122,noise_gate,0.5,7 December 1894,7 December 1894,1.0,1.0,1.0,1.0,816,8,0.0001696
+b897a2aa08cb11ebbd92ac1f6bf848b6,noise_gate,0.2,João da Mata,João Da Mata,1.0,1.0,1.0,1.0,550,7,0.0001156
+b897a2aa08cb11ebbd92ac1f6bf848b6,noise_gate,0.25,João da Mata,João Da Mata,1.0,1.0,1.0,1.0,483,7,0.0001022
+b897a2aa08cb11ebbd92ac1f6bf848b6,noise_gate,0.3,João da Mata,João Da Mata,1.0,1.0,1.0,1.0,351,7,7.58e-05
+b897a2aa08cb11ebbd92ac1f6bf848b6,noise_gate,0.35,João da Mata,João Da Mata,1.0,1.0,1.0,1.0,264,7,5.84e-05
+b897a2aa08cb11ebbd92ac1f6bf848b6,noise_gate,0.5,João da Mata,João Da Mata,1.0,1.0,1.0,1.0,209,7,4.740000000000001e-05
+060cb332087711ebbd67ac1f6bf848b6,noise_gate,0.2,Goran Veselinovski,Goran Veselinovski,1.0,1.0,1.0,1.0,493,8,0.00010500000000000002
+060cb332087711ebbd67ac1f6bf848b6,noise_gate,0.25,Empress Xiaoshurui,Goran Veselinovski,0.0,0.0,0.0,0.0,343,9,7.580000000000001e-05
+060cb332087711ebbd67ac1f6bf848b6,noise_gate,0.3,Goran Veselinovski,Goran Veselinovski,1.0,1.0,1.0,1.0,239,8,5.42e-05
+060cb332087711ebbd67ac1f6bf848b6,noise_gate,0.35,Empress Xiaoshurui,Goran Veselinovski,0.0,0.0,0.0,0.0,239,9,5.5e-05
+060cb332087711ebbd67ac1f6bf848b6,noise_gate,0.5,Goran Veselinovski,Goran Veselinovski,1.0,1.0,1.0,1.0,190,8,4.44e-05
+c2c7992e08bd11ebbd8aac1f6bf848b6,noise_gate,0.2,The Bilingual Lover,Budak Nafsu,0.0,0.0,0.0,0.0,932,7,0.000192
+c2c7992e08bd11ebbd8aac1f6bf848b6,noise_gate,0.25,The Bilingual Lover,Budak Nafsu,0.0,0.0,0.0,0.0,896,7,0.00018480000000000002
+c2c7992e08bd11ebbd8aac1f6bf848b6,noise_gate,0.3,The Bilingual Lover,Budak Nafsu,0.0,0.0,0.0,0.0,839,7,0.0001734
+c2c7992e08bd11ebbd8aac1f6bf848b6,noise_gate,0.35,The Bilingual Lover,Budak Nafsu,0.0,0.0,0.0,0.0,327,13,7.58e-05
+c2c7992e08bd11ebbd8aac1f6bf848b6,noise_gate,0.5,The Bilingual Lover,Budak Nafsu,0.0,0.0,0.0,0.0,327,7,7.1e-05
+77bf469e0bdc11eba7f7acde48001122,noise_gate,0.2,Canada,Toronto,0.0,0.0,0.0,0.0,667,4,0.0001366
+77bf469e0bdc11eba7f7acde48001122,noise_gate,0.25,Canada,Toronto,0.0,0.0,0.0,0.0,667,4,0.0001366
+77bf469e0bdc11eba7f7acde48001122,noise_gate,0.3,Canada,Toronto,0.0,0.0,0.0,0.0,667,4,0.0001366
+77bf469e0bdc11eba7f7acde48001122,noise_gate,0.35,Canada,Toronto,0.0,0.0,0.0,0.0,667,4,0.0001366
+77bf469e0bdc11eba7f7acde48001122,noise_gate,0.5,Canada,Toronto,0.0,0.0,0.0,0.0,320,4,6.72e-05
+77f5a3dc0bb011ebab90acde48001122,noise_gate,0.2,"Rainier III, Prince of Monaco","Rainier III, Prince of Monaco",1.0,1.0,1.0,1.0,969,10,0.00020180000000000003
+77f5a3dc0bb011ebab90acde48001122,noise_gate,0.25,"Rainier III, Prince of Monaco","Rainier III, Prince of Monaco",1.0,1.0,1.0,1.0,969,10,0.00020180000000000003
+77f5a3dc0bb011ebab90acde48001122,noise_gate,0.3,"Rainier III, Prince of Monaco","Rainier III, Prince of Monaco",1.0,1.0,1.0,1.0,850,10,0.00017800000000000002
+77f5a3dc0bb011ebab90acde48001122,noise_gate,0.35,"Rainier III, Prince of Monaco","Rainier III, Prince of Monaco",1.0,1.0,1.0,1.0,850,10,0.00017800000000000002
+77f5a3dc0bb011ebab90acde48001122,noise_gate,0.5,"Rainier III, Prince of Monaco","Rainier III, Prince of Monaco",1.0,1.0,1.0,1.0,639,10,0.00013580000000000002
+3c9ec66a089011ebbd72ac1f6bf848b6,noise_gate,0.2,yes,yes,1.0,1.0,1.0,1.0,947,4,0.0001926
+3c9ec66a089011ebbd72ac1f6bf848b6,noise_gate,0.25,yes,yes,1.0,1.0,1.0,1.0,688,4,0.00014079999999999998
+3c9ec66a089011ebbd72ac1f6bf848b6,noise_gate,0.3,yes,yes,1.0,1.0,1.0,1.0,570,4,0.0001172
+3c9ec66a089011ebbd72ac1f6bf848b6,noise_gate,0.35,yes,yes,1.0,1.0,1.0,1.0,570,4,0.0001172
+3c9ec66a089011ebbd72ac1f6bf848b6,noise_gate,0.5,noanswer,yes,0.0,0.0,0.0,0.0,460,5,9.6e-05
+20806979089c11ebbd78ac1f6bf848b6,noise_gate,0.2,"Aloha, Bobby and Rose","Aloha, Bobby And Rose",1.0,1.0,1.0,1.0,942,9,0.0001956
+20806979089c11ebbd78ac1f6bf848b6,noise_gate,0.25,"Aloha, Bobby and Rose","Aloha, Bobby And Rose",1.0,1.0,1.0,1.0,668,9,0.0001408
+20806979089c11ebbd78ac1f6bf848b6,noise_gate,0.3,"Aloha, Bobby and Rose","Aloha, Bobby And Rose",1.0,1.0,1.0,1.0,668,9,0.0001408
+20806979089c11ebbd78ac1f6bf848b6,noise_gate,0.35,"Aloha, Bobby and Rose","Aloha, Bobby And Rose",1.0,1.0,1.0,1.0,493,9,0.00010580000000000001
+20806979089c11ebbd78ac1f6bf848b6,noise_gate,0.5,"Aloha, Bobby and Rose","Aloha, Bobby And Rose",1.0,1.0,1.0,1.0,409,9,8.900000000000001e-05
+8afe75c40bda11eba7f7acde48001122,noise_gate,0.2,Filipino,Filipino,1.0,1.0,1.0,1.0,660,6,0.00013680000000000002
+8afe75c40bda11eba7f7acde48001122,noise_gate,0.25,Filipino,Filipino,1.0,1.0,1.0,1.0,492,6,0.0001032
+8afe75c40bda11eba7f7acde48001122,noise_gate,0.3,Filipino,Filipino,1.0,1.0,1.0,1.0,378,6,8.04e-05
+8afe75c40bda11eba7f7acde48001122,noise_gate,0.35,Filipino,Filipino,1.0,1.0,1.0,1.0,378,6,8.04e-05
+8afe75c40bda11eba7f7acde48001122,noise_gate,0.5,Filipino,Filipino,1.0,1.0,1.0,1.0,144,6,3.3600000000000004e-05
+85cc412008b611ebbd88ac1f6bf848b6,noise_gate,0.2,no,yes,0.0,0.0,0.0,0.0,658,4,0.0001348
+85cc412008b611ebbd88ac1f6bf848b6,noise_gate,0.25,no,yes,0.0,0.0,0.0,0.0,551,10,0.00011820000000000001
+85cc412008b611ebbd88ac1f6bf848b6,noise_gate,0.3,no,yes,0.0,0.0,0.0,0.0,251,4,5.3400000000000004e-05
+85cc412008b611ebbd88ac1f6bf848b6,noise_gate,0.35,no,yes,0.0,0.0,0.0,0.0,213,4,4.58e-05
+85cc412008b611ebbd88ac1f6bf848b6,noise_gate,0.5,yes,yes,1.0,1.0,1.0,1.0,168,10,4.16e-05
+1eb0c10808d611ebbd98ac1f6bf848b6,noise_gate,0.2,The Man from Lost River,The Man From Lost River,1.0,1.0,1.0,1.0,895,8,0.00018539999999999998
+1eb0c10808d611ebbd98ac1f6bf848b6,noise_gate,0.25,The Man from Lost River,The Man From Lost River,1.0,1.0,1.0,1.0,783,14,0.0001678
+1eb0c10808d611ebbd98ac1f6bf848b6,noise_gate,0.3,The Man from Lost River,The Man From Lost River,1.0,1.0,1.0,1.0,648,8,0.000136
+1eb0c10808d611ebbd98ac1f6bf848b6,noise_gate,0.35,McVeagh of the South Seas,The Man From Lost River,0.0,0.0,0.0,0.0,451,10,9.82e-05
+1eb0c10808d611ebbd98ac1f6bf848b6,noise_gate,0.5,The Man From Lost River,The Man From Lost River,1.0,1.0,1.0,1.0,157,14,4.2600000000000005e-05
+6db45b3208bf11ebbd8aac1f6bf848b6,noise_gate,0.2,Return of the Hero,Return Of The Hero,1.0,1.0,1.0,1.0,544,7,0.00011440000000000002
+6db45b3208bf11ebbd8aac1f6bf848b6,noise_gate,0.25,Return of the Hero,Return Of The Hero,1.0,1.0,1.0,1.0,354,7,7.64e-05
+6db45b3208bf11ebbd8aac1f6bf848b6,noise_gate,0.3,Return of the Hero,Return Of The Hero,1.0,1.0,1.0,1.0,279,13,6.62e-05
+6db45b3208bf11ebbd8aac1f6bf848b6,noise_gate,0.35,Return of the Hero,Return Of The Hero,1.0,1.0,1.0,1.0,264,13,6.32e-05
+6db45b3208bf11ebbd8aac1f6bf848b6,noise_gate,0.5,Return of the Hero,Return Of The Hero,1.0,1.0,1.0,1.0,237,13,5.780000000000001e-05
+1a76997408a311ebbd7bac1f6bf848b6,noise_gate,0.2,Vagabonderne på Bakkegården,Vagabonderne På Bakkegården,1.0,1.0,1.0,1.0,769,14,0.000165
+1a76997408a311ebbd7bac1f6bf848b6,noise_gate,0.25,Vagabonderne på Bakkegården,Vagabonderne På Bakkegården,1.0,1.0,1.0,1.0,435,14,9.82e-05
+1a76997408a311ebbd7bac1f6bf848b6,noise_gate,0.3,Vagabonderne på Bakkegården,Vagabonderne På Bakkegården,1.0,1.0,1.0,1.0,348,14,8.080000000000001e-05
+1a76997408a311ebbd7bac1f6bf848b6,noise_gate,0.35,Vagabonderne på Bakkegården,Vagabonderne På Bakkegården,1.0,1.0,1.0,1.0,348,14,8.080000000000001e-05
+1a76997408a311ebbd7bac1f6bf848b6,noise_gate,0.5,Vagabonderne på Bakkegården,Vagabonderne På Bakkegården,1.0,1.0,1.0,1.0,203,20,5.660000000000001e-05
+c7ea6b080baf11ebab90acde48001122,noise_gate,0.2,Theodora,Eutropia,0.0,0.0,0.0,0.0,1148,6,0.00023440000000000003
+c7ea6b080baf11ebab90acde48001122,noise_gate,0.25,Theodora,Eutropia,0.0,0.0,0.0,0.0,992,6,0.0002032
+c7ea6b080baf11ebab90acde48001122,noise_gate,0.3,Flavia Maximiana Theodora,Eutropia,0.0,0.0,0.0,0.0,867,10,0.00018140000000000002
+c7ea6b080baf11ebab90acde48001122,noise_gate,0.35,Flavia Maximiana Theodora,Eutropia,0.0,0.0,0.0,0.0,807,10,0.0001694
+c7ea6b080baf11ebab90acde48001122,noise_gate,0.5,Theodora,Eutropia,0.0,0.0,0.0,0.0,691,6,0.00014300000000000003
+391fed160bb011ebab90acde48001122,noise_gate,0.2,Countess Amalie Henriette of Solms-Baruth,Countess Amalie Henriette of Solms-Baruth,1.0,1.0,1.0,1.0,1191,14,0.0002494
+391fed160bb011ebab90acde48001122,noise_gate,0.25,Countess Amalie Henriette of Solms-Baruth,Countess Amalie Henriette of Solms-Baruth,1.0,1.0,1.0,1.0,1191,14,0.0002494
+391fed160bb011ebab90acde48001122,noise_gate,0.3,Countess Amalie Henriette of Solms-Baruth,Countess Amalie Henriette of Solms-Baruth,1.0,1.0,1.0,1.0,1191,14,0.0002494
+391fed160bb011ebab90acde48001122,noise_gate,0.35,Countess Amalie Henriette of Solms-Baruth,Countess Amalie Henriette of Solms-Baruth,1.0,1.0,1.0,1.0,1191,14,0.0002494
+391fed160bb011ebab90acde48001122,noise_gate,0.5,Princess Feodora of Leiningen,Countess Amalie Henriette of Solms-Baruth,0.0,0.22222222222222224,0.25,0.2,654,10,0.0001388

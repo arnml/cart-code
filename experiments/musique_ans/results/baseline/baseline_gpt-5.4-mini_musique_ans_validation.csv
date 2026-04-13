@@ -3,39 +3,403 @@ question_id,method,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,out
 2hop__67660_81007,retrieval_k3,The Mother,Tracy McConnell,1.0,1.0,1.0,1.0,363,5,7.66e-05
 2hop__67660_81007,retrieval_k5,The Mother,Tracy McConnell,1.0,1.0,1.0,1.0,585,5,0.000121
 2hop__67660_81007,retrieval_k10,The Mother,Tracy McConnell,1.0,1.0,1.0,1.0,1042,5,0.00021239999999999999
-2hop__92051_827343,always_think,Nora Ephron,Lana Wood,0.0,0.0,0.0,0.0,91,13,2.8599999999999997e-05
-2hop__92051_827343,retrieval_k3,Mara Wilson,Lana Wood,0.0,0.0,0.0,0.0,392,6,8.32e-05
-2hop__92051_827343,retrieval_k5,noanswer,Lana Wood,0.0,0.0,0.0,0.0,627,5,0.0001294
+2hop__92051_827343,always_think,Maureen O'Hara,Lana Wood,0.0,0.0,0.0,0.0,91,14,2.94e-05
+2hop__92051_827343,retrieval_k3,noanswer,Lana Wood,0.0,0.0,0.0,0.0,392,11,8.72e-05
+2hop__92051_827343,retrieval_k5,Mara Wilson,Lana Wood,0.0,0.0,0.0,0.0,627,12,0.000135
 2hop__92051_827343,retrieval_k10,Mara Wilson,Lana Wood,0.0,0.0,0.0,0.0,1398,6,0.00028440000000000003
-2hop__144150_82341,always_think,Miami-Dade County,in Northern Florida,0.0,0.0,0.0,0.0,85,13,2.7400000000000002e-05
-2hop__144150_82341,retrieval_k3,Central Florida,in Northern Florida,0.0,0.5,0.5,0.5,290,5,6.2e-05
+2hop__144150_82341,always_think,Florida Panhandle,in Northern Florida,0.0,0.5,0.5,0.5,85,12,2.6600000000000003e-05
+2hop__144150_82341,retrieval_k3,Ocala,in Northern Florida,0.0,0.0,0.0,0.0,290,5,6.2e-05
 2hop__144150_82341,retrieval_k5,Central Florida,in Northern Florida,0.0,0.5,0.5,0.5,524,5,0.00010880000000000002
 2hop__144150_82341,retrieval_k10,Central Florida,in Northern Florida,0.0,0.5,0.5,0.5,966,5,0.0001972
 2hop__83938_5666,always_think,Boris Yeltsin,Yeltsin,0.0,0.6666666666666666,0.5,1.0,89,14,2.9000000000000004e-05
 2hop__83938_5666,retrieval_k3,Boris Yeltsin,Yeltsin,0.0,0.6666666666666666,0.5,1.0,445,8,9.54e-05
-2hop__83938_5666,retrieval_k5,Yeltsin,Yeltsin,1.0,1.0,1.0,1.0,784,6,0.00016160000000000002
-2hop__83938_5666,retrieval_k10,Boris Yeltsin,Yeltsin,0.0,0.6666666666666666,0.5,1.0,1312,8,0.00026880000000000003
-2hop__167577_31122,always_think,18th century,18th,1.0,1.0,1.0,1.0,91,12,2.7799999999999998e-05
-2hop__167577_31122,retrieval_k3,17th century,18th,0.0,0.5,0.5,0.5,696,6,0.00014400000000000003
+2hop__83938_5666,retrieval_k5,Boris Yeltsin,Yeltsin,0.0,0.6666666666666666,0.5,1.0,784,8,0.0001632
+2hop__83938_5666,retrieval_k10,Vladimir Putin,Yeltsin,0.0,0.0,0.0,0.0,1312,6,0.00026720000000000004
+2hop__167577_31122,always_think,17th century,18th,0.0,0.5,0.5,0.5,91,12,2.7799999999999998e-05
+2hop__167577_31122,retrieval_k3,18th century,18th,1.0,1.0,1.0,1.0,696,6,0.00014400000000000003
 2hop__167577_31122,retrieval_k5,18th century,18th,1.0,1.0,1.0,1.0,1249,6,0.0002546
-2hop__167577_31122,retrieval_k10,17th century,18th,0.0,0.5,0.5,0.5,2077,6,0.0004202
-2hop__9238_9237,always_think,1987,September 2012,0.0,0.0,0.0,0.0,89,11,2.6600000000000003e-05
+2hop__167577_31122,retrieval_k10,18th century,18th,1.0,1.0,1.0,1.0,2077,6,0.0004202
+2hop__9238_9237,always_think,1999,September 2012,0.0,0.0,0.0,0.0,89,11,2.6600000000000003e-05
 2hop__9238_9237,retrieval_k3,September 2012,September 2012,1.0,1.0,1.0,1.0,369,7,7.939999999999999e-05
 2hop__9238_9237,retrieval_k5,September 2012,September 2012,1.0,1.0,1.0,1.0,497,7,0.000105
 2hop__9238_9237,retrieval_k10,September 2012,September 2012,1.0,1.0,1.0,1.0,1042,7,0.000214
-2hop__107905_110222,always_think,4 June 1819,10 June 1819,0.0,0.6666666666666666,0.6666666666666666,0.6666666666666666,88,14,2.8800000000000002e-05
+2hop__107905_110222,always_think,23 May 1819,10 June 1819,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,88,14,2.8800000000000002e-05
 2hop__107905_110222,retrieval_k3,10 June 1819,10 June 1819,1.0,1.0,1.0,1.0,432,8,9.28e-05
 2hop__107905_110222,retrieval_k5,10 June 1819,10 June 1819,1.0,1.0,1.0,1.0,619,8,0.0001302
 2hop__107905_110222,retrieval_k10,10 June 1819,10 June 1819,1.0,1.0,1.0,1.0,1175,8,0.00024139999999999999
-2hop__145203_34088,always_think,Phoenix Raceway,Tucson Raceway Park,0.0,0.4,0.5,0.3333333333333333,85,11,2.58e-05
+2hop__145203_34088,always_think,Charlotte Motor Speedway,Tucson Raceway Park,0.0,0.0,0.0,0.0,85,12,2.6600000000000003e-05
 2hop__145203_34088,retrieval_k3,Tucson Raceway Park,Tucson Raceway Park,1.0,1.0,1.0,1.0,388,8,8.400000000000001e-05
 2hop__145203_34088,retrieval_k5,Tucson Raceway Park,Tucson Raceway Park,1.0,1.0,1.0,1.0,570,8,0.00012040000000000001
 2hop__145203_34088,retrieval_k10,Tucson Raceway Park,Tucson Raceway Park,1.0,1.0,1.0,1.0,1162,8,0.0002388
-2hop__498061_88622,always_think,Michael Hayden,ADM Michael S. Rogers,0.0,0.4,0.5,0.3333333333333333,83,11,2.54e-05
+2hop__498061_88622,always_think,Michael V. Hayden,ADM Michael S. Rogers,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,83,13,2.7e-05
 2hop__498061_88622,retrieval_k3,noanswer,ADM Michael S. Rogers,0.0,0.0,0.0,0.0,475,5,9.900000000000001e-05
 2hop__498061_88622,retrieval_k5,noanswer,ADM Michael S. Rogers,0.0,0.0,0.0,0.0,689,5,0.0001418
 2hop__498061_88622,retrieval_k10,Keith B. Alexander,ADM Michael S. Rogers,0.0,0.0,0.0,0.0,1684,7,0.0003424
-3hop1__33845_42197_18397,always_think,the United Nations Security Council,the Politburo,0.0,0.0,0.0,0.0,104,14,3.2000000000000005e-05
+3hop1__33845_42197_18397,always_think,New York City,the Politburo,0.0,0.0,0.0,0.0,104,12,3.04e-05
 3hop1__33845_42197_18397,retrieval_k3,Politburo,the Politburo,1.0,1.0,1.0,1.0,646,6,0.00013400000000000003
-3hop1__33845_42197_18397,retrieval_k5,Politburo,the Politburo,1.0,1.0,1.0,1.0,1268,6,0.00025840000000000005
-3hop1__33845_42197_18397,retrieval_k10,Taiwan Strait,the Politburo,0.0,0.0,0.0,0.0,2190,12,0.00044760000000000004
+3hop1__33845_42197_18397,retrieval_k5,Korea,the Politburo,0.0,0.0,0.0,0.0,1268,5,0.00025760000000000003
+3hop1__33845_42197_18397,retrieval_k10,the Politburo,the Politburo,1.0,1.0,1.0,1.0,2190,7,0.00044360000000000005
+2hop__822965_165304,always_think,Mikaal Zulfiqar,Kim Braden,0.0,0.0,0.0,0.0,89,15,2.9800000000000003e-05
+2hop__822965_165304,retrieval_k3,Bernard Braden,Kim Braden,0.0,0.5,0.5,0.5,342,7,7.400000000000001e-05
+2hop__822965_165304,retrieval_k5,Christopher Masterson,Kim Braden,0.0,0.0,0.0,0.0,657,6,0.0001362
+2hop__822965_165304,retrieval_k10,Christopher Masterson,Kim Braden,0.0,0.0,0.0,0.0,1100,12,0.0002296
+2hop__286093_361551,always_think,Huron County,Bay County,0.0,0.5,0.5,0.5,80,12,2.56e-05
+2hop__286093_361551,retrieval_k3,Bay County,Bay County,1.0,1.0,1.0,1.0,436,5,9.120000000000001e-05
+2hop__286093_361551,retrieval_k5,Bay County,Bay County,1.0,1.0,1.0,1.0,604,5,0.0001248
+2hop__286093_361551,retrieval_k10,Bay County,Bay County,1.0,1.0,1.0,1.0,1138,5,0.00023160000000000002
+2hop__580231_162399,always_think,1920,15 December 1950,0.0,0.0,0.0,0.0,84,11,2.5600000000000002e-05
+2hop__580231_162399,retrieval_k3,1950,15 December 1950,0.0,0.5,1.0,0.3333333333333333,578,5,0.00011960000000000001
+2hop__580231_162399,retrieval_k5,1950,15 December 1950,0.0,0.5,1.0,0.3333333333333333,783,5,0.0001606
+2hop__580231_162399,retrieval_k10,1950,15 December 1950,0.0,0.5,1.0,0.3333333333333333,1186,5,0.0002412
+2hop__461639_83837,always_think,Luke Bryan,Karen Fairchild,0.0,0.0,0.0,0.0,87,11,2.6200000000000003e-05
+2hop__461639_83837,retrieval_k3,Karen Fairchild,Karen Fairchild,1.0,1.0,1.0,1.0,475,6,9.98e-05
+2hop__461639_83837,retrieval_k5,Karen Fairchild,Karen Fairchild,1.0,1.0,1.0,1.0,767,6,0.00015820000000000002
+2hop__461639_83837,retrieval_k10,Karen Fairchild,Karen Fairchild,1.0,1.0,1.0,1.0,1264,6,0.00025760000000000003
+2hop__83785_461854,always_think,Rhett Butler,Laurence Olivier,0.0,0.0,0.0,0.0,86,7,2.28e-05
+2hop__83785_461854,retrieval_k3,Rhett Butler,Laurence Olivier,0.0,0.0,0.0,0.0,806,7,0.00016680000000000002
+2hop__83785_461854,retrieval_k5,Rhett Butler,Laurence Olivier,0.0,0.0,0.0,0.0,954,7,0.0001964
+2hop__83785_461854,retrieval_k10,Rhett Butler,Laurence Olivier,0.0,0.0,0.0,0.0,1497,7,0.00030500000000000004
+4hop1__802394_153080_159767_81096,always_think,A. J. Foyt,Mario Andretti,0.0,0.0,0.0,0.0,100,16,3.2800000000000004e-05
+4hop1__802394_153080_159767_81096,retrieval_k3,Simon Pagenaud,Mario Andretti,0.0,0.0,0.0,0.0,363,13,8.3e-05
+4hop1__802394_153080_159767_81096,retrieval_k5,Mario Andretti,Mario Andretti,1.0,1.0,1.0,1.0,694,12,0.0001484
+4hop1__802394_153080_159767_81096,retrieval_k10,Mario Andretti,Mario Andretti,1.0,1.0,1.0,1.0,1312,12,0.00027200000000000005
+2hop__485221_544917,always_think,Lake Okeechobee,Lake Superior,0.0,0.5,0.5,0.5,87,15,2.9400000000000003e-05
+2hop__485221_544917,retrieval_k3,Washington Island,Lake Superior,0.0,0.0,0.0,0.0,470,5,9.8e-05
+2hop__485221_544917,retrieval_k5,Washington Island,Lake Superior,0.0,0.0,0.0,0.0,635,5,0.00013099999999999999
+2hop__485221_544917,retrieval_k10,Washington Island,Lake Superior,0.0,0.0,0.0,0.0,1183,5,0.00024060000000000002
+2hop__38229_84500,always_think,noanswer,North Atlantic Treaty Organization,0.0,0.0,0.0,0.0,90,11,2.68e-05
+2hop__38229_84500,retrieval_k3,NATO,North Atlantic Treaty Organization,1.0,1.0,1.0,1.0,684,5,0.0001408
+2hop__38229_84500,retrieval_k5,North Atlantic Treaty Organization,North Atlantic Treaty Organization,1.0,1.0,1.0,1.0,1043,7,0.00021420000000000003
+2hop__38229_84500,retrieval_k10,North Atlantic Treaty Organization,North Atlantic Treaty Organization,1.0,1.0,1.0,1.0,1961,7,0.0003978
+2hop__822113_91104,always_think,GSAT-6A,ATS - 6 (Applications Technology Satellite - 6),0.0,0.0,0.0,0.0,97,14,3.06e-05
+2hop__822113_91104,retrieval_k3,ATS-6,ATS - 6 (Applications Technology Satellite - 6),1.0,1.0,1.0,1.0,424,12,9.440000000000002e-05
+2hop__822113_91104,retrieval_k5,ATS-6,ATS - 6 (Applications Technology Satellite - 6),1.0,1.0,1.0,1.0,677,6,0.00014020000000000002
+2hop__822113_91104,retrieval_k10,Compass-M1,ATS - 6 (Applications Technology Satellite - 6),0.0,0.0,0.0,0.0,1242,6,0.00025320000000000003
+2hop__106864_80460,always_think,Pakistan,207.77 million people,0.0,0.0,0.0,0.0,88,10,2.56e-05
+2hop__106864_80460,retrieval_k3,207.77 million,207.77 million people,0.0,0.8,1.0,0.6666666666666666,533,7,0.0001122
+2hop__106864_80460,retrieval_k5,"211,059,000",207.77 million people,0.0,0.0,0.0,0.0,824,8,0.00017120000000000001
+2hop__106864_80460,retrieval_k10,207.77 million,207.77 million people,0.0,0.8,1.0,0.6666666666666666,1263,7,0.0002582
+3hop1__67704_237521_291682,always_think,Matilda Ziegler,Liza Minnelli,0.0,0.0,0.0,0.0,96,14,3.0400000000000004e-05
+3hop1__67704_237521_291682,retrieval_k3,noanswer,Liza Minnelli,0.0,0.0,0.0,0.0,351,11,7.9e-05
+3hop1__67704_237521_291682,retrieval_k5,Katherine Jackson,Liza Minnelli,0.0,0.0,0.0,0.0,637,6,0.00013220000000000001
+3hop1__67704_237521_291682,retrieval_k10,Katherine Jackson,Liza Minnelli,0.0,0.0,0.0,0.0,1297,6,0.0002642
+2hop__525242_52835,always_think,"Niels Nef
+",John D. Loudermilk,0.0,0.0,0.0,0.0,86,14,2.84e-05
+2hop__525242_52835,retrieval_k3,John D. Loudermilk,John D. Loudermilk,1.0,1.0,1.0,1.0,427,9,9.26e-05
+2hop__525242_52835,retrieval_k5,John D. Loudermilk,John D. Loudermilk,1.0,1.0,1.0,1.0,619,9,0.000131
+2hop__525242_52835,retrieval_k10,John D. Loudermilk,John D. Loudermilk,1.0,1.0,1.0,1.0,1026,9,0.00021240000000000004
+4hop1__860115_798482_131926_13165,always_think,Treaty of Paris,Treaty of Paris,1.0,1.0,1.0,1.0,97,13,2.98e-05
+4hop1__860115_798482_131926_13165,retrieval_k3,Treaty of Paris (1783),Treaty of Paris,0.0,0.8571428571428571,0.75,1.0,552,17,0.000124
+4hop1__860115_798482_131926_13165,retrieval_k5,Treaty of Guadalupe Hidalgo,Treaty of Paris,0.0,0.5714285714285715,0.5,0.6666666666666666,769,8,0.0001602
+4hop1__860115_798482_131926_13165,retrieval_k10,Treaty of Guadalupe Hidalgo,Treaty of Paris,0.0,0.5714285714285715,0.5,0.6666666666666666,1539,8,0.0003142
+3hop2__101809_30152_20999,always_think,civil servants,The dynasty regrouped and defeated the Portuguese,0.0,0.0,0.0,0.0,97,11,2.82e-05
+3hop2__101809_30152_20999,retrieval_k3,appointed governorships,The dynasty regrouped and defeated the Portuguese,0.0,0.0,0.0,0.0,457,7,9.7e-05
+3hop2__101809_30152_20999,retrieval_k5,Burma,The dynasty regrouped and defeated the Portuguese,0.0,0.0,0.0,0.0,803,5,0.00016460000000000002
+3hop2__101809_30152_20999,retrieval_k10,Portuguese,The dynasty regrouped and defeated the Portuguese,0.0,0.33333333333333337,1.0,0.2,1499,5,0.0003038
+2hop__444265_82341,always_think,South Florida,in Northern Florida,0.0,0.5,0.5,0.5,85,11,2.58e-05
+2hop__444265_82341,retrieval_k3,"Ocala, Florida",in Northern Florida,0.0,0.5,0.5,0.5,262,7,5.800000000000001e-05
+2hop__444265_82341,retrieval_k5,"Ocala, Florida",in Northern Florida,0.0,0.5,0.5,0.5,370,7,7.96e-05
+2hop__444265_82341,retrieval_k10,"Ocala, Florida",in Northern Florida,0.0,0.5,0.5,0.5,607,7,0.000127
+2hop__647996_551681,always_think,Emilia Galotti,Emilia Galotti,1.0,1.0,1.0,1.0,87,13,2.7800000000000005e-05
+2hop__647996_551681,retrieval_k3,noanswer,Emilia Galotti,0.0,0.0,0.0,0.0,512,5,0.00010640000000000001
+2hop__647996_551681,retrieval_k5,Emilia Galotti,Emilia Galotti,1.0,1.0,1.0,1.0,665,7,0.0001386
+2hop__647996_551681,retrieval_k10,Emilia Galotti,Emilia Galotti,1.0,1.0,1.0,1.0,1076,7,0.00022080000000000003
+2hop__58168_38663,always_think,4.6%,54.7%,0.0,0.0,0.0,0.0,90,13,2.84e-05
+2hop__58168_38663,retrieval_k3,54.7%,54.7%,1.0,1.0,1.0,1.0,693,7,0.00014419999999999998
+2hop__58168_38663,retrieval_k5,22.61%,54.7%,0.0,0.0,0.0,0.0,930,7,0.0001916
+2hop__58168_38663,retrieval_k10,22.61%,54.7%,0.0,0.0,0.0,0.0,1672,7,0.00034
+3hop1__28527_42197_18397,always_think,China,the Politburo,0.0,0.0,0.0,0.0,102,10,2.84e-05
+3hop1__28527_42197_18397,retrieval_k3,Korea,the Politburo,0.0,0.0,0.0,0.0,613,5,0.0001266
+3hop1__28527_42197_18397,retrieval_k5,the Taiwan Strait,the Politburo,0.0,0.0,0.0,0.0,989,6,0.00020260000000000002
+3hop1__28527_42197_18397,retrieval_k10,Korea,the Politburo,0.0,0.0,0.0,0.0,2047,5,0.0004134
+3hop1__307152_400692_51423,always_think,Peles Castle,Casa Loma,0.0,0.0,0.0,0.0,90,12,2.76e-05
+3hop1__307152_400692_51423,retrieval_k3,Katzenstein Castle,Casa Loma,0.0,0.0,0.0,0.0,290,7,6.36e-05
+3hop1__307152_400692_51423,retrieval_k5,Casa Loma,Casa Loma,1.0,1.0,1.0,1.0,539,12,0.00011740000000000001
+3hop1__307152_400692_51423,retrieval_k10,Casa Loma,Casa Loma,1.0,1.0,1.0,1.0,1349,12,0.0002794
+2hop__704217_82341,always_think,Miami-Dade County,in Northern Florida,0.0,0.0,0.0,0.0,85,13,2.7400000000000002e-05
+2hop__704217_82341,retrieval_k3,Ocala,in Northern Florida,0.0,0.0,0.0,0.0,491,5,0.0001022
+2hop__704217_82341,retrieval_k5,"Ocala, Florida",in Northern Florida,0.0,0.5,0.5,0.5,605,7,0.0001266
+2hop__704217_82341,retrieval_k10,Ocala,in Northern Florida,0.0,0.0,0.0,0.0,856,5,0.0001752
+2hop__808562_72813,always_think,Bubbles,a Western District uniformed officer,0.0,0.0,0.0,0.0,86,11,2.6e-05
+2hop__808562_72813,retrieval_k3,Bobby Brown,a Western District uniformed officer,0.0,0.0,0.0,0.0,394,6,8.360000000000001e-05
+2hop__808562_72813,retrieval_k5,Bobby Brown,a Western District uniformed officer,0.0,0.0,0.0,0.0,796,6,0.00016400000000000003
+2hop__808562_72813,retrieval_k10,Bobby Brown,a Western District uniformed officer,0.0,0.0,0.0,0.0,1431,6,0.00029099999999999997
+2hop__94629_1110,always_think,2005,2005,1.0,1.0,1.0,1.0,95,11,2.78e-05
+2hop__94629_1110,retrieval_k3,2005,2005,1.0,1.0,1.0,1.0,497,5,0.0001034
+2hop__94629_1110,retrieval_k5,2005,2005,1.0,1.0,1.0,1.0,1096,5,0.0002232
+2hop__94629_1110,retrieval_k10,2005,2005,1.0,1.0,1.0,1.0,1715,5,0.000347
+3hop1__274148_792411_51423,always_think,Inverness Castle,Casa Loma,0.0,0.0,0.0,0.0,91,13,2.8599999999999997e-05
+3hop1__274148_792411_51423,retrieval_k3,Roy Castle,Casa Loma,0.0,0.0,0.0,0.0,387,5,8.140000000000001e-05
+3hop1__274148_792411_51423,retrieval_k5,Roy Castle,Casa Loma,0.0,0.0,0.0,0.0,556,5,0.00011520000000000001
+3hop1__274148_792411_51423,retrieval_k10,Casa Loma,Casa Loma,1.0,1.0,1.0,1.0,873,6,0.00017940000000000002
+2hop__123545_47134,always_think,Bruin,Benny Beaver,0.0,0.0,0.0,0.0,86,11,2.6e-05
+2hop__123545_47134,retrieval_k3,Benny Beaver,Benny Beaver,1.0,1.0,1.0,1.0,367,6,7.82e-05
+2hop__123545_47134,retrieval_k5,Benny Beaver,Benny Beaver,1.0,1.0,1.0,1.0,568,6,0.0001184
+2hop__123545_47134,retrieval_k10,Benny Beaver,Benny Beaver,1.0,1.0,1.0,1.0,1112,6,0.00022720000000000002
+2hop__754753_57816,always_think,#7,100,0.0,0.0,0.0,0.0,90,11,2.68e-05
+2hop__754753_57816,retrieval_k3,100,100,1.0,1.0,1.0,1.0,384,4,8e-05
+2hop__754753_57816,retrieval_k5,100,100,1.0,1.0,1.0,1.0,725,10,0.000153
+2hop__754753_57816,retrieval_k10,100,100,1.0,1.0,1.0,1.0,1557,4,0.00031460000000000006
+3hop1__398232_326948_78782,always_think,Horatio Kitchener,General Edward Pakenham,0.0,0.0,0.0,0.0,95,14,3.0200000000000002e-05
+3hop1__398232_326948_78782,retrieval_k3,James Wolfe,General Edward Pakenham,0.0,0.0,0.0,0.0,446,5,9.32e-05
+3hop1__398232_326948_78782,retrieval_k5,James Wolfe,General Edward Pakenham,0.0,0.0,0.0,0.0,654,11,0.0001396
+3hop1__398232_326948_78782,retrieval_k10,James Wolfe,General Edward Pakenham,0.0,0.0,0.0,0.0,1223,5,0.0002486
+2hop__332453_139339,always_think,Best Motion Picture – Comedy or Musical,Academy Award for Best Live Action Short Film,0.0,0.13333333333333333,0.14285714285714285,0.125,84,16,2.96e-05
+2hop__332453_139339,retrieval_k3,An Academy Award for Best Live Action Short Film,Academy Award for Best Live Action Short Film,1.0,1.0,1.0,1.0,518,12,0.00011320000000000001
+2hop__332453_139339,retrieval_k5,an Academy Award for Best Live Action Short Film,Academy Award for Best Live Action Short Film,1.0,1.0,1.0,1.0,636,12,0.0001368
+2hop__332453_139339,retrieval_k10,Academy Award for Best Live Action Short Film,Academy Award for Best Live Action Short Film,1.0,1.0,1.0,1.0,945,12,0.0001986
+3hop2__668732_223623_162182,always_think,South Central Coast,South Central Coast,1.0,1.0,1.0,1.0,91,12,2.7799999999999998e-05
+3hop2__668732_223623_162182,retrieval_k3,"Da Nang, Vietnam",South Central Coast,0.0,0.0,0.0,0.0,325,13,7.539999999999999e-05
+3hop2__668732_223623_162182,retrieval_k5,Mekong Delta region,South Central Coast,0.0,0.0,0.0,0.0,459,8,9.820000000000002e-05
+3hop2__668732_223623_162182,retrieval_k10,Da Nang,South Central Coast,0.0,0.0,0.0,0.0,805,5,0.000165
+3hop2__89854_92991_76291,always_think,"January 3, 1995",January 2015,0.0,0.4,0.3333333333333333,0.5,98,16,3.24e-05
+3hop2__89854_92991_76291,retrieval_k3,110th United States Congress,January 2015,0.0,0.0,0.0,0.0,386,8,8.360000000000001e-05
+3hop2__89854_92991_76291,retrieval_k5,114th Congress,January 2015,0.0,0.0,0.0,0.0,637,12,0.000137
+3hop2__89854_92991_76291,retrieval_k10,110th United States Congress,January 2015,0.0,0.0,0.0,0.0,1352,8,0.0002768
+2hop__223823_29898,always_think,CFCN-DT,CFJC-TV in Kamloops,0.0,0.0,0.0,0.0,89,14,2.9000000000000004e-05
+2hop__223823_29898,retrieval_k3,CFJC-TV,CFJC-TV in Kamloops,0.0,0.5,1.0,0.3333333333333333,678,6,0.0001404
+2hop__223823_29898,retrieval_k5,CFJC-TV,CFJC-TV in Kamloops,0.0,0.5,1.0,0.3333333333333333,804,6,0.00016560000000000001
+2hop__223823_29898,retrieval_k10,CFJC-TV,CFJC-TV in Kamloops,0.0,0.5,1.0,0.3333333333333333,1141,6,0.00023300000000000003
+2hop__109131_343058,always_think,Christopher Guest,Adrian Edmondson,0.0,0.0,0.0,0.0,83,11,2.54e-05
+2hop__109131_343058,retrieval_k3,Dawn French,Adrian Edmondson,0.0,0.0,0.0,0.0,238,6,5.24e-05
+2hop__109131_343058,retrieval_k5,Dawn French,Adrian Edmondson,0.0,0.0,0.0,0.0,327,6,7.02e-05
+2hop__109131_343058,retrieval_k10,Jennifer Saunders,Adrian Edmondson,0.0,0.0,0.0,0.0,669,5,0.0001378
+4hop1__88342_75218_128008_67954,always_think,Ichiro Suzuki,Alex Bregman,0.0,0.0,0.0,0.0,101,12,2.9800000000000006e-05
+4hop1__88342_75218_128008_67954,retrieval_k3,American League,Alex Bregman,0.0,0.0,0.0,0.0,643,11,0.00013739999999999998
+4hop1__88342_75218_128008_67954,retrieval_k5,Alex Bregman,Alex Bregman,1.0,1.0,1.0,1.0,931,13,0.00019660000000000004
+4hop1__88342_75218_128008_67954,retrieval_k10,Los Angeles Dodgers,Alex Bregman,0.0,0.0,0.0,0.0,1508,6,0.0003064
+4hop3__312119_132409_371500_35031,always_think,third,third-largest,0.0,0.0,0.0,0.0,101,10,2.82e-05
+4hop3__312119_132409_371500_35031,retrieval_k3,2,third-largest,0.0,0.0,0.0,0.0,466,10,0.00010120000000000001
+4hop3__312119_132409_371500_35031,retrieval_k5,San Diego,third-largest,0.0,0.0,0.0,0.0,679,5,0.0001398
+4hop3__312119_132409_371500_35031,retrieval_k10,San Diego,third-largest,0.0,0.0,0.0,0.0,1351,11,0.000279
+2hop__424294_19033,always_think,TNA Hall of Fame,Great American Bash,0.0,0.0,0.0,0.0,94,14,3e-05
+2hop__424294_19033,retrieval_k3,Italy,Great American Bash,0.0,0.0,0.0,0.0,329,4,6.9e-05
+2hop__424294_19033,retrieval_k5,WWE Championship from Triple H's victory in the 2008 Royal Rumble,Great American Bash,0.0,0.0,0.0,0.0,549,19,0.000125
+2hop__424294_19033,retrieval_k10,2008 FIFA Club World Cup,Great American Bash,0.0,0.0,0.0,0.0,1084,9,0.00022400000000000002
+3hop2__90098_19639_10557,always_think,Latin,Medieval Latin,0.0,0.6666666666666666,1.0,0.5,108,10,2.96e-05
+3hop2__90098_19639_10557,retrieval_k3,Sylv-,Medieval Latin,0.0,0.0,0.0,0.0,572,6,0.0001192
+3hop2__90098_19639_10557,retrieval_k5,Classical Latin,Medieval Latin,0.0,0.5,0.5,0.5,826,6,0.00017
+3hop2__90098_19639_10557,retrieval_k10,Medieval Latin,Medieval Latin,1.0,1.0,1.0,1.0,1786,6,0.00036200000000000007
+2hop__37097_53663,always_think,Africa,northeastern Africa,1.0,1.0,1.0,1.0,87,4,2.0600000000000003e-05
+2hop__37097_53663,retrieval_k3,northeastern Africa,northeastern Africa,1.0,1.0,1.0,1.0,479,7,0.00010140000000000001
+2hop__37097_53663,retrieval_k5,northeastern Africa,northeastern Africa,1.0,1.0,1.0,1.0,640,7,0.0001336
+2hop__37097_53663,retrieval_k10,northeastern Africa,northeastern Africa,1.0,1.0,1.0,1.0,1171,7,0.00023980000000000003
+2hop__80070_89752,always_think,Massachusetts,Maine,0.0,0.0,0.0,0.0,89,11,2.6600000000000003e-05
+2hop__80070_89752,retrieval_k3,noanswer,Maine,0.0,0.0,0.0,0.0,360,5,7.6e-05
+2hop__80070_89752,retrieval_k5,New England,Maine,0.0,0.0,0.0,0.0,584,5,0.00012080000000000001
+2hop__80070_89752,retrieval_k10,noanswer,Maine,0.0,0.0,0.0,0.0,1460,5,0.000296
+3hop1__488744_443779_52195,always_think,Halimah Yacob,Francisco Guterres,0.0,0.0,0.0,0.0,103,15,3.2600000000000006e-05
+3hop1__488744_443779_52195,retrieval_k3,Susilo Bambang Yudhoyono,Francisco Guterres,0.0,0.0,0.0,0.0,601,11,0.00012900000000000002
+3hop1__488744_443779_52195,retrieval_k5,Susilo Bambang Yudhoyono,Francisco Guterres,0.0,0.0,0.0,0.0,856,11,0.00018
+3hop1__488744_443779_52195,retrieval_k10,Francisco Guterres,Francisco Guterres,1.0,1.0,1.0,1.0,1751,8,0.00035660000000000005
+3hop2__655849_223623_162182,always_think,North Central Coast,South Central Coast,0.0,0.6666666666666666,0.6666666666666666,0.6666666666666666,92,12,2.8000000000000003e-05
+3hop2__655849_223623_162182,retrieval_k3,Da Nang,South Central Coast,0.0,0.0,0.0,0.0,347,5,7.340000000000001e-05
+3hop2__655849_223623_162182,retrieval_k5,South Central Coast,South Central Coast,1.0,1.0,1.0,1.0,501,6,0.00010499999999999999
+3hop2__655849_223623_162182,retrieval_k10,South Central Coast,South Central Coast,1.0,1.0,1.0,1.0,805,6,0.00016580000000000002
+3hop1__49236_89752_54221,always_think,7 a.m.,5am,0.0,0.0,0.0,0.0,100,13,3.04e-05
+3hop1__49236_89752_54221,retrieval_k3,5am,5am,1.0,1.0,1.0,1.0,313,11,7.14e-05
+3hop1__49236_89752_54221,retrieval_k5,5am,5am,1.0,1.0,1.0,1.0,613,5,0.0001266
+3hop1__49236_89752_54221,retrieval_k10,5am,5am,1.0,1.0,1.0,1.0,1422,5,0.0002884
+2hop__159903_154896,always_think,1999,27 April 2009,0.0,0.0,0.0,0.0,90,11,2.68e-05
+2hop__159903_154896,retrieval_k3,2009,27 April 2009,0.0,0.5,1.0,0.3333333333333333,848,5,0.00017360000000000002
+2hop__159903_154896,retrieval_k5,2003,27 April 2009,0.0,0.0,0.0,0.0,1092,5,0.00022239999999999998
+2hop__159903_154896,retrieval_k10,2009,27 April 2009,0.0,0.5,1.0,0.3333333333333333,1632,11,0.0003352
+2hop__73717_653666,always_think,Lucy Mack Smith,Lucy Mack Smith,1.0,1.0,1.0,1.0,91,12,2.7799999999999998e-05
+2hop__73717_653666,retrieval_k3,Lucy Mack Smith,Lucy Mack Smith,1.0,1.0,1.0,1.0,420,6,8.879999999999999e-05
+2hop__73717_653666,retrieval_k5,Lucy Mack Smith,Lucy Mack Smith,1.0,1.0,1.0,1.0,647,6,0.0001342
+2hop__73717_653666,retrieval_k10,Lucy Mack Smith,Lucy Mack Smith,1.0,1.0,1.0,1.0,1350,12,0.0002796
+2hop__398344_85513,always_think,noanswer,TBD,0.0,0.0,0.0,0.0,92,11,2.7200000000000004e-05
+2hop__398344_85513,retrieval_k3,TBA,TBD,0.0,0.0,0.0,0.0,290,5,6.2e-05
+2hop__398344_85513,retrieval_k5,TBA,TBD,0.0,0.0,0.0,0.0,415,11,9.18e-05
+2hop__398344_85513,retrieval_k10,TBA,TBD,0.0,0.0,0.0,0.0,1041,11,0.00021700000000000002
+2hop__87053_319330,always_think,Elizabeth Wilson Woodrow Wilson Jr.,Jessie Woodrow Wilson,0.0,0.5,0.4,0.6666666666666666,86,10,2.5199999999999996e-05
+2hop__87053_319330,retrieval_k3,"Margaret, Jessie, and Eleanor",Jessie Woodrow Wilson,0.0,0.28571428571428575,0.25,0.3333333333333333,623,10,0.00013260000000000002
+2hop__87053_319330,retrieval_k5,Margaret Wilson,Jessie Woodrow Wilson,0.0,0.4,0.5,0.3333333333333333,905,6,0.00018580000000000002
+2hop__87053_319330,retrieval_k10,Jessie Woodrow Wilson Sayre,Jessie Woodrow Wilson,1.0,1.0,1.0,1.0,1618,10,0.0003316
+3hop1__145212_443779_52195,always_think,José Ramos-Horta,Francisco Guterres,0.0,0.0,0.0,0.0,103,13,3.1e-05
+3hop1__145212_443779_52195,retrieval_k3,Susilo Bambang Yudhoyono,Francisco Guterres,0.0,0.0,0.0,0.0,529,11,0.00011460000000000001
+3hop1__145212_443779_52195,retrieval_k5,Susilo Bambang Yudhoyono,Francisco Guterres,0.0,0.0,0.0,0.0,799,11,0.0001686
+3hop1__145212_443779_52195,retrieval_k10,Susilo Bambang Yudhoyono,Francisco Guterres,0.0,0.0,0.0,0.0,1879,11,0.0003846
+2hop__678516_179720,always_think,Sir William Rothenstein,Harold Knight,0.0,0.0,0.0,0.0,89,14,2.9000000000000004e-05
+2hop__678516_179720,retrieval_k3,Laura Knight,Harold Knight,0.0,0.5,0.5,0.5,354,5,7.48e-05
+2hop__678516_179720,retrieval_k5,Laura Knight,Harold Knight,0.0,0.5,0.5,0.5,479,5,9.980000000000001e-05
+2hop__678516_179720,retrieval_k10,Harold Knight,Harold Knight,1.0,1.0,1.0,1.0,1006,6,0.00020600000000000002
+2hop__135336_461854,always_think,Herbert Balfour Paul,Laurence Olivier,0.0,0.0,0.0,0.0,81,15,2.82e-05
+2hop__135336_461854,retrieval_k3,Herbert Leigh Holman,Laurence Olivier,0.0,0.0,0.0,0.0,343,8,7.500000000000002e-05
+2hop__135336_461854,retrieval_k5,Herbert Leigh Holman,Laurence Olivier,0.0,0.0,0.0,0.0,480,8,0.00010240000000000001
+2hop__135336_461854,retrieval_k10,Herbert Leigh Holman,Laurence Olivier,0.0,0.0,0.0,0.0,1039,8,0.0002142
+2hop__144317_120065,always_think,1945,1738,0.0,0.0,0.0,0.0,88,11,2.64e-05
+2hop__144317_120065,retrieval_k3,1945,1738,0.0,0.0,0.0,0.0,398,5,8.360000000000001e-05
+2hop__144317_120065,retrieval_k5,1738,1738,1.0,1.0,1.0,1.0,514,5,0.00010680000000000001
+2hop__144317_120065,retrieval_k10,1945,1738,0.0,0.0,0.0,0.0,1168,5,0.0002376
+4hop2__103790_14670_8987_8529,always_think,2005,1943–1992,0.0,0.0,0.0,0.0,123,11,3.34e-05
+4hop2__103790_14670_8987_8529,retrieval_k3,1943–1992,1943–1992,1.0,1.0,1.0,1.0,430,8,9.240000000000001e-05
+4hop2__103790_14670_8987_8529,retrieval_k5,1943–1992,1943–1992,1.0,1.0,1.0,1.0,816,8,0.0001696
+4hop2__103790_14670_8987_8529,retrieval_k10,1943–1992,1943–1992,1.0,1.0,1.0,1.0,1392,8,0.00028480000000000004
+3hop1__140345_2053_52946,always_think,2018,"February 7, 2018",0.0,0.5,1.0,0.3333333333333333,106,11,3.0000000000000004e-05
+3hop1__140345_2053_52946,retrieval_k3,"February 7, 2018","February 7, 2018",1.0,1.0,1.0,1.0,559,16,0.00012460000000000002
+3hop1__140345_2053_52946,retrieval_k5,"February 7, 2018","February 7, 2018",1.0,1.0,1.0,1.0,822,10,0.00017240000000000002
+3hop1__140345_2053_52946,retrieval_k10,"February 7, 2018 to February 25, 2018","February 7, 2018",0.0,0.6,0.42857142857142855,1.0,1189,18,0.0002522
+2hop__37656_160040,always_think,Martin Luther,Josh McDowell,0.0,0.0,0.0,0.0,89,11,2.6600000000000003e-05
+2hop__37656_160040,retrieval_k3,sola scriptura,Josh McDowell,0.0,0.0,0.0,0.0,443,7,9.420000000000001e-05
+2hop__37656_160040,retrieval_k5,sola scriptura,Josh McDowell,0.0,0.0,0.0,0.0,958,7,0.00019720000000000002
+2hop__37656_160040,retrieval_k10,Bible alone,Josh McDowell,0.0,0.0,0.0,0.0,1600,5,0.000324
+3hop1__584774_131926_87157,always_think,southwest to northeast,rises in northern Minnesota and meanders slowly southwards,0.0,0.0,0.0,0.0,93,13,2.9e-05
+3hop1__584774_131926_87157,retrieval_k3,southbound,rises in northern Minnesota and meanders slowly southwards,0.0,0.0,0.0,0.0,545,5,0.00011300000000000001
+3hop1__584774_131926_87157,retrieval_k5,southward,rises in northern Minnesota and meanders slowly southwards,0.0,0.0,0.0,0.0,931,11,0.00019500000000000002
+3hop1__584774_131926_87157,retrieval_k10,southwards,rises in northern Minnesota and meanders slowly southwards,0.0,0.2222222222222222,1.0,0.125,1437,5,0.00029140000000000004
+3hop2__132957_132968_40768,always_think,1982,1981,0.0,0.0,0.0,0.0,97,11,2.82e-05
+3hop2__132957_132968_40768,retrieval_k3,early 1980s,1981,0.0,0.0,0.0,0.0,475,8,0.00010140000000000001
+3hop2__132957_132968_40768,retrieval_k5,early 1980s,1981,0.0,0.0,0.0,0.0,714,8,0.0001492
+3hop2__132957_132968_40768,retrieval_k10,early 1980s,1981,0.0,0.0,0.0,0.0,1187,8,0.0002438
+2hop__711639_110949,always_think,"May 5, 1984",11 September 1962,0.0,0.0,0.0,0.0,81,16,2.9e-05
+2hop__711639_110949,retrieval_k3,1895-1897,11 September 1962,0.0,0.0,0.0,0.0,354,14,8.2e-05
+2hop__711639_110949,retrieval_k5,1895 or 1897,11 September 1962,0.0,0.0,0.0,0.0,554,9,0.00011800000000000001
+2hop__711639_110949,retrieval_k10,noanswer,11 September 1962,0.0,0.0,0.0,0.0,929,5,0.0001898
+2hop__543050_245420,always_think,Fresno,Citrus Heights,0.0,0.0,0.0,0.0,85,12,2.6600000000000003e-05
+2hop__543050_245420,retrieval_k3,Fair Oaks,Citrus Heights,0.0,0.0,0.0,0.0,381,5,8.020000000000001e-05
+2hop__543050_245420,retrieval_k5,Fair Oaks,Citrus Heights,0.0,0.0,0.0,0.0,534,5,0.00011080000000000001
+2hop__543050_245420,retrieval_k10,Carmichael,Citrus Heights,0.0,0.0,0.0,0.0,1064,6,0.00021760000000000003
+2hop__598467_68489,always_think,Mickey Horton,Snapper Foster,0.0,0.0,0.0,0.0,87,12,2.7000000000000006e-05
+2hop__598467_68489,retrieval_k3,Scotty Grainger,Snapper Foster,0.0,0.0,0.0,0.0,399,8,8.620000000000002e-05
+2hop__598467_68489,retrieval_k5,Snapper Foster,Snapper Foster,1.0,1.0,1.0,1.0,561,6,0.000117
+2hop__598467_68489,retrieval_k10,Snapper Foster,Snapper Foster,1.0,1.0,1.0,1.0,1094,6,0.00022360000000000001
+2hop__80673_510545,always_think,Paul Bettany,Jennifer Connelly,0.0,0.0,0.0,0.0,88,12,2.7200000000000004e-05
+2hop__80673_510545,retrieval_k3,noanswer,Jennifer Connelly,0.0,0.0,0.0,0.0,676,5,0.0001392
+2hop__80673_510545,retrieval_k5,Jennifer Connelly,Jennifer Connelly,1.0,1.0,1.0,1.0,850,6,0.00017480000000000002
+2hop__80673_510545,retrieval_k10,Jennifer Connelly,Jennifer Connelly,1.0,1.0,1.0,1.0,1754,6,0.0003556
+4hop3__668721_132409_146285_35031,always_think,4th,third-largest,0.0,0.0,0.0,0.0,106,11,3.0000000000000004e-05
+4hop3__668721_132409_146285_35031,retrieval_k3,noanswer,third-largest,0.0,0.0,0.0,0.0,723,11,0.0001534
+4hop3__668721_132409_146285_35031,retrieval_k5,San Diego,third-largest,0.0,0.0,0.0,0.0,941,11,0.00019700000000000002
+4hop3__668721_132409_146285_35031,retrieval_k10,San Diego,third-largest,0.0,0.0,0.0,0.0,1771,11,0.00036300000000000004
+2hop__24697_578772,always_think,Tokyo,Chinese surname,0.0,0.0,0.0,0.0,91,4,2.14e-05
+2hop__24697_578772,retrieval_k3,Chang'an,Chinese surname,0.0,0.0,0.0,0.0,710,5,0.000146
+2hop__24697_578772,retrieval_k5,Chang'an,Chinese surname,0.0,0.0,0.0,0.0,1056,5,0.0002152
+2hop__24697_578772,retrieval_k10,Chang'an,Chinese surname,0.0,0.0,0.0,0.0,1644,5,0.0003328
+2hop__22885_36240,always_think,Book of Exodus,Genesis 3:15,0.0,0.0,0.0,0.0,99,12,2.9400000000000003e-05
+2hop__22885_36240,retrieval_k3,Genesis 3:15,Genesis 3:15,1.0,1.0,1.0,1.0,634,8,0.0001332
+2hop__22885_36240,retrieval_k5,Genesis 3:15,Genesis 3:15,1.0,1.0,1.0,1.0,1008,8,0.00020800000000000001
+2hop__22885_36240,retrieval_k10,Genesis 3:15,Genesis 3:15,1.0,1.0,1.0,1.0,1883,8,0.00038300000000000004
+4hop1__199362_765799_282674_759393,always_think,Janesville,Green Bay,0.0,0.0,0.0,0.0,98,12,2.9200000000000005e-05
+4hop1__199362_765799_282674_759393,retrieval_k3,Green Bay,Green Bay,1.0,1.0,1.0,1.0,400,11,8.88e-05
+4hop1__199362_765799_282674_759393,retrieval_k5,Appleton,Green Bay,0.0,0.0,0.0,0.0,539,5,0.00011180000000000001
+4hop1__199362_765799_282674_759393,retrieval_k10,Pécs,Green Bay,0.0,0.0,0.0,0.0,1053,6,0.00021540000000000003
+3hop1__305282_282081_73772,always_think,"December 14, 2011","December 14, 1814",0.0,0.6666666666666666,0.6666666666666666,0.6666666666666666,88,16,3.04e-05
+3hop1__305282_282081_73772,retrieval_k3,29 August 1862,"December 14, 1814",0.0,0.0,0.0,0.0,424,14,9.600000000000002e-05
+3hop1__305282_282081_73772,retrieval_k5,29 August 1862,"December 14, 1814",0.0,0.0,0.0,0.0,571,8,0.0001206
+3hop1__305282_282081_73772,retrieval_k10,29 August 1862,"December 14, 1814",0.0,0.0,0.0,0.0,1114,8,0.00022920000000000001
+2hop__31326_31270,always_think,"Nashville to Hemlock, Michigan is about 600 miles",45,0.0,0.0,0.0,0.0,91,22,3.58e-05
+2hop__31326_31270,retrieval_k3,Clarksville,45,0.0,0.0,0.0,0.0,425,5,8.900000000000001e-05
+2hop__31326_31270,retrieval_k5,Nashville,45,0.0,0.0,0.0,0.0,680,6,0.0001408
+2hop__31326_31270,retrieval_k10,Clarksville,45,0.0,0.0,0.0,0.0,1269,5,0.0002578
+2hop__31995_8583,always_think,Austrian Germans,Iranic Sarmatians and the Germanic Goths,0.0,0.0,0.0,0.0,91,13,2.8599999999999997e-05
+2hop__31995_8583,retrieval_k3,Sarmatians and Goths,Iranic Sarmatians and the Germanic Goths,0.0,0.7499999999999999,1.0,0.6,670,10,0.000142
+2hop__31995_8583,retrieval_k5,Sarmatians and Goths,Iranic Sarmatians and the Germanic Goths,0.0,0.7499999999999999,1.0,0.6,955,10,0.000199
+2hop__31995_8583,retrieval_k10,Sarmatians and Goths,Iranic Sarmatians and the Germanic Goths,0.0,0.7499999999999999,1.0,0.6,1846,10,0.0003772
+2hop__166820_52835,always_think,John D. Loudermilk,John D. Loudermilk,1.0,1.0,1.0,1.0,91,15,3.02e-05
+2hop__166820_52835,retrieval_k3,John D. Loudermilk,John D. Loudermilk,1.0,1.0,1.0,1.0,441,9,9.54e-05
+2hop__166820_52835,retrieval_k5,John D. Loudermilk,John D. Loudermilk,1.0,1.0,1.0,1.0,566,15,0.0001252
+2hop__166820_52835,retrieval_k10,John D. Loudermilk,John D. Loudermilk,1.0,1.0,1.0,1.0,1076,9,0.00022240000000000004
+3hop1__198276_709625_84283,always_think,Amoeba Music,Warner Music Group,0.0,0.5,0.5,0.5,89,13,2.82e-05
+3hop1__198276_709625_84283,retrieval_k3,Warner Music Group,Warner Music Group,1.0,1.0,1.0,1.0,321,13,7.46e-05
+3hop1__198276_709625_84283,retrieval_k5,Warner Music Group,Warner Music Group,1.0,1.0,1.0,1.0,468,7,9.920000000000001e-05
+3hop1__198276_709625_84283,retrieval_k10,Warner Music Group,Warner Music Group,1.0,1.0,1.0,1.0,965,7,0.0001986
+2hop__46550_85990,always_think,Dick Cheney and Tom Daschle,"anti-slavery activists, modernizers, ex Whigs and ex Free Soilers",0.0,0.14285714285714285,0.2,0.1111111111111111,93,16,3.1400000000000004e-05
+2hop__46550_85990,retrieval_k3,Dick Gephardt,"anti-slavery activists, modernizers, ex Whigs and ex Free Soilers",0.0,0.0,0.0,0.0,626,13,0.00013560000000000002
+2hop__46550_85990,retrieval_k5,Nancy Pelosi,"anti-slavery activists, modernizers, ex Whigs and ex Free Soilers",0.0,0.0,0.0,0.0,911,5,0.0001862
+2hop__46550_85990,retrieval_k10,Dick Gephardt,"anti-slavery activists, modernizers, ex Whigs and ex Free Soilers",0.0,0.0,0.0,0.0,1400,7,0.0002856
+2hop__804417_126089,always_think,Norway,Johan Remkes,0.0,0.0,0.0,0.0,84,11,2.5600000000000002e-05
+2hop__804417_126089,retrieval_k3,Bergenhus fortress commander,Johan Remkes,0.0,0.0,0.0,0.0,318,8,7.000000000000001e-05
+2hop__804417_126089,retrieval_k5,"Bjørgvin
+",Johan Remkes,0.0,0.0,0.0,0.0,500,8,0.00010640000000000001
+2hop__804417_126089,retrieval_k10,"Hordaland county, Norway",Johan Remkes,0.0,0.0,0.0,0.0,849,15,0.0001818
+2hop__156085_436709,always_think,Walt Disney,Walt Disney,1.0,1.0,1.0,1.0,82,12,2.6000000000000002e-05
+2hop__156085_436709,retrieval_k3,Walt Disney and Ub Iwerks,Walt Disney,0.0,0.5714285714285715,0.4,1.0,643,10,0.00013659999999999999
+2hop__156085_436709,retrieval_k5,Walt Disney and Ub Iwerks,Walt Disney,0.0,0.5714285714285715,0.4,1.0,875,10,0.000183
+2hop__156085_436709,retrieval_k10,Walt Disney and Ub Iwerks,Walt Disney,0.0,0.5714285714285715,0.4,1.0,1373,10,0.0002826
+3hop1__418091_15840_36014,always_think,"5
+",five,0.0,0.0,0.0,0.0,100,11,2.8800000000000002e-05
+3hop1__418091_15840_36014,retrieval_k3,five games,five,0.0,0.6666666666666666,0.5,1.0,661,5,0.0001362
+3hop1__418091_15840_36014,retrieval_k5,five,five,1.0,1.0,1.0,1.0,1080,4,0.0002192
+3hop1__418091_15840_36014,retrieval_k10,five games per year,five,0.0,0.4,0.25,1.0,1591,7,0.00032380000000000006
+3hop1__796649_720914_27537,always_think,to become a bishop,for the conclave in Rome,0.0,0.0,0.0,0.0,87,13,2.7800000000000005e-05
+3hop1__796649_720914_27537,retrieval_k3,to attend the conclave in Rome,for the conclave in Rome,0.0,0.6666666666666665,0.6,0.75,778,10,0.00016360000000000002
+3hop1__796649_720914_27537,retrieval_k5,conclave in Rome,for the conclave in Rome,0.0,0.8571428571428571,1.0,0.75,918,7,0.00018920000000000002
+3hop1__796649_720914_27537,retrieval_k10,for the conclave in Rome,for the conclave in Rome,1.0,1.0,1.0,1.0,1521,9,0.0003114
+2hop__32441_522949,always_think,noanswer,Edith Roosevelt,0.0,0.0,0.0,0.0,91,11,2.7e-05
+2hop__32441_522949,retrieval_k3,noanswer,Edith Roosevelt,0.0,0.0,0.0,0.0,361,5,7.620000000000001e-05
+2hop__32441_522949,retrieval_k5,noanswer,Edith Roosevelt,0.0,0.0,0.0,0.0,710,5,0.000146
+2hop__32441_522949,retrieval_k10,yes,Edith Roosevelt,0.0,0.0,0.0,0.0,1558,4,0.00031480000000000006
+2hop__68590_27628,always_think,Luis de Guindos,Vitor Constâncio,0.0,0.0,0.0,0.0,89,14,2.9000000000000004e-05
+2hop__68590_27628,retrieval_k3,Vitor Constâncio,Vitor Constâncio,1.0,1.0,1.0,1.0,600,8,0.0001264
+2hop__68590_27628,retrieval_k5,Vitor Constâncio,Vitor Constâncio,1.0,1.0,1.0,1.0,721,8,0.0001506
+2hop__68590_27628,retrieval_k10,Vitor Constâncio,Vitor Constâncio,1.0,1.0,1.0,1.0,1207,8,0.0002478
+2hop__6827_86319,always_think,John G. Stumpf,Brian Thomas Moynihan,0.0,0.0,0.0,0.0,83,15,2.86e-05
+2hop__6827_86319,retrieval_k3,Bank of America,Brian Thomas Moynihan,0.0,0.0,0.0,0.0,520,6,0.00010879999999999999
+2hop__6827_86319,retrieval_k5,Brian Moynihan,Brian Thomas Moynihan,1.0,1.0,1.0,1.0,690,7,0.0001436
+2hop__6827_86319,retrieval_k10,Brian Moynihan,Brian Thomas Moynihan,1.0,1.0,1.0,1.0,1147,7,0.000235
+3hop1__103890_10659_83548,always_think,Miklós Horthy,Lech Wałęsa,0.0,0.0,0.0,0.0,106,15,3.320000000000001e-05
+3hop1__103890_10659_83548,retrieval_k3,Lech Wałęsa,Lech Wałęsa,1.0,1.0,1.0,1.0,468,8,0.00010000000000000002
+3hop1__103890_10659_83548,retrieval_k5,William the Conqueror,Lech Wałęsa,0.0,0.0,0.0,0.0,843,14,0.00017980000000000003
+3hop1__103890_10659_83548,retrieval_k10,George Soros,Lech Wałęsa,0.0,0.0,0.0,0.0,1755,6,0.00035580000000000003
+3hop1__831162_831637_91775,always_think,"Sea, Air, and Land
+","Sea, Air, and Land",1.0,1.0,1.0,1.0,95,16,3.18e-05
+3hop1__831162_831637_91775,retrieval_k3,"Sea, Air, and Land Teams","Sea, Air, and Land",0.0,0.888888888888889,0.8,1.0,481,10,0.00010420000000000001
+3hop1__831162_831637_91775,retrieval_k5,"Sea, Air, and Land Teams","Sea, Air, and Land",0.0,0.888888888888889,0.8,1.0,757,10,0.0001594
+3hop1__831162_831637_91775,retrieval_k10,"Sea, Air, and Land","Sea, Air, and Land",1.0,1.0,1.0,1.0,1061,9,0.00021940000000000002
+2hop__450608_373421,always_think,Vilnius County,counties of Lithuania,0.0,0.0,0.0,0.0,88,6,2.2400000000000002e-05
+2hop__450608_373421,retrieval_k3,Vilnius County,counties of Lithuania,0.0,0.0,0.0,0.0,372,6,7.92e-05
+2hop__450608_373421,retrieval_k5,Vilnius County,counties of Lithuania,0.0,0.0,0.0,0.0,537,6,0.0001122
+2hop__450608_373421,retrieval_k10,Vilnius County,counties of Lithuania,0.0,0.0,0.0,0.0,1150,6,0.00023480000000000002
+4hop2__9988_158985_70784_61381,always_think,noanswer,1932,0.0,0.0,0.0,0.0,104,11,2.96e-05
+4hop2__9988_158985_70784_61381,retrieval_k3,noanswer,1932,0.0,0.0,0.0,0.0,377,5,7.94e-05
+4hop2__9988_158985_70784_61381,retrieval_k5,1932,1932,1.0,1.0,1.0,1.0,865,5,0.000177
+4hop2__9988_158985_70784_61381,retrieval_k10,1932,1932,1.0,1.0,1.0,1.0,1471,5,0.0002982
+3hop1__857_846_7794,always_think,"42,300",8.005 million,0.0,0.0,0.0,0.0,100,12,2.96e-05
+3hop1__857_846_7794,retrieval_k3,8.005 million,8.005 million,1.0,1.0,1.0,1.0,622,7,0.00013000000000000002
+3hop1__857_846_7794,retrieval_k5,8.005 million,8.005 million,1.0,1.0,1.0,1.0,916,7,0.0001888
+3hop1__857_846_7794,retrieval_k10,8.005 million,8.005 million,1.0,1.0,1.0,1.0,1553,7,0.0003162
+4hop1__88342_75218_128008_80286,always_think,Pete Rose,Pete Rose,1.0,1.0,1.0,1.0,103,11,2.9400000000000003e-05
+4hop1__88342_75218_128008_80286,retrieval_k3,Johnny Burnett,Pete Rose,0.0,0.0,0.0,0.0,686,6,0.00014200000000000004
+4hop1__88342_75218_128008_80286,retrieval_k5,Johnny Burnett,Pete Rose,0.0,0.0,0.0,0.0,897,6,0.0001842
+4hop1__88342_75218_128008_80286,retrieval_k10,Pete Rose,Pete Rose,1.0,1.0,1.0,1.0,1813,11,0.00037140000000000003
+2hop__38030_23241,always_think,48%,48.8 percent,0.0,0.0,0.0,0.0,97,11,2.82e-05
+2hop__38030_23241,retrieval_k3,48.8%,48.8 percent,0.0,0.6666666666666666,1.0,0.5,662,7,0.000138
+2hop__38030_23241,retrieval_k5,49.3%,48.8 percent,0.0,0.0,0.0,0.0,1064,7,0.00021840000000000002
+2hop__38030_23241,retrieval_k10,48.8%,48.8 percent,0.0,0.6666666666666666,1.0,0.5,1909,7,0.0003874
+2hop__434218_29898,always_think,CHBC-DT,CFJC-TV in Kamloops,0.0,0.0,0.0,0.0,88,13,2.8000000000000003e-05
+2hop__434218_29898,retrieval_k3,CFJC-TV,CFJC-TV in Kamloops,0.0,0.5,1.0,0.3333333333333333,666,6,0.00013800000000000002
+2hop__434218_29898,retrieval_k5,CFJC-TV,CFJC-TV in Kamloops,0.0,0.5,1.0,0.3333333333333333,1065,6,0.0002178
+2hop__434218_29898,retrieval_k10,CFJC-TV,CFJC-TV in Kamloops,0.0,0.5,1.0,0.3333333333333333,1702,6,0.00034520000000000004
+2hop__739909_807845,always_think,News Corp,Digital First Media,0.0,0.0,0.0,0.0,85,11,2.58e-05
+2hop__739909_807845,retrieval_k3,MediaNews Group,Digital First Media,1.0,1.0,1.0,1.0,427,6,9.02e-05
+2hop__739909_807845,retrieval_k5,Digital First Media,Digital First Media,1.0,1.0,1.0,1.0,569,12,0.00012340000000000002
+2hop__739909_807845,retrieval_k10,Digital First Media,Digital First Media,1.0,1.0,1.0,1.0,974,12,0.0002044
+2hop__7855_7794,always_think,"4,601,207",8.005 million,0.0,0.0,0.0,0.0,87,14,2.8600000000000004e-05
+2hop__7855_7794,retrieval_k3,8.005 million,8.005 million,1.0,1.0,1.0,1.0,433,7,9.22e-05
+2hop__7855_7794,retrieval_k5,8.11 million,8.005 million,0.0,0.5,0.5,0.5,661,7,0.00013780000000000002
+2hop__7855_7794,retrieval_k10,8.11 million,8.005 million,0.0,0.5,0.5,0.5,1095,7,0.0002246
+4hop1__58323_375563_161848_61344,always_think,Europe,submerged continent of Zealandia,0.0,0.0,0.0,0.0,93,10,2.6600000000000003e-05
+4hop1__58323_375563_161848_61344,retrieval_k3,Australia,submerged continent of Zealandia,0.0,0.0,0.0,0.0,463,4,9.580000000000001e-05
+4hop1__58323_375563_161848_61344,retrieval_k5,Australia,submerged continent of Zealandia,0.0,0.0,0.0,0.0,696,4,0.00014240000000000002
+4hop1__58323_375563_161848_61344,retrieval_k10,Australia,submerged continent of Zealandia,0.0,0.0,0.0,0.0,1303,4,0.00026380000000000007
+2hop__46213_494136,always_think,J. Michael Finley,Meg Ryan,0.0,0.0,0.0,0.0,93,14,2.9800000000000003e-05
+2hop__46213_494136,retrieval_k3,Meg Ryan,Meg Ryan,1.0,1.0,1.0,1.0,420,5,8.8e-05
+2hop__46213_494136,retrieval_k5,Blythe Danner,Meg Ryan,0.0,0.0,0.0,0.0,708,14,0.0001528
+2hop__46213_494136,retrieval_k10,Gwyneth Paltrow,Meg Ryan,0.0,0.0,0.0,0.0,1363,9,0.0002798
+3hop2__159979_30587_44003,always_think,Gulf of Mexico,through the Florida Straits,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,92,13,2.8800000000000002e-05
+3hop2__159979_30587_44003,retrieval_k3,Florida Straits,through the Florida Straits,0.0,0.8,1.0,0.6666666666666666,759,12,0.0001614
+3hop2__159979_30587_44003,retrieval_k5,Gulf of Mexico,through the Florida Straits,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,1114,7,0.00022840000000000002
+3hop2__159979_30587_44003,retrieval_k10,Gulf of Mexico,through the Florida Straits,0.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,1571,7,0.0003198000000000001
+3hop1__136129_87694_64412,always_think,2006,11 February 1929,0.0,0.0,0.0,0.0,98,11,2.8400000000000003e-05
+3hop1__136129_87694_64412,retrieval_k3,1929,11 February 1929,0.0,0.5,1.0,0.3333333333333333,429,11,9.460000000000001e-05
+3hop1__136129_87694_64412,retrieval_k5,1929,11 February 1929,0.0,0.5,1.0,0.3333333333333333,559,11,0.0001206
+3hop1__136129_87694_64412,retrieval_k10,1929,11 February 1929,0.0,0.5,1.0,0.3333333333333333,1187,5,0.00024139999999999999
+3hop2__67618_30587_44003,always_think,Gulf of Mexico,through the Florida Straits,0.0,0.0,0.0,0.0,94,13,2.9199999999999998e-05
+3hop2__67618_30587_44003,retrieval_k3,Florida Straits,through the Florida Straits,0.0,0.8,1.0,0.6666666666666666,531,6,0.000111
+3hop2__67618_30587_44003,retrieval_k5,Gulf of Mexico,through the Florida Straits,0.0,0.0,0.0,0.0,787,7,0.000163
+3hop2__67618_30587_44003,retrieval_k10,Gulf of Mexico,through the Florida Straits,0.0,0.0,0.0,0.0,1405,7,0.00028660000000000003
+3hop1__844109_720914_27537,always_think,to become a priest,for the conclave in Rome,0.0,0.0,0.0,0.0,90,13,2.84e-05
+3hop1__844109_720914_27537,retrieval_k3,for the conclave in Rome,for the conclave in Rome,1.0,1.0,1.0,1.0,464,9,0.0001
+3hop1__844109_720914_27537,retrieval_k5,conclave in Rome,for the conclave in Rome,0.0,0.8571428571428571,1.0,0.75,689,7,0.00014340000000000002
+3hop1__844109_720914_27537,retrieval_k10,to attend the conclave in Rome,for the conclave in Rome,0.0,0.6666666666666665,0.6,0.75,1274,10,0.0002628
