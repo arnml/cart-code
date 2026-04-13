@@ -1,0 +1,51 @@
+question_id,method,threshold,answer_pred,answer_gt,em,f1,precision,recall,input_tokens,output_tokens,cost_usd
+91edc89c0bdc11eba7f7acde48001122,noise_gate,0.2,Les films du losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,1317,8,0.00026980000000000005
+91edc89c0bdc11eba7f7acde48001122,noise_gate,0.25,Les films du losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,1084,8,0.0002232
+91edc89c0bdc11eba7f7acde48001122,noise_gate,0.3,Les films du losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,1084,8,0.0002232
+91edc89c0bdc11eba7f7acde48001122,noise_gate,0.35,Les Films du Losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,553,8,0.00011700000000000001
+91edc89c0bdc11eba7f7acde48001122,noise_gate,0.5,Les films du losange,Cahiers du cinéma,0.0,0.28571428571428575,0.25,0.3333333333333333,169,8,4.02e-05
+cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.2,no,yes,0.0,0.0,0.0,0.0,478,4,9.88e-05
+cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.25,no,yes,0.0,0.0,0.0,0.0,427,4,8.86e-05
+cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.3,no,yes,0.0,0.0,0.0,0.0,201,10,4.82e-05
+cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.35,no,yes,0.0,0.0,0.0,0.0,182,10,4.4399999999999995e-05
+cd80e22a08d711ebbd9aac1f6bf848b6,noise_gate,0.5,yes,yes,1.0,1.0,1.0,1.0,182,4,3.96e-05
+ab94845c0baf11ebab90acde48001122,noise_gate,0.2,Theudebert I,Theuderic I,0.0,0.5,0.5,0.5,1059,7,0.0002174
+ab94845c0baf11ebab90acde48001122,noise_gate,0.25,Theudebert I,Theuderic I,0.0,0.5,0.5,0.5,943,7,0.00019420000000000003
+ab94845c0baf11ebab90acde48001122,noise_gate,0.3,Wacho,Theuderic I,0.0,0.0,0.0,0.0,834,5,0.0001708
+ab94845c0baf11ebab90acde48001122,noise_gate,0.35,Theudebert I,Theuderic I,0.0,0.5,0.5,0.5,319,7,6.94e-05
+ab94845c0baf11ebab90acde48001122,noise_gate,0.5,Theuderich I,Theuderic I,0.0,0.5,0.5,0.5,282,7,6.200000000000002e-05
+d347b6500bdb11eba7f7acde48001122,noise_gate,0.2,Germany,Austria,0.0,0.0,0.0,0.0,497,4,0.0001026
+d347b6500bdb11eba7f7acde48001122,noise_gate,0.25,West German,Austria,0.0,0.0,0.0,0.0,497,5,0.0001034
+d347b6500bdb11eba7f7acde48001122,noise_gate,0.3,West Germany,Austria,0.0,0.0,0.0,0.0,316,5,6.720000000000001e-05
+d347b6500bdb11eba7f7acde48001122,noise_gate,0.35,West German,Austria,0.0,0.0,0.0,0.0,251,5,5.42e-05
+d347b6500bdb11eba7f7acde48001122,noise_gate,0.5,West Germany,Austria,0.0,0.0,0.0,0.0,192,5,4.240000000000001e-05
+672e556408de11ebbd9eac1f6bf848b6,noise_gate,0.2,Ernst Bessey,Friedrich Paschen,0.0,0.0,0.0,0.0,809,8,0.0001682
+672e556408de11ebbd9eac1f6bf848b6,noise_gate,0.25,Ernst Bessey,Friedrich Paschen,0.0,0.0,0.0,0.0,727,8,0.0001518
+672e556408de11ebbd9eac1f6bf848b6,noise_gate,0.3,Ernst Bessey,Friedrich Paschen,0.0,0.0,0.0,0.0,727,8,0.0001518
+672e556408de11ebbd9eac1f6bf848b6,noise_gate,0.35,Ernst Bessey,Friedrich Paschen,0.0,0.0,0.0,0.0,679,8,0.00014220000000000001
+672e556408de11ebbd9eac1f6bf848b6,noise_gate,0.5,Ernst Bessey,Friedrich Paschen,0.0,0.0,0.0,0.0,577,8,0.0001218
+396b04e7089911ebbd77ac1f6bf848b6,noise_gate,0.2,Blood of the Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,286,8,6.36e-05
+396b04e7089911ebbd77ac1f6bf848b6,noise_gate,0.25,Blood of the Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,239,8,5.42e-05
+396b04e7089911ebbd77ac1f6bf848b6,noise_gate,0.3,Blood Of The Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,239,14,5.9000000000000004e-05
+396b04e7089911ebbd77ac1f6bf848b6,noise_gate,0.35,Blood Of The Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,239,14,5.9000000000000004e-05
+396b04e7089911ebbd77ac1f6bf848b6,noise_gate,0.5,Blood of the Losers,Blood Of The Losers,1.0,1.0,1.0,1.0,239,14,5.9000000000000004e-05
+f6e8ecc80bae11ebab90acde48001122,noise_gate,0.2,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,1447,8,0.00029580000000000003
+f6e8ecc80bae11ebab90acde48001122,noise_gate,0.25,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,1314,8,0.0002692
+f6e8ecc80bae11ebab90acde48001122,noise_gate,0.3,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,1255,8,0.00025739999999999997
+f6e8ecc80bae11ebab90acde48001122,noise_gate,0.35,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,1255,8,0.00025739999999999997
+f6e8ecc80bae11ebab90acde48001122,noise_gate,0.5,Owain Glyndŵr,Gruffudd Fychan II,0.0,0.0,0.0,0.0,1255,8,0.00025739999999999997
+390da94e08a411ebbd7cac1f6bf848b6,noise_gate,0.2,Dokuz Dağın Efesi,Dokuz Dağın Efesi,1.0,1.0,1.0,1.0,579,9,0.000123
+390da94e08a411ebbd7cac1f6bf848b6,noise_gate,0.25,noanswer,Dokuz Dağın Efesi,0.0,0.0,0.0,0.0,533,5,0.0001106
+390da94e08a411ebbd7cac1f6bf848b6,noise_gate,0.3,Dokuz Dağın Efesi,Dokuz Dağın Efesi,1.0,1.0,1.0,1.0,533,9,0.0001138
+390da94e08a411ebbd7cac1f6bf848b6,noise_gate,0.35,The Life and Loves of Tschaikovsky,Dokuz Dağın Efesi,0.0,0.0,0.0,0.0,482,12,0.00010600000000000002
+390da94e08a411ebbd7cac1f6bf848b6,noise_gate,0.5,Dokuz Dağın Efesi,Dokuz Dağın Efesi,1.0,1.0,1.0,1.0,258,15,6.36e-05
+01b2d6ae0bdd11eba7f7acde48001122,noise_gate,0.2,1027,1027,1.0,1.0,1.0,1.0,635,5,0.00013099999999999999
+01b2d6ae0bdd11eba7f7acde48001122,noise_gate,0.25,1027,1027,1.0,1.0,1.0,1.0,604,5,0.0001248
+01b2d6ae0bdd11eba7f7acde48001122,noise_gate,0.3,1027,1027,1.0,1.0,1.0,1.0,551,5,0.00011420000000000001
+01b2d6ae0bdd11eba7f7acde48001122,noise_gate,0.35,1027,1027,1.0,1.0,1.0,1.0,551,5,0.00011420000000000001
+01b2d6ae0bdd11eba7f7acde48001122,noise_gate,0.5,noanswer,1027,0.0,0.0,0.0,0.0,392,5,8.240000000000001e-05
+21eb30140bde11eba7f7acde48001122,noise_gate,0.2,Temple University,Mount Holyoke College,0.0,0.0,0.0,0.0,624,5,0.00012880000000000001
+21eb30140bde11eba7f7acde48001122,noise_gate,0.25,Temple University,Mount Holyoke College,0.0,0.0,0.0,0.0,581,5,0.00012020000000000001
+21eb30140bde11eba7f7acde48001122,noise_gate,0.3,Temple University,Mount Holyoke College,0.0,0.0,0.0,0.0,485,5,0.000101
+21eb30140bde11eba7f7acde48001122,noise_gate,0.35,Temple University,Mount Holyoke College,0.0,0.0,0.0,0.0,371,5,7.82e-05
+21eb30140bde11eba7f7acde48001122,noise_gate,0.5,University of Michigan,Mount Holyoke College,0.0,0.0,0.0,0.0,274,12,6.440000000000001e-05

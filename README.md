@@ -93,6 +93,30 @@ under their own dataset folders:
 - `experiments/2wiki/results/baseline/`
 - `experiments/musique_ans/results/baseline/`
 
+### 2Wiki noise gate
+```bash
+uv run python -m experiments.2wiki.run_noise_gate <SAMPLE_SIZE> [max_workers]
+```
+
+### MuSiQue-Ans noise gate
+```bash
+uv run python -m experiments.musique_ans.run_noise_gate <SAMPLE_SIZE> [max_workers]
+```
+
+These scripts write their CSVs under:
+- `experiments/2wiki/results/noise_gate/`
+- `experiments/musique_ans/results/noise_gate/`
+
+### 2Wiki noise-gate analysis
+```bash
+uv run python -m experiments.2wiki.analyse_noise_gate <MODEL_NAME> [split]
+```
+
+### MuSiQue-Ans noise-gate analysis
+```bash
+uv run python -m experiments.musique_ans.analyse_noise_gate <MODEL_NAME> [split]
+```
+
 ### Analyse baselines
 ```bash
 uv run python -m experiments.analyse_baseline <MODEL_NAME>
