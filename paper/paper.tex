@@ -101,8 +101,7 @@ The Pareto presentation reports the trade-off without committing to a specific $
 Figure~\ref{fig:gold_vs_distractor} illustrates the difficulty of selection over $D$: a gold paragraph and a BM25-retrieved distractor for the same HotpotQA question share entities, vocabulary, and discourse style, producing close embedding scores and motivating the selection rules introduced in Section~\ref{sec:methods}.
 
 \begin{figure}[t]
-    \centering
-    \includegraphics[width=0.95\linewidth]{images/fig1_gold_vs_distractor.pdf}
+    \centering    \includegraphics[width=0.95\linewidth]{images/fig1_gold_vs_distractor.png}
     \caption{An example HotpotQA distractor instance. The gold paragraph and the BM25-retrieved distractor share entities and vocabulary with the question, producing similar embedding scores. The structural similarity makes paragraph-level filtering non-trivial.}
     \label{fig:gold_vs_distractor}
 \end{figure}
@@ -110,70 +109,70 @@ Figure~\ref{fig:gold_vs_distractor} illustrates the difficulty of selection over
 \section{Methods}
 \label{sec:methods}
 
-Five strategies are evaluated, ordered by the amount of structure they exploit at the selector layer: none (fixed budget), similarity gap (Adaptive-$k$), per-arm reward statistics (UCB1-TUNED), context features and contextual reward (LinUCB), and dense paragraph-level similarity (Noise-Gate, proposed). Each subsection opens with the design hypothesis the strategy embodies, then defines the rule formally. Within the comparator-ladder framing of Section~\ref{sec:introduction}, the three comparators (Adaptive-$k$, UCB1-TUNED, LinUCB) form a progression of increasing structure: Adaptive-$k$ is training-free, while UCB1-TUNED and LinUCB are learned; the proposed Noise-Gate replaces the entire ladder by a deterministic threshold on a single richer signal.
+Five strategies are evaluated, ordered by selector-level structure: none (fixed budget), similarity gap (Adaptive-$k$), per-arm reward statistics (UCB1-TUNED), contextual features (LinUCB), and dense paragraph-level similarity (Noise-Gate, proposed). Each subsection states the design hypothesis, then defines the rule formally. Within the comparator ladder of Section~\ref{sec:introduction}, Adaptive-$k$ is training-free while UCB1-TUNED and LinUCB are learned; Noise-Gate replaces the ladder with a deterministic threshold on a single richer signal.
 
 \subsection{Fixed-$k$ Baselines}
 \label{subsec:methods_fixed}
 
-The baselines pass the top $k$ paragraphs of the retrieved pool, ordered by the upstream retrieval score, and supply the quality and cost reference points for the comparison. Four anchors are used on HotpotQA distractor with the configuration of Section~\ref{sec:experiments}: $k{=}0$ (no retrieval, parametric-knowledge floor) at F1 0.387 and 103.5 mean tokens; $k{=}3$ at F1 0.651 and 471.3 mean tokens; $k{=}5$ at F1 0.716 and 731.7 mean tokens; and $k{=}10$ at F1 0.792 and 1452.5 mean tokens. Throughout the paper, $k{=}10$ serves as the quality reference against which the $\pm 0.05$ tolerance band is measured, and $k{=}0$ as the parametric-knowledge floor below which a context-selection strategy is uninformative. The four anchors trace a near-monotone quality--cost curve: each additional pair of paragraphs costs roughly $300$ extra tokens and recovers a smaller increment of F1, so the curve already exhibits diminishing returns within the fixed-$k$ family before any adaptive policy is introduced.
+The baselines pass the top $k$ paragraphs ranked by the upstream retrieval score and supply the quality and cost reference points. Four anchors are used on HotpotQA distractor under the configuration of Section~\ref{sec:experiments}: $k{=}0$ at F1 0.387 and 103.5 mean tokens; $k{=}3$ at F1 0.651 and 471.3 mean tokens; $k{=}5$ at F1 0.716 and 731.7 mean tokens; and $k{=}10$ at F1 0.792 and 1452.5 mean tokens. Throughout the paper, $k{=}10$ serves as the quality reference for the $\pm 0.05$ tolerance band, and $k{=}0$ as the parametric-knowledge floor below which selection is uninformative. Each additional pair of paragraphs costs roughly $300$ extra tokens for a smaller F1 increment, so the curve exhibits diminishing returns within the fixed-$k$ family before any adaptive policy is introduced.
 
 \subsection{Adaptive-$k$}
 \label{subsec:methods_adaptivek}
 
-The design hypothesis behind Adaptive-$k$~\cite{taguchi2025adaptivek} is that the largest gap in sorted similarity scores marks the boundary between relevant and irrelevant context, so a single largest-gap rule can replace a tuned integer $k$. The appeal is that the rule is single-pass, training-free, and parameter-light: a strategy that adapts the retrieval budget to the per-query similarity profile while remaining as cheap to deploy as a fixed-$k$ baseline. Given retrieved documents with similarity scores $s_1 \ge s_2 \ge \cdots \ge s_n$, the cut point of maximum adjacent separation is
+Adaptive-$k$~\cite{taguchi2025adaptivek} assumes that the largest gap in sorted similarity scores marks the boundary between relevant and irrelevant context, so a single largest-gap rule replaces a tuned integer $k$. The rule is single-pass, training-free, and parameter-light, adapting the budget to the per-query similarity profile at the deployment cost of a fixed-$k$ baseline. Given scores $s_1 \ge s_2 \ge \cdots \ge s_n$, the cut point of maximum adjacent separation is
 \begin{equation}
 \label{eq:adaptivek}
 k^* \;=\; \arg\max_{1\le i<n}(s_i - s_{i+1}).
 \end{equation}
-A minimum-gap floor $\delta=0.08$ guards against degenerate splits; if $\max_i (s_i - s_{i+1}) < \delta$, the rule falls back to $k=\min(5,n)$. The rule exploits exactly one structural feature of the candidate pool, namely the rank of similarity scores, and assumes that the largest adjacent drop is informative about the boundary between evidence and noise.
+A minimum-gap floor $\delta=0.08$ guards against degenerate splits: if $\max_i (s_i - s_{i+1}) < \delta$, the rule falls back to $k=\min(5,n)$. The rule exploits a single structural feature, the rank of similarity scores, and assumes the largest adjacent drop separates evidence from noise.
 
 \subsection{UCB1-TUNED}
 \label{subsec:methods_ucb1}
 
-The design hypothesis behind UCB1-TUNED~\cite{auer2002ucb1} is that per-arm reward statistics learned from a training split, combined with variance-aware exploration, can rank arms more accurately than a static rule, at training cost lighter than full supervision. The appeal is that the bandit reuses the upstream retrieval pool but reorders it by a learned utility, attaching a principled exploration term that adapts to the variance of each arm.
+UCB1-TUNED~\cite{auer2002ucb1} assumes that per-arm reward statistics estimated on a training split, with variance-aware exploration, rank arms more accurately than a static rule at lighter cost than full supervision. The bandit reuses the upstream retrieval pool but reorders it by a learned utility with an exploration term that adapts to per-arm variance.
 
-Each paragraph title is treated as an arm. A binary reward of 1 is recorded if the title appears in the supporting-fact set of the example, 0 otherwise. Per-title means $\mu_a$ and variances $\sigma_a^2$ are estimated online with Welford's recursion over the HotpotQA training split ($n{=}90{,}447$), so the estimator scales linearly in the size of the training pool and stores a constant per arm. At inference, each candidate title $a$ is scored as
+Each paragraph title is an arm; the binary reward is 1 if the title is in the supporting-fact set, 0 otherwise. Per-title means $\mu_a$ and variances $\sigma_a^2$ are estimated online with Welford's recursion over the HotpotQA training split ($n{=}90{,}447$), giving constant storage per arm. At inference, each candidate title $a$ is scored as
 \begin{equation}
 \label{eq:ucb1tuned}
 \mathrm{score}(a) \;=\; \mu_a \;+\; \sqrt{\frac{\ln T}{n_a}\,\min\!\bigl(\tfrac{1}{4},\,\sigma_a^2\bigr)},
 \end{equation}
-where $T$ is the cumulative round count and $n_a$ the number of pulls of arm $a$. The top-$k$ titles by score are kept; titles unseen during training fall back to the BM25 ordering of the upstream retriever. The exploration term is variance-aware, which is the refinement of UCB1-TUNED over the original UCB1: arms with low observed variance are penalised less for their exploration bonus, so titles with stable rewards rise faster in the ordering.
+with $T$ the cumulative round count and $n_a$ the pull count of arm $a$. The top-$k$ titles are kept; titles unseen during training fall back to the upstream BM25 ordering. The variance-aware exploration term distinguishes UCB1-TUNED from UCB1: arms with low observed variance receive a smaller bonus, so titles with stable rewards rise faster in the ranking.
 
 \subsection{LinUCB}
 \label{subsec:methods_linucb}
 
-The design hypothesis behind LinUCB~\cite{chu2011linucb} is that parameterising reward as a linear function of context features generalises beyond the training-time arm vocabulary, addressing UCB1-TUNED's cold-start regime in settings where arms drawn at inference are not those drawn during training. The appeal is that documents previously unseen as arms can still be evaluated through their features, so the policy is in principle robust to the title-vocabulary shift between train and inference splits that a title-indexed bandit suffers from.
+LinUCB~\cite{chu2011linucb} parameterises reward as a linear function of context features, generalising beyond the training-time arm vocabulary and addressing the cold-start regime of UCB1-TUNED. Documents unseen as arms remain scoreable through their features, so the policy is in principle robust to the title-vocabulary shift between train and inference splits.
 
 Each question--paragraph pair is mapped to a feature vector,
 \begin{equation}
 \label{eq:linucb_features}
 x(q,d) = [f_1,\, f_2,\, f_3]^\top,\quad \hat{\theta} = A^{-1}b,\quad A = I + \sum_{t=1}^{T} x_t x_t^\top,\quad b = \sum_{t=1}^{T} r_t x_t,
 \end{equation}
-where $f_1$ is the title-in-question fraction, $f_2$ is the normalised question length, and $f_3$ is the normalised section length. The three features are chosen to be tractable at the scale of the training split: each is a constant-time computation per question--paragraph pair and does not require dense embedding inference, which is the constraint that motivates a contextual bandit over a model that consumes paragraph embeddings directly. The ridge update accumulates the parameter estimate $\hat{\theta}$ over the training observations $\{(x_t,r_t)\}_{t=1}^{T}$ with binary reward $r_t\in\{0,1\}$. At inference, each candidate is scored by
+where $f_1$ is the title-in-question fraction, $f_2$ the normalised question length, and $f_3$ the normalised section length. The three features are constant-time per pair and require no dense embedding inference, the scale constraint that motivates a contextual bandit over a model consuming paragraph embeddings directly. The ridge update accumulates $\hat{\theta}$ over training observations $\{(x_t,r_t)\}_{t=1}^{T}$ with binary reward $r_t\in\{0,1\}$. At inference, each candidate is scored by
 \begin{equation}
 \label{eq:linucb_score}
 p(q,d) \;=\; \hat{\theta}^\top x(q,d) \;+\; \alpha\,\sqrt{x(q,d)^\top A^{-1}\, x(q,d)},
 \end{equation}
-where the second term is the LinUCB exploration bonus controlled by $\alpha$, and the top-$k$ paragraphs by $p(q,d)$ are kept.
+with the second term the LinUCB exploration bonus controlled by $\alpha$; the top-$k$ paragraphs by $p(q,d)$ are kept.
 
 \subsection{Noise-Gate}
 \label{subsec:methods_noisegate}
 
-The design hypothesis behind Noise-Gate is that dense paragraph-level cosine similarity to the question is a discriminative signal that distinguishes gold evidence from BM25-adjacent distractors when surface and rank features cannot, and that a subsequent redundancy filter removes the near-duplicates introduced by paragraph-level granularity. The appeal is that the policy requires no training, computes embeddings on a small encoder that can be cached offline, and exposes a single primary tunable parameter with a clear Pareto interpretation. The two stages are kept separate because they address two different failure modes of paragraph-level selection: a relevance stage prevents low-similarity distractors from entering the selected set, and a redundancy stage prevents near-duplicate paragraphs from accumulating once the relevance threshold is cleared. The procedure is applied to the same paragraph pool $D$, with embeddings $e_q$ and $\{e_i\}$ computed on a small sentence encoder and cached per dataset.
+Noise-Gate assumes that dense paragraph-level cosine similarity to the question discriminates gold evidence from BM25-adjacent distractors when surface and rank features cannot, and that a subsequent redundancy filter removes near-duplicates introduced by paragraph-level granularity. The policy requires no training, runs on a small encoder cached offline, and exposes a single primary tunable parameter with a clear Pareto interpretation. The two stages are kept separate to address distinct failure modes: the relevance stage blocks low-similarity distractors, and the redundancy stage prevents near-duplicates from accumulating once the relevance threshold is cleared. The procedure is applied to the pool $D$, with embeddings $e_q$ and $\{e_i\}$ computed on a small sentence encoder and cached per dataset.
 
-\textbf{Stage 1 (relevance).} A paragraph is retained only if its cosine similarity to the question clears the threshold $\tau$:
+\textbf{Stage 1 (relevance).} A paragraph is retained if its cosine similarity to the question clears $\tau$:
 \begin{equation}
 \label{eq:cos}
 \cos(q, d_i) \;=\; \frac{e_q \cdot e_i}{\|e_q\|\,\|e_i\|} \;\ge\; \tau.
 \end{equation}
 
-\textbf{Stage 2 (redundancy).} Among paragraphs surviving Stage 1, a paragraph $d_i$ is added to the selected set $S$ only if its maximum Jaccard overlap with already-selected paragraphs is at most $\rho$:
+\textbf{Stage 2 (redundancy).} Among paragraphs surviving Stage 1, $d_i$ is added to $S$ only if its maximum Jaccard overlap with already-selected paragraphs is at most $\rho$:
 \begin{equation}
 \label{eq:jaccard}
 \max_{d_j \in S}\;\frac{|d_i \cap d_j|}{|d_i \cup d_j|} \;\le\; \rho.
 \end{equation}
 
-The gate operates on precomputed embeddings; no per-dataset training is performed. Algorithm~\ref{alg:noisegate} states the selection in pseudocode.
+The gate operates on precomputed embeddings without per-dataset training. Algorithm~\ref{alg:noisegate} states the selection in pseudocode.
 
 \begin{algorithm}[t]
 \caption{Noise-Gate context selection.}
