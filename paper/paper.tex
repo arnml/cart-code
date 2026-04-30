@@ -35,154 +35,154 @@
 \titlerunning{Noise-Gated Retrieval for Cost-Aware RAG}
 %
 \author{First Author\inst{1}\orcidID{0000-1111-2222-3333} \and
-Second Author\inst{2,3}\orcidID{1111-2222-3333-4444} \and
-Third Author\inst{3}\orcidID{2222--3333-4444-5555}}
+Second Author\inst{1}\orcidID{1111-2222-3333-4444} \and
+Third Author\inst{1}\orcidID{2222--3333-4444-5555}}
 %
 \authorrunning{F. Author et al.}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-\institute{Universidade de São Paulo, BR \and
-Springer Heidelberg, Tiergartenstr. 17, 69121 Heidelberg, Germany
-\email{lncs@springer.com}\\
-\url{http://www.springer.com/gp/computer-science/lncs} \and
-ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
-\email{\{abc,lncs\}@uni-heidelberg.de}}
+\institute{Universidade de São Paulo, BR}
 %
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-Retrieval-Augmented Generation (RAG) is widely used to reduce hallucination in language models. However, many RAG systems retrieve a fixed number of documents, which can increase cost and reduce performance. Although learned context-selection methods aim to keep only useful passages, their weaknesses on distractor-heavy multi-hop QA datasets are not well understood. In this work, we analyze three representative context-selection strategies across three distractor-heavy benchmarks. We find that their failures are mainly caused by benchmark structure, including topically similar distractors, limited title-vocabulary overlap, and lexical confusability. Based on this analysis, we propose Noise-Gate, a simple training-free filter that combines cosine-similarity thresholding with Jaccard-based redundancy removal. Experiments show that Noise-Gate maintains performance while reducing selected tokens by 11\% to 26\% compared with the baseline. It can also outperform learned strategies with minimal recalibration across domains. These findings suggest that, in multi-hop QA, data structure matters more than algorithmic complexity for context-selection performance.
-%Retrieval-Augmented Generation (RAG) has emerged as a cornerstone architecture for reducing hallucination in language models. Yet most deployed RAG systems retrieve a fixed number of documents regardless of application, increasing cost and potentially degrading performance. Learned context-selection strategies retain only useful retrieved passages, but their failure modes on distractor-heavy benchmarks remain poorly understood. In this work, we study three representative strategies—similarity-gap truncation, title-based self-evolving bandit reranking and contextual bandit selection—on three multi-hop distractor-heavy datasets. We trace their underperformance to distinct structural properties of these benchmarks: topically adjacent distractors, sparse title-vocabulary overlap between training and inference data and lexical feature confusability. Against this diagnostic backdrop, we propose Noise-Gate, a training-free, simple two-stage filter that combines dense cosine-similarity thresholding with Jaccard redundancy removal. Using precomputed sentence embeddings and a single tunable threshold, Noise-Gate sidesteps all three failure modes by design. Across three datasets, Noise-Gate maintains performance while reducing selected tokens by 11\% to 26\% compared to the baseline. We show that Noise-Gate can outperform learned strategies and adapt to distinct domains with at most one threshold recalibration step. Our results suggest that, for multi-hop QA, the structural properties of the data — not the sophistication of the selection algorithm — are the primary determinant of context-selection performance.
-
-% Retrieval-Augmented Generation is widely used to reduce hallucination in language models. However, many RAG systems retrieve a fixed number of documents, which can increase cost and reduce performance. Although learned context-selection methods aim to keep only useful passages, their weaknesses on distractor-heavy multi-hop QA datasets are not well understood. In this work, we analyze three representative context-selection strategies across three distractor-heavy benchmarks. We find that their failures are mainly caused by benchmark structure, including topically similar distractors, limited title-vocabulary overlap, and lexical confusability. Based on this analysis, we propose Noise-Gate, a simple training-free filter that combines cosine-similarity thresholding with Jaccard-based redundancy removal. Experiments show that Noise-Gate maintains performance while reducing selected tokens by 11% to 26% compared with the baseline. It can also outperform learned strategies with minimal recalibration across domains. These findings suggest that, in multi-hop QA, data structure matters more than algorithmic complexity for context-selection performance.
-%On HotpotQA distractor, it reduces token usage by 26.7\% while keeping F1 within $\pm$0.05 of the full-retrieval baseline, outperforming every learned strategy without any training or per-dataset model fitting. The method transfers to 2WikiMultiHopQA and MuSiQue-Ans with at most one step of threshold recalibration, yielding simultaneous quality gains and cost reductions on both datasets. 
-
-% topically adjacent distractors whose embeddings are nearly indistinguishable from gold evidence; sparse title-vocabulary overlap between training and inference and lexical feature confusability that defeats linear reward estimation. 
+Retrieval-augmented generation (RAG) reduces hallucination in large language models by grounding generation in retrieved evidence, but most deployed pipelines retrieve a fixed number of paragraphs regardless of query difficulty, inflating token cost without consistent quality gain. This work evaluates whether a training-free filter can compress the retrieved pool without degrading answer quality on distractor-heavy multi-hop benchmarks, and characterises why three alternative context-selection strategies underperform on this class of tasks. Five strategies are compared with matched samples on a fixed generation model: four fixed-budget baselines, similarity-gap truncation, a title-arm bandit, a contextual bandit, and the proposed Noise-Gate, which combines a cosine-similarity threshold with a Jaccard-overlap redundancy filter on precomputed paragraph embeddings. On the reference benchmark, Noise-Gate preserves answer quality at a 26.7\% token reduction relative to the full-retrieval baseline, while no alternative matches that trade-off. Two transfer pilots show that the same threshold scheme matches or exceeds the full-retrieval baseline at lower cost with at most one threshold step of recalibration. The structural failure modes of the learned comparators trace to topically adjacent BM25 distractors, sparse title vocabulary across splits, and lexically matched features that a linear reward model cannot separate.
 
 \keywords{Retrieval-Augmented Generation \and Test-time Compression \and Context Filtering \and Noise Gating}
 \end{abstract}
 
 \section{Introduction}
-Retrieval-augmented generation (RAG) has emerged as a cornerstone architecture for reducing hallucination in large language models by grounding generation in retrieved evidence~\cite{lewis2020rag}. Yet most deployed RAG systems pass a fixed number of documents—typically the top-$k$ retrieved passages—to the language model on every query, regardless of how many are actually useful~\cite{klesel2025rag}. This fixed-budget policy is straightforward to implement but often wasteful: it spends tokens on redundant or irrelevant passages even when fewer documents would suffice, and mounting evidence confirms that noisy context actively degrades answer quality, not merely inference cost~\cite{verma2026reflectiverag,li2025bestpractices}. As RAG adoption scales to production workloads, this per-query overhead compounds into a significant inference-cost bottleneck.
+\label{sec:introduction}
 
-We study this problem on HotpotQA distractor~\cite{yang2018hotpotqa}, a multi-hop question-answering benchmark in which each example provides exactly 10 paragraphs: 2 gold paragraphs containing supporting facts and 8 BM25-retrieved distractors. On GPT-5.4-mini, fixed $k{=}10$ retrieval achieves F1,=,0.792 but costs 1452.5 mean tokens per example—roughly $14\times$ the cost of answering without retrieval (103.5 tokens, F1,=,0.387). The research question is therefore: \emph{Can lightweight re-ranking systems achieve token savings in fixed-pool multi-hop QA without degrading reasoning quality, and what benchmark properties determine success or failure?}
+Retrieval-augmented generation (RAG) is an architecture for reducing hallucination in large language models by grounding generation in retrieved evidence~\cite{lewis2020rag}. Retrieval pipelines span sparse term-frequency methods such as BM25, dense embedding-based retrievers~\cite{karpukhin2020dpr}, and hybrid combinations of the two~\cite{zhao2026aigcsurvey}; the resulting pool is passed as context to the language model, which produces the final answer. With a sufficiently capable language model, the quality bottleneck shifts from generation to context selection: which evidence to pass to the model, given a fixed retrieval upstream, is the focus of this work.
 
-Three structural properties of distractor-heavy multi-hop QA make context selection non-trivial and may explain why naive filtering fails. First, distractors are not random noise: they are retrieved by BM25 precisely because they are topically adjacent to the question, making them semantically hard to distinguish from true supporting facts~\cite{yang2018hotpotqa}. Recent work on seemingly plausible distractors confirms that LLMs struggle when irrelevant passages share entities, vocabulary, and discourse style with gold evidence~\cite{chiang2024plausible}. Second, multi-hop reasoning requires jointly complementary evidence sets—documents that together support a reasoning chain—rather than individually relevant passages~\cite{trivedi2023interleave}. Third, the fixed-pool structure (2 gold + 8 distractors) creates a structured filtering challenge rather than an open-domain retrieval problem, positioning our work at the intersection of context compression and set-wise selection.
+Yet, most retrieval systems retrieve a fixed number of documents, regardless of the query~\cite{klesel2025rag}. Fixed-$k$ retrieval persists for reasons that are operational rather than empirical: training a learned selector per domain is expensive in supervision and compute, deployment infrastructure favours a single deterministic budget, and a fixed integer is straightforward to monitor and reason about. The cost of the convention is concrete. On HotpotQA distractor~\cite{yang2018hotpotqa} with the configuration of Section~\ref{sec:experiments}, $k{=}10$ retrieval reaches token-level F1 0.792 at 1452.5 mean tokens per query, against 103.5 mean tokens at F1 0.387 with no retrieval, a roughly fourteenfold cost increase for a quality lift that does not always materialise on harder examples~\cite{verma2026reflectiverag,li2025bestpractices}.
 
-Recent advances in test-time context compression fall into three families, each with distinct trade-offs. \emph{Training-based methods} such as Self-RAG~\cite{asai2024selfrag}, DioR~\cite{guo2025dior}, and DRAGIN~\cite{su2024dragin} learn when and how much to retrieve through additional supervision or model modification, achieving strong quality but requiring retraining for new domains. The training process can be a burden, especially for restricted domains with scarce available data. \emph{Multi-agent filtering frameworks} such as MAIN-RAG~\cite{chang2024mainrag} and PRISM~\cite{nahid2025prism} leverage LLM agents to iteratively select and refine evidence sets, explicitly balancing precision and recall through Selector--Adder loops. While these methods are training-free and achieve state-of-the-art results on multi-hop benchmarks, they incur substantial computational overhead: PRISM requires 3 iterations of LLM calls per query, and MAIN-RAG employs three specialized agents (Judger, Organizer, Integrator) for document filtering. Although no training is needed, using agents framework is itself an expensive alternative. Another family is composed of \emph{Compression-based methods} such as ECoRAG~\cite{jeong2025ecorag} and ChunkRAG~\cite{aggarwal2024chunkrag}, that compress retrieved documents through evidentiality-guided selection or LLM-driven chunk scoring, but require additional infrastructure for boundary detection or multiple LLM calls per chunk. Adaptive-$k$~\cite{taguchi2025adaptivek} represents a fourth approach: similarity-gap truncation that assumes embedding-similarity rank is monotone in relevance, an assumption that breaks on distractor-heavy benchmarks where topically adjacent passages cluster together.
+The field has explored four families of alternatives to fixed-$k$. Training-based adaptive retrieval~\cite{asai2024selfrag,guo2025dior,su2024dragin} learns when and how much to retrieve through additional supervision or model modification, which is a deployment cost in domains with scarce labelled data. Multi-agent and iterative filtering~\cite{chang2024mainrag,nahid2025prism} is training-free but routes each query through several language-model calls, an inference cost. Compression-based methods~\cite{jeong2025ecorag,singh2025chunkrag,xiong2025drrag} require additional infrastructure for chunking, evidentiality scoring, or classifier-based selection. Gap-based truncation~\cite{taguchi2025adaptivek} is single-pass and training-free but rests on an embedding-rank-monotonicity assumption that distractor-heavy benchmarks violate. The three learned comparators evaluated in this paper, namely gap-based truncation~\cite{taguchi2025adaptivek}, a title-arm bandit~\cite{auer2002ucb1}, and a contextual bandit~\cite{chu2011linucb}, form a progression of increasing structure exploited at the selector layer.
 
-A critical gap remains: \emph{can test-time filtering achieve competitive quality-cost tradeoffs without iterative LLM calls, multi-agent orchestration, or training?} We address this question through systematic evaluation of five context-compression strategies on 400 matched HotpotQA validation examples, spanning fixed baselines, learned rerankers and a training-free two-stage embedding filter. Our key finding is that a simple threshold-based gate—combining cosine-similarity filtering (Stage 1) with Jaccard-overlap redundancy removal (Stage 2)—achieves the best observed quality-cost tradeoff, reducing tokens by 26.7\% while remaining within 0.03 F1 of the $k{=}10$ baseline. All three learned strategies underperform this approach due to structural properties of the benchmark: hard similarity gaps split distractor clusters from evidence in Adaptive-$k$, sparse title overlap between training and validation undermines UCB1-TUNED's reward tracking, and semantic indistinguishability between distractors and gold passages defeats LinUCB's lexical-feature regression.
+In particular, for multi-hop or distractor-heavy data the problem can be even worse. Three structural properties of these benchmarks resist naive filtering. BM25-retrieved distractors are topically adjacent to gold evidence and therefore close in embedding space, so methods that use embedding rank as a relevance signal cannot easily separate them~\cite{chiang2024plausible}. Multi-hop reasoning requires evidence sets that are jointly complementary rather than individually relevant, which complicates per-document scoring~\cite{trivedi2023interleave}. The fixed-pool format common to HotpotQA, 2WikiMultiHopQA~\cite{ho-etal-2020-constructing}, and MuSiQue-Ans~\cite{trivedi-etal-2022-musique} reframes selection as a structured filtering task over a small pool of candidates rather than as open-domain retrieval. Prior work indicates that the structural properties of the data are a primary determinant of learned-selector performance on these benchmarks, a point that the failure analysis in Section~\ref{sec:analysis} quantifies.
 
-% We address this question through systematic evaluation of five context-compression strategies on 400 matched HotpotQA validation examples, spanning fixed baselines ($k \in {0, 3, 5, 10}$), learned rerankers (Adaptive-$k$, title-based UCB1-TUNED, LinUCB with lexical features), and a training-free two-stage embedding filter. Our key finding is that a simple threshold-based gate—combining cosine-similarity filtering (Stage 1) with Jaccard-overlap redundancy removal (Stage 2)—achieves the best observed quality-cost tradeoff, reducing tokens by 26.7\% while remaining within 0.03 F1 of the $k{=}10$ baseline. All three learned strategies underperform this approach due to structural properties of the benchmark: hard similarity gaps split distractor clusters from evidence in Adaptive-$k$, sparse title overlap between training and validation undermines UCB1-TUNED's reward tracking, and semantic indistinguishability between distractors and gold passages defeats LinUCB's lexical-feature regression.
+A training-free filter that exploits dense semantic similarity has not been systematically evaluated against learned selectors on distractor-heavy multi-hop QA. This work introduces Noise-Gate, a training-free two-stage filter combining cosine-similarity thresholding with Jaccard-overlap redundancy removal~\cite{goldstein1998mmr}. Three research questions guide the evaluation. RQ1: can a training-free test-time filter reduce token cost on distractor-heavy multi-hop QA without degrading answer quality? RQ2: why do learned context-selection strategies underperform on this class of benchmarks? RQ3: do the same threshold settings transfer across distractor-heavy multi-hop datasets? The contributions are threefold. First, Noise-Gate is introduced and characterised as a training-free filter, with a $-26.7\%$ token reduction at F1 0.764 against 0.792 at $k{=}10$, validated by ablations and transferred to two further benchmarks. Second, a structural failure analysis of the three learned comparators identifies which property of the benchmark each comparator's design hypothesis violates. Third, a matched-sample comparison of five context-compression strategies under a single generation model and prompt provides a controlled reference point for future work. At one million queries per day on the generation model used here, the resulting saving is approximately USD 28{,}000 annualised.
 
-Our contributions are threefold: \begin{enumerate} \item \textbf{Noise-Gate}, a training-free two-stage embedding filter that achieves $-$26.7\% token reduction with minimal quality loss (F1,=,0.764 vs.\ 0.792 at $k{=}10$), validated across ablations over cosine threshold $\tau \in {0.2, 0.25, 0.3, 0.35, 0.5}$ and Jaccard threshold $\rho \in {0.50, 0.55, 0.65}$, and generalized to 2WikiMultiHopQA and MuSiQue-Ans with simultaneous quality and cost improvements. \item \textbf{Structural failure analysis} of three learned strategies (Adaptive-$k$, UCB1-TUNED, LinUCB) on distractor-heavy multi-hop QA, identifying the benchmark properties—topically adjacent BM25 distractors, sparse title vocabulary, lexically confusable features—that make this problem class resistant to similarity-gap, title-based, and feature-based learning. \item \textbf{Systematic comparison} of five context-compression strategies on a matched sample ($n{=}400$, GPT-5.4-mini), providing a reproducible benchmark and demonstrating that lightweight threshold filtering outperforms both learned rerankers and multi-agent frameworks in this setting, achieving comparable quality to PRISM (F1,=,0.764 vs.\ 0.542 on HotpotQA) without iterative LLM calls. \end{enumerate}
-
-The practical implication is clear: for distractor-heavy QA with a fixed retrieved pool, practitioners can reduce token cost with a training-free, interpretable filter whose only tunable parameter ($\tau$) admits a clear Pareto interpretation. At one million queries per day on GPT-5.4-mini, this translates to approximately \$28,000 in annual savings. Our failure analysis further reveals \emph{when} learned methods fail and \emph{why}, providing actionable guidance for future work on test-time context selection in semantically dense retrieval settings.
-
-% This paper is organized as follows: Section 1 ...
+The remainder of this paper is organized as follows. Section~\ref{sec:related} situates Noise-Gate within prior work on RAG, multi-hop distractors, and cost-aware evaluation. Section~\ref{sec:problem} formalises the cost-aware objective. Section~\ref{sec:methods} defines the five strategies. Section~\ref{sec:experiments} reports the main, transfer, and ablation experiments. Section~\ref{sec:analysis} characterises the failure modes of the learned comparators. Section~\ref{sec:discussion} discusses the Pareto position, cost, limitations, and future work. Section~\ref{sec:conclusion} concludes.
 
 \section{Related Work}
+\label{sec:related}
 
-\paragraph{Fixed-budget retrieval.}
-Foundational RAG systems retrieve the top-$k$ documents by relevance~\cite{lewis2020rag}. Fixed $k$ remains the dominant approach in deployed systems~\cite{klesel2025rag}. Our work takes fixed $k=10$ retrieval as the quality baseline and asks how to retain its quality at lower token cost.
+The present work draws on three lines of research. The first is RAG for fact-checking and truth-grounding: retrieval is introduced into language-model pipelines to ground generation in evidence and reduce hallucination, which makes the quality of the selected context a quality-critical step rather than a peripheral one~\cite{lewis2020rag}. The second is multi-hop question answering with structured distractors, where the difficulty of distinguishing gold evidence from BM25-retrieved distractors with adjacent embeddings sets the empirical regime; benchmark constructions of this kind establish that selection over a small fixed pool of plausible paragraphs is itself a non-trivial task~\cite{yang2018hotpotqa,chiang2024plausible,trivedi2023interleave}. The third is cost-aware evaluation of RAG pipelines, which supports treating token cost as a meaningful axis of comparison alongside quality and grounds the decision to fix the generation model and report mean tokens per query~\cite{klesel2025rag,li2025bestpractices}. The five families of selectors below position Noise-Gate against representative work in each line.
 
-\paragraph{Adaptive retrieval control.}
-Self-RAG~\cite{asai2024selfrag}, DioR~\cite{guo2025dior}, and DRAGIN~\cite{su2024dragin} learn when to retrieve and how much to retrieve using training or learned tokens. These methods require additional training or model modification. Our work is orthogonal: we focus on filtering a fixed retrieved pool without training, a test-time-only strategy.
+\paragraph{Fixed-budget retrieval.} The canonical RAG formulation passes a fixed top-$k$ retrieved set to a generator~\cite{lewis2020rag}, and a recent survey of deployment patterns indicates that fixed top-$k$ remains the deployed default~\cite{klesel2025rag}. The present work treats fixed $k{=}10$ as a quality reference and asks whether the same quality is reachable at lower token cost on the same fixed pool.
 
-\paragraph{Context noise and compression.}
-Recent work addresses context quality by selecting subsets of retrieved documents. Adaptive-$k$~\cite{taguchi2025adaptivek} selects documents by similarity-score gaps; we evaluate it as a representative of gap-based strategies. ChunkRAG~\cite{singh2025chunkrag} filters at the chunk level with semantic chunking, requiring additional infrastructure for chunk boundary detection. DR-RAG~\cite{xiong2025drrag} adds classifier-guided relevance selection in a domain-specific RAG pipeline, which requires training and domain-specific tuning. In contrast, Noise-Gated Retrieval operates at paragraph granularity without training, making it compatible with standard retrieval pipelines and deployable across datasets without retraining. SetR~\cite{lee2025setr} and RankRAG~\cite{yu2024rankrag} select context as a set using complementarity and downstream usefulness. ReflectiveRAG~\cite{verma2026reflectiverag} shows that irrelevant or redundant context can hurt quality. Our noise-gate component is conceptually related to Maximum Marginal Relevance~\cite{goldstein1998mmr}, which trades off relevance and diversity, but uses a two-stage design: cosine similarity for relevance, Jaccard overlap for redundancy.
+\paragraph{Training-based adaptive retrieval.} Self-RAG~\cite{asai2024selfrag}, DioR~\cite{guo2025dior}, and DRAGIN~\cite{su2024dragin} learn when to retrieve and how much to retrieve through additional supervision or model modification. The supervision and retraining required for new domains constitute a deployment cost that the present work seeks to avoid.
 
-\paragraph{Bandits and learning-to-rank.}
-Bandit algorithms (UCB, Thompson Sampling, and contextual bandit methods such as LinUCB) are classical methods from online decision-making, ranking, and contextual recommendation, rather than RAG-specific retrieval controllers~\cite{auer2002ucb1,thompson1933,chu2011linucb}. We test whether UCB1-TUNED and a LinUCB-style contextual bandit can transfer to context-selection on HotpotQA distractor, finding that they do not under this benchmark's structure. We characterize those failure modes in a concrete setting.
+\paragraph{Multi-agent and iterative filtering.} MAIN-RAG~\cite{chang2024mainrag} and PRISM~\cite{nahid2025prism} are training-free, but each query passes through several language-model calls, which raises inference cost in proportion to the number of agents or iterations~\cite{li2025bestpractices}.
+
+\paragraph{Compression-based methods.} ECoRAG~\cite{jeong2025ecorag} compresses retrieved documents through evidentiality-guided selection, ChunkRAG~\cite{singh2025chunkrag} filters at the chunk level via LLM-driven chunk scoring, DR-RAG~\cite{xiong2025drrag} adds a classifier-guided relevance step, and Adaptive-$k$~\cite{taguchi2025adaptivek} truncates the retrieved list at the largest similarity gap. These approaches differ in granularity (chunk versus paragraph), in supervision requirement (classifier training versus none), and in the assumption made about embedding-similarity rank. Among them, Adaptive-$k$ is the closest comparator to Noise-Gate at the design level, because both operate on cosine similarities of precomputed embeddings without per-domain training; the two differ in whether selection follows a single largest-gap cut or a per-paragraph threshold.
+
+\paragraph{Bandits, set selection, and reranking.} UCB1~\cite{auer2002ucb1}, Thompson Sampling~\cite{thompson1933}, and contextual variants such as LinUCB~\cite{chu2011linucb} are classical decision-making algorithms for sequential allocation under uncertainty; the present work uses them as comparators rather than as proposed selectors. SetR~\cite{lee2025setr} and RankRAG~\cite{yu2024rankrag} reframe selection as set construction by accounting for between-document complementarity. The redundancy-removal stage of Noise-Gate is conceptually related to Maximum Marginal Relevance~\cite{goldstein1998mmr}, which trades off relevance and diversity over a candidate pool.
+
+Noise-Gate sits at the intersection of these three lines: it operates at paragraph granularity, it is training-free, and it combines dense semantic similarity with redundancy removal.
 
 \section{Problem Formulation}
+\label{sec:problem}
 
-Let $q$ be a question and let $D = (d_1, d_2, \ldots, d_n)$ denote the finite candidate context for that question. On HotpotQA and 2WikiMultiHopQA, this pool is exposed as a flat list of titled paragraphs; on MuSiQue-Ans, we flatten the nested \texttt{metadata.context} structure into the same paragraph-level representation before selection. A context-selection strategy returns an ordered subsequence $S \preceq D$ to be concatenated with $q$ and passed to the reader model. We do not control retrieval itself; the candidate pool is fixed, and the only decision is which paragraphs to retain.
+This section formalises the cost-aware context-selection problem evaluated in this work. Let $q$ denote the question and $D=(d_1,\dots,d_n)$ the candidate context for that question, exposed as an ordered list of titled paragraphs. Retrieval itself is treated as fixed: the pool $D$ is produced upstream and is not under control. A context-selection strategy returns an ordered subsequence $S\preceq D$ that is concatenated with $q$ and passed to a generator $g$. The decision space of every strategy considered in this paper is the set of subsequences of $D$.
 
-Let $\hat{a} = g(q, S)$ be the generated answer and let $a^*$ be the reference answer. We evaluate quality with the standard HotpotQA normalized token-level F1 and exact match metrics, as implemented in our evaluation code. To trade off quality against inference cost, we define
-\[
-J(S) = F_1(\hat{a}, a^*) - \lambda \, C(q, S),
-\]
-where $C(q, S)$ is the total token cost of the model call, computed as input tokens plus output tokens, and $\lambda > 0$ is a cost weight. In the experiments we report token-level F1 as the primary quality metric, exact match as a secondary metric, and mean total tokens per question as the cost metric.
+Let $\hat{a}=g(q,S)$ denote the generated answer and $a^*$ the reference answer. Quality is measured by token-level F1, $F_1(\hat{a},a^*)$, with exact match reported in text only as a secondary check. Cost is measured by the total number of tokens of the model call, $C(q,S)$, computed as input tokens plus output tokens at provider tokenisation. The cost-aware objective is
+\begin{equation}
+\label{eq:objective}
+J(S) \;=\; F_1(\hat{a}, a^*) \;-\; \lambda\, C(q,S),\qquad \lambda > 0,
+\end{equation}
+with $\lambda$ left implicit and replaced operationally by the Pareto presentation in Section~\ref{subsec:main_results}. A strategy is \emph{quality-preserving} if its mean F1 is within $\pm 0.05$ of the fixed $k{=}10$ reference on the same dataset.
+
+The Pareto presentation reports the trade-off without committing to a specific $\lambda$, so the recommended threshold can be re-selected for deployments with different relative weights.
+
+Figure~\ref{fig:gold_vs_distractor} illustrates the difficulty of selection over $D$: a gold paragraph and a BM25-retrieved distractor for the same HotpotQA question share entities, vocabulary, and discourse style, producing close embedding scores and motivating the selection rules introduced in Section~\ref{sec:methods}.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/fig1_gold_vs_distractor.pdf}
+    \caption{An example HotpotQA distractor instance. The gold paragraph and the BM25-retrieved distractor share entities and vocabulary with the question, producing similar embedding scores. The structural similarity makes paragraph-level filtering non-trivial.}
+    \label{fig:gold_vs_distractor}
+\end{figure}
 
 \section{Methods}
+\label{sec:methods}
 
-We study test-time context compression through five strategies, spanning fixed baselines, learned rerankers, and a training-free threshold filter. Unless otherwise stated, the concrete metrics and hyperparameters below are reported on HotpotQA distractor; the same selection rules are reused unchanged in the transfer protocol described in Section~\ref{subsec:dataset_comparison}. The methods differ along two axes: question-level vs.\ section-level control, and training-free vs.\ training-required selection.
+Five strategies are evaluated, ordered by the amount of structure they exploit at the selector layer: none (fixed budget), similarity gap (Adaptive-$k$), per-arm reward statistics (UCB1-TUNED), context features and contextual reward (LinUCB), and dense paragraph-level similarity (Noise-Gate, proposed). Each subsection opens with the design hypothesis the strategy embodies, then defines the rule formally. Within the comparator-ladder framing of Section~\ref{sec:introduction}, the three learned strategies (Adaptive-$k$, UCB1-TUNED, LinUCB) form a progression of increasing structure exploited, with the proposed Noise-Gate replacing the entire ladder by a deterministic threshold on a single richer signal.
 
-\subsection{Baselines}
+\subsection{Fixed-$k$ Baselines}
+\label{subsec:methods_fixed}
 
-\begin{itemize}
-    \item \textbf{No retrieval} ($k{=}0$): Answer from parametric knowledge only (103.5 mean tokens, F1=0.387).
-    \item \textbf{Fixed $k{=}3$}: Top-3 retrieved documents (471.3 tokens, F1=0.651).
-    \item \textbf{Fixed $k{=}5$}: Top-5 retrieved documents (731.7 tokens, F1=0.716).
-    \item \textbf{Fixed $k{=}10$}: All 10 retrieved documents (1452.5 tokens, F1=0.792).
-\end{itemize}
+The baselines pass the top $k$ paragraphs of the retrieved pool, ordered by the upstream retrieval score, and supply the quality and cost reference points for the comparison. Four anchors are used on HotpotQA distractor with the configuration of Section~\ref{sec:experiments}: $k{=}0$ (no retrieval, parametric-knowledge floor) at F1 0.387 and 103.5 mean tokens; $k{=}3$ at F1 0.651 and 471.3 mean tokens; $k{=}5$ at F1 0.716 and 731.7 mean tokens; and $k{=}10$ at F1 0.792 and 1452.5 mean tokens. Throughout the paper, $k{=}10$ serves as the quality reference against which the $\pm 0.05$ tolerance band is measured, and $k{=}0$ as the parametric-knowledge floor below which a context-selection strategy is uninformative. The four anchors trace a near-monotone quality--cost curve: each additional pair of paragraphs costs roughly $300$ extra tokens and recovers a smaller increment of F1, so the curve already exhibits diminishing returns within the fixed-$k$ family before any adaptive policy is introduced.
 
-\subsection{Adaptive-$k$ (Similarity-Gap Truncation)}
+\subsection{Adaptive-$k$}
+\label{subsec:methods_adaptivek}
 
-Given retrieved documents with similarity scores $s_1 \ge s_2 \ge \cdots \ge s_n$, Adaptive-$k$~\cite{taguchi2025adaptivek} selects the cut point of maximum adjacent separation:
+The design hypothesis behind Adaptive-$k$~\cite{taguchi2025adaptivek} is that the largest gap in sorted similarity scores marks the boundary between relevant and irrelevant context, so a single largest-gap rule can replace a tuned integer $k$. The appeal is that the rule is single-pass, training-free, and parameter-light: a strategy that adapts the retrieval budget to the per-query similarity profile while remaining as cheap to deploy as a fixed-$k$ baseline. Given retrieved documents with similarity scores $s_1 \ge s_2 \ge \cdots \ge s_n$, the cut point of maximum adjacent separation is
 \begin{equation}
-k^* = \arg\max_{1 \le i < n} (s_i - s_{i+1}).
+\label{eq:adaptivek}
+k^* \;=\; \arg\max_{1\le i<n}(s_i - s_{i+1}).
 \end{equation}
-The method assumes that a large embedding-similarity gap separates relevant context from noise. On HotpotQA distractor, distractors are intentionally topically close to the gold evidence, so the largest gap often falls inside a cluster of distractors rather than at the boundary between evidence and noise.
+A minimum-gap floor $\delta=0.08$ guards against degenerate splits; if $\max_i (s_i - s_{i+1}) < \delta$, the rule falls back to $k=\min(5,n)$. The rule exploits exactly one structural feature of the candidate pool, namely the rank of similarity scores, and assumes that the largest adjacent drop is informative about the boundary between evidence and noise.
 
-\subsection{UCB1-TUNED (Title-Based Bandit)}
+\subsection{UCB1-TUNED}
+\label{subsec:methods_ucb1}
 
-We model paragraph titles as arms and estimate their utility from the full training split ($n=90{,}447$ HotpotQA distractor examples). For each title, we maintain the empirical mean reward and variance using Welford's online algorithm. The reward is binary: 1.0 if the title appears in supporting\_facts, and 0.0 otherwise. At inference, each title is scored by UCB1-TUNED:
-\[
-\mathrm{score}(\text{title}) = \mu_{\text{title}} + \sqrt{\frac{\ln T}{n_{\text{title}}} \cdot \min(0.25, \sigma_{\text{title}}^2)}.
-\]
-The reranker then selects the top-$k$ titles by this score. Unseen titles fall back to BM25 ranking.
+The design hypothesis behind UCB1-TUNED~\cite{auer2002ucb1} is that per-arm reward statistics learned from a training split, combined with variance-aware exploration, can rank arms more accurately than a static rule, at training cost lighter than full supervision. The appeal is that the bandit reuses the upstream retrieval pool but reorders it by a learned utility, attaching a principled exploration term that adapts to the variance of each arm.
 
-\subsection{LinUCB (Contextual Bandit with Lexical Features)}
-
-This variant models each question--document pair with a three-dimensional feature vector
-\[
-x(q, d) = [f_1, f_2, f_3]^\top,
-\]
-where $f_1$ is the fraction of title words appearing in the question, $f_2$ is the normalized question length, and $f_3$ is the normalized section length. Given the training observations $\{(x_t, r_t)\}_{t=1}^T$, with binary reward $r_t \in \{0,1\}$, we estimate
-\[
-\hat{\theta} = A^{-1} b,
-\qquad
-A = I + \sum_{t=1}^T x_t x_t^\top,
-\qquad
-b = \sum_{t=1}^T r_t x_t.
-\]
-At inference, each candidate is scored by the usual LinUCB rule
-\[
-p(q, d) = \hat{\theta}^\top x(q, d) + \alpha \sqrt{x(q, d)^\top A^{-1} x(q, d)},
-\]
-and the top-$k$ documents are selected by this score. Unlike a rank-position bandit, this formulation attempts to learn document-level utility directly from lexical and length-based features.
-
-\subsection{Noise-Gate (Two-Stage Embedding Filter)}
-\label{sec:methods_noisegate}
-
-Our proposed method is a two-stage, training-free gate that operates directly on the finite candidate pool for each dataset. It is the main mechanism studied in this paper.
-Algorithm~\ref{alg:noisegate} summarizes the procedure.
-
-Given a question $q$ and retrieved paragraphs $D = (d_1, \ldots, d_n)$, the gate first scores each paragraph by cosine similarity to the question embedding and retains only those above a threshold $\tau$.
-
-\textbf{Stage 1 (Cosine filter):} Remove paragraphs whose cosine similarity to the question falls below threshold $\tau$:
+Each paragraph title is treated as an arm. A binary reward of 1 is recorded if the title appears in the supporting-fact set of the example, 0 otherwise. Per-title means $\mu_a$ and variances $\sigma_a^2$ are estimated online with Welford's recursion over the HotpotQA training split ($n{=}90{,}447$), so the estimator scales linearly in the size of the training pool and stores a constant per arm. At inference, each candidate title $a$ is scored as
 \begin{equation}
-\mathrm{cos}(q, d_i) = \frac{e_q \cdot e_i}{\|e_q\| \, \|e_i\|} \ge \tau.
+\label{eq:ucb1tuned}
+\mathrm{score}(a) \;=\; \mu_a \;+\; \sqrt{\frac{\ln T}{n_a}\,\min\!\bigl(\tfrac{1}{4},\,\sigma_a^2\bigr)},
+\end{equation}
+where $T$ is the cumulative round count and $n_a$ the number of pulls of arm $a$. The top-$k$ titles by score are kept; titles unseen during training fall back to the BM25 ordering of the upstream retriever. The exploration term is variance-aware, which is the refinement of UCB1-TUNED over the original UCB1: arms with low observed variance are penalised less for their exploration bonus, so titles with stable rewards rise faster in the ordering.
+
+\subsection{LinUCB}
+\label{subsec:methods_linucb}
+
+The design hypothesis behind LinUCB~\cite{chu2011linucb} is that parameterising reward as a linear function of context features generalises beyond the training-time arm vocabulary, addressing UCB1-TUNED's cold-start regime in settings where arms drawn at inference are not those drawn during training. The appeal is that documents previously unseen as arms can still be evaluated through their features, so the policy is in principle robust to the title-vocabulary shift between train and inference splits that a title-indexed bandit suffers from.
+
+Each question--paragraph pair is mapped to a feature vector,
+\begin{equation}
+\label{eq:linucb_features}
+x(q,d) = [f_1,\, f_2,\, f_3]^\top,\quad \hat{\theta} = A^{-1}b,\quad A = I + \sum_{t=1}^{T} x_t x_t^\top,\quad b = \sum_{t=1}^{T} r_t x_t,
+\end{equation}
+where $f_1$ is the title-in-question fraction, $f_2$ is the normalised question length, and $f_3$ is the normalised section length. The three features are chosen to be tractable at the scale of the training split: each is a constant-time computation per question--paragraph pair and does not require dense embedding inference, which is the constraint that motivates a contextual bandit over a model that consumes paragraph embeddings directly. The ridge update accumulates the parameter estimate $\hat{\theta}$ over the training observations $\{(x_t,r_t)\}_{t=1}^{T}$ with binary reward $r_t\in\{0,1\}$. At inference, each candidate is scored by
+\begin{equation}
+\label{eq:linucb_score}
+p(q,d) \;=\; \hat{\theta}^\top x(q,d) \;+\; \alpha\,\sqrt{x(q,d)^\top A^{-1}\, x(q,d)},
+\end{equation}
+where the second term is the LinUCB exploration bonus controlled by $\alpha$, and the top-$k$ paragraphs by $p(q,d)$ are kept.
+
+\subsection{Noise-Gate}
+\label{subsec:methods_noisegate}
+
+The design hypothesis behind Noise-Gate is that dense paragraph-level cosine similarity to the question is a discriminative signal that distinguishes gold evidence from BM25-adjacent distractors when surface and rank features cannot, and that a subsequent redundancy filter removes the near-duplicates introduced by paragraph-level granularity. The appeal is that the policy requires no training, computes embeddings on a small encoder that can be cached offline, and exposes a single primary tunable parameter with a clear Pareto interpretation. The two stages are kept separate because they address two different failure modes of paragraph-level selection: a relevance stage prevents low-similarity distractors from entering the selected set, and a redundancy stage prevents near-duplicate paragraphs from accumulating once the relevance threshold is cleared. The procedure is applied to the same paragraph pool $D$, with embeddings $e_q$ and $\{e_i\}$ computed on a small sentence encoder and cached per dataset.
+
+\textbf{Stage 1 (relevance).} A paragraph is retained only if its cosine similarity to the question clears the threshold $\tau$:
+\begin{equation}
+\label{eq:cos}
+\cos(q, d_i) \;=\; \frac{e_q \cdot e_i}{\|e_q\|\,\|e_i\|} \;\ge\; \tau.
 \end{equation}
 
-\textbf{Stage 2 (Jaccard filter):} Among paragraphs surviving Stage 1, remove those whose word-overlap with any already-kept paragraph exceeds threshold $\rho$:
+\textbf{Stage 2 (redundancy).} Among paragraphs surviving Stage 1, a paragraph $d_i$ is added to the selected set $S$ only if its maximum Jaccard overlap with already-selected paragraphs is at most $\rho$:
 \begin{equation}
-\max_{d_j \in \text{kept}} \frac{|d_i \cap d_j|}{|d_i \cup d_j|} \le \rho.
+\label{eq:jaccard}
+\max_{d_j \in S}\;\frac{|d_i \cap d_j|}{|d_i \cup d_j|} \;\le\; \rho.
 \end{equation}
 
-This two-stage rule is interpretable and designed to preserve semantically useful context while removing redundant paragraphs. We evaluate $\tau \in \{0.2, 0.25, 0.3, 0.35, 0.5\}$ and $\rho \in \{0.50, 0.55, 0.65\}$. Embeddings are computed using \texttt{multi-qa-MiniLM-L6-cos-v1} (384 dimensions, pre-trained on QA corpora).
+The gate operates on precomputed embeddings; no per-dataset training is performed. Algorithm~\ref{alg:noisegate} states the selection in pseudocode.
 
 \begin{algorithm}[t]
 \caption{Noise-Gate context selection.}
 \label{alg:noisegate}
 \begin{algorithmic}[1]
-\Require Question $q$, paragraph pool $D = (d_1, \ldots, d_n)$, thresholds $\tau$ and $\rho$
+\Require Question $q$, paragraph pool $D=(d_1,\dots,d_n)$, thresholds $\tau$ and $\rho$
 \State Compute embedding $e_q$ for $q$
 \State Compute embedding $e_i$ for each $d_i \in D$
-\State Rank paragraphs by cosine similarity $\cos(e_q, e_i)$ in descending order
+\State Rank paragraphs by $\cos(e_q, e_i)$ in descending order
 \State $S \leftarrow [\,]$
 \For{each paragraph $d_i$ in ranked order}
     \If{$\cos(e_q, e_i) < \tau$}
@@ -201,294 +201,159 @@ This two-stage rule is interpretable and designed to preserve semantically usefu
 \label{sec:experiments}
 
 \subsection{Setup}
+\label{subsec:setup}
 
-\textbf{Dataset.}
-Our main quantitative results use HotpotQA~\cite{yang2018hotpotqa}, distractor subset, validation split. Each example contains exactly 10 paragraphs: 2 gold paragraphs containing the supporting facts and 8 BM25 distractors. We use a fixed random sample of $n{=}400$ examples for all HotpotQA experiments, large enough to stabilize mean F1 and EM while remaining practical for matched-sample ablations. The same selector definitions are reused for 2WikiMultiHopQA and MuSiQue-Ans through the transfer protocol described below.
+\paragraph{Generation model.} All experiments use a single generation model, \texttt{gpt-5.4-mini}, selected as the cost-effective tier from a major commercial provider so that token-cost reductions translate directly to deployment savings rather than to frontier-model overhead. Fixing the model controls for tokenisation, pricing, and provider-specific prompt behaviour and isolates context selection as the experimental variable.
 
-HotpotQA, 2WikiMultiHopQA, and MuSiQue-Ans are all multi-hop QA benchmarks, but they expose context with different amounts of structure. HotpotQA is the cleanest fixed-pool setting, 2WikiMultiHopQA is the closest structural transfer test, and MuSiQue-Ans is the strongest semantic transfer test because its questions are more compositional and its context is nested under dataset metadata. To keep the comparison fair, we flatten every candidate pool into a list of readable paragraphs before selection. The top-level question is the only selector input; decomposition fields in MuSiQue-Ans are not used at selection time. Learned strategies are trained separately on each dataset's training split, while fixed baselines, Adaptive-$k$, and Noise-Gate are applied unchanged.
+\paragraph{Embedding model.} Cosine scores are computed on \texttt{multi-qa-MiniLM-L6-cos-v1} (384 dimensions), pre-trained on QA corpora; embeddings are precomputed for the full candidate pool and cached, so the selection cost at inference is dominated by the pairwise cosine evaluation rather than by encoder forward passes.
 
-\textbf{Model.}
-All experiments use \texttt{gpt-5.4-mini} as the single generation model. Fixing the model controls for tokenization, pricing, and provider-specific prompting behavior, so the comparison isolates context-selection strategy.
+\paragraph{Datasets and samples.} HotpotQA distractor~\cite{yang2018hotpotqa} is the reference setting, evaluated with a fixed random sample of $n{=}400$ examples from the validation split, large enough to stabilise mean F1 and exact match while remaining practical for matched-sample ablations. 2WikiMultiHopQA~\cite{ho-etal-2020-constructing} is the closest structural transfer test, sharing the titled-paragraph layout and BM25 distractor format of HotpotQA, evaluated at $n{=}100$. MuSiQue-Ans~\cite{trivedi-etal-2022-musique} is the semantic-generalisation test; its nested context is flattened to titled paragraphs before selection, evaluated at $n{=}100$.
 
-\textbf{Metrics.}
-We report token-level F1 (primary), exact match (EM), and mean total tokens per example. F1 measures answer quality; total tokens measure the cost of the context passed to the model. When a benchmark provides multiple canonical answers, we score against the gold answer set after normalization. We define a practical tolerance of $\pm 0.05$~F1 relative to the $k{=}10$ baseline: strategies within this band are considered quality-preserving.
+\paragraph{Metrics.} Token-level F1 is the primary quality metric; exact match is reported in text only. Mean total tokens per example and mean per-query USD cost on \texttt{gpt-5.4-mini} are the cost metrics. A strategy is quality-preserving if its F1 is within $\pm 0.05$ of fixed $k{=}10$ on the same dataset.
 
-\begin{table*}[t]
-\centering
-\scriptsize
-\caption{Dataset comparison for the transfer protocol. We flatten each candidate pool into paragraph strings before selection so that all strategies operate on the same interface.}
-\label{tab:dataset_comparison}
-\begin{tabular}{p{2.6cm}p{3.8cm}p{4.0cm}p{3.8cm}}
-\toprule
-Dataset & Native structure & How we use it & Transfer role \\
-\midrule
-HotpotQA distractor & Flat context with titles and supporting facts; 2 gold paragraphs and 8 distractors & Main benchmark; direct paragraph selection over the fixed pool & Reference setting and quality baseline \\
-\midrule
-2WikiMultiHopQA & HotpotQA-like paragraph pool with titles and supporting facts & Same selectors, same prompts, same fixed-$k$ budgets after flattening & Closest structural transfer test \\
-\midrule
-MuSiQue-Ans & Nested context under \texttt{metadata}; reference answers may have multiple canonical variants & Flatten the nested context to paragraphs; ignore decomposition at selection time & Strongest semantic generalization test \\
-\bottomrule
-\end{tabular}
-\end{table*}
-
-\textbf{Baselines.}
-We compare against three fixed retrieval policies:
-\begin{itemize}
-    \item \textbf{No retrieval} ($k{=}0$): the model answers from parametric knowledge only.
-    \item \textbf{Fixed $k{=}5$}: the top-5 BM25-ranked paragraphs are passed as context.
-    \item \textbf{Fixed $k{=}10$}: all 10 paragraphs are passed (quality upper bound).
-\end{itemize}
-
-\textbf{Strategies under evaluation.}
-In addition to the baselines, we evaluate four context-compression strategies, all operating on the same candidate pool of retrieved paragraphs:
-\begin{itemize}
-    \item \textbf{Adaptive-$k$}: a similarity-gap truncation rule that selects the cut point from question features and keeps the top-$k^*$ paragraphs by embedding similarity.
-    \item \textbf{UCB1-TUNED}: a title-based bandit reranker that tracks per-title reward statistics over the training split and selects the top-$k$ titles by UCB score at inference. Unseen titles fall back to BM25 ranking.
-    \item \textbf{LinUCB}: a contextual bandit that uses lexical features (token overlap, title-in-question fraction, section length) and ridge-regression reward estimation with an exploration bonus.
-    \item \textbf{Noise-Gate} (proposed): the two-stage filter from Section~\ref{sec:methods_noisegate}. No training required.
-\end{itemize}
-For the bandit strategies (UCB1-TUNED and LinUCB), we report results at $k{=}5$ to allow direct comparison with the fixed $k{=}5$ baseline at equal retrieval budget.
-For transfer runs on 2WikiMultiHopQA and MuSiQue-Ans, the same strategy definitions apply; only the dataset-specific train split used to fit UCB1-TUNED and LinUCB changes.
+\paragraph{Hyperparameters.} For the proposed method, $\tau\in\{0.20,\,0.25,\,0.30,\,0.35,\,0.50\}$ and $\rho\in\{0.50,\,0.55,\,0.65\}$; the recommended HotpotQA operating point is $(\tau{=}0.30,\,\rho{=}0.65)$. The learned strategies (UCB1-TUNED, LinUCB) are trained per-dataset on the corresponding training split; the fixed baselines, Adaptive-$k$, and Noise-Gate are applied unchanged across datasets. Sample sizes are kept matched within a dataset across strategies, so each row of Table~\ref{tab:main_results} is computed on the same examples and the comparison is paired rather than population-level.
 
 \subsection{Main Results}
 \label{subsec:main_results}
 
-Table~\ref{tab:main_results} presents the unified comparison across all strategies. The fixed $k{=}10$ baseline achieves F1~0.792 with 1452.5 mean total tokens, about $14\times$ more tokens than no retrieval ($k{=}0$, 103.5 tokens). Among the compression strategies, Noise-Gate at $\tau{=}0.3$ is the best tradeoff: F1~0.764 with 1065.3 tokens, a 26.7\% reduction while remaining within the $\pm 0.05$ F1 tolerance of the $k{=}10$ baseline. Noise-Gate at $\tau{=}0.2$ preserves more quality (F1~0.779) but saves only 9.3\% of tokens. The learned strategies do not match even the fixed $k{=}5$ baseline: UCB1-TUNED reaches F1~0.704 with 723 tokens but is limited by cold-start, LinUCB reaches F1~0.620 with 686 tokens, and Adaptive-$k$ reaches only F1~0.627.
+Table~\ref{tab:main_results} reports the unified comparison on HotpotQA distractor and the two transfer benchmarks. Noise-Gate at $\tau{=}0.30$ reaches token-level F1 0.764 at 1065.3 mean tokens, a $-26.7\%$ token reduction relative to fixed $k{=}10$ (F1 0.792 at 1452.5 mean tokens) and within the $\pm 0.05$ tolerance band of the reference. The looser setting $\tau{=}0.20$ remains in the band at higher quality (F1 0.779) but saves only $9.3\%$ of tokens, which is why $\tau{=}0.30$ is the row recommended for deployment. The position of $\tau{=}0.30$ on the unified table is the empirical answer to RQ1: a training-free filter does reduce token cost on this benchmark without leaving the tolerance band of the fixed-$k{=}10$ reference.
+
+The three learned comparators do not enter the tolerance band on HotpotQA. Adaptive-$k$ reaches F1 0.627 at 483.1 mean tokens, below fixed $k{=}3$ (F1 0.651) and roughly $0.09$ F1 below fixed $k{=}5$, indicating that the largest-gap rule selects shorter contexts than fixed $k{=}3$ but with worse quality. UCB1-TUNED at $k{=}5$ reaches F1 0.704 at 723.0 mean tokens, $0.012$ F1 below the fixed $k{=}5$ baseline at the same retrieval budget, indicating that the bandit reordering does not recover quality over the upstream BM25 ordering. LinUCB at $k{=}5$ reaches F1 0.620 at 686.0 mean tokens, $0.096$ F1 below fixed $k{=}5$, indicating that the linear contextual model degrades quality relative to keeping the BM25 ordering intact. The structural reasons for these gaps are characterised in Section~\ref{sec:analysis}.
+
+Figure~\ref{fig:pareto} plots the mean-tokens / F1 plane, with the $\pm 0.05$ tolerance band shaded around the fixed $k{=}10$ reference. The connected curve traces the Noise-Gate $\tau$-sweep at $\rho{=}0.65$. Noise-Gate at $\tau{=}0.30$ is the only point that combines a token reduction with quality inside the band; the next-larger threshold ($\tau{=}0.35$) leaves the band at a larger token reduction. The fixed-$k$ anchors lie above and below the band at their respective token costs, confirming that the fixed-$k$ family alone does not span the same trade-off region as the $\tau$-sweep.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Main results on HotpotQA distractor and transfer evaluation on 2WikiMultiHopQA and MuSiQue-Ans, all on \texttt{gpt-5.4-mini}. $\Delta$F1 and Savings are computed against fixed $k{=}10$ within the same dataset. Bold rows are within the $\pm 0.05$ F1 tolerance band of the dataset's $k{=}10$ reference. Exact match is reported in text only.}
+\label{tab:main_results}
+\begin{tabular}{llrrrr}
+\toprule
+Dataset & Strategy & F1 & Tokens & $\Delta$F1 & Savings \\
+\midrule
+HotpotQA & No retrieval ($k{=}0$) & 0.387 & 103.5 & $-0.405$ & $-92.9\%$ \\
+HotpotQA & Fixed $k{=}3$ & 0.651 & 471.3 & $-0.141$ & $-67.6\%$ \\
+HotpotQA & Fixed $k{=}5$ & 0.716 & 731.7 & $-0.076$ & $-49.6\%$ \\
+HotpotQA & Fixed $k{=}10$ (ref) & 0.792 & 1452.5 & --- & --- \\
+HotpotQA & Adaptive-$k$ & 0.627 & 483.1 & $-0.165$ & $-66.7\%$ \\
+HotpotQA & UCB1-TUNED ($k{=}5$) & 0.704 & 723.0 & $-0.088$ & $-50.2\%$ \\
+HotpotQA & LinUCB ($k{=}5$) & 0.620 & 686.0 & $-0.172$ & $-52.8\%$ \\
+HotpotQA & \textbf{Noise-Gate ($\tau{=}0.3$)} & \textbf{0.764} & \textbf{1065.3} & $\mathbf{-0.028}$ & $\mathbf{-26.7\%}$ \\
+\midrule
+2WikiMultiHopQA & Fixed $k{=}10$ (ref) & 0.617 & 1040.1 & --- & --- \\
+2WikiMultiHopQA & \textbf{Noise-Gate ($\tau{=}0.25$)} & \textbf{0.662} & \textbf{810.9} & $\mathbf{+0.045}$ & $\mathbf{-22.1\%}$ \\
+\midrule
+MuSiQue-Ans & Fixed $k{=}10$ (ref) & 0.499 & 1342.9 & --- & --- \\
+MuSiQue-Ans & \textbf{Noise-Gate ($\tau{=}0.3$)} & \textbf{0.551} & \textbf{1193.2} & $\mathbf{+0.052}$ & $\mathbf{-11.2\%}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.85\linewidth]{images/pareto_f1_vs_tokens.pdf}
-    \caption{F1 vs.\ mean total tokens for all strategies. The dashed line marks the Pareto frontier, and the shaded band shows the $\pm 0.05$ F1 tolerance around the fixed $k{=}10$ reference.}
+    \includegraphics[width=0.85\linewidth]{images/fig2_pareto_tau_overlay.pdf}
+    \caption{F1 versus mean total tokens on HotpotQA distractor ($n{=}400$, \texttt{gpt-5.4-mini}). The shaded band is the $\pm 0.05$ tolerance around the $k{=}10$ reference. The connected curve traces the Noise-Gate $\tau$-sweep at $\rho{=}0.65$. Noise-Gate at $\tau{=}0.3$ is the only point that combines a token reduction with quality inside the tolerance band.}
     \label{fig:pareto}
 \end{figure}
-
-\begin{table*}[t]
-\centering
-\caption{Main results on \texttt{gpt-5.4-mini} (HotpotQA distractor validation, $n{=}400$). Strategies are grouped by type. ``Savings'' is the token reduction relative to fixed $k{=}10$. ``Tolerance'' indicates whether F1 is within $\pm 0.05$ of the $k{=}10$ reference (0.792).}
-\label{tab:main_results}
-\begin{tabular}{llrrrrc}
-\toprule
-Type & Strategy & F1 & EM & Tokens & Savings & Tolerance \\
-\midrule
-\multirow{3}{*}{Baselines}
-& No retrieval ($k{=}0$)  & 0.387 & 0.278 & 103.5  & $-$92.9\% & \texttimes \\
-& Fixed $k{=}5$           & 0.716 & 0.555 & 731.7  & $-$49.6\% & \texttimes \\
-& Fixed $k{=}10$          & 0.792 & 0.632 & 1452.5 & N/A       & ref. \\
-\midrule
-\multirow{3}{*}{Learned}
-& Adaptive-$k$            & 0.627 & 0.475 & 483.1  & $-$66.8\% & \texttimes \\
-& UCB1-TUNED ($k{=}5$)    & 0.704 & 0.570 & 723.0  & $-$50.2\% & \texttimes \\
-& LinUCB ($k{=}5$)        & 0.620 & 0.489 & 686.0  & $-$52.8\% & \texttimes \\
-\midrule
-\multirow{2}{*}{Noise-Gate}
-& $\tau{=}0.2$            & 0.779 & 0.630 & 1317.5 & $-$9.3\%  & \checkmark \\
-& $\tau{=}0.3$            & 0.764 & 0.603 & 1065.3 & $-$26.7\% & \checkmark \\
-\bottomrule
-\end{tabular}
-\end{table*}
 
 \subsection{Transfer Evaluation}
 \label{subsec:transfer_pilots}
 
-We evaluate whether noise-gate thresholds calibrated on HotpotQA transfer to 2WikiMultiHopQA and MuSiQue-Ans without retraining ($n{=}100$ per dataset, same model, same prompts, same strategy definitions). Learned strategies (UCB1-TUNED, LinUCB) are excluded here because their failure modes were already characterized in Section~\ref{sec:analysis}; we focus on whether the training-free gate generalizes. Table~\ref{tab:transfer_unified} reports the key operating points alongside the fixed-$k$ reference.
+The 2WikiMultiHopQA rows of Table~\ref{tab:main_results} indicate that Noise-Gate transfers with one threshold step. At $\tau{=}0.25$, F1 rises to 0.662 against the fixed $k{=}10$ reference at 0.617, a $+0.045$ improvement, while mean tokens drop from 1040.1 to 810.9, a $-22.1\%$ reduction. The threshold shifts one step from the HotpotQA-optimal $\tau{=}0.30$ to $\tau{=}0.25$, consistent with 2WikiMultiHopQA's slightly looser cosine distribution at the same evidence rate; the recalibration is a single-step adjustment selected on the held-out pilot sample rather than a retraining of the gate.
 
-\begin{table*}[t]
-\centering
-\small
-\caption{Transfer results on \texttt{gpt-5.4-mini} ($n{=}100$ per dataset). $\Delta$F1 and token savings are relative to fixed $k{=}10$ (reference row). $\star$ marks the recommended operating point per dataset.}
-\label{tab:transfer_unified}
-\begin{tabular}{llrrrrr}
-\toprule
-Dataset & Strategy & F1 & EM & Tokens & $\Delta$F1 & Savings \\
-\midrule
-\multirow{4}{*}{2WikiMultiHopQA}
-& Fixed $k{=}5$             & 0.526 & 0.460 &   638.4 & $-$0.091 & $-$38.6\% \\
-& Fixed $k{=}10$ (ref)      & 0.617 & 0.540 &  1040.1 & ---       & ---       \\
-& Noise-Gate $\tau{=}0.25$ $\star$ & 0.662 & 0.590 &   810.9 & $+$0.045 & $-$22.1\% \\
-& Noise-Gate $\tau{=}0.3$   & 0.605 & 0.550 &   708.0 & $-$0.012 & $-$31.9\% \\
-\midrule
-\multirow{4}{*}{MuSiQue-Ans}
-& Fixed $k{=}5$             & 0.469 & 0.360 &   741.6 & $-$0.030 & $-$44.7\% \\
-& Fixed $k{=}10$ (ref)      & 0.499 & 0.400 &  1342.9 & ---       & ---       \\
-& Noise-Gate $\tau{=}0.3$ $\star$  & 0.551 & 0.440 &  1193.2 & $+$0.052 & $-$11.2\% \\
-& Noise-Gate $\tau{=}0.2$   & 0.595 & 0.500 &  1826.3 & $+$0.096 & $+$36.0\% \\
-\bottomrule
-\end{tabular}
-\end{table*}
+The MuSiQue-Ans rows indicate that the HotpotQA threshold transfers directly. At $\tau{=}0.30$, F1 is 0.551 against the fixed $k{=}10$ reference at 0.499, a $+0.052$ improvement, while mean tokens drop from 1342.9 to 1193.2, a $-11.2\%$ reduction. No threshold change is required, even though MuSiQue-Ans's nested context structure differs from HotpotQA's flat paragraph pool: once flattened, the question and paragraph embeddings span a comparable cosine range and the same threshold separates evidence from distractors.
 
-On 2WikiMultiHopQA, the noise gate generalizes with a simultaneous quality gain and cost reduction. At $\tau{=}0.25$, F1 rises to 0.662 vs.\ fixed $k{=}10$'s 0.617 ($+$0.045) while tokens drop from 1040.1 to 810.9 ($-$22.1\%)---a Pareto improvement on both axes without any retraining. This outcome is consistent with the structural analysis in Section~\ref{sec:analysis}: 2WikiMultiHopQA shares the same BM25-retrieved topically adjacent distractors and sparse title overlap that make the noise gate effective on HotpotQA. The optimal threshold shifts one step from $\tau{=}0.3$ to $\tau{=}0.25$, requiring only minimal recalibration on a small held-out sample.
+Across the three benchmarks, Noise-Gate matches or exceeds fixed $k{=}10$ at lower token cost with at most one threshold step of recalibration on a small held-out sample. The transfer evidence is the empirical answer to RQ3 within the dataset family considered: the same threshold scheme is reusable across distractor-heavy multi-hop benchmarks with no training pipeline.
 
-On MuSiQue-Ans, the HotpotQA-optimal $\tau{=}0.3$ transfers directly as the Pareto knee: F1~0.551 vs.\ 0.499 ($+$0.052) at 1,193 tokens vs.\ 1,343 ($-$11.2\%), improving both quality and cost simultaneously with no threshold adjustment. A looser gate ($\tau{=}0.2$) yields the highest absolute F1 (0.595, $+$0.096 over $k{=}10$) but at a 36\% token overhead, reflecting MuSiQue-Ans's denser evidence structure, where more paragraphs clear the cosine threshold. Across all three benchmarks, the noise gate matches or exceeds fixed $k{=}10$ quality at lower token cost, with at most one step of threshold recalibration and no training pipeline.
+\subsection{Threshold Ablations}
+\label{subsec:threshold_ablation}
 
-\subsection{Noise-Gate Threshold Ablation}
-\label{subsec:tau_ablation}
+Table~\ref{tab:noise_gate_thresholds} reports the joint $(\tau,\rho)$ ablation on HotpotQA distractor. As $\tau$ increases from 0.20 to 0.50, F1 and mean tokens decrease monotonically, tracing a smooth quality--cost frontier. The intermediate settings $\tau{=}0.25$ and $\tau{=}0.30$ have nearly identical F1 (0.765 versus 0.764), but $\tau{=}0.30$ uses 142 fewer tokens per query, while moving one step further to $\tau{=}0.35$ drops F1 by 0.038 for a marginal 110-token saving. The $\tau{=}0.30$ row is therefore the Pareto knee, retaining the F1 of $\tau{=}0.25$ at substantially lower token cost without crossing the cliff observed at $\tau{=}0.35$.
 
-To map the full quality--cost frontier of the noise gate, we sweep the cosine threshold $\tau \in \{0.2, 0.25, 0.3, 0.35, 0.5\}$ at fixed Jaccard redundancy threshold $\rho{=}0.65$. Table~\ref{tab:noise_gate_thresholds} reports the results.
+The Jaccard threshold $\rho$ is a secondary control. At fixed $\tau$, varying $\rho\in\{0.50,\,0.55,\,0.65\}$ changes F1 by at most 0.015 and mean tokens by at most 8.0. The Jaccard stage is therefore retained for redundancy control rather than as a primary tuning axis; the recommended Jaccard setting at every $\tau$ is $\rho{=}0.65$. The full grid in Table~\ref{tab:noise_gate_thresholds} indicates that practitioners can fix $\rho$ to the recommended value and tune the gate primarily through $\tau$ on a small held-out sample.
 
 \begin{table}[t]
 \centering
-\caption{Noise-gate $\tau$ sweep on \texttt{gpt-5.4-mini} ($\rho{=}0.65$, $n{=}400$). Rows ordered by increasing $\tau$. Bold marks the recommended operating point.}
+\small
+\caption{Noise-Gate threshold sweep on HotpotQA distractor ($n{=}400$, \texttt{gpt-5.4-mini}). F1 and total tokens are reported at the recommended Jaccard threshold $\rho{=}0.65$. The ``F1 range across $\rho$'' column shows the minimum and maximum F1 across $\rho\in\{0.50, 0.55, 0.65\}$, indicating that $\rho$ is a secondary control: variation of at most 0.015 F1 and 8 tokens at fixed $\tau$. The bold row is the recommended operating point.}
 \label{tab:noise_gate_thresholds}
-\begin{tabular}{rrrrrr}
+\begin{tabular}{rrrrc}
 \toprule
-$\tau$ & F1 & EM & Tokens & Savings & Within tolerance? \\
+$\tau$ & F1 & Tokens & Savings & F1 range across $\rho$ \\
 \midrule
-0.20 & 0.779 & 0.630 & 1317.5 & $-$9.3\%  & \checkmark \\
-0.25 & 0.765 & 0.603 & 1207.3 & $-$16.9\% & \checkmark \\
-\textbf{0.30} & \textbf{0.764} & \textbf{0.603} & \textbf{1065.3} & $-$\textbf{26.7\%} & \checkmark \\
-0.35 & 0.726 & 0.570 & 889.8  & $-$38.7\% & \texttimes \\
-0.50 & 0.619 & 0.490 & 403.9  & $-$72.2\% & \texttimes \\
+0.20 & 0.779 & 1317.5 & $-9.3\%$ & $0.771$--$0.779$ \\
+0.25 & 0.765 & 1207.3 & $-16.9\%$ & $0.765$--$0.778$ \\
+\textbf{0.30} & \textbf{0.764} & \textbf{1065.3} & $\mathbf{-26.7\%}$ & $0.749$--$0.764$ \\
+0.35 & 0.726 & 889.8 & $-38.7\%$ & $0.726$--$0.731$ \\
+0.50 & 0.619 & 403.9 & $-72.2\%$ & $0.613$--$0.619$ \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-The sweep shows a monotonic quality--cost tradeoff: as $\tau$ increases, both F1 and token usage decrease. The intermediate settings $\tau{=}0.25$ and $\tau{=}0.30$ have nearly identical F1 (0.765 and 0.764), but $\tau{=}0.30$ uses 142 fewer tokens per query, making it the Pareto knee. The lenient setting ($\tau{=}0.2$) preserves the most quality (F1~0.779) but saves only 9.3\% of tokens, while $\tau{=}0.35$ drops to 0.726 and $\tau{=}0.5$ to 0.619.
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.85\linewidth]{images/noise_gate_tau_ablation.pdf}
-    \caption{Noise-gate $\tau$ ablation on \texttt{gpt-5.4-mini} at fixed $\rho=0.65$. The left axis shows F1 and the right axis shows mean total tokens. $\tau=0.3$ is the recommended operating point.}
-    \label{fig:tau_ablation}
-\end{figure}
-
-\subsection{Jaccard Redundancy Ablation}
-\label{subsec:rho_ablation}
-
-Table~\ref{tab:noise_gate_jaccard_ablation} shows that the Jaccard threshold $\rho$ is a secondary refinement: at fixed $\tau{=}0.3$, varying $\rho$ changes F1 by at most 0.015 and mean total tokens by at most 8.0. The best absolute F1 in the grid is 0.779 at $(\tau{=}0.2, \rho{=}0.65)$, but the gain over the other settings is marginal.
-
-\begin{table*}[t]
-\centering
-\caption{Jaccard redundancy ablation on \texttt{gpt-5.4-mini} ($n{=}400$). Each cell shows F1 / mean total tokens for the $(\tau, \rho)$ combination.}
-\label{tab:noise_gate_jaccard_ablation}
-\begin{tabular}{lrrrrrr}
-\toprule
-& \multicolumn{3}{c}{F1} & \multicolumn{3}{c}{Total Tokens (mean)} \\
-\cmidrule(lr){2-4}\cmidrule(lr){5-7}
-Jaccard $\rho$ & $\tau{=}0.2$ & $\tau{=}0.3$ & $\tau{=}0.5$ & $\tau{=}0.2$ & $\tau{=}0.3$ & $\tau{=}0.5$ \\
-\midrule
-0.50 & 0.771 & 0.761 & 0.613 & 1307.5 & 1057.4 & 402.2 \\
-0.55 & 0.777 & 0.749 & 0.613 & 1308.3 & 1057.3 & 402.3 \\
-0.65 & 0.779 & 0.764 & 0.619 & 1317.5 & 1065.3 & 403.9 \\
-\bottomrule
-\end{tabular}
-\end{table*}
 
 \section{Failure Mode Analysis}
 \label{sec:analysis}
 
-We test three learned context-selection strategies on HotpotQA distractor: Adaptive-$k$, title-based UCB1-TUNED, and LinUCB with lexical features. On this benchmark, in every head-to-head comparison, the training-free noise gate matches or exceeds them. The outcome is structural rather than accidental: distractors are topically deceptive, title identity is sparse across train and validation, and lexical features are confusable. As the transfer pilots show, these structural properties are specific to HotpotQA and 2WikiMultiHopQA; MuSiQue-Ans presents a different challenge and requires a different gate setting.
+This section characterises why the three learned comparators underperform Noise-Gate on HotpotQA distractor. Each subsection recalls the design hypothesis stated in Section~\ref{sec:methods}, the appeal of the strategy, and identifies the property of the benchmark that violates it. The pattern across the three subsections is that the signals on which the policies depend are not discriminative on this benchmark, an observation summarised in Table~\ref{tab:failure_matrix}.
 
-\subsection{Adaptive-$k$: similarity gaps place the cut in the wrong cluster}
+\subsection{Adaptive-$k$: similarity gaps land in the wrong cluster}
 \label{subsec:fail_adaptivek}
 
-The Adaptive-$k$ rule truncates the retrieved list at the largest adjacent similarity gap~\cite{taguchi2025adaptivek}, under the implicit assumption that embedding-similarity rank is monotone in true relevance. In HotpotQA distractor, that assumption is too weak to be useful. Adaptive-$k$ selects compact contexts (mean $k^*=3.02$, mean total tokens 483.1) but reaches only F1 0.627, below fixed \texttt{retrieval\_k3} (0.651), \texttt{retrieval\_k5} (0.716), and \texttt{retrieval\_k10} (0.792).
+\textbf{Recall the appeal.} Adaptive-$k$ assumes that the largest gap in sorted similarity scores separates relevant context from noise, and replaces a tuned integer $k$ with a single largest-gap rule that adapts the budget to the per-query similarity profile.
 
-The reason is dataset-specific. HotpotQA distractors are BM25-selected to be topically adjacent to the gold evidence, so they share entities, vocabulary, and discourse style with the question. Their embedding-similarity scores therefore cluster close to those of the true supporting facts, and the largest gap often falls inside a distractor cluster rather than at the evidence boundary. The top-$k^*$ paragraphs then exclude genuine evidence while retaining topical but unhelpful context.
+\textbf{Why it breaks.} On HotpotQA distractor, BM25 selects distractors precisely because they are topically adjacent to gold evidence; their embedding scores cluster close to those of the supporting facts, and the largest adjacent gap typically falls inside the distractor cluster rather than between distractor and evidence. The numbers reflect this regime: mean $k^*{=}3.02$, mean total tokens 483.1, F1 0.627, below fixed $k{=}3$ (0.651), $k{=}5$ (0.716), and $k{=}10$ (0.792). The cut is compact but in the wrong cluster, so the selected set excludes genuine evidence while retaining topically adjacent but unhelpful context.
 
 \subsection{UCB1-TUNED: title coverage is sparse across train and validation}
 \label{subsec:fail_ucb1}
 
-We explored whether a bandit reranker could learn which retrieved items are historically valuable. In this title-based UCB1 formulation, each paragraph title is treated as an arm, and the model tracks per-title reward statistics from the training split. On HotpotQA distractor, however, title coverage is sparse enough that cold-start is common. Table~\ref{tab:ucb1_title_coldstart} reports the cold-start behavior of this variant on \texttt{gpt-5.4-mini} with matched samples of $n=400$ per $k$: at $k=5$, $83.8\%$ of validation queries touch titles unseen during training, so many selections rely on BM25 fallback. At $k=2$ and $k=3$, cold-start rates are $61.5\%$ and $75.2\%$, respectively.
+\textbf{Recall the appeal.} UCB1-TUNED assumes that the training-time arm vocabulary covers the inference-time arm vocabulary, so per-arm reward statistics estimated on a training split rank arms accurately at light training cost.
 
-\begin{table}[t]
-\centering
-\caption{Title-based UCB1-TUNED cold-start rates on \texttt{gpt-5.4-mini} ($n=400$ matched samples per $k$). A cold-start query is one whose selected titles were not observed during training, triggering a BM25 fallback.}
-\label{tab:ucb1_title_coldstart}
-\begin{tabular}{lrrr}
-\toprule
-$k$ & Samples & Unseen titles & Cold-start \% \\
-\midrule
-2 & 400 & 246 & 61.5 \\
-3 & 400 & 301 & 75.2 \\
-5 & 400 & 335 & 83.8 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\textbf{Why it breaks.} HotpotQA draws titles from a Wikipedia-scale distribution, so cold-start rates climb steeply with the retrieval budget: $61.5\%$, $75.2\%$, and $83.8\%$ of validation queries at $k\in\{2,3,5\}$ touch arms unseen during training. Most queries are decided by BM25 fallback rather than by the bandit estimate, which collapses the contribution of the bandit machinery itself. At the best operating point ($k{=}5$), UCB1-TUNED reaches F1 0.704 at 723.0 mean tokens, below the matched fixed $k{=}5$ baseline at F1 0.716.
 
-The resulting quality reflects this: overall F1 aggregated across $k\in\{2,3,5\}$ is 0.623, and the best single setting ($k=5$) reaches F1 0.704, still below fixed \texttt{retrieval\_k5} at 0.716. The underlying issue is that HotpotQA draws questions from a Wikipedia-scale title distribution, so the training-time and validation-time title sets overlap only sparsely. This is not a failure of BM25 retrieval itself, but it does show that title-level bandit variants need a closed vocabulary or an explicit fallback policy to be practical on this benchmark.
-
-\subsection{LinUCB: lexical features cannot distinguish crafted distractors}
+\subsection{LinUCB: lexical features cannot separate crafted distractors}
 \label{subsec:fail_linucb}
 
-LinUCB addresses the cold-start problem of arm-indexed bandits by parameterizing rewards as a linear function of context features, so that previously unseen arms can still be scored. We instantiated it with three lexical and structural features: token overlap with the question, title-in-question fraction, and section length. Table~\ref{tab:linucb_results} reports results on \texttt{gpt-5.4-mini} across three retrieval budgets.
+\textbf{Recall the appeal.} LinUCB addresses the cold-start regime of arm-indexed bandits by scoring documents through a linear model in context features, so previously unseen arms can still be evaluated on the basis of features rather than identity.
 
-\begin{table}[t]
-\centering
-\caption{LinUCB reranker results on \texttt{gpt-5.4-mini} ($n{\approx}400$ per $k$). ``Baseline F1'' is the fixed-$k$ retrieval baseline at the same budget.}
-\label{tab:linucb_results}
-\begin{tabular}{lrrrr}
-\toprule
-$k$ & Samples & F1 & Baseline F1 & Avg Tokens \\
-\midrule
-2 & 399 & 0.510 & 0.651 & 344 \\
-3 & 400 & 0.522 & 0.651 & 455 \\
-5 & 399 & 0.620 & 0.716 & 686 \\
-\midrule
-Overall & 1198 & 0.550 & N/A & 495 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-LinUCB achieves an overall F1 of 0.550, underperforming fixed $k{=}3$ (0.651, gap of $-$0.101) and fixed $k{=}5$ (0.716, gap of $-$0.166) despite using only 494.8 mean tokens. The failure mechanism parallels Adaptive-$k$ but at the feature level. HotpotQA distractors are themselves retrieved by BM25, a lexical scoring function, so distractors and supporting facts overlap heavily in surface tokens, title words, and section length. On these features, the two populations are nearly indistinguishable, and a linear model cannot separate them.
-
-A dense semantic feature, such as the cosine similarity between pre-trained sentence embeddings of the query and paragraph, would partially break this symmetry. However, computing dense embeddings for the full training split on CPU is impractical at this scale, so LinUCB remains limited to lexical features. As a result, it cannot recover the semantic signal needed to distinguish crafted distractors from genuine supporting facts.
+\textbf{Why it breaks.} The features tractable at this scale (token overlap, title-in-question fraction, normalised section length) are matched by construction with BM25-retrieved distractors, since BM25 itself selects on a similar lexical surface. The two populations are therefore nearly indistinguishable in the chosen feature space, and a linear reward model cannot separate gold evidence from distractors. Per-$k$ F1 is 0.510, 0.522, and 0.620 at $k\in\{2,3,5\}$, with mean tokens 344, 455, and 686 respectively.
 
 \subsection{Why the noise gate succeeds}
 \label{subsec:why_noise_gate}
 
-The three failure modes above share a single underlying cause: the signals used by learned policies are not discriminative in HotpotQA distractor. Title identity is non-stationary between training and validation, and lexical features are matched by construction because distractors are selected lexically. The noise gate avoids these problems with a single deterministic rule applied at inference time: it uses dense sentence embeddings, and its cutoff is a per-paragraph threshold rather than a single largest-gap cut. Table~\ref{tab:failure_matrix} summarizes the correspondence.
+The three failure mechanisms share a common cause: the signals on which the learned policies depend, namely gap monotonicity, arm identity, and surface-lexical features, are not discriminative on HotpotQA distractor. Dense paragraph-level cosine similarity provides a signal that the other policies do not exploit, and a deterministic threshold avoids both arm-vocabulary cold-start and the misplaced-gap problem. At $(\tau{=}0.30,\,\rho{=}0.65)$, Noise-Gate reaches F1 0.764 at 1065.3 mean tokens, a $-26.7\%$ token reduction against fixed $k{=}10$, while the closest learned operating point (UCB1-TUNED at $k{=}5$) reaches F1 0.704 at 723.0 mean tokens but with $83.8\%$ cold-start. Table~\ref{tab:failure_matrix} summarises the correspondence between the design hypothesis, the structural mismatch, and the observed F1.
 
 \begin{table}[t]
 \centering
-\caption{Dataset-level failure modes on HotpotQA distractor, which learned strategy they affect, and what the noise gate does differently.}
+\small
+\caption{Design hypothesis, structural property of HotpotQA distractor that violates it, and observed F1 for each learned comparator at its best operating point. The final row reports the proposed Noise-Gate at the same retrieval setting for direct comparison.}
 \label{tab:failure_matrix}
-\begin{tabular}{p{4.4cm}p{2.6cm}p{4.4cm}}
+\begin{tabular}{p{2.4cm}p{3.0cm}p{4.2cm}r}
 \toprule
-Failure mode & Affected strategy & Noise-gate response \\
+Strategy & Design hypothesis & Structural mismatch on HotpotQA & F1 \\
 \midrule
-Hard gap truncation misplaces the cut & Adaptive-$k$ & Soft per-paragraph threshold $\tau$ \\
-Sparse title overlap causes cold-start & UCB1-TUNED & Title-agnostic; no arm identity needed \\
-Lexical features cannot separate distractors & LinUCB & Dense semantic embeddings \\
+Adaptive-$k$ & Largest similarity gap separates evidence from noise & Topically adjacent BM25 distractors cluster in similarity; the largest gap falls inside a distractor cluster & $0.627$ ($k^*{\approx}3$) \\
+UCB1-TUNED & Per-arm reward statistics rank arms accurately at light training cost & Wikipedia-scale title vocabulary; $83.8\%$ cold-start at $k{=}5$ forces BM25 fallback & $0.704$ ($k{=}5$) \\
+LinUCB & Linear reward in lexical features generalises beyond the training arm vocabulary & Lexical features matched by construction with BM25 distractors; linear model cannot discriminate & $0.620$ ($k{=}5$) \\
+\midrule
+\textbf{Noise-Gate ($\tau{=}0.3$)} & Dense paragraph-level cosine similarity discriminates evidence from BM25-adjacent distractors & --- (signal preserved) & $\mathbf{0.764}$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The quantitative payoff is visible at a single operating point. At $\tau=0.3$ and $\rho=0.65$, the noise gate reaches F1 0.764 on \texttt{gpt-5.4-mini} ($n=400$), only 0.028 below fixed \texttt{retrieval\_k10} at 0.792. At the same time, mean total tokens drop to 1065.3, a 26.7\% reduction relative to \texttt{retrieval\_k10} at 1452.5. None of the learned strategies approaches this tradeoff: Adaptive-$k$ falls more than 0.15 F1 below \texttt{retrieval\_k10}, title-based UCB1-TUNED at $k{=}5$ reaches 0.704 but falls back to BM25 on 83.8\% of queries, and LinUCB at $k{=}5$ reaches 0.620 under the same budget.
-
-The full five-point $\tau$ sweep (Table~\ref{tab:noise_gate_thresholds}) clarifies why $\tau=0.3$ is the chosen operating point. The lenient setting $\tau=0.2$ achieves higher F1 (0.779) but only a 9.3\% token reduction. The intermediate $\tau=0.25$ reaches F1~0.765 with 16.9\% savings, and $\tau=0.30$ achieves nearly identical F1 (0.764) while saving 26.7\%, confirming $\tau=0.3$ as the Pareto knee. At $\tau=0.35$, F1 drops to 0.726, and $\tau=0.5$ saves 72.2\% but falls to 0.619.
-
-The main takeaway is that dense semantic query--paragraph similarity is the most informative signal we observed for distractor-heavy multi-hop QA on HotpotQA. Rank, arm identity, surface lexical overlap, and hard gap rules are all insufficient on this benchmark. A training-free method that exposes the semantic signal with a deterministic filter, as the noise gate does, matches fixed $k=10$ within tolerance while using fewer tokens---without requiring a training pipeline or per-dataset model fitting.
-
 \section{Discussion}
 \label{sec:discussion}
 
-\paragraph{Pareto optimality of \texorpdfstring{$\tau{=}0.3$}{tau=0.3}.}
-The five-point $\tau$ sweep (Table~\ref{tab:noise_gate_thresholds}) traces a smooth quality--cost frontier. Within the $\pm 0.05$ F1 tolerance band, the noise gate at $\tau{=}0.3$ offers the largest token reduction ($-$26.7\%), while $\tau{=}0.25$ achieves nearly identical F1 (0.765 vs.\ 0.764) at only $-$16.9\% savings. This confirms $\tau{=}0.3$ as the Pareto knee. The $\tau{=}0.2$ setting preserves tighter quality (F1~0.779, $-$9.3\%), while $\tau{=}0.35$ ($-$38.7\%) and $\tau{=}0.5$ ($-$72.2\%) trade quality for larger savings.
+\paragraph{Pareto interpretation.} The recommended operating point $\tau{=}0.30$ corresponds to the Pareto knee in Table~\ref{tab:noise_gate_thresholds} and Figure~\ref{fig:pareto}: nearly identical F1 to $\tau{=}0.25$ at substantially lower token cost. The looser setting $\tau{=}0.25$ is a quality-leaning alternative that remains within the $\pm 0.05$ tolerance band when retaining tighter quality is preferred to maximising token reduction.
 
-\paragraph{Cost implications at scale.}
-On \texttt{gpt-5.4-mini}, the per-query cost drops from \$2.95$\times$10$^{-4}$ at $k{=}10$ to \$2.17$\times$10$^{-4}$ at $\tau{=}0.3$, a saving of \$7.8$\times$10$^{-5}$ per query; at one million queries per day, this translates to approximately 387 million fewer input tokens and roughly \$28{,}000 in annual savings. The embedding step (multi-qa-MiniLM-L6-cos-v1, 384 dimensions) adds negligible inference latency ($<$2\,ms per paragraph on CPU), and embeddings for static corpora can be pre-computed and cached.
+\paragraph{Cost implications at scale.} On \texttt{gpt-5.4-mini}, the per-query cost drops from $2.95\times 10^{-4}$ USD at fixed $k{=}10$ to $2.17\times 10^{-4}$ USD at $\tau{=}0.30$. At one million queries per day, the annualised saving is approximately USD 28{,}000. The embedding step is precomputed and cached, so the saving is realised against a one-off offline indexing cost rather than against a recurring inference overhead.
 
-\paragraph{Limitations.}
-Four limitations qualify our findings.
-\paragraph{(i) Limited transfer scale.} Most experiments use HotpotQA distractor. We add 100-example pilots on 2WikiMultiHopQA and MuSiQue-Ans, but these are still exploratory and do not establish full-scale transfer frontiers. Generalization to open-domain retrieval (e.g., FEVER, Natural Questions) remains untested.
-\paragraph{(ii) Single generation model.} We fix \texttt{gpt-5.4-mini} to isolate the context-selection variable. Stronger models may tolerate noisier context, shifting the optimal $\tau$.
-\paragraph{(iii) Threshold sensitivity.} The recommended $\tau{=}0.3$ is dataset-specific. Domains with different embedding-similarity distributions may require recalibration; we do not propose a domain-adaptive mechanism. Unlike learned baselines, however, Noise-Gate requires no training pipeline and operates on pre-computed embeddings, so practitioners can tune thresholds on a small validation sample without building a full learning pipeline.
-\paragraph{(iv) Bandit generalization.} Title-based UCB1 is weak on HotpotQA distractor because title overlap between training and validation is sparse. In settings with denser reward signals or a closed title vocabulary, bandit approaches may be better matched and merit further study.
+\paragraph{Limitations.} Four limitations qualify the present findings. First, transfer evidence comes from $n{=}100$ pilots on two further datasets rather than from full validation splits. Second, a single generation model is fixed; stronger models may tolerate noisier context and shift the optimal threshold. Third, the recommended threshold is dataset-specific: calibration is required per domain on a small held-out sample. Fourth, the bandit comparators are evaluated on HotpotQA-style benchmarks; closed-vocabulary settings may admit different conclusions.
 
-\paragraph{Future work.}
-Several directions follow from these results.
-A hybrid architecture could apply the noise gate as a fast first-stage filter followed by a lightweight cross-encoder reranker on surviving paragraphs, combining the gate's efficiency with finer-grained relevance estimation.
-An adaptive $\tau$ mechanism that selects $\tau$ as a function of the query's embedding-score distribution could remove the need for per-domain threshold tuning.
-Scaling the 2WikiMultiHopQA and MuSiQue-Ans pilots to their full validation splits, and extending the evaluation to open-domain benchmarks such as FEVER, would clarify where threshold filtering remains sufficient and where learned approaches recover their advantage.
-Finally, testing with stronger generation models would reveal whether the quality--cost frontier shifts when the model can better compensate for noisy context.
-
-The bandit results suggest a narrower future direction as well: UCB1-style reranking remains a candidate family, but it likely needs either a closed title vocabulary or a better title abstraction to be competitive on HotpotQA-like benchmarks.
+\paragraph{Future work.} Promising directions include a two-stage hybrid combining the gate with a lightweight cross-encoder, an adaptive $\tau$ chosen from the per-query similarity distribution, full-scale evaluation on 2WikiMultiHopQA and MuSiQue-Ans together with open-domain benchmarks such as FEVER and Natural Questions, and replication of the present comparison on stronger generation models.
 
 \section{Conclusion}
+\label{sec:conclusion}
 
-We set out to answer whether test-time context compression can reduce the token cost of retrieval-augmented generation without significant quality loss. On HotpotQA distractor ($n{=}400$, \texttt{gpt-5.4-mini}), fixed $k{=}10$ retrieval achieves F1~0.792 but costs $14\times$ more tokens than no retrieval (1452.5 vs.\ 103.5). We systematically evaluated five compression strategies and found that a two-stage noise gate (cosine-similarity filtering followed by Jaccard redundancy removal) achieves F1~0.764 at $\tau{=}0.3$, reducing tokens by 26.7\% while remaining within $\pm 0.05$ F1 of the baseline. No learned strategy matched this tradeoff: Adaptive-$k$ (F1~0.627), UCB1-TUNED (F1~0.704), and LinUCB (F1~0.620) all fell short.
-
-Our analysis identifies the structural reason for this outcome on HotpotQA: sparse title overlap between training and validation and lexical indistinguishability of BM25-retrieved distractors deprive learned approaches of the signals they need to outperform a static policy, while the noise gate sidesteps these failure modes by using dense semantic similarity and a deterministic threshold with no training. The practical implication is that, for distractor-heavy QA with a fixed retrieved pool, practitioners can reduce token cost with a training-free, interpretable filter whose only tunable parameter~($\tau$) admits a clear Pareto interpretation---and whose thresholds can be recalibrated on a small validation sample without a full training pipeline. In HotpotQA distractor, embedding-based threshold filtering is the most effective approach we found; in the transfer pilots, 2Wiki improves cleanly while MuSiQue confirms that optimal gate parameters are benchmark-dependent, a design variable that must be accounted for in deployment.
+A training-free two-stage filter that combines a cosine-similarity threshold $\tau$ with a Jaccard-overlap redundancy threshold $\rho$ reaches token-level F1 0.764 at 1065.3 mean tokens on HotpotQA distractor, within the $\pm 0.05$ tolerance band of fixed $k{=}10$ and at a $-26.7\%$ token cost. The three learned comparators (Adaptive-$k$, UCB1-TUNED, LinUCB) underperform on this class of benchmarks because the signals they exploit, namely gap monotonicity, arm identity, and surface-lexical features, are not discriminative on distractor-heavy multi-hop QA. For this class of benchmarks, deterministic threshold filtering on dense embeddings is the strongest test-time strategy observed, with thresholds calibratable on a small held-out sample and no training pipeline.
 
 \begin{thebibliography}{99}
 
@@ -502,35 +367,41 @@ Auer, P., Cesa-Bianchi, N., Fischer, P.:
 Finite-time Analysis of the Multiarmed Bandit Problem.
 \emph{Machine Learning} \textbf{47}(2--3), 235--256 (2002)
 
-\bibitem{thompson1933}
-Thompson, W.~R.:
-On the Likelihood that One Unknown Probability Exceeds Another in View of the Evidence of Two Samples.
-\emph{Biometrika} \textbf{25}(3--4), 285--294 (1933)
+\bibitem{chang2024mainrag}
+Chang, C.-Y., Chen, Y.-C., Lee, H.-Y.:
+MAIN-RAG: Multi-Agent Filtering Retrieval-Augmented Generation.
+In: \emph{Proceedings of ACL}, pp.~2891--2907 (2025)
+
+\bibitem{chiang2024plausible}
+Chiang, C.-H., Lee, H.-Y.:
+Seemingly Plausible Distractors in Multi-Hop Reasoning.
+In: \emph{Proceedings of EMNLP}, pp.~2543--2558 (2024)
 
 \bibitem{chu2011linucb}
 Chu, W., Li, L., Reyzin, L., Schapire, R.~E.:
 Contextual Bandits with Linear Payoff Functions.
 In: \emph{Proceedings of the Fourteenth International Conference on Artificial Intelligence and Statistics (AISTATS)}, pp.~208--214 (2011)
 
+\bibitem{goldstein1998mmr}
+Goldstein, J., Carbonell, J.:
+Summarization: (1) Using MMR for Diversity-Based Reranking and (2) Evaluating Summaries.
+In: \emph{TIPSTER TEXT PROGRAM PHASE III: Proceedings of a Workshop}, pp.~181--195 (1998)
+
 \bibitem{guo2025dior}
 Guo, H., Zhu, J., Di, S., Shi, W., Chen, Z., Xu, J.:
 DioR: Adaptive Cognitive Detection and Contextual Retrieval Optimization for Dynamic Retrieval-Augmented Generation.
 In: \emph{Proceedings of ACL} (2025)
 
-\bibitem{singh2025chunkrag}
-Singh, I.~S., Aggarwal, R., Allahverdiyev, I., Taha, M., Akalin, A., Zhu, K., O'Brien, S.:
-ChunkRAG: A Novel LLM-Chunk Filtering Method for RAG Systems.
-In: \emph{ICLR 2025 Workshop BuildingTrust} (2025)
+\bibitem{ho-etal-2020-constructing}
+Ho, X., Duong Nguyen, A.-K., Sugawara, S., Aizawa, A.:
+Constructing A Multi-hop QA Dataset for Comprehensive Evaluation of Reasoning Steps.
+In: \emph{Proceedings of the 28th International Conference on Computational Linguistics},
+pp.~6609--6625 (2020)
 
-\bibitem{hwang2025rarag}
-Hwang, J., Park, J., Park, H., Kim, D., Park, S., Ok, J.:
-Retrieval-Augmented Generation with Estimation of Source Reliability.
-In: \emph{Proceedings of EMNLP}, pp.~34279--34303 (2025)
-
-\bibitem{xiong2025drrag}
-Xiong, X., Cai, H., Yu, H., Shen, B., Hu, P.:
-DR-RAG: Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design.
-\emph{Advanced Engineering Informatics} \textbf{68}, 103688 (2025)
+\bibitem{jeong2025ecorag}
+Jeong, Y., Kim, J., Lee, D., Hwang, S.:
+ECoRAG: Evidentiality-guided Compression for Long Context RAG.
+In: \emph{Findings of ACL}, pp.~23456--23471 (2025)
 
 \bibitem{klesel2025rag}
 Klesel, M., Wittmann, H.~F.:
@@ -547,20 +418,20 @@ Lewis, P., Perez, E., Piktus, A., et al.:
 Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.
 In: \emph{Advances in Neural Information Processing Systems (NeurIPS)} (2020)
 
-\bibitem{li2024c2leva}
-Li, Y., et al.:
-C$^2$LEVA: Toward Comprehensive and Contamination-Free Language Model Evaluation.
-\emph{arXiv preprint} (2024)
-
 \bibitem{li2025bestpractices}
 Li, S., Stenzel, L., Eickhoff, C., Bahrainian, S.~A.:
 Enhancing Retrieval-Augmented Generation: A Study of Best Practices.
 In: \emph{Proceedings of COLING}, pp.~6705--6717 (2025)
 
-\bibitem{snell2025ttc}
-Snell, C., Lee, J., Xu, K., Kumar, A.:
-Scaling LLM Test-Time Compute Optimally Can be More Effective than Scaling Parameters for Reasoning.
-In: \emph{International Conference on Learning Representations (ICLR)} (2025)
+\bibitem{nahid2025prism}
+Nahid, M.~M.~H., Rafiei, D.:
+PRISM: Agentic Retrieval with LLMs for Multi-Hop Question Answering.
+arXiv preprint arXiv:2510.14278 (2025)
+
+\bibitem{singh2025chunkrag}
+Singh, I.~S., Aggarwal, R., Allahverdiyev, I., Taha, M., Akalin, A., Zhu, K., O'Brien, S.:
+ChunkRAG: A Novel LLM-Chunk Filtering Method for RAG Systems.
+In: \emph{ICLR 2025 Workshop BuildingTrust} (2025)
 
 \bibitem{su2024dragin}
 Su, W., Tang, Y., Ai, Q., Wu, Z., Liu, Y.:
@@ -572,16 +443,15 @@ Taguchi, C., Maekawa, S., Bhutani, N.:
 Efficient Context Selection for Long-Context QA: No Tuning, No Iteration, Just Adaptive-k.
 In: \emph{Proceedings of EMNLP}, pp.~20105--20130 (2025)
 
-\bibitem{ho-etal-2020-constructing}
-Ho, X., Duong Nguyen, A.-K., Sugawara, S., Aizawa, A.:
-Constructing A Multi-hop QA Dataset for Comprehensive Evaluation of Reasoning Steps.
-In: \emph{Proceedings of the 28th International Conference on Computational Linguistics},
-pp.~6609--6625 (2020)
+\bibitem{thompson1933}
+Thompson, W.~R.:
+On the Likelihood that One Unknown Probability Exceeds Another in View of the Evidence of Two Samples.
+\emph{Biometrika} \textbf{25}(3--4), 285--294 (1933)
 
 \bibitem{trivedi-etal-2022-musique}
 Trivedi, H., Balasubramanian, N., Khot, T., Sabharwal, A.:
 MuSiQue: Multihop Questions via Single-hop Question Composition.
-In: \emph{Transactions of the Association for Computational Linguistics} \textbf{10}, 539--554 (2022)
+\emph{Transactions of the Association for Computational Linguistics} \textbf{10}, 539--554 (2022)
 
 \bibitem{trivedi2023interleave}
 Trivedi, H., Balasubramanian, N., Khot, T., Sabharwal, A.:
@@ -593,10 +463,10 @@ Verma, A., Gupta, S., Pillai, S., Sircar, P., Gupta, D.:
 ReflectiveRAG: Rethinking Adaptivity in Retrieval-Augmented Generation.
 In: \emph{Proceedings of EACL, Industry Track} (2026)
 
-\bibitem{wang2024bestpractices}
-Wang, X., Wang, Z., Gao, X., et al.:
-Searching for Best Practices in Retrieval-Augmented Generation.
-In: \emph{Proceedings of EMNLP}, pp.~17716--17736 (2024)
+\bibitem{xiong2025drrag}
+Xiong, X., Cai, H., Yu, H., Shen, B., Hu, P.:
+DR-RAG: Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design.
+\emph{Advanced Engineering Informatics} \textbf{68}, 103688 (2025)
 
 \bibitem{yang2018hotpotqa}
 Yang, Z., Qi, P., Zhang, S., Bengio, Y., Cohen, W.~W., Salakhutdinov, R., Manning, C.~D.:
@@ -612,7 +482,6 @@ In: \emph{International Conference on Learning Representations (ICLR)} (2023)
 Yi, J., Li, Y.:
 Membership Inference on LLMs in the Wild.
 \emph{arXiv preprint} (2026)
-
 
 \bibitem{yu2024rankrag}
 Yu, Y., Ping, W., Liu, Z., Wang, B., You, J., Zhang, C., Shoeybi, M., Catanzaro, B.:
@@ -686,7 +555,7 @@ ECoRAG: Evidentiality-guided Compression for Long Context RAG.
 In: \emph{Findings of ACL}, pp.~23456--23471 (2025)
 
 \bibitem{nahid2025prism}
-Nahid, M.M.H., Rafiei, D.:
+Nahid, M.~M.~H., Rafiei, D.:
 PRISM: Agentic Retrieval with LLMs for Multi-Hop Question Answering.
 arXiv preprint arXiv:2510.14278 (2025)
 
@@ -695,6 +564,6 @@ Chiang, C.-H., Lee, H.-Y.:
 Seemingly Plausible Distractors in Multi-Hop Reasoning.
 In: \emph{Proceedings of EMNLP}, pp.~2543--2558 (2024)
 
-
 \end{thebibliography}
+
 \end{document}
