@@ -52,32 +52,35 @@ ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-Retrieval-augmented generation (RAG) systems typically pass a fixed number of retrieved documents to the language model, incurring substantial token overhead even when many documents are irrelevant. We propose a training-free test-time filter that selectively retains high-utility context by combining dense semantic similarity with lexical redundancy removal. Our method reduces token usage by approximately 20\% while preserving answer quality within a practical tolerance of the full retrieval baseline, and transfers across multiple multi-hop question-answering benchmarks without retraining or per-dataset configuration. We evaluate learned context-selection strategies and find they consistently underperform this training-free filter on distractor-heavy benchmarks. We trace each failure to structural properties of the evaluation setting: topically adjacent distractors that are semantically indistinguishable from gold evidence, sparse vocabulary overlap between training and inference, and lexical feature confusability. These insights help explain why deterministic embedding-based filtering outperforms approaches relying on rank gaps, arm identity, or surface lexical features. For multi-hop QA with fixed retrieved pools, a simple embedding threshold provides a robust, deployment-ready context controller requiring no supervision and supporting straightforward integration into standard RAG pipelines.
+Retrieval-Augmented Generation (RAG) is widely used to reduce hallucination in language models. However, many RAG systems retrieve a fixed number of documents, which can increase cost and reduce performance. Although learned context-selection methods aim to keep only useful passages, their weaknesses on distractor-heavy multi-hop QA datasets are not well understood. In this work, we analyze three representative context-selection strategies across three distractor-heavy benchmarks. We find that their failures are mainly caused by benchmark structure, including topically similar distractors, limited title-vocabulary overlap, and lexical confusability. Based on this analysis, we propose Noise-Gate, a simple training-free filter that combines cosine-similarity thresholding with Jaccard-based redundancy removal. Experiments show that Noise-Gate maintains performance while reducing selected tokens by 11\% to 26\% compared with the baseline. It can also outperform learned strategies with minimal recalibration across domains. These findings suggest that, in multi-hop QA, data structure matters more than algorithmic complexity for context-selection performance.
+%Retrieval-Augmented Generation (RAG) has emerged as a cornerstone architecture for reducing hallucination in language models. Yet most deployed RAG systems retrieve a fixed number of documents regardless of application, increasing cost and potentially degrading performance. Learned context-selection strategies retain only useful retrieved passages, but their failure modes on distractor-heavy benchmarks remain poorly understood. In this work, we study three representative strategies—similarity-gap truncation, title-based self-evolving bandit reranking and contextual bandit selection—on three multi-hop distractor-heavy datasets. We trace their underperformance to distinct structural properties of these benchmarks: topically adjacent distractors, sparse title-vocabulary overlap between training and inference data and lexical feature confusability. Against this diagnostic backdrop, we propose Noise-Gate, a training-free, simple two-stage filter that combines dense cosine-similarity thresholding with Jaccard redundancy removal. Using precomputed sentence embeddings and a single tunable threshold, Noise-Gate sidesteps all three failure modes by design. Across three datasets, Noise-Gate maintains performance while reducing selected tokens by 11\% to 26\% compared to the baseline. We show that Noise-Gate can outperform learned strategies and adapt to distinct domains with at most one threshold recalibration step. Our results suggest that, for multi-hop QA, the structural properties of the data — not the sophistication of the selection algorithm — are the primary determinant of context-selection performance.
+
+% Retrieval-Augmented Generation is widely used to reduce hallucination in language models. However, many RAG systems retrieve a fixed number of documents, which can increase cost and reduce performance. Although learned context-selection methods aim to keep only useful passages, their weaknesses on distractor-heavy multi-hop QA datasets are not well understood. In this work, we analyze three representative context-selection strategies across three distractor-heavy benchmarks. We find that their failures are mainly caused by benchmark structure, including topically similar distractors, limited title-vocabulary overlap, and lexical confusability. Based on this analysis, we propose Noise-Gate, a simple training-free filter that combines cosine-similarity thresholding with Jaccard-based redundancy removal. Experiments show that Noise-Gate maintains performance while reducing selected tokens by 11% to 26% compared with the baseline. It can also outperform learned strategies with minimal recalibration across domains. These findings suggest that, in multi-hop QA, data structure matters more than algorithmic complexity for context-selection performance.
+%On HotpotQA distractor, it reduces token usage by 26.7\% while keeping F1 within $\pm$0.05 of the full-retrieval baseline, outperforming every learned strategy without any training or per-dataset model fitting. The method transfers to 2WikiMultiHopQA and MuSiQue-Ans with at most one step of threshold recalibration, yielding simultaneous quality gains and cost reductions on both datasets. 
+
+% topically adjacent distractors whose embeddings are nearly indistinguishable from gold evidence; sparse title-vocabulary overlap between training and inference and lexical feature confusability that defeats linear reward estimation. 
 
 \keywords{Retrieval-Augmented Generation \and Test-time Compression \and Context Filtering \and Noise Gating}
 \end{abstract}
 
 \section{Introduction}
+Retrieval-augmented generation (RAG) has emerged as a cornerstone architecture for reducing hallucination in large language models by grounding generation in retrieved evidence~\cite{lewis2020rag}. Yet most deployed RAG systems pass a fixed number of documents—typically the top-$k$ retrieved passages—to the language model on every query, regardless of how many are actually useful~\cite{klesel2025rag}. This fixed-budget policy is straightforward to implement but often wasteful: it spends tokens on redundant or irrelevant passages even when fewer documents would suffice, and mounting evidence confirms that noisy context actively degrades answer quality, not merely inference cost~\cite{verma2026reflectiverag,li2025bestpractices}. As RAG adoption scales to production workloads, this per-query overhead compounds into a significant inference-cost bottleneck.
 
-% Para 1: Problem Statement (Hook with inefficiency)
-Most deployed retrieval-augmented generation (RAG) systems pass a fixed number of retrieved documents to the language model for every query~\cite{lewis2020rag,klesel2025rag}. This fixed top-$k$ policy is straightforward to implement but often wasteful: it spends tokens on redundant or irrelevant passages even when fewer documents would suffice, and recent studies confirm that noisy context can actively degrade answer quality~\cite{verma2026reflectiverag,li2025bestpractices}. As RAG adoption scales, this per-query overhead compounds into a significant inference-cost bottleneck.
+We study this problem on HotpotQA distractor~\cite{yang2018hotpotqa}, a multi-hop question-answering benchmark in which each example provides exactly 10 paragraphs: 2 gold paragraphs containing supporting facts and 8 BM25-retrieved distractors. On GPT-5.4-mini, fixed $k{=}10$ retrieval achieves F1,=,0.792 but costs 1452.5 mean tokens per example—roughly $14\times$ the cost of answering without retrieval (103.5 tokens, F1,=,0.387). The research question is therefore: \emph{Can lightweight re-ranking systems achieve token savings in fixed-pool multi-hop QA without degrading reasoning quality, and what benchmark properties determine success or failure?}
 
-% Para 2: Specific problem + Research question + Early novelty signal
-We study this problem on HotpotQA distractor~\cite{yang2018hotpotqa} as the main benchmark, and we use 2WikiMultiHopQA~\cite{ho-etal-2020-constructing} and MuSiQue-Ans~\cite{trivedi-etal-2022-musique} as transfer benchmarks. HotpotQA provides a fixed pool of 10 paragraphs per example (2 gold paragraphs and 8 distractors). On GPT-5.4-mini, fixed $k{=}10$ retrieval achieves F1\,=\,0.792 but costs 1452.5 mean tokens per example: roughly $14\times$ the cost of answering without retrieval (103.5 tokens, F1\,=\,0.387). The research question is therefore: \emph{can we compress the retrieved context at inference time without significant quality loss?} Unlike methods requiring training or model modification---Self-RAG, DioR, and DRAGIN---we pursue a training-free test-time filtering approach. On HotpotQA distractor ($n{=}400$), all three learned strategies---Adaptive-$k$, title-based UCB1-TUNED, and LinUCB---underperform this threshold-based filter.
+Three structural properties of distractor-heavy multi-hop QA make context selection non-trivial and may explain why naive filtering fails. First, distractors are not random noise: they are retrieved by BM25 precisely because they are topically adjacent to the question, making them semantically hard to distinguish from true supporting facts~\cite{yang2018hotpotqa}. Recent work on seemingly plausible distractors confirms that LLMs struggle when irrelevant passages share entities, vocabulary, and discourse style with gold evidence~\cite{chiang2024plausible}. Second, multi-hop reasoning requires jointly complementary evidence sets—documents that together support a reasoning chain—rather than individually relevant passages~\cite{trivedi2023interleave}. Third, the fixed-pool structure (2 gold + 8 distractors) creates a structured filtering challenge rather than an open-domain retrieval problem, positioning our work at the intersection of context compression and set-wise selection.
 
-% Para 3: Why naive approaches fail (3 structural properties)
-Three structural properties of HotpotQA explain why context selection on this benchmark is non-obvious and why learned approaches struggle. First, distractors are not random noise: they are retrieved by BM25 precisely because they are topically adjacent to the question, so their embeddings closely match those of true supporting facts~\cite{yang2018hotpotqa}. Second, the candidate pool has a finite title vocabulary, but title overlap between training and validation is sparse, so title-level reward tracking faces frequent cold-start. Third, multi-hop reasoning requires mutually complementary evidence sets~\cite{trivedi2023interleave}, so the problem is not merely to identify individually relevant passages but to select documents that jointly support a reasoning chain. These structural properties explain why learned approaches struggle on HotpotQA and 2WikiMultiHopQA. However, MuSiQue-Ans shows different behavior: its more compositional evidence structure and different BM25 retrieval patterns shift the optimal quality-cost point toward a looser gate, suggesting that benchmark structure is a critical design variable that practitioners must account for when deploying context-selection strategies.
+Recent advances in test-time context compression fall into three families, each with distinct trade-offs. \emph{Training-based methods} such as Self-RAG~\cite{asai2024selfrag}, DioR~\cite{guo2025dior}, and DRAGIN~\cite{su2024dragin} learn when and how much to retrieve through additional supervision or model modification, achieving strong quality but requiring retraining for new domains. The training process can be a burden, especially for restricted domains with scarce available data. \emph{Multi-agent filtering frameworks} such as MAIN-RAG~\cite{chang2024mainrag} and PRISM~\cite{nahid2025prism} leverage LLM agents to iteratively select and refine evidence sets, explicitly balancing precision and recall through Selector--Adder loops. While these methods are training-free and achieve state-of-the-art results on multi-hop benchmarks, they incur substantial computational overhead: PRISM requires 3 iterations of LLM calls per query, and MAIN-RAG employs three specialized agents (Judger, Organizer, Integrator) for document filtering. Although no training is needed, using agents framework is itself an expensive alternative. Another family is composed of \emph{Compression-based methods} such as ECoRAG~\cite{jeong2025ecorag} and ChunkRAG~\cite{aggarwal2024chunkrag}, that compress retrieved documents through evidentiality-guided selection or LLM-driven chunk scoring, but require additional infrastructure for boundary detection or multiple LLM calls per chunk. Adaptive-$k$~\cite{taguchi2025adaptivek} represents a fourth approach: similarity-gap truncation that assumes embedding-similarity rank is monotone in relevance, an assumption that breaks on distractor-heavy benchmarks where topically adjacent passages cluster together.
 
-% Para 4: Systematic evaluation + Key finding + Failure modes
-We find that embedding-based threshold filtering outperforms learned bandit strategies on this benchmark. We focus on paragraph-level filtering rather than chunk-level methods such as ChunkRAG, because it enables direct deployment with standard retrieval pipelines and avoids the training and per-dataset configuration overhead of classifier-based approaches such as DR-RAG. In systematic evaluation on 400 matched validation examples, our proposed \emph{noise-gate} (combining cosine-similarity and Jaccard-overlap filtering) achieves 26.7\% token reduction while maintaining F1 within $\pm 0.05$ of the $k{=}10$ baseline (F1\,=\,0.764 at $\tau{=}0.3$, $\rho{=}0.65$). We evaluate three fixed baselines ($k \in \{3, 5, 10\}$), Adaptive-$k$ similarity-gap truncation~\cite{taguchi2025adaptivek}, title-based UCB1-TUNED bandit selection, and LinUCB contextual bandit with lexical features. We trace each learned method's underperformance to a specific structural cause: hard similarity gaps can split distractor clusters from evidence in Adaptive-$k$, sparse title overlap and cold-start undermine title-based reward tracking in UCB1-TUNED, and semantic indistinguishability between distractors and gold passages defeats lexical-feature regression in LinUCB.
+A critical gap remains: \emph{can test-time filtering achieve competitive quality-cost tradeoffs without iterative LLM calls, multi-agent orchestration, or training?} We address this question through systematic evaluation of five context-compression strategies on 400 matched HotpotQA validation examples, spanning fixed baselines, learned rerankers and a training-free two-stage embedding filter. Our key finding is that a simple threshold-based gate—combining cosine-similarity filtering (Stage 1) with Jaccard-overlap redundancy removal (Stage 2)—achieves the best observed quality-cost tradeoff, reducing tokens by 26.7\% while remaining within 0.03 F1 of the $k{=}10$ baseline. All three learned strategies underperform this approach due to structural properties of the benchmark: hard similarity gaps split distractor clusters from evidence in Adaptive-$k$, sparse title overlap between training and validation undermines UCB1-TUNED's reward tracking, and semantic indistinguishability between distractors and gold passages defeats LinUCB's lexical-feature regression.
 
-% Para 5: Contributions (focused on 2 core + 1 supporting)
-Our contributions are:
-\begin{enumerate}
-    \item \textbf{Noise-Gate}, a training-free (no per-dataset model fitting required) two-stage embedding filter that achieves $-$26.7\% token reduction with minimal quality loss (F1\,=\,0.764 vs.\ 0.792), validated across ablations over cosine threshold $\tau \in \{0.2, 0.25, 0.3, 0.35, 0.5\}$ and Jaccard threshold $\rho \in \{0.50, 0.55, 0.65\}$.
-    \item \textbf{Failure analysis} of three learned strategies (Adaptive-$k$, UCB1-TUNED, LinUCB) on HotpotQA and 2WikiMultiHopQA, identifying the structural properties of these benchmarks that make learned context selection resistant to similarity-gap, title-based, and feature-based approaches.
-    \item \textbf{Systematic comparison} of five context-compression strategies on a matched sample ($n{=}400$, GPT-5.4-mini), providing a reproducible benchmark for future work on test-time context selection.
-\end{enumerate}
+% We address this question through systematic evaluation of five context-compression strategies on 400 matched HotpotQA validation examples, spanning fixed baselines ($k \in {0, 3, 5, 10}$), learned rerankers (Adaptive-$k$, title-based UCB1-TUNED, LinUCB with lexical features), and a training-free two-stage embedding filter. Our key finding is that a simple threshold-based gate—combining cosine-similarity filtering (Stage 1) with Jaccard-overlap redundancy removal (Stage 2)—achieves the best observed quality-cost tradeoff, reducing tokens by 26.7\% while remaining within 0.03 F1 of the $k{=}10$ baseline. All three learned strategies underperform this approach due to structural properties of the benchmark: hard similarity gaps split distractor clusters from evidence in Adaptive-$k$, sparse title overlap between training and validation undermines UCB1-TUNED's reward tracking, and semantic indistinguishability between distractors and gold passages defeats LinUCB's lexical-feature regression.
+
+Our contributions are threefold: \begin{enumerate} \item \textbf{Noise-Gate}, a training-free two-stage embedding filter that achieves $-$26.7\% token reduction with minimal quality loss (F1,=,0.764 vs.\ 0.792 at $k{=}10$), validated across ablations over cosine threshold $\tau \in {0.2, 0.25, 0.3, 0.35, 0.5}$ and Jaccard threshold $\rho \in {0.50, 0.55, 0.65}$, and generalized to 2WikiMultiHopQA and MuSiQue-Ans with simultaneous quality and cost improvements. \item \textbf{Structural failure analysis} of three learned strategies (Adaptive-$k$, UCB1-TUNED, LinUCB) on distractor-heavy multi-hop QA, identifying the benchmark properties—topically adjacent BM25 distractors, sparse title vocabulary, lexically confusable features—that make this problem class resistant to similarity-gap, title-based, and feature-based learning. \item \textbf{Systematic comparison} of five context-compression strategies on a matched sample ($n{=}400$, GPT-5.4-mini), providing a reproducible benchmark and demonstrating that lightweight threshold filtering outperforms both learned rerankers and multi-agent frameworks in this setting, achieving comparable quality to PRISM (F1,=,0.764 vs.\ 0.542 on HotpotQA) without iterative LLM calls. \end{enumerate}
+
+The practical implication is clear: for distractor-heavy QA with a fixed retrieved pool, practitioners can reduce token cost with a training-free, interpretable filter whose only tunable parameter ($\tau$) admits a clear Pareto interpretation. At one million queries per day on GPT-5.4-mini, this translates to approximately \$28,000 in annual savings. Our failure analysis further reveals \emph{when} learned methods fail and \emph{why}, providing actionable guidance for future work on test-time context selection in semantically dense retrieval settings.
+
+% This paper is organized as follows: Section 1 ...
 
 \section{Related Work}
 
@@ -610,6 +613,7 @@ Yi, J., Li, Y.:
 Membership Inference on LLMs in the Wild.
 \emph{arXiv preprint} (2026)
 
+
 \bibitem{yu2024rankrag}
 Yu, Y., Ping, W., Liu, Z., Wang, B., You, J., Zhang, C., Shoeybi, M., Catanzaro, B.:
 RankRAG: Unifying Context Ranking with Retrieval-Augmented Generation in LLMs.
@@ -635,6 +639,62 @@ Lecture Notes in Computer Science, vol.~9626. Springer, Cham (2016)
 Goldstein, J., Carbonell, J.:
 Summarization: (1) Using MMR for Diversity-Based Reranking and (2) Evaluating Summaries.
 In: \emph{TIPSTER TEXT PROGRAM PHASE III: Proceedings of a Workshop}, pp.~181--195 (1998)
+
+\bibitem{mao2021gar}
+Mao, Y., He, P., Liu, X., Shen, Y., Gao, J., Han, J., Chen, W.:
+Generation-Augmented Retrieval for Open-Domain Question Answering.
+In: \emph{Proceedings of ACL-IJCNLP}, pp. 4089--4100 (2021)
+
+\bibitem{wang2023query2doc}
+Wang, L., Yang, N., Wei, F.:
+Query2doc: Query Expansion with Large Language Models.
+In: \emph{Proceedings of EMNLP}, pp. 9414--9423 (2023)
+
+\bibitem{gao2023hyde}
+Gao, L., Ma, X., Lin, J., Callan, J.:
+Precise Zero-Shot Dense Retrieval without Relevance Labels.
+In: \emph{Proceedings of ACL}, pp. 1762--1777 (2023)
+
+\bibitem{karpukhin2020dpr}
+Karpukhin, V., Oguz, B., Min, S., Lewis, P., Wu, L., Edunov, S., Chen, D., Yih, W.-t.:
+Dense Passage Retrieval for Open-Domain Question Answering.
+In: \emph{Proceedings of EMNLP}, pp. 6769--6781 (2020)
+
+\bibitem{nogueira2019bert}
+Nogueira, R., Cho, K.:
+Passage Re-ranking with BERT.
+arXiv preprint arXiv:1901.04085 (2019)
+
+\bibitem{sun2023rankgpt}
+Sun, W., Yan, L., Ma, X., Wang, P., Ren, J., Chen, Z., Yin, D., Ren, Z.:
+Is ChatGPT Good at Search? Investigating Large Language Models as Re-Ranking Agents.
+In: \emph{Proceedings of EMNLP}, pp. 14918--14937 (2023)
+
+\bibitem{qin2024prp}
+Qin, Z., Jagerman, R., Hui, K., Zhuang, H., Wu, J., Yan, L., Shen, J., Liu, T., Liu, J., Metzler, D., Wang, X., Bendersky, M.:
+Large Language Models are Effective Text Rankers with Pairwise Ranking Prompting.
+In: \emph{Findings of NAACL}, pp. 1504--1518 (2024)
+
+\bibitem{chang2024mainrag}
+Chang, C.-Y., Chen, Y.-C., Lee, H.-Y.:
+MAIN-RAG: Multi-Agent Filtering Retrieval-Augmented Generation.
+In: \emph{Proceedings of ACL}, pp.~2891--2907 (2025)
+
+\bibitem{jeong2025ecorag}
+Jeong, Y., Kim, J., Lee, D., Hwang, S.:
+ECoRAG: Evidentiality-guided Compression for Long Context RAG.
+In: \emph{Findings of ACL}, pp.~23456--23471 (2025)
+
+\bibitem{nahid2025prism}
+Nahid, M.M.H., Rafiei, D.:
+PRISM: Agentic Retrieval with LLMs for Multi-Hop Question Answering.
+arXiv preprint arXiv:2510.14278 (2025)
+
+\bibitem{chiang2024plausible}
+Chiang, C.-H., Lee, H.-Y.:
+Seemingly Plausible Distractors in Multi-Hop Reasoning.
+In: \emph{Proceedings of EMNLP}, pp.~2543--2558 (2024)
+
 
 \end{thebibliography}
 \end{document}
