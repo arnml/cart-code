@@ -70,7 +70,7 @@ The paper is organised as follows. Section~\ref{sec:related} situates Noise-Gate
 \section{Related Work}
 \label{sec:related}
 
-The present work draws on three lines of research. The first is RAG for fact-checking and truth-grounding: retrieval is introduced into language-model pipelines to ground generation in evidence and reduce hallucination, which makes the quality of the selected context a quality-critical step rather than a peripheral one~\cite{lewis2020rag}. The second is multi-hop question answering with structured distractors, where the difficulty of distinguishing gold evidence from BM25-retrieved distractors with adjacent embeddings sets the empirical regime; benchmark constructions of this kind establish that selection over a small fixed pool of plausible paragraphs is itself a non-trivial task~\cite{yang2018hotpotqa,chiang2024plausible,trivedi2023interleave}. The third is cost-aware evaluation of RAG pipelines, which supports treating token cost as a meaningful axis of comparison alongside quality and grounds the decision to fix the generation model and report mean tokens per query~\cite{klesel2025rag,li2025bestpractices}. The five families of selectors below position Noise-Gate against representative work in each line.
+This paper is situated at the intersection of three research areas: evidence-grounded RAG, multi-hop question answering with structured distractors, and cost-aware evaluation of RAG pipelines. The first area studies the use of retrieval in language-model pipelines to ground generation in evidence and reduce hallucination, which makes the quality of the selected context a quality-critical step rather than a peripheral one~\cite{lewis2020rag}. The second area concerns multi-hop question answering with structured distractors, where the difficulty of distinguishing gold evidence from BM25-retrieved distractors with adjacent embeddings sets the empirical regime; benchmark constructions of this kind establish that selection over a small fixed pool of plausible paragraphs is itself a non-trivial task~\cite{yang2018hotpotqa,chiang2024plausible,trivedi2023interleave}. The third area is cost-aware evaluation of RAG pipelines, which supports treating token cost as a meaningful axis of comparison alongside quality and grounds the decision to fix the generation model and report mean tokens per query~\cite{klesel2025rag,li2025bestpractices}. The five families of selectors below position Noise-Gate against representative work in each area.
 
 \paragraph{Fixed-budget retrieval.} The canonical RAG formulation passes a fixed top-$k$ retrieved set to a generator~\cite{lewis2020rag}, and a recent survey of deployment patterns indicates that fixed top-$k$ remains the deployed default~\cite{klesel2025rag}. The present work treats fixed $k{=}10$ as a quality reference and asks whether the same quality is reachable at lower token cost on the same fixed pool.
 
@@ -326,7 +326,7 @@ The three failure mechanisms share a common cause: the signals on which the lear
 \small
 \caption{Design hypothesis, structural property of HotpotQA distractor that violates it, and observed F1 for each learned comparator at its best operating point. The final row reports the proposed Noise-Gate at the same retrieval setting for direct comparison.}
 \label{tab:failure_matrix}
-\begin{tabular}{p{2.4cm}p{3.0cm}p{4.2cm}r}
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{4.2cm}r}
 \toprule
 Strategy & Design hypothesis & Structural mismatch on HotpotQA & F1 \\
 \midrule
@@ -368,9 +368,11 @@ Finite-time Analysis of the Multiarmed Bandit Problem.
 \emph{Machine Learning} \textbf{47}(2--3), 235--256 (2002)
 
 \bibitem{chang2024mainrag}
+\begin{sloppypar}
 Chang, C.-Y., Chen, Y.-C., Lee, H.-Y.:
 MAIN-RAG: Multi-Agent Filtering Retrieval-Augmented Generation.
 In: \emph{Proceedings of ACL}, pp.~2891--2907 (2025)
+\end{sloppypar}
 
 \bibitem{chiang2024plausible}
 Chiang, C.-H., Lee, H.-Y.:
@@ -504,11 +506,6 @@ Adaptive Effort for Search Evaluation Metrics.
 In: Ferro, N., et al. (eds.) \emph{Advances in Information Retrieval (ECIR 2016)}.
 Lecture Notes in Computer Science, vol.~9626. Springer, Cham (2016)
 
-\bibitem{goldstein1998mmr}
-Goldstein, J., Carbonell, J.:
-Summarization: (1) Using MMR for Diversity-Based Reranking and (2) Evaluating Summaries.
-In: \emph{TIPSTER TEXT PROGRAM PHASE III: Proceedings of a Workshop}, pp.~181--195 (1998)
-
 \bibitem{mao2021gar}
 Mao, Y., He, P., Liu, X., Shen, Y., Gao, J., Han, J., Chen, W.:
 Generation-Augmented Retrieval for Open-Domain Question Answering.
@@ -530,9 +527,11 @@ Dense Passage Retrieval for Open-Domain Question Answering.
 In: \emph{Proceedings of EMNLP}, pp. 6769--6781 (2020)
 
 \bibitem{nogueira2019bert}
+\begin{sloppypar}
 Nogueira, R., Cho, K.:
 Passage Re-ranking with BERT.
 arXiv preprint arXiv:1901.04085 (2019)
+\end{sloppypar}
 
 \bibitem{sun2023rankgpt}
 Sun, W., Yan, L., Ma, X., Wang, P., Ren, J., Chen, Z., Yin, D., Ren, Z.:
@@ -543,26 +542,6 @@ In: \emph{Proceedings of EMNLP}, pp. 14918--14937 (2023)
 Qin, Z., Jagerman, R., Hui, K., Zhuang, H., Wu, J., Yan, L., Shen, J., Liu, T., Liu, J., Metzler, D., Wang, X., Bendersky, M.:
 Large Language Models are Effective Text Rankers with Pairwise Ranking Prompting.
 In: \emph{Findings of NAACL}, pp. 1504--1518 (2024)
-
-\bibitem{chang2024mainrag}
-Chang, C.-Y., Chen, Y.-C., Lee, H.-Y.:
-MAIN-RAG: Multi-Agent Filtering Retrieval-Augmented Generation.
-In: \emph{Proceedings of ACL}, pp.~2891--2907 (2025)
-
-\bibitem{jeong2025ecorag}
-Jeong, Y., Kim, J., Lee, D., Hwang, S.:
-ECoRAG: Evidentiality-guided Compression for Long Context RAG.
-In: \emph{Findings of ACL}, pp.~23456--23471 (2025)
-
-\bibitem{nahid2025prism}
-Nahid, M.~M.~H., Rafiei, D.:
-PRISM: Agentic Retrieval with LLMs for Multi-Hop Question Answering.
-arXiv preprint arXiv:2510.14278 (2025)
-
-\bibitem{chiang2024plausible}
-Chiang, C.-H., Lee, H.-Y.:
-Seemingly Plausible Distractors in Multi-Hop Reasoning.
-In: \emph{Proceedings of EMNLP}, pp.~2543--2558 (2024)
 
 \end{thebibliography}
 

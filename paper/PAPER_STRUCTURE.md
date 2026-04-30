@@ -25,7 +25,7 @@ The paper must follow BRACIS / Springer LNCS conventions for academic writing.
 - Numbers are reported with consistent precision: F1 and EM to 3 decimals, mean tokens to 1 decimal, percentages to 1 decimal, costs in scientific notation.
 - All quantitative claims must reference Tab 1, Tab 2, Tab 3, Fig 2, or be cited.
 - Symbols are introduced before use. Equations are numbered and referenced explicitly.
-- Citations follow LNCS numbered style (`splncs04`, rendered as `[n]`); every `\bibitem` must be cited at least once. See §0.1.
+- Citations follow LNCS numbered style (`splncs04`, rendered as `[n]`); every `\bibitem` retained at submission must be cited at least once. A reservoir of uncited entries is allowed during drafting; see §0.1.
 - Hyperparameters are reported in §5.1 (Setup) and not re-defined in §5.2–§5.4.
 
 **Diction list (use / avoid).**
@@ -57,7 +57,7 @@ The paper must follow Springer LNCS / BRACIS bibliography conventions.
 
 **Bibliography style.**
 - LNCS uses numbered citations rendered as `[n]` (the `splncs04` bibliography style). Citations are placed immediately after the author name, method name, or claim they support.
-- Every entry in the bibliography must be cited at least once in the body. Uncited `\bibitem` entries are removed before submission.
+- During drafting, an uncited `\bibitem` reservoir is permitted so candidate references can be added or removed without churn. Before submission, every entry remaining in the bibliography must be cited at least once in the body; any reservoir entry not adopted is removed at that point.
 - Avoid duplicate \bibitem entries for the same paper (one canonical key per work).
 
 **Where to cite.**

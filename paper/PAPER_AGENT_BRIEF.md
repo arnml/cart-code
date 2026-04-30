@@ -96,17 +96,15 @@ Important examples:
 
 Do not cite the paper's own results. Refer to the relevant section, table, or figure instead.
 
-## Current Known Bibliography Issue
+## Current Bibliography State
 
-`paper.tex` currently contains duplicate `\bibitem` keys near the end of the bibliography, including:
+The duplicate `\bibitem` keys previously present near the end of the bibliography (`goldstein1998mmr`, `chang2024mainrag`, `jeong2025ecorag`, `nahid2025prism`, `chiang2024plausible`) have been removed; every key is now defined exactly once.
 
-- `goldstein1998mmr`
-- `chang2024mainrag`
-- `jeong2025ecorag`
-- `nahid2025prism`
-- `chiang2024plausible`
+A reservoir of currently-uncited entries is intentionally retained in `paper.tex` because they may be cited in later revisions:
 
-An agent revising references should remove duplicates and ensure every remaining `\bibitem` is cited at least once.
+- `jiang2016adaptive`, `mao2021gar`, `wang2023query2doc`, `gao2023hyde`, `nogueira2019bert`, `sun2023rankgpt`, `qin2024prp`, `yao2023react`, `yi2026membership`, `zhang2024retrievalqa`.
+
+An agent revising references should preserve these reservoir entries unless the author explicitly asks for cleanup. Before submission, every remaining `\bibitem` must be either cited at first relevant mention or removed.
 
 ## Fixed Experimental Facts
 
