@@ -32,7 +32,22 @@ The paper must follow BRACIS / Springer LNCS conventions for academic writing.
 - Use: *evaluate, propose, characterize, observe, find, indicate, consistent with, in line with, sufficient, reduce, preserve, transfer*.
 - Avoid: *crush, beat, smash, blow away, breakthrough, killer, sweet spot, magic, juice*.
 
-**Length.** LNCS 12-page limit including references. Target distribution: Intro 1.25 pp, Related Work 1.0 pp, Problem Formulation 0.5 pp, Methods 2.5 pp, Experiments 2.5 pp, Failure Mode Analysis 2.0 pp, Discussion 0.75 pp, Conclusion 0.5 pp.
+**Length.** LNCS 12-page limit including references. Target body length is approximately 4800 words, distributed across sections in round numbers that sum exactly to 4800:
+
+| Section | Words |
+|---|---:|
+| Abstract | 200 |
+| 1. Introduction | 700 |
+| 2. Related Work | 500 |
+| 3. Problem Formulation | 250 |
+| 4. Methods | 1100 |
+| 5. Experiments | 1100 |
+| 6. Failure Mode Analysis | 600 |
+| 7. Discussion | 250 |
+| 8. Conclusion | 100 |
+| **Total** | **4800** |
+
+These targets are guidance, not hard limits: ±10 % per section is acceptable as long as the section budgets stay close to the totals above. Captions, table cells, and bibliography do not count.
 
 ---
 
@@ -103,32 +118,73 @@ These conventions apply across the paper and are stated once in §5.1, then assu
 
 ## 1. Introduction
 
-The introduction must:
+The introduction is structured as **six paragraphs**, in this order. Paragraph plan follows advisor guidance (see "Advisor preferences" note at the end of this section).
 
-- Open by stating that RAG is a standard technique for grounding language model outputs and that fixed-$k$ retrieval is the deployed default.
-- Establish the cost problem with concrete numbers: at $k{=}10$ on HotpotQA distractor, mean cost per query is 1452.5 tokens versus 103.5 tokens with no retrieval (a ratio of approximately $14\times$), at F1 0.792 versus 0.387.
-- State the research question: whether test-time context filtering can reduce token cost on distractor-heavy multi-hop QA without degrading answer quality, and what benchmark properties determine success or failure.
+### P1 — RAG as architecture for grounding language model outputs
+- Open: "Retrieval-augmented generation is an architecture for reducing hallucination in large language models by grounding generation in retrieved evidence."
+- Briefly survey retrieval mechanisms (sparse BM25-style retrieval, dense embedding-based retrieval, hybrid retrieval) so the reader understands the layer Noise-Gate operates on.
+- State that the LLM is the state-of-the-art final layer of a RAG pipeline, and that the question of *what context to pass* to that layer is the focus of this work.
+
+### P2 — Fixed-$k$ retrieval is the deployed default, and explain why
+- Open: "Yet, most retrieval systems retrieve a fixed number of documents, regardless of the query."
+- Argue *why* fixed-$k$ persists despite known weaknesses: training learned selectors per domain is expensive in data and compute; deployment infrastructure favors a single deterministic rule; the fixed-budget policy is straightforward to implement and reason about.
+- Establish the cost consequence with concrete numbers: at $k{=}10$ on HotpotQA distractor, mean cost per query is 1452.5 tokens versus 103.5 tokens with no retrieval (a ratio of approximately $14\times$), at F1 0.792 versus 0.387.
+
+### P3 — How the field has tried to address fixed-$k$ context-selection
+- Detail the alternatives to fixed-$k$: training-based adaptive retrieval, multi-agent / iterative filtering, compression-based methods, and gap-based truncation.
+- For each family, state in one phrase its weakness in deployment: training-based methods need supervision and retraining for new domains; multi-agent methods incur multiple LLM calls per query; compression-based methods need additional infrastructure; gap-based methods rest on a strong assumption about embedding-rank monotonicity.
+- This is also where the **comparator-ladder** sentence lands (one orienting line): the three learned comparators evaluated in this paper — gap-based truncation, title-arm bandit, contextual bandit — form a progression of increasing structure exploited.
+
+### P4 — Distractor-heavy / multi-hop data makes context-selection harder
+- Open: "In particular, for multi-hop or distractor-heavy data the problem can be even worse."
 - Identify three structural reasons distractor-heavy QA resists naive filtering: BM25 distractors are topically adjacent to gold evidence, multi-hop reasoning requires jointly complementary evidence sets, and the fixed-pool 2-gold-plus-8-distractors format is a structured filtering task rather than an open-domain retrieval task.
-- Survey the four families of test-time RAG control (training-based, multi-agent / iterative, compression-based, gap-based) and state in one sentence each why each is heavy or brittle for the deployment setting considered here.
-- Introduce the proposed method, Noise-Gate, as a training-free two-stage filter combining cosine-similarity thresholding with Jaccard-overlap redundancy removal.
-- Frame the three learned baselines as a progression of increasing structure exploited: gap-based truncation (training-free, embedding-rank signal), title-arm bandit (light training, per-title reward signal), contextual bandit (training, lexical-feature signal). This sentence orients the reader to the comparator design before §4.
-- State the three contributions: (i) Noise-Gate as a training-free filter with $-26.7\%$ token reduction at F1 0.764 versus 0.792 at $k{=}10$, validated by ablations and transferred to two further benchmarks; (ii) a structural failure analysis of the three learned strategies on distractor-heavy multi-hop QA; (iii) a matched-sample comparison of five context-compression strategies under a single generation model and prompt.
-- Close with the practical implication: at one million queries per day on `gpt-5.4-mini`, the saving is approximately USD 28,000 per year.
+- State, citing prior work, that **data structure is a primary determinant of learned-selector performance** on these benchmarks — preview the failure-mode finding without yet quantifying it.
+
+### P5 — Wrap-up, research questions, and contributions
+- One sentence summarizing the gap: a training-free filter that exploits dense semantic similarity has not been systematically evaluated against learned selectors on distractor-heavy multi-hop QA.
+- Introduce **Noise-Gate** as a training-free two-stage filter combining cosine-similarity thresholding with Jaccard-overlap redundancy removal.
+- State the **research questions** explicitly:
+  - RQ1: Can a training-free test-time filter reduce token cost on distractor-heavy multi-hop QA without degrading answer quality?
+  - RQ2: Why do learned context-selection strategies underperform on this class of benchmarks?
+  - RQ3: Do the same threshold settings transfer across distractor-heavy multi-hop datasets?
+- State the **contributions**, as a numbered list:
+  1. Noise-Gate as a training-free filter with $-26.7\%$ token reduction at F1 0.764 versus 0.792 at $k{=}10$, validated by ablations and transferred to two further benchmarks.
+  2. A structural failure analysis of the three learned strategies on distractor-heavy multi-hop QA.
+  3. A matched-sample comparison of five context-compression strategies under a single generation model and prompt.
+- Close with the practical implication: at one million queries per day on `gpt-5.4-mini`, the annualized saving is approximately USD 28,000.
+
+### P6 — Paper organization
+- Open: "The remainder of this paper is organized as follows."
+- One sentence per section, naming what each section delivers (Related Work, Problem Formulation, Methods, Experiments, Failure Mode Analysis, Discussion, Conclusion).
 
 **No floats in this section.**
+
+**Advisor preferences (must follow when feasible).** The six-paragraph plan above mirrors the advisor's recommendation. Maintain the openings (P2 begins with "Yet, most retrieval systems retrieve a fixed number of documents…"; P4 begins with "In particular, for multi-hop or distractor-heavy data…"; P6 begins with "The remainder of this paper is organized as follows…"). The plan is binding for paragraph order and openings; the wording within each paragraph is free as long as it satisfies the bullets.
 
 ## 2. Related Work
 
-The section must position the proposed method against four families, in this order:
+Two organizational layouts are acceptable. **Layout A** (default, advisor-preferred) opens with one paragraph naming the three relevant research lines, then follows with one paragraph per family. **Layout B** uses three named subsections (one per research line) when the paragraphs are long enough to justify the structural overhead. Pick whichever reads cleaner at the LNCS page count; do not introduce subsections shorter than half a column.
 
-- **Fixed-budget retrieval.** Anchor the baseline. Cite Lewis et al. (2020) and a recent survey establishing fixed top-$k$ as the deployed default.
+### Opening paragraph (research-line framing, advisor-preferred)
+- State that this work draws on three lines of research:
+  1. **RAG for fact-checking and truth-grounding** — establishing why grounded generation matters and why selecting *useful* context is a quality-critical step.
+  2. **Multi-hop QA and distractors** — the difficulty of distinguishing gold evidence from BM25-retrieved distractors when their embeddings are close.
+  3. **Cost-aware evaluation of RAG pipelines** — supporting the claim that token cost is a meaningful metric to track in this setting.
+- This paragraph names the lines and cites the canonical references; the following paragraphs go into method-by-method detail.
+
+### Body paragraphs (one per family, in this order)
+- **Fixed-budget retrieval.** Anchor the baseline. Cite Lewis et al. (2020) and a recent survey establishing fixed top-$k$ as the deployed default. Connect to research line 1 (RAG / truth-grounding).
 - **Training-based adaptive retrieval.** Self-RAG, DioR, DRAGIN. State that they require additional supervision or model modification, which is a deployment cost.
-- **Multi-agent / iterative filtering.** MAIN-RAG, PRISM. State that they are training-free but incur multiple LLM calls per query, an inference cost.
+- **Multi-agent / iterative filtering.** MAIN-RAG, PRISM. State that they are training-free but incur multiple LLM calls per query, an inference cost. Connect to research line 3 (cost-aware evaluation).
 - **Compression-based methods.** ECoRAG, ChunkRAG, DR-RAG, Adaptive-$k$. Distinguish chunk-level filtering, evidentiality scoring, classifier-based selection, and similarity-gap truncation.
-- **Bandits and learning-to-rank.** UCB, Thompson Sampling, LinUCB; SetR and RankRAG for set selection. Cite as classical decision-making techniques applied here as comparators, not as RAG-specific systems.
-- **Closing sentence.** Position Noise-Gate as a paragraph-level, training-free filter that combines dense semantic similarity with redundancy removal.
+- **Bandits and learning-to-rank.** UCB, Thompson Sampling, LinUCB; SetR and RankRAG for set selection. Cite as classical decision-making techniques applied here as comparators, not as RAG-specific systems. Connect to research line 2 (multi-hop / distractor difficulty).
+
+### Closing sentence
+- Position Noise-Gate as a paragraph-level, training-free filter that combines dense semantic similarity with redundancy removal, sitting at the intersection of the three research lines.
 
 **No floats in this section.**
+
+**Advisor preferences (try to satisfy when feasible).** The opening research-line paragraph and the optional three-subsection structure are advisor recommendations; treat them as preferences rather than hard requirements. If the body fits cleanly into the four-family order without subsections, that is acceptable. The non-negotiable elements are: (i) the opening paragraph names the three research lines, (ii) the four families are covered, and (iii) the closing sentence positions Noise-Gate.
 
 ## 3. Problem Formulation
 
