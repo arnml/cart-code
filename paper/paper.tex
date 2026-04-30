@@ -82,7 +82,7 @@ This paper connects three lines of work: evidence-grounded RAG, multi-hop questi
 
 \paragraph{Bandits, set selection, and reranking.} UCB1~\cite{auer2002ucb1}, Thompson Sampling~\cite{thompson1933}, and contextual variants such as LinUCB~\cite{chu2011linucb} are classical decision-making algorithms for sequential allocation under uncertainty; the present work uses them as comparators rather than as proposed selectors. SetR~\cite{lee2025setr} and RankRAG~\cite{yu2024rankrag} reframe selection as set construction by accounting for between-document complementarity. The redundancy-removal stage of Noise-Gate is conceptually related to Maximum Marginal Relevance~\cite{goldstein1998mmr}, which trades off relevance and diversity over a candidate pool.
 
-Noise-Gate sits at the intersection of these three lines: it operates at paragraph granularity, it is training-free, and it combines dense semantic similarity with redundancy removal.
+Noise-Gate differs from these families by operating at paragraph granularity without training, using dense semantic similarity for selection and redundancy removal for compression.
 
 \section{Problem Formulation}
 \label{sec:problem}
