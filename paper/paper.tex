@@ -87,18 +87,16 @@ Noise-Gate differs from these families by operating at paragraph granularity wit
 \section{Problem Formulation}
 \label{sec:problem}
 
-This section formalises the cost-aware context-selection problem evaluated in this work. Let $q$ denote the question and $D=(d_1,\dots,d_n)$ the candidate context for that question, exposed as an ordered list of titled paragraphs. Retrieval itself is treated as fixed: the pool $D$ is produced upstream and is not under control. A context-selection strategy returns an ordered subsequence $S\preceq D$ that is concatenated with $q$ and passed to a generator $g$. The decision space of every strategy considered in this paper is the set of subsequences of $D$.
+This section formalises the cost-aware context-selection problem. Let $q$ denote the question and $D=(d_1,\dots,d_n)$ the candidate context, exposed as an ordered list of titled paragraphs. Retrieval is treated as fixed: $D$ is produced upstream and not under control. A context-selection strategy returns an ordered subsequence $S\preceq D$ concatenated with $q$ and passed to a generator $g$. The decision space is the set of subsequences of $D$.
 
-Let $\hat{a}=g(q,S)$ denote the generated answer and $a^*$ the reference answer. Quality is measured by token-level F1, $F_1(\hat{a},a^*)$, with exact match reported in text only as a secondary check. Cost is measured by the total number of tokens of the model call, $C(q,S)$, computed as input tokens plus output tokens at provider tokenisation. The cost-aware objective is
+Let $\hat{a}=g(q,S)$ denote the generated answer and $a^*$ the reference. Quality is measured by token-level F1, $F_1(\hat{a},a^*)$, with exact match reported in text only as a secondary check. Cost $C(q,S)$ is the total tokens of the model call, input plus output at provider tokenisation. The cost-aware objective is
 \begin{equation}
 \label{eq:objective}
 J(S) \;=\; F_1(\hat{a}, a^*) \;-\; \lambda\, C(q,S),\qquad \lambda > 0,
 \end{equation}
-with $\lambda$ left implicit and replaced operationally by the Pareto presentation in Section~\ref{subsec:main_results}. A strategy is \emph{quality-preserving} if its mean F1 is within $\pm 0.05$ of the fixed $k{=}10$ reference on the same dataset.
+with $\lambda$ left implicit and replaced operationally by the Pareto presentation in Section~\ref{subsec:main_results}, so the recommended threshold is re-selectable for deployments with different relative weights. A strategy is \emph{quality-preserving} if its mean F1 is within $\pm 0.05$ of the fixed $k{=}10$ reference on the same dataset.
 
-The Pareto presentation reports the trade-off without committing to a specific $\lambda$, so the recommended threshold can be re-selected for deployments with different relative weights.
-
-Figure~\ref{fig:gold_vs_distractor} illustrates the difficulty of selection over $D$: a gold paragraph and a BM25-retrieved distractor for the same HotpotQA question share entities, vocabulary, and discourse style, producing close embedding scores and motivating the selection rules introduced in Section~\ref{sec:methods}.
+Figure~\ref{fig:gold_vs_distractor} illustrates the selection difficulty over $D$: a gold paragraph and a BM25-retrieved distractor for the same HotpotQA question share entities, vocabulary, and discourse style, yielding close embedding scores and motivating the selection rules of Section~\ref{sec:methods}.
 
 \begin{figure}[t]
     \centering    \includegraphics[width=0.95\linewidth]{images/fig1_gold_vs_distractor.png}
