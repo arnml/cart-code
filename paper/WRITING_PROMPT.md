@@ -19,7 +19,7 @@ Rewrite `paper.tex` so that it matches `PAPER_STRUCTURE.md` exactly. The output 
 
 1. **Style.** Follow §0 of `PAPER_STRUCTURE.md` strictly: formal academic register, no marketing language, no first-person singular, no em-dashes for narrative emphasis, no exclamation marks, no rhetorical questions in the body. Use the diction lists.
 2. **Length.** Hit the per-section word budgets in §0 (Abstract 200, Intro 700, Related Work 500, Problem Formulation 250, Methods 1100, Experiments 1100, Failure Mode Analysis 600, Discussion 250, Conclusion 100; total 4800). ±10 % per section is acceptable. Captions, table cells, and the bibliography do not count.
-3. **Citations.** Follow §0.1. Every `\bibitem` in the final file must be cited at least once; cite each work at first mention with method-name-first phrasing where possible. Remove any uncited bibitems listed in §0.1's "must either be cited or removed" line. Do not invent new references.
+3. **Citations.** Follow §0.1. Every active `\bibitem` in the final file must be cited at least once; cite each work at first mention with method-name-first phrasing where possible. Comment out any uncited bibitems listed in §0.1's cleanup line rather than deleting them. Do not invent new references.
 4. **Reference validation.** For every citation kept in the final file, verify the reference against an open source (arXiv, ACL Anthology, OpenReview, Springer, the publisher's official page, or a permanent DOI) and confirm that (a) the work cited actually exists, (b) the cited claim, method, or result is in fact in that paper, and (c) the bibliography entry's title, authors, venue, and year match the canonical record. Correct any drift before submission. If a reference cannot be located in an open source, flag it for the author rather than leave it in.
 5. **Reference selection.** Prefer recent peer-reviewed work (last 3–5 years) for empirical and methodological claims, and use canonical older references for established results — original algorithm papers (e.g., UCB1, LinUCB), foundational benchmarks (e.g., HotpotQA), classical techniques (e.g., MMR). Recency is a tiebreaker, not the primary criterion: a 2002 algorithm paper is preferred over a 2024 application paper when the claim is about the algorithm itself. Avoid arXiv-only preprints when a peer-reviewed version exists; use the published venue. Do not pad with marginal recent papers when a stronger older citation already supports the claim.
 6. **Conventions.** Apply §0.2 once, in §5.1 (Setup), and do not re-state hyperparameters elsewhere. The generation model is `gpt-5.4-mini`, chosen as the cost-effective tier from a major commercial provider.
@@ -45,7 +45,7 @@ Work in this order so each step is verifiable:
 8. Rewrite §6 (Failure Mode Analysis) with the "Recall the appeal / Why it breaks" structure. Replace the prior three failure-related tables with Tab 3.
 9. Rewrite §7 (Discussion) as four named paragraphs (Pareto, Cost, Limitations, Future work).
 10. Rewrite §8 (Conclusion) as the three statements in the specified order.
-11. Audit citations: for each `\bibitem` in the file, confirm it is cited; for each method, dataset, or claim listed in §0.1's coverage list, confirm the citation is present at first mention. Remove uncited bibitems. Then validate each remaining reference against an open source (arXiv, ACL Anthology, OpenReview, Springer, DOI) per Rules 4–5 — confirm the work exists, supports the cited claim, and that title/authors/venue/year are correct. Flag anything that cannot be located.
+11. Audit citations: for each active `\bibitem` in the file, confirm it is cited; for each method, dataset, or claim listed in §0.1's coverage list, confirm the citation is present at first mention. Comment out uncited bibitems rather than deleting them. Then validate each remaining active reference against an open source (arXiv, ACL Anthology, OpenReview, Springer, DOI) per Rules 4–5 — confirm the work exists, supports the cited claim, and that title/authors/venue/year are correct. Flag anything that cannot be located.
 12. Compile mentally: confirm 2 figures, 3 tables, 1 algorithm, 7 numbered equations, and a body length close to 4800 words.
 
 ### Output format
@@ -60,6 +60,7 @@ Return the complete rewritten `paper.tex`. No diff, no commentary, no preamble. 
 - Do not change the float numbers or labels (`tab:main_results`, `fig:pareto`, etc.) without updating every `\ref` accordingly.
 - Do not exceed the LNCS 12-page limit.
 - Do not insert your own opinions, novelty claims, or marketing language.
+- Do not remove or rewrite LaTeX comments (lines or trailing fragments beginning with `%`) in `paper.tex`. They carry author notes, paragraph plans, and todo markers that must be preserved across rewrites. Edit the surrounding prose around them. Only delete a comment if the author explicitly asks for that comment to be removed.
 
 ---
 

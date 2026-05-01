@@ -23,9 +23,9 @@ The paper must follow BRACIS / Springer LNCS conventions for academic writing.
 **Required practices.**
 - Each section opens with one declarative sentence stating its purpose.
 - Numbers are reported with consistent precision: F1 and EM to 3 decimals, mean tokens to 1 decimal, percentages to 1 decimal, costs in scientific notation.
-- All quantitative claims must reference Tab 1, Tab 2, Tab 3, Fig 2, or be cited.
+- All quantitative claims must reference Tab 1, Tab 2, Tab 3, Tab 4, Fig 2, or be cited.
 - Symbols are introduced before use. Equations are numbered and referenced explicitly.
-- Citations follow LNCS numbered style (`splncs04`, rendered as `[n]`); every `\bibitem` retained at submission must be cited at least once. A reservoir of uncited entries is allowed during drafting; see §0.1.
+- Citations follow LNCS numbered style (`splncs04`, rendered as `[n]`); every active `\bibitem` retained at submission must be cited at least once. A commented reservoir of uncited entries is allowed during drafting; see §0.1.
 - Hyperparameters are reported in §5.1 (Setup) and not re-defined in §5.2–§5.4.
 
 **Diction list (use / avoid).**
@@ -57,7 +57,7 @@ The paper must follow Springer LNCS / BRACIS bibliography conventions.
 
 **Bibliography style.**
 - LNCS uses numbered citations rendered as `[n]` (the `splncs04` bibliography style). Citations are placed immediately after the author name, method name, or claim they support.
-- During drafting, an uncited `\bibitem` reservoir is permitted so candidate references can be added or removed without churn. Before submission, every entry remaining in the bibliography must be cited at least once in the body; any reservoir entry not adopted is removed at that point.
+- During drafting, an uncited `\bibitem` reservoir is permitted so candidate references can be added or commented out without churn. Before submission, every active entry remaining in the bibliography must be cited at least once in the body; any reservoir entry not adopted should be commented out rather than deleted.
 - Avoid duplicate \bibitem entries for the same paper (one canonical key per work).
 
 **Where to cite.**
@@ -97,7 +97,7 @@ The paper must follow Springer LNCS / BRACIS bibliography conventions.
 - *Diversity / MMR:* `goldstein1998mmr`.
 - *Deployment / best practices:* `klesel2025rag`, `li2025bestpractices`.
 
-Entries currently in the `paper.tex` bibliography that have no citation in the present narrative (e.g., `li2024c2leva`, `snell2025ttc`, `wang2024bestpractices`, `yi2026membership`, `zhang2024retrievalqa`, `zhao2026aigcsurvey`, `jiang2016adaptive`, `mao2021gar`, `wang2023query2doc`, `gao2023hyde`, `karpukhin2020dpr`, `nogueira2019bert`, `sun2023rankgpt`, `qin2024prp`, `yao2023react`, `hwang2025rarag`) must either be cited in the appropriate paragraph or removed before submission.
+Entries currently in the `paper.tex` bibliography that have no citation in the present narrative (e.g., `yi2026membership`, `zhang2024retrievalqa`, `jiang2016adaptive`, `mao2021gar`, `wang2023query2doc`, `gao2023hyde`, `nogueira2019bert`, `sun2023rankgpt`, `qin2024prp`, `yao2023react`) must either be cited in the appropriate paragraph or commented out before submission. Keep the commented text in place as a reservoir unless the author explicitly requests deletion.
 
 ---
 
@@ -110,9 +110,9 @@ These conventions apply across the paper and are stated once in §5.1, then assu
 - **Sample sizes.** $n{=}400$ for HotpotQA distractor (validation split). $n{=}100$ for transfer pilots on 2WikiMultiHopQA and MuSiQue-Ans.
 - **Metrics.** Token-level F1 (primary), exact match (secondary, reported in text only), mean total tokens per example, mean per-query USD cost.
 - **Tolerance band.** A strategy is *quality-preserving* if its F1 is within $\pm 0.05$ of fixed $k{=}10$ on the same dataset.
-- **Hyperparameters of the proposed method.** Cosine threshold $\tau\in\{0.2, 0.25, 0.3, 0.35, 0.5\}$. Jaccard threshold $\rho\in\{0.50, 0.55, 0.65\}$. Recommended operating point for HotpotQA: $(\tau{=}0.3, \rho{=}0.65)$.
+- **Hyperparameters of the proposed method.** Main sweep: cosine threshold $\tau\in\{0.2, 0.25, 0.3, 0.35, 0.5\}$ and Jaccard threshold $\rho\in\{0.50, 0.55, 0.65\}$. Expanded Jaccard diagnostic at $\tau{=}0.3$: $\rho\in\{0.05,0.20,0.35,0.50,0.65,0.80,0.95\}$. Recommended operating point for HotpotQA: $(\tau{=}0.3, \rho{=}0.65)$.
 
-**Float budget (final): 2 figures, 3 tables, 1 algorithm, 7 equations.**
+**Float budget (current): 2 figures, 4 tables, 1 algorithm, 7 equations.**
 
 ---
 
@@ -256,7 +256,9 @@ The section opens with one sentence: five strategies are evaluated, ordered by t
 ### 5.4 Threshold Ablations
 - One paragraph reading Tab 2: as $\tau$ increases, F1 and tokens both decrease monotonically; $\tau{=}0.3$ is the Pareto knee, with nearly identical F1 to $\tau{=}0.25$ and 142 fewer tokens.
 - One paragraph on $\rho$: at fixed $\tau$, varying $\rho\in\{0.50, 0.55, 0.65\}$ changes F1 by at most 0.015 and mean tokens by at most 8. The Jaccard stage is therefore a secondary refinement, retained for redundancy control rather than for primary tuning.
+- One paragraph on the expanded $\rho$ diagnostic: at $\tau{=}0.3$, very strict settings $\rho\in\{0.05,0.20\}$ remove too much context, while $\rho\ge 0.35$ is comparatively stable on the matched $n{=}400$ sample.
 - **Tab 2.** Threshold ablation (combined $\tau\times\rho$).
+- **Tab 3.** Jaccard sensitivity at $\tau{=}0.3$.
 
 ## 6. Failure Mode Analysis
 
@@ -269,23 +271,23 @@ The section opens by stating that the three learned strategies are evaluated spe
 ### 6.2 UCB1-TUNED — title coverage is sparse across train and validation
 - The title-arm formulation assumes that the training-time arm vocabulary covers the inference-time arm vocabulary. HotpotQA draws titles from a Wikipedia-scale distribution, so 83.8 % of validation queries at $k{=}5$ touch arms unseen during training (cold-start rates 61.5 / 75.2 / 83.8 % at $k\in\{2,3,5\}$), forcing BM25 fallback on most queries.
 - Best operating point ($k{=}5$): F1 0.704, mean tokens 723.0 — below fixed $k{=}5$ at F1 0.716.
-- Numbers stated in prose; the synthesis lands in Tab 3.
+- Numbers stated in prose; the synthesis lands in Tab 4.
 
 ### 6.3 LinUCB — lexical features cannot separate crafted distractors
 - The contextual-bandit formulation addresses cold-start by scoring documents through context features. The features tractable at scale (token overlap, title-in-question fraction, normalized section length) are matched-by-construction with BM25-retrieved distractors, so a linear model in those features cannot discriminate gold evidence from distractors.
 - Per-$k$ F1: 0.510 / 0.522 / 0.620 at $k\in\{2,3,5\}$, mean tokens 344 / 455 / 686.
-- Numbers stated in prose; the synthesis lands in Tab 3.
+- Numbers stated in prose; the synthesis lands in Tab 4.
 
 ### 6.4 Why the noise gate succeeds
 - The three failure mechanisms share a common cause: the signals on which the learned policies depend are not discriminative on this benchmark. Dense paragraph-level cosine similarity provides a signal that the other policies do not exploit, and a deterministic threshold avoids both arm-vocabulary cold-start and the misplaced-gap problem.
 - One paragraph closing the loop on the cost side: at $(\tau{=}0.3, \rho{=}0.65)$, F1 is 0.764, tokens 1065.3, $-26.7\%$ versus $k{=}10$, while the closest learned operating point (UCB1-TUNED at $k{=}5$) reaches F1 0.704 at 723.0 tokens but with 83.8 % cold-start.
-- **Tab 3.** Failure summary.
+- **Tab 4.** Failure summary.
 
 ## 7. Discussion
 
 The section must contain four named paragraphs:
 
-- **Pareto interpretation.** State that the recommended $\tau{=}0.3$ corresponds to the Pareto knee in Tab 2 and Fig 2, with $\tau{=}0.25$ a quality-leaning alternative within the band.
+- **Pareto interpretation.** State that the recommended $\tau{=}0.3$ corresponds to the Pareto knee in Tab 2 and Fig 2, with $\tau{=}0.25$ a quality-leaning alternative within the band. Add that Tab 3 supports the same interpretation for Jaccard: $\rho\ge0.35$ is comparatively stable, while overly strict thresholds remove useful evidence.
 - **Cost implications at scale.** Per-query cost on `gpt-5.4-mini` drops from $2.95\times 10^{-4}$ USD at $k{=}10$ to $2.17\times 10^{-4}$ USD at $\tau{=}0.3$. At one million queries per day, the annualized saving is approximately USD 28,000.
 - **Limitations.** (i) Transfer evidence is from $n{=}100$ pilots on two further datasets, not full validation splits. (ii) A single generation model is fixed; stronger models may tolerate noisier context and shift the optimal threshold. (iii) The recommended $\tau$ is dataset-specific; calibration is required per domain. (iv) The bandit comparators are evaluated only on HotpotQA-style benchmarks; closed-vocabulary settings may admit different conclusions.
 - **Future work.** A two-stage hybrid combining the gate with a lightweight cross-encoder; an adaptive $\tau$ chosen from the per-query similarity distribution; full-scale evaluation on 2WikiMultiHopQA, MuSiQue-Ans, and open-domain benchmarks (FEVER, Natural Questions); evaluation on stronger generation models.
@@ -296,6 +298,7 @@ The conclusion must contain three statements, in this order:
 
 - The research question is answered: a training-free two-stage filter (cosine threshold $\tau$ followed by Jaccard redundancy threshold $\rho$) achieves F1 0.764 at 1065.3 tokens on HotpotQA distractor, within the $\pm 0.05$ tolerance band of $k{=}10$ and at $-26.7\%$ token cost.
 - The structural finding: the three learned comparators (Adaptive-$k$, UCB1-TUNED, LinUCB) underperform because their signals — gap monotonicity, arm identity, surface-lexical features — are not discriminative on distractor-heavy multi-hop QA.
+- The threshold-ablation takeaway: $\tau$ controls the main quality--cost frontier, while $\rho$ is stable once it avoids the overly strict regime below 0.35.
 - The practical takeaway: for this class of benchmarks, deterministic threshold filtering with dense embeddings is the strongest test-time strategy observed, with thresholds calibratable on a small held-out sample and no training pipeline.
 
 ---
@@ -333,7 +336,21 @@ The conclusion must contain three statements, in this order:
 | 0.35 | 0.726 | 889.8 | $-38.7\%$ | $0.726$–$0.731$ |
 | 0.50 | 0.619 | 403.9 | $-72.2\%$ | $0.613$–$0.619$ |
 
-### Tab 3. Failure Summary on HotpotQA Distractor
+### Tab 3. Jaccard Sensitivity at $\tau{=}0.30$
+- **Caption.** Jaccard sensitivity at $\tau{=}0.30$ on HotpotQA distractor ($n{=}400$ matched examples, `gpt-5.4-mini`). Very strict redundancy thresholds remove too much context, while $\rho \ge 0.35$ is comparatively stable.
+- **Layout.** One row per $\rho$ value; three columns.
+
+| $\rho$ | F1 | Mean tokens |
+|---:|---:|---:|
+| 0.05 | 0.514 | 246.1 |
+| 0.20 | 0.646 | 921.7 |
+| 0.35 | 0.742 | 1085.5 |
+| 0.50 | 0.723 | 1102.7 |
+| 0.65 | 0.744 | 1107.0 |
+| 0.80 | 0.723 | 1106.8 |
+| 0.95 | 0.723 | 1112.7 |
+
+### Tab 4. Failure Summary on HotpotQA Distractor
 - **Caption.** Design hypothesis, structural property of HotpotQA distractor that violates it, and observed F1 for each learned comparator at its best operating point. The final row reports the proposed Noise-Gate at the same retrieval budget for direct comparison.
 - **Layout.** Four rows; the final row separated by `\midrule`.
 

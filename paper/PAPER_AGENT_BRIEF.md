@@ -104,7 +104,7 @@ A reservoir of currently-uncited entries is intentionally retained in `paper.tex
 
 - `jiang2016adaptive`, `mao2021gar`, `wang2023query2doc`, `gao2023hyde`, `nogueira2019bert`, `sun2023rankgpt`, `qin2024prp`, `yao2023react`, `yi2026membership`, `zhang2024retrievalqa`.
 
-An agent revising references should preserve these reservoir entries unless the author explicitly asks for cleanup. Before submission, every remaining `\bibitem` must be either cited at first relevant mention or removed.
+An agent revising references should preserve these reservoir entries unless the author explicitly asks for deletion. Before submission, every active `\bibitem` must be cited at first relevant mention; uncited reservoir entries should be commented out rather than removed.
 
 ## Fixed Experimental Facts
 
@@ -151,7 +151,7 @@ Use the Introduction only as the promise that later sections must fulfill.
 - **Failure Mode Analysis:** Tie each comparator's failure to one structural property of the benchmark. Keep "Recall the appeal" and "Why it breaks" if that structure is already present.
 - **Discussion:** Keep claims practical and bounded: Pareto interpretation, cost implications, limitations, future work.
 - **Conclusion:** Restate the result, the reason learned comparators underperform, and the deployment implication without adding new claims.
-- **Bibliography:** Remove duplicate keys and uncited entries. Do not add references unless they support a specific sentence in the body.
+- **Bibliography:** Remove duplicate keys and comment out uncited entries. Do not add references unless they support a specific sentence in the body.
 
 ## Editing Priorities
 
@@ -161,7 +161,11 @@ When revising, prefer high-signal fixes:
 2. Define terms before relying on them.
 3. Keep citations attached to the exact claim they support.
 4. Preserve all experimental numbers and labels.
-5. Remove duplicate or uncited bibliography entries.
+5. Remove duplicate bibliography entries and comment out uncited bibliography entries.
 6. Keep the page budget tight.
 
 Do not perform broad rewrites unless explicitly requested. This paper needs careful tightening more than stylistic reinvention.
+
+## Preserve LaTeX Comments
+
+Do not remove or rewrite LaTeX comments (lines or trailing fragments beginning with `%`) in `paper.tex`. They carry author notes, paragraph plans, citation reminders, todo markers, and structural signposts that must survive edits. When editing a paragraph that contains comments, keep the comments in place and adjust only the surrounding prose. Only delete a comment if the author explicitly asks for that comment to be removed.
