@@ -47,7 +47,7 @@ Third Author\inst{1}\orcidID{2222--3333-4444-5555}}
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-Retrieval-augmented generation (RAG) reduces hallucination by grounding large language models in retrieved evidence, but deployed pipelines often retrieve a fixed paragraph budget regardless of query difficulty, increasing token cost without reliable quality gains. This work evaluates whether a training-free filter can compress retrieved context without degrading answer quality on distractor-heavy multi-hop benchmarks, where answers require combining evidence across paragraphs, and characterises why three alternative selectors underperform. Using matched samples and a fixed generator, we compare four fixed-budget baselines, similarity-gap truncation, a title-arm bandit, a contextual bandit, and Noise-Gate, which applies a cosine-similarity threshold plus Jaccard-overlap redundancy filtering over precomputed paragraph embeddings. On the reference benchmark, Noise-Gate preserves answer quality with 26.7\% fewer tokens than the full-retrieval baseline, while no alternative matches that trade-off. Two transfer pilots show that the same threshold scheme matches or exceeds the full-retrieval baseline with 22.1\% and 11.2\% fewer tokens, using at most one threshold step of recalibration. Comparator failures trace to topically adjacent BM25 distractors that violate embedding-rank monotonicity, sparse title vocabulary across splits, and lexically matched features that a linear reward model cannot separate.
+Retrieval-augmented generation (RAG) reduces hallucination by grounding large language models in retrieved evidence, but deployed pipelines often retrieve a fixed paragraph budget regardless of query difficulty, increasing token cost without reliable quality gains. This work evaluates whether a training-free filter can compress retrieved context without degrading answer quality on distractor-heavy multi-hop benchmarks, where answers require combining evidence across paragraphs, and characterises why three alternative selectors underperform. Using matched samples and a fixed generator, we compare four fixed-budget baselines, similarity-gap truncation, a title-arm bandit, a contextual bandit, and Noise-Gate, which applies a cosine-similarity threshold plus Jaccard-overlap redundancy filtering over precomputed paragraph embeddings. On the reference benchmark, Noise-Gate preserves answer quality with 26.7\% fewer tokens than the full-retrieval baseline, while no alternative matches that trade-off. Two transfer pilots show that the same threshold scheme matches or exceeds the full-retrieval baseline with 22.1\% and 11.2\% fewer tokens, using at most one threshold step of recalibration. Comparator failures trace to topically adjacent BM25 distractors violating embedding-rank monotonicity, sparse title vocabulary across splits, and lexically matched features a linear reward model cannot separate.
 
 \keywords{Retrieval-Augmented Generation \and Test-time Compression \and Context Filtering \and Noise Gating}
 \end{abstract}
@@ -141,14 +141,14 @@ with $T$ the cumulative round count and $n_a$ the pull count of arm $a$. The top
 \subsection{LinUCB}
 \label{subsec:methods_linucb}
 
-LinUCB~\cite{chu2011linucb} parameterises reward as a linear function of context features, generalising beyond the training-time arm vocabulary and addressing the cold-start regime of UCB1-TUNED. Documents unseen as arms remain scoreable through their features, so the policy is in principle robust to the title-vocabulary shift between train and inference splits.
+LinUCB~\cite{chu2011linucb} parameterises reward as a linear function of context features, generalising beyond the training-time arm vocabulary and addressing the cold-start regime of UCB1-TUNED.
 
 Each question--paragraph pair is mapped to a feature vector,
 \begin{equation}
 \label{eq:linucb_features}
 x(q,d) = [f_1,\, f_2,\, f_3]^\top,\quad \hat{\theta} = A^{-1}b,\quad A = I + \sum_{t=1}^{T} x_t x_t^\top,\quad b = \sum_{t=1}^{T} r_t x_t,
 \end{equation}
-where $f_1$ is the title-in-question fraction, $f_2$ the normalised question length, and $f_3$ the normalised section length. The three features are constant-time per pair and require no dense embedding inference, the scale constraint that motivates a contextual bandit over a model consuming paragraph embeddings directly. The ridge update accumulates $\hat{\theta}$ over training observations $\{(x_t,r_t)\}_{t=1}^{T}$ with binary reward $r_t\in\{0,1\}$. At inference, each candidate is scored by
+where $f_1$ is the title-in-question fraction, $f_2$ the normalised question length, and $f_3$ the normalised section length. The three features are constant-time per pair and require no dense embedding inference, the scale constraint motivating a contextual bandit over paragraph-embedding models. The ridge update accumulates $\hat{\theta}$ over training observations $\{(x_t,r_t)\}_{t=1}^{T}$ with binary reward $r_t\in\{0,1\}$. At inference, each candidate is scored by
 \begin{equation}
 \label{eq:linucb_score}
 p(q,d) \;=\; \hat{\theta}^\top x(q,d) \;+\; \alpha\,\sqrt{x(q,d)^\top A^{-1}\, x(q,d)},
@@ -198,6 +198,8 @@ The gate operates on precomputed embeddings without per-dataset training. Algori
 
 \section{Experiments}
 \label{sec:experiments}
+
+The evaluation compares Noise-Gate to the baselines and comparators of Section~\ref{sec:methods} under matched samples and a fixed generation model. Section~\ref{subsec:setup} fixes the evaluation harness, Section~\ref{subsec:main_results} reports the unified comparison on HotpotQA distractor, Section~\ref{subsec:transfer_pilots} the transfer pilots on 2WikiMultiHopQA and MuSiQue-Ans, and Section~\ref{subsec:threshold_ablation} the joint $(\tau,\rho)$ sweep on HotpotQA.
 
 \subsection{Setup}
 \label{subsec:setup}
@@ -250,7 +252,7 @@ MuSiQue-Ans & \textbf{Noise-Gate ($\tau{=}0.3$)} & \textbf{0.551} & \textbf{1193
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.85\linewidth]{images/fig2_pareto_tau_overlay.pdf}
+    \includegraphics[width=0.85\linewidth]{images/fig2_pareto_tau_overlay.png}
     \caption{F1 versus mean total tokens on HotpotQA distractor ($n{=}400$, \texttt{gpt-5.4-mini}). The shaded band is the $\pm 0.05$ tolerance around the $k{=}10$ reference. The connected curve traces the Noise-Gate $\tau$-sweep at $\rho{=}0.65$. Noise-Gate at $\tau{=}0.3$ is the only point that combines a token reduction with quality inside the tolerance band.}
     \label{fig:pareto}
 \end{figure}
@@ -269,7 +271,7 @@ Across the three benchmarks, Noise-Gate matches or exceeds fixed $k{=}10$ at low
 
 Table~\ref{tab:noise_gate_thresholds} reports the joint $(\tau,\rho)$ ablation on HotpotQA distractor. As $\tau$ increases from 0.20 to 0.50, F1 and mean tokens decrease monotonically, tracing a smooth quality--cost frontier. The intermediate settings $\tau{=}0.25$ and $\tau{=}0.30$ have nearly identical F1 (0.765 versus 0.764), but $\tau{=}0.30$ uses 142 fewer tokens per query, while moving one step further to $\tau{=}0.35$ drops F1 by 0.038 for a marginal 110-token saving. The $\tau{=}0.30$ row is therefore the Pareto knee, retaining the F1 of $\tau{=}0.25$ at substantially lower token cost without crossing the cliff observed at $\tau{=}0.35$.
 
-The Jaccard threshold $\rho$ is a secondary control. At fixed $\tau$, varying $\rho\in\{0.50,\,0.55,\,0.65\}$ changes F1 by at most 0.015 and mean tokens by at most 8.0. The Jaccard stage is therefore retained for redundancy control rather than as a primary tuning axis; the recommended Jaccard setting at every $\tau$ is $\rho{=}0.65$. The full grid in Table~\ref{tab:noise_gate_thresholds} indicates that practitioners can fix $\rho$ to the recommended value and tune the gate primarily through $\tau$ on a small held-out sample.
+The Jaccard threshold $\rho$ is a secondary control. At fixed $\tau$, varying $\rho\in\{0.50,\,0.55,\,0.65\}$ changes F1 by at most 0.015 and mean tokens by at most 8.0. The Jaccard stage is therefore retained for redundancy control rather than as a primary tuning axis, with $\rho{=}0.65$ the recommended setting at every $\tau$. Practitioners can fix $\rho$ at this value and tune the gate primarily through $\tau$ on a small held-out sample.
 
 \begin{table}[t]
 \centering
@@ -341,9 +343,9 @@ LinUCB & Linear reward in lexical features generalises beyond the training arm v
 \section{Discussion}
 \label{sec:discussion}
 
-\paragraph{Pareto interpretation.} The recommended operating point $\tau{=}0.30$ corresponds to the Pareto knee in Table~\ref{tab:noise_gate_thresholds} and Figure~\ref{fig:pareto}: nearly identical F1 to $\tau{=}0.25$ at substantially lower token cost. The looser setting $\tau{=}0.25$ is a quality-leaning alternative that remains within the $\pm 0.05$ tolerance band when retaining tighter quality is preferred to maximising token reduction.
+\paragraph{Pareto interpretation.} The recommended operating point $\tau{=}0.30$ corresponds to the Pareto knee in Table~\ref{tab:noise_gate_thresholds} and Figure~\ref{fig:pareto}: nearly identical F1 to $\tau{=}0.25$ at substantially lower token cost. The looser setting $\tau{=}0.25$ remains within the $\pm 0.05$ tolerance band as a quality-leaning alternative when tighter quality is preferred to maximising token reduction.
 
-\paragraph{Cost implications at scale.} On \texttt{gpt-5.4-mini}, the per-query cost drops from $2.95\times 10^{-4}$ USD at fixed $k{=}10$ to $2.17\times 10^{-4}$ USD at $\tau{=}0.30$. At one million queries per day, the annualised saving is approximately USD 28{,}000. The embedding step is precomputed and cached, so the saving is realised against a one-off offline indexing cost rather than against a recurring inference overhead.
+\paragraph{Cost implications at scale.} On \texttt{gpt-5.4-mini}, the per-query cost drops from $2.95\times 10^{-4}$ USD at fixed $k{=}10$ to $2.17\times 10^{-4}$ USD at $\tau{=}0.30$. At one million queries per day, the annualised saving is approximately USD 28{,}000. The embedding step is precomputed and cached, so the saving is realised against a one-off indexing cost rather than recurring inference overhead.
 
 \paragraph{Limitations.} Four limitations qualify the present findings. First, transfer evidence comes from $n{=}100$ pilots on two further datasets rather than from full validation splits. Second, a single generation model is fixed; stronger models may tolerate noisier context and shift the optimal threshold. Third, the recommended threshold is dataset-specific: calibration is required per domain on a small held-out sample. Fourth, the bandit comparators are evaluated on HotpotQA-style benchmarks; closed-vocabulary settings may admit different conclusions.
 
