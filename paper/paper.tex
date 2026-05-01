@@ -271,6 +271,8 @@ Table~\ref{tab:noise_gate_thresholds} reports the joint $(\tau,\rho)$ ablation o
 
 The Jaccard threshold $\rho$ is a secondary control. At fixed $\tau$, varying $\rho\in\{0.50,\,0.55,\,0.65\}$ changes F1 by at most 0.015 and mean tokens by at most 8.0. The Jaccard stage is therefore retained for redundancy control rather than as a primary tuning axis, with $\rho{=}0.65$ the recommended setting at every $\tau$. Practitioners can fix $\rho$ at this value and tune the gate primarily through $\tau$ on a small held-out sample.
 
+An expanded diagnostic sweep on the matched $n{=}400$ sample clarifies the lower end of the Jaccard range. Table~\ref{tab:jaccard_sensitivity_pilot} fixes $\tau{=}0.30$ and varies $\rho$ from 0.05 to 0.95. Very strict redundancy thresholds remove too much context: $\rho{=}0.05$ reaches F1 0.514 with 246.1 mean tokens, and $\rho{=}0.20$ reaches F1 0.646 with 921.7 mean tokens. For $\rho\ge 0.35$, F1 stays in a narrower range while token counts stabilise near the recommended setting. This pattern supports treating $\rho$ as a redundancy guard rather than the main quality--cost control.
+
 \begin{table}[t]
 \centering
 \small
@@ -285,6 +287,26 @@ $\tau$ & F1 & Tokens & Savings & F1 range across $\rho$ \\
 \textbf{0.30} & \textbf{0.764} & \textbf{1065.3} & $\mathbf{-26.7\%}$ & $0.749$--$0.764$ \\
 0.35 & 0.726 & 889.8 & $-38.7\%$ & $0.726$--$0.731$ \\
 0.50 & 0.619 & 403.9 & $-72.2\%$ & $0.613$--$0.619$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Jaccard sensitivity at $\tau{=}0.30$ on HotpotQA distractor ($n{=}400$ matched examples, \texttt{gpt-5.4-mini}). Very strict redundancy thresholds remove too much context, while $\rho \ge 0.35$ is comparatively stable.}
+\label{tab:jaccard_sensitivity_pilot}
+\begin{tabular}{rrr}
+\toprule
+$\rho$ & F1 & Mean tokens \\
+\midrule
+0.05 & 0.514 & 246.1 \\
+0.20 & 0.646 & 921.7 \\
+0.35 & 0.742 & 1085.5 \\
+0.50 & 0.723 & 1102.7 \\
+0.65 & 0.744 & 1107.0 \\
+0.80 & 0.723 & 1106.8 \\
+0.95 & 0.723 & 1112.7 \\
 \bottomrule
 \end{tabular}
 \end{table}
