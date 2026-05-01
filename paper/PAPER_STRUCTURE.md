@@ -365,7 +365,7 @@ The conclusion must contain three statements, in this order:
 - **Reference band.** Horizontal shaded band at $F_1 \in [0.742, 0.842]$ (the $\pm 0.05$ tolerance around the $k{=}10$ reference).
 - **Points to plot (HotpotQA, $n{=}400$).**
   - *Fixed baselines (square markers):* $(103.5, 0.387)$, $(471.3, 0.651)$, $(731.7, 0.716)$, $(1452.5, 0.792)$.
-  - *Learned strategies (triangle markers):* Adaptive-$k$ $(483.1, 0.627)$; UCB1-TUNED $k{=}5$ $(723.0, 0.704)$; LinUCB $k{=}5$ $(686.0, 0.620)$.
+  - *Non-fixed comparator selectors (triangle markers):* Adaptive-$k$ $(483.1, 0.627)$; UCB1-TUNED $k{=}5$ $(723.0, 0.704)$; LinUCB $k{=}5$ $(686.0, 0.620)$.
   - *Noise-Gate $\tau$-sweep (circle markers, connected by line):* $(1317.5, 0.779)$, $(1207.3, 0.765)$, $(1065.3, 0.764)$, $(889.8, 0.726)$, $(403.9, 0.619)$, with $\tau$ value labeled at each marker.
 - **Annotations.** Arrow labelled "knee, $\tau{=}0.3$" pointing to $(1065.3, 0.764)$. Reference label "$k{=}10$" near $(1452.5, 0.792)$.
 - **Caption (draft).** "F1 versus mean total tokens on HotpotQA distractor ($n{=}400$, `gpt-5.4-mini`). The shaded band is the $\pm 0.05$ tolerance around the $k{=}10$ reference. The connected curve traces the Noise-Gate $\tau$-sweep at $\rho{=}0.65$. Noise-Gate at $\tau{=}0.3$ is the only point that combines a token reduction with quality inside the tolerance band."
