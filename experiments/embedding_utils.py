@@ -5,7 +5,21 @@ No caching - embeddings are cheap and caching causes race conditions with parall
 """
 
 import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
+
+
+def cosine_similarities(query_embedding: list[float], embeddings: list[list[float]]) -> np.ndarray:
+    """Compute cosine similarity between one query embedding and many embeddings."""
+    query_arr = np.asarray(query_embedding, dtype=np.float64)
+    embedding_arr = np.asarray(embeddings, dtype=np.float64)
+
+    query_norm = np.linalg.norm(query_arr)
+    embedding_norms = np.linalg.norm(embedding_arr, axis=1)
+    denom = query_norm * embedding_norms
+
+    similarities = np.zeros(len(embedding_arr), dtype=np.float64)
+    nonzero = denom > 0
+    similarities[nonzero] = embedding_arr[nonzero] @ query_arr / denom[nonzero]
+    return similarities
 
 
 def _get_encoding(model: str):
@@ -147,9 +161,7 @@ def retrieve_top_k(
     ]
 
     # Compute similarity
-    question_arr = np.array(question_emb).reshape(1, -1)
-    para_arr = np.array(para_embs)
-    similarities = cosine_similarity(question_arr, para_arr)[0]
+    similarities = cosine_similarities(question_emb, para_embs)
 
     # Get top-k
     top_indices = np.argsort(similarities)[::-1][:k]

@@ -18,11 +18,10 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
 
 from experiments.baselines_config import DATASET_CONFIG, LLM_CONFIG, LLM_TO_EMBEDDING, MODELS
 from experiments.cache_dataset import load_dataset_cached
-from experiments.embedding_utils import embed_text
+from experiments.embedding_utils import cosine_similarities, embed_text
 from experiments.eval_utils import evaluate_sample
 from experiments.llm_anthropic import call_anthropic
 from experiments.llm_openai import call_openai
@@ -122,9 +121,7 @@ def noise_gate_select(
         for paragraph in paragraphs
     ]
 
-    question_arr = np.array(question_embedding).reshape(1, -1)
-    paragraph_arr = np.array(paragraph_embeddings)
-    similarities = cosine_similarity(question_arr, paragraph_arr)[0]
+    similarities = cosine_similarities(question_embedding, paragraph_embeddings)
 
     ranked_indices = np.argsort(similarities)[::-1]
     ranked_docs = [paragraphs[i] for i in ranked_indices]

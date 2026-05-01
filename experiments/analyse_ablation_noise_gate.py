@@ -1,8 +1,8 @@
 """Analyze and summarize noise-gate ablation results.
 
 Reads the regular noise-gate CSV for the base Jaccard threshold (0.65) and the
-ablation CSV for the tighter Jaccard thresholds (0.55 and 0.50), then produces
-two markdown tables:
+ablation CSV for additional Jaccard thresholds, then produces two markdown
+tables:
 
 - F1 by Jaccard threshold versus similarity threshold
 - Mean total tokens by Jaccard threshold versus similarity threshold
@@ -65,6 +65,33 @@ def load_results(model: str) -> tuple[list[dict[str, str]], tuple[Path, Path]]:
     results = _read_csv(base_csv_path, default_jaccard=BASE_JACCARD_THRESHOLD)
     results.extend(_read_csv(ablation_csv_path))
     return results, (base_csv_path, ablation_csv_path)
+
+
+def filter_to_matched_grid(results: list[dict[str, str]]) -> tuple[list[dict[str, str]], int]:
+    """Keep only question IDs present for every Jaccard/threshold cell."""
+    grouped_ids: dict[tuple[float, float], set[str]] = defaultdict(set)
+
+    for row in results:
+        jaccard_raw = row.get("jaccard", "").strip()
+        threshold_raw = row.get("threshold", "").strip()
+        qid = row.get("question_id", "").strip()
+        if not jaccard_raw or not threshold_raw or not qid:
+            continue
+        grouped_ids[(float(jaccard_raw), float(threshold_raw))].add(qid)
+
+    if not grouped_ids:
+        raise ValueError("No jaccard/threshold groups found in noise-gate results")
+
+    matched_ids = set.intersection(*grouped_ids.values())
+    if not matched_ids:
+        raise ValueError("No common question IDs are present across the full ablation grid")
+
+    filtered = [
+        row
+        for row in results
+        if row.get("question_id", "").strip() in matched_ids
+    ]
+    return filtered, len(matched_ids)
 
 
 def aggregate_results(results: list[dict[str, str]]) -> dict[float, dict[float, dict[str, float]]]:
@@ -154,9 +181,19 @@ def _render_table(
     return lines
 
 
-def generate_summary(model: str, aggregated: dict[float, dict[float, dict[str, float]]]) -> str:
+def generate_summary(
+    model: str,
+    aggregated: dict[float, dict[float, dict[str, float]]],
+    matched_count: int,
+) -> str:
     """Generate the markdown report."""
-    lines = [f"# Noise-Gate Ablation Analysis: {model}", ""]
+    lines = [
+        f"# Noise-Gate Ablation Analysis: {model}",
+        "",
+        f"All values are averaged over the {matched_count} question IDs present in every "
+        "Jaccard-threshold and similarity-threshold cell.",
+        "",
+    ]
 
     lines.extend(
         _render_table(
@@ -199,10 +236,13 @@ def analyse_ablation_noise_gate(model: str) -> None:
     for csv_path in csv_paths:
         print(f"  - {csv_path}")
 
+    results, matched_count = filter_to_matched_grid(results)
+    print(f"Using {matched_count} matched question IDs across the full grid")
+
     aggregated = aggregate_results(results)
     print(f"Found {len(aggregated)} jaccard groups")
 
-    summary = generate_summary(model, aggregated)
+    summary = generate_summary(model, aggregated, matched_count)
     print("\n" + summary)
 
     save_summary(model, summary)
