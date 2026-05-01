@@ -156,7 +156,7 @@ with the second term the LinUCB exploration bonus controlled by $\alpha$; the to
 \subsection{Noise-Gate}
 \label{subsec:methods_noisegate}
 
-Noise-Gate assumes that dense paragraph-level cosine similarity to the question discriminates gold evidence from BM25-adjacent distractors when surface and rank features cannot, and that a subsequent redundancy filter removes near-duplicates introduced by paragraph-level granularity. The policy requires no training, runs on a small encoder cached offline, and exposes a single primary tunable parameter with a clear Pareto interpretation. The two stages are kept separate to address distinct failure modes: the relevance stage blocks low-similarity distractors, and the redundancy stage prevents near-duplicates from accumulating once the relevance threshold is cleared. The procedure is applied to the pool $D$, with embeddings $e_q$ and $\{e_i\}$ computed on a small sentence encoder and cached per dataset.
+Noise-Gate assumes that dense paragraph-level cosine similarity to the question discriminates gold evidence from BM25-adjacent distractors when surface and rank features cannot, and that a subsequent redundancy filter removes near-duplicates introduced by paragraph-level granularity. The policy requires no training, runs on a small encoder cached offline, and exposes a single primary tunable parameter, the cosine threshold $\tau$, with $\rho$ retained as a secondary redundancy guard. The two stages are kept separate to address distinct failure modes: the relevance stage blocks low-similarity distractors, and the redundancy stage prevents near-duplicates from accumulating once the relevance threshold is cleared. The procedure is applied to the pool $D$, with embeddings $e_q$ and $\{e_i\}$ computed on a small sentence encoder and cached per dataset.
 
 \textbf{Stage 1 (relevance).} A paragraph is retained if its cosine similarity to the question clears $\tau$:
 \begin{equation}
@@ -210,7 +210,7 @@ The evaluation compares Noise-Gate to the baselines and comparators of Section~\
 
 \paragraph{Metrics.} Token-level F1 is the primary quality metric; exact match is reported in text only. Mean total tokens per example and mean per-query USD cost on \texttt{gpt-5.4-mini} are the cost metrics. A strategy is quality-preserving if its F1 is within $\pm 0.05$ of fixed $k{=}10$ on the same dataset.
 
-\paragraph{Hyperparameters.} For the proposed method, $\tau\in\{0.20,\,0.25,\,0.30,\,0.35,\,0.50\}$ and $\rho\in\{0.50,\,0.55,\,0.65\}$; the recommended HotpotQA operating point is $(\tau{=}0.30,\,\rho{=}0.65)$. The learned strategies (UCB1-TUNED, LinUCB) are trained per-dataset on the corresponding training split; the fixed baselines, Adaptive-$k$, and Noise-Gate are applied unchanged across datasets. Sample sizes are kept matched within a dataset across strategies, so each row of Table~\ref{tab:main_results} is computed on the same examples and the comparison is paired rather than population-level.
+\paragraph{Hyperparameters.} For the main threshold sweep, the proposed method uses $\tau\in\{0.20,\,0.25,\,0.30,\,0.35,\,0.50\}$ and $\rho\in\{0.50,\,0.55,\,0.65\}$; the recommended HotpotQA operating point is $(\tau{=}0.30,\,\rho{=}0.65)$. An expanded diagnostic at $\tau{=}0.30$ additionally evaluates $\rho\in\{0.05,\,0.20,\,0.35,\,0.50,\,0.65,\,0.80,\,0.95\}$. The learned strategies (UCB1-TUNED, LinUCB) are trained per-dataset on the corresponding training split; the fixed baselines, Adaptive-$k$, and Noise-Gate are applied unchanged across datasets. Sample sizes are kept matched within a dataset across strategies, so each row of Table~\ref{tab:main_results} is computed on the same examples and the comparison is paired rather than population-level.
 
 \subsection{Main Results}
 \label{subsec:main_results}
@@ -363,7 +363,7 @@ LinUCB & Linear reward in lexical features generalises beyond the training arm v
 \section{Discussion}
 \label{sec:discussion}
 
-\paragraph{Pareto interpretation.} The recommended operating point $\tau{=}0.30$ corresponds to the Pareto knee in Table~\ref{tab:noise_gate_thresholds} and Figure~\ref{fig:pareto}: nearly identical F1 to $\tau{=}0.25$ at substantially lower token cost. The looser setting $\tau{=}0.25$ remains within the $\pm 0.05$ tolerance band as a quality-leaning alternative when tighter quality is preferred to maximising token reduction.
+\paragraph{Pareto interpretation.} The recommended operating point $\tau{=}0.30$ corresponds to the Pareto knee in Table~\ref{tab:noise_gate_thresholds} and Figure~\ref{fig:pareto}: nearly identical F1 to $\tau{=}0.25$ at substantially lower token cost. The looser setting $\tau{=}0.25$ remains within the $\pm 0.05$ tolerance band as a quality-leaning alternative when tighter quality is preferred to maximising token reduction. The expanded Jaccard sweep in Table~\ref{tab:jaccard_sensitivity_pilot} supports the same interpretation: once $\rho$ is at least 0.35, the redundancy stage is comparatively stable, while overly strict thresholds delete useful evidence.
 
 \paragraph{Cost implications at scale.} On \texttt{gpt-5.4-mini}, the per-query cost drops from $2.95\times 10^{-4}$ USD at fixed $k{=}10$ to $2.17\times 10^{-4}$ USD at $\tau{=}0.30$. At one million queries per day, the annualised saving is approximately USD 28{,}000. The embedding step is precomputed and cached, so the saving is realised against a one-off indexing cost rather than recurring inference overhead.
 
@@ -374,7 +374,7 @@ LinUCB & Linear reward in lexical features generalises beyond the training arm v
 \section{Conclusion}
 \label{sec:conclusion}
 
-A training-free two-stage filter that combines a cosine-similarity threshold $\tau$ with a Jaccard-overlap redundancy threshold $\rho$ reaches token-level F1 0.764 at 1065.3 mean tokens on HotpotQA distractor, within the $\pm 0.05$ tolerance band of fixed $k{=}10$ and at a $-26.7\%$ token cost. The three learned comparators (Adaptive-$k$, UCB1-TUNED, LinUCB) underperform on this class of benchmarks because the signals they exploit, namely gap monotonicity, arm identity, and surface-lexical features, are not discriminative on distractor-heavy multi-hop QA. For this class of benchmarks, deterministic threshold filtering on dense embeddings is the strongest test-time strategy observed, with thresholds calibratable on a small held-out sample and no training pipeline.
+A training-free two-stage filter that combines a cosine-similarity threshold $\tau$ with a Jaccard-overlap redundancy threshold $\rho$ reaches token-level F1 0.764 at 1065.3 mean tokens on HotpotQA distractor, within the $\pm 0.05$ tolerance band of fixed $k{=}10$ and at a $-26.7\%$ token cost. The threshold ablations indicate that $\tau$ controls the main quality--cost frontier, while $\rho$ is stable once it avoids the overly strict regime below 0.35. The three learned comparators (Adaptive-$k$, UCB1-TUNED, LinUCB) underperform on this class of benchmarks because the signals they exploit, namely gap monotonicity, arm identity, and surface-lexical features, are not discriminative on distractor-heavy multi-hop QA. For this class of benchmarks, deterministic threshold filtering on dense embeddings is the strongest test-time strategy observed, with thresholds calibratable on a small held-out sample and no training pipeline.
 
 \begin{thebibliography}{99}
 
@@ -496,73 +496,74 @@ Yang, Z., Qi, P., Zhang, S., Bengio, Y., Cohen, W.~W., Salakhutdinov, R., Mannin
 HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering.
 In: \emph{Proceedings of EMNLP} (2018)
 
-\bibitem{yao2023react}
-Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., Cao, Y.:
-ReAct: Synergizing Reasoning and Acting in Language Models.
-In: \emph{International Conference on Learning Representations (ICLR)} (2023)
+% Uncited reference reservoir. Commented out during bibliography cleanup; keep for possible later citation.
+% \bibitem{yao2023react}
+% Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., Cao, Y.:
+% ReAct: Synergizing Reasoning and Acting in Language Models.
+% In: \emph{International Conference on Learning Representations (ICLR)} (2023)
 
-\bibitem{yi2026membership}
-Yi, J., Li, Y.:
-Membership Inference on LLMs in the Wild.
-\emph{arXiv preprint} (2026)
+% \bibitem{yi2026membership}
+% Yi, J., Li, Y.:
+% Membership Inference on LLMs in the Wild.
+% \emph{arXiv preprint} (2026)
 
 \bibitem{yu2024rankrag}
 Yu, Y., Ping, W., Liu, Z., Wang, B., You, J., Zhang, C., Shoeybi, M., Catanzaro, B.:
 RankRAG: Unifying Context Ranking with Retrieval-Augmented Generation in LLMs.
 In: \emph{Advances in Neural Information Processing Systems (NeurIPS)} (2024)
 
-\bibitem{zhang2024retrievalqa}
-Zhang, Z., Fang, M., Chen, L.:
-RetrievalQA: Assessing Adaptive Retrieval-Augmented Generation for Short-form Open-Domain Question Answering.
-In: \emph{Findings of ACL}, pp.~6963--6975 (2024)
+% \bibitem{zhang2024retrievalqa}
+% Zhang, Z., Fang, M., Chen, L.:
+% RetrievalQA: Assessing Adaptive Retrieval-Augmented Generation for Short-form Open-Domain Question Answering.
+% In: \emph{Findings of ACL}, pp.~6963--6975 (2024)
 
 \bibitem{zhao2026aigcsurvey}
 Zhao, P., Zhang, H., Yu, Q., Wang, Z., Geng, Y., Fu, F., Yang, L., Zhang, W., Jiang, J., Cui, B.:
 Retrieval-Augmented Generation for AI-Generated Content: A Survey.
 \emph{Data Science and Engineering} \textbf{11}, 1--29 (2026)
 
-\bibitem{jiang2016adaptive}
-Jiang, J., Allan, J.:
-Adaptive Effort for Search Evaluation Metrics.
-In: Ferro, N., et al. (eds.) \emph{Advances in Information Retrieval (ECIR 2016)}.
-Lecture Notes in Computer Science, vol.~9626. Springer, Cham (2016)
+% \bibitem{jiang2016adaptive}
+% Jiang, J., Allan, J.:
+% Adaptive Effort for Search Evaluation Metrics.
+% In: Ferro, N., et al. (eds.) \emph{Advances in Information Retrieval (ECIR 2016)}.
+% Lecture Notes in Computer Science, vol.~9626. Springer, Cham (2016)
 
-\bibitem{mao2021gar}
-Mao, Y., He, P., Liu, X., Shen, Y., Gao, J., Han, J., Chen, W.:
-Generation-Augmented Retrieval for Open-Domain Question Answering.
-In: \emph{Proceedings of ACL-IJCNLP}, pp. 4089--4100 (2021)
+% \bibitem{mao2021gar}
+% Mao, Y., He, P., Liu, X., Shen, Y., Gao, J., Han, J., Chen, W.:
+% Generation-Augmented Retrieval for Open-Domain Question Answering.
+% In: \emph{Proceedings of ACL-IJCNLP}, pp. 4089--4100 (2021)
 
-\bibitem{wang2023query2doc}
-Wang, L., Yang, N., Wei, F.:
-Query2doc: Query Expansion with Large Language Models.
-In: \emph{Proceedings of EMNLP}, pp. 9414--9423 (2023)
+% \bibitem{wang2023query2doc}
+% Wang, L., Yang, N., Wei, F.:
+% Query2doc: Query Expansion with Large Language Models.
+% In: \emph{Proceedings of EMNLP}, pp. 9414--9423 (2023)
 
-\bibitem{gao2023hyde}
-Gao, L., Ma, X., Lin, J., Callan, J.:
-Precise Zero-Shot Dense Retrieval without Relevance Labels.
-In: \emph{Proceedings of ACL}, pp. 1762--1777 (2023)
+% \bibitem{gao2023hyde}
+% Gao, L., Ma, X., Lin, J., Callan, J.:
+% Precise Zero-Shot Dense Retrieval without Relevance Labels.
+% In: \emph{Proceedings of ACL}, pp. 1762--1777 (2023)
 
 \bibitem{karpukhin2020dpr}
 Karpukhin, V., Oguz, B., Min, S., Lewis, P., Wu, L., Edunov, S., Chen, D., Yih, W.-t.:
 Dense Passage Retrieval for Open-Domain Question Answering.
 In: \emph{Proceedings of EMNLP}, pp. 6769--6781 (2020)
 
-\bibitem{nogueira2019bert}
-\begin{sloppypar}
-Nogueira, R., Cho, K.:
-Passage Re-ranking with BERT.
-arXiv preprint arXiv:1901.04085 (2019)
-\end{sloppypar}
+% \bibitem{nogueira2019bert}
+% \begin{sloppypar}
+% Nogueira, R., Cho, K.:
+% Passage Re-ranking with BERT.
+% arXiv preprint arXiv:1901.04085 (2019)
+% \end{sloppypar}
 
-\bibitem{sun2023rankgpt}
-Sun, W., Yan, L., Ma, X., Wang, P., Ren, J., Chen, Z., Yin, D., Ren, Z.:
-Is ChatGPT Good at Search? Investigating Large Language Models as Re-Ranking Agents.
-In: \emph{Proceedings of EMNLP}, pp. 14918--14937 (2023)
+% \bibitem{sun2023rankgpt}
+% Sun, W., Yan, L., Ma, X., Wang, P., Ren, J., Chen, Z., Yin, D., Ren, Z.:
+% Is ChatGPT Good at Search? Investigating Large Language Models as Re-Ranking Agents.
+% In: \emph{Proceedings of EMNLP}, pp. 14918--14937 (2023)
 
-\bibitem{qin2024prp}
-Qin, Z., Jagerman, R., Hui, K., Zhuang, H., Wu, J., Yan, L., Shen, J., Liu, T., Liu, J., Metzler, D., Wang, X., Bendersky, M.:
-Large Language Models are Effective Text Rankers with Pairwise Ranking Prompting.
-In: \emph{Findings of NAACL}, pp. 1504--1518 (2024)
+% \bibitem{qin2024prp}
+% Qin, Z., Jagerman, R., Hui, K., Zhuang, H., Wu, J., Yan, L., Shen, J., Liu, T., Liu, J., Metzler, D., Wang, X., Bendersky, M.:
+% Large Language Models are Effective Text Rankers with Pairwise Ranking Prompting.
+% In: \emph{Findings of NAACL}, pp. 1504--1518 (2024)
 
 \end{thebibliography}
 
