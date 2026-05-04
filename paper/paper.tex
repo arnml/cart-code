@@ -210,7 +210,7 @@ The evaluation compares Noise-Gate to the baselines and comparators of Section~\
 
 \paragraph{Metrics.} Token-level F1 is the primary quality metric; exact match is reported in text only. Mean total tokens per example and mean per-query USD cost on \texttt{gpt-5.4-mini} are the cost metrics. A strategy is quality-preserving if its F1 is within $\pm 0.05$ of fixed $k{=}10$ on the same dataset.
 
-\paragraph{Hyperparameters.} For the main threshold sweep, the proposed method uses $\tau\in\{0.20,\,0.25,\,0.30,\,0.35,\,0.50\}$ and $\rho\in\{0.50,\,0.55,\,0.65\}$; the recommended HotpotQA operating point is $(\tau{=}0.30,\,\rho{=}0.65)$. An expanded diagnostic at $\tau{=}0.30$ additionally evaluates $\rho\in\{0.05,\,0.20,\,0.35,\,0.50,\,0.65,\,0.80,\,0.95\}$. The learned strategies (UCB1-TUNED, LinUCB) are trained per-dataset on the corresponding training split; the fixed baselines, Adaptive-$k$, and Noise-Gate are applied unchanged across datasets. Sample sizes are kept matched within a dataset across strategies, so each row of Table~\ref{tab:main_results} is computed on the same examples and the comparison is paired rather than population-level.
+\paragraph{Hyperparameters.} For the main threshold sweep, the proposed method uses $\tau\in\{0.20,\,0.25,\,0.30,\,0.35,\,0.50\}$ at $\rho{=}0.65$; the recommended HotpotQA operating point is $(\tau{=}0.30,\,\rho{=}0.65)$. The joint ablation evaluates the same $\tau$ values with $\rho\in\{0.05,\,0.20,\,0.35,\,0.50,\,0.65,\,0.80,\,0.95\}$. The learned strategies (UCB1-TUNED, LinUCB) are trained per-dataset on the corresponding training split; the fixed baselines, Adaptive-$k$, and Noise-Gate are applied unchanged across datasets. Sample sizes are kept matched within a dataset across strategies, so each row of Table~\ref{tab:main_results} is computed on the same examples and the comparison is paired rather than population-level.
 
 \subsection{Main Results}
 \label{subsec:main_results}
@@ -267,26 +267,26 @@ Across the three benchmarks, Noise-Gate matches or exceeds fixed $k{=}10$ at low
 \subsection{Threshold Ablations}
 \label{subsec:threshold_ablation}
 
-Table~\ref{tab:noise_gate_thresholds} reports the joint $(\tau,\rho)$ ablation on HotpotQA distractor. As $\tau$ increases from 0.20 to 0.50, F1 and mean tokens decrease monotonically, tracing a smooth quality--cost frontier. The intermediate settings $\tau{=}0.25$ and $\tau{=}0.30$ have nearly identical F1 (0.765 versus 0.764), but $\tau{=}0.30$ uses 142 fewer tokens per query, while moving one step further to $\tau{=}0.35$ drops F1 by 0.038 for a marginal 110-token saving. The $\tau{=}0.30$ row is therefore the Pareto knee, retaining the F1 of $\tau{=}0.25$ at substantially lower token cost without crossing the cliff observed at $\tau{=}0.35$.
+Table~\ref{tab:noise_gate_thresholds} reports the joint $(\tau,\rho)$ ablation on the 395 HotpotQA distractor question IDs present in every ablation cell. At the recommended redundancy threshold $\rho{=}0.65$, increasing $\tau$ from 0.20 to 0.50 reduces mean tokens from 1318.4 to 402.6 while tracing the expected quality--cost frontier. The intermediate settings $\tau{=}0.25$ and $\tau{=}0.30$ have the same rounded F1 (0.763), but $\tau{=}0.30$ uses 144.3 fewer tokens per query. Moving one step further to $\tau{=}0.35$ saves an additional 177.4 tokens but drops F1 by 0.034. The $\tau{=}0.30$ row is therefore the Pareto knee, retaining the F1 of $\tau{=}0.25$ at substantially lower token cost without crossing the quality drop observed at $\tau{=}0.35$.
 
-The Jaccard threshold $\rho$ is a secondary control. At fixed $\tau$, varying $\rho\in\{0.50,\,0.55,\,0.65\}$ changes F1 by at most 0.015 and mean tokens by at most 8.0. The Jaccard stage is therefore retained for redundancy control rather than as a primary tuning axis, with $\rho{=}0.65$ the recommended setting at every $\tau$. Practitioners can fix $\rho$ at this value and tune the gate primarily through $\tau$ on a small held-out sample.
+The Jaccard threshold $\rho$ is a secondary control once the overly strict regime is avoided. Across $\rho\ge 0.35$, fixed-$\tau$ F1 varies by at most 0.023 and mean tokens by at most 38.5, far less than the variation induced by changing $\tau$. The Jaccard stage is therefore retained for redundancy control rather than as a primary tuning axis, with $\rho{=}0.65$ used as the operating default because it is the best setting at the recommended $\tau{=}0.30$ and remains in the stable high-$\rho$ region. Practitioners can fix $\rho$ at this value and tune the gate primarily through $\tau$ on a small held-out sample.
 
-An expanded diagnostic sweep on the matched $n{=}400$ sample clarifies the lower end of the Jaccard range. Table~\ref{tab:jaccard_sensitivity_pilot} fixes $\tau{=}0.30$ and varies $\rho$ from 0.05 to 0.95. Very strict redundancy thresholds remove too much context: $\rho{=}0.05$ reaches F1 0.514 with 246.1 mean tokens, and $\rho{=}0.20$ reaches F1 0.646 with 921.7 mean tokens. For $\rho\ge 0.35$, F1 stays in a narrower range while token counts stabilise near the recommended setting. This pattern supports treating $\rho$ as a redundancy guard rather than the main quality--cost control.
+An expanded diagnostic sweep on the matched ablation sample clarifies the lower end of the Jaccard range. Table~\ref{tab:jaccard_sensitivity_pilot} fixes $\tau{=}0.30$ and varies $\rho$ from 0.05 to 0.95. Very strict redundancy thresholds remove too much context: $\rho{=}0.05$ reaches F1 0.530 with 257.1 mean tokens, and $\rho{=}0.20$ reaches F1 0.693 with 923.5 mean tokens. For $\rho\ge 0.35$, F1 stays between 0.740 and 0.763 while token counts stabilise between 1037.2 and 1069.5. This pattern supports treating $\rho$ as a redundancy guard rather than the main quality--cost control.
 
 \begin{table}[t]
 \centering
 \small
-\caption{Noise-Gate threshold sweep on HotpotQA distractor ($n{=}400$, \texttt{gpt-5.4-mini}). F1 and total tokens are reported at the recommended Jaccard threshold $\rho{=}0.65$. The ``F1 range across $\rho$'' column shows the minimum and maximum F1 across $\rho\in\{0.50, 0.55, 0.65\}$, indicating that $\rho$ is a secondary control: variation of at most 0.015 F1 and 8 tokens at fixed $\tau$. The bold row is the recommended operating point.}
+\caption{Noise-Gate threshold sweep on HotpotQA distractor ($n{=}395$ matched ablation examples, \texttt{gpt-5.4-mini}). F1 and total tokens are reported at the recommended Jaccard threshold $\rho{=}0.65$. The ``F1 range across $\rho\ge 0.35$'' column shows the minimum and maximum F1 after excluding the two overly strict redundancy settings. The bold row is the recommended operating point.}
 \label{tab:noise_gate_thresholds}
 \begin{tabular}{rrrrc}
 \toprule
-$\tau$ & F1 & Tokens & Savings & F1 range across $\rho$ \\
+$\tau$ & F1 & Tokens & Savings & F1 range across $\rho\ge 0.35$ \\
 \midrule
-0.20 & 0.779 & 1317.5 & $-9.3\%$ & $0.771$--$0.779$ \\
-0.25 & 0.765 & 1207.3 & $-16.9\%$ & $0.765$--$0.778$ \\
-\textbf{0.30} & \textbf{0.764} & \textbf{1065.3} & $\mathbf{-26.7\%}$ & $0.749$--$0.764$ \\
-0.35 & 0.726 & 889.8 & $-38.7\%$ & $0.726$--$0.731$ \\
-0.50 & 0.619 & 403.9 & $-72.2\%$ & $0.613$--$0.619$ \\
+0.20 & 0.777 & 1318.4 & $-9.2\%$ & $0.775$--$0.779$ \\
+0.25 & 0.763 & 1209.8 & $-16.7\%$ & $0.760$--$0.763$ \\
+\textbf{0.30} & \textbf{0.763} & \textbf{1065.5} & $\mathbf{-26.6\%}$ & $0.740$--$0.763$ \\
+0.35 & 0.729 & 888.1 & $-38.9\%$ & $0.725$--$0.729$ \\
+0.50 & 0.619 & 402.6 & $-72.3\%$ & $0.616$--$0.619$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -294,19 +294,19 @@ $\tau$ & F1 & Tokens & Savings & F1 range across $\rho$ \\
 \begin{table}[t]
 \centering
 \small
-\caption{Jaccard sensitivity at $\tau{=}0.30$ on HotpotQA distractor ($n{=}400$ matched examples, \texttt{gpt-5.4-mini}). Very strict redundancy thresholds remove too much context, while $\rho \ge 0.35$ is comparatively stable.}
+\caption{Jaccard sensitivity at $\tau{=}0.30$ on HotpotQA distractor ($n{=}395$ matched ablation examples, \texttt{gpt-5.4-mini}). Very strict redundancy thresholds remove too much context, while $\rho \ge 0.35$ is comparatively stable.}
 \label{tab:jaccard_sensitivity_pilot}
 \begin{tabular}{rrr}
 \toprule
 $\rho$ & F1 & Mean tokens \\
 \midrule
-0.05 & 0.514 & 246.1 \\
-0.20 & 0.646 & 921.7 \\
-0.35 & 0.742 & 1085.5 \\
-0.50 & 0.723 & 1102.7 \\
-0.65 & 0.744 & 1107.0 \\
-0.80 & 0.723 & 1106.8 \\
-0.95 & 0.723 & 1112.7 \\
+0.05 & 0.530 & 257.1 \\
+0.20 & 0.693 & 923.5 \\
+0.35 & 0.740 & 1037.2 \\
+0.50 & 0.741 & 1057.3 \\
+0.65 & 0.763 & 1065.5 \\
+0.80 & 0.741 & 1067.9 \\
+0.95 & 0.741 & 1069.5 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -374,7 +374,7 @@ LinUCB & Linear reward in lexical features generalises beyond the training arm v
 \section{Conclusion}
 \label{sec:conclusion}
 
-A training-free two-stage filter that combines a cosine-similarity threshold $\tau$ with a Jaccard-overlap redundancy threshold $\rho$ reaches token-level F1 0.764 at 1065.3 mean tokens on HotpotQA distractor, within the $\pm 0.05$ tolerance band of fixed $k{=}10$ and at a $-26.7\%$ token cost. The threshold ablations indicate that $\tau$ controls the main quality--cost frontier, while $\rho$ is stable once it avoids the overly strict regime below 0.35. The three learned comparators (Adaptive-$k$, UCB1-TUNED, LinUCB) underperform on this class of benchmarks because the signals they exploit, namely gap monotonicity, arm identity, and surface-lexical features, are not discriminative on distractor-heavy multi-hop QA. For this class of benchmarks, deterministic threshold filtering on dense embeddings is the strongest test-time strategy observed, with thresholds calibratable on a small held-out sample and no training pipeline.
+A training-free two-stage filter that combines a cosine-similarity threshold $\tau$ with a Jaccard-overlap redundancy threshold $\rho$ reaches token-level F1 0.764 at 1065.3 mean tokens on HotpotQA distractor, within the $\pm 0.05$ tolerance band of fixed $k{=}10$ and with a 26.7\% token reduction. The threshold ablations indicate that $\tau$ controls the main quality--cost frontier, while $\rho$ is stable once it avoids the overly strict regime below 0.35. The three learned comparators (Adaptive-$k$, UCB1-TUNED, LinUCB) underperform on this class of benchmarks because the signals they exploit, namely gap monotonicity, arm identity, and surface-lexical features, are not discriminative on distractor-heavy multi-hop QA. For this class of benchmarks, deterministic threshold filtering on dense embeddings is the strongest test-time strategy observed, with thresholds calibratable on a small held-out sample and no training pipeline.
 
 \begin{thebibliography}{99}
 
